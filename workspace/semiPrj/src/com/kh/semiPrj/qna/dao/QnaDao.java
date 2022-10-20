@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kh.semiPrj.common.JDBCTemplate;
+import common.JDBCTemplate;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
 public class QnaDao {
@@ -33,7 +33,7 @@ public class QnaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(pstmt);
+			common.JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
@@ -79,8 +79,8 @@ public class QnaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
+			common.JDBCTemplate.close(rs);
+			common.JDBCTemplate.close(pstmt);
 		}
 		
 		return voList;
@@ -128,8 +128,8 @@ public class QnaDao {
 			
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
+			common.JDBCTemplate.close(rs);
+			common.JDBCTemplate.close(pstmt);
 		}
 		
 		return vo;
