@@ -3,7 +3,7 @@ package com.kh.semiPrj.qna.service;
 import java.sql.Connection;
 import java.util.List;
 
-import com.kh.semiPrj.common.JDBCTemplate;
+import common.JDBCTemplate;
 import com.kh.semiPrj.qna.dao.QnaDao;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
