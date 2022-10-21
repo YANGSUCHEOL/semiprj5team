@@ -25,6 +25,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 	
     <style>
+    @import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	letter-spacing: -0.1em;
+}
         #main {
             width: 65vw;
             display: grid;
@@ -64,8 +72,14 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            row-gap: 50px;
+            row-gap: 70px;
             column-gap: 30px;
+        }
+        .result {
+        	display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
+            row-gap: 10px;
         }
     </style>
 </head>
@@ -80,16 +94,21 @@
             <div id="text"><span>검색 결과 <%= cnt %> 건</span></div>
             <div id="now">
             
+            <% if(voList != null) { %>
 				<%for(int i = 0; i < voList.size(); ++i){%>
 					<div class="result" onclick="location.href='/semiPrj/search/detail?rno=<%= voList.get(i).getNo() %>'">
 						<div><img src="<%= voList.get(i).getPhoto() %>"></img></div>
 						<div><%= voList.get(i).getName() %></div>
 				        <div><%= voList.get(i).getAddress() %></div>
 				        <div><%= voList.get(i).getOpen() %> ~ <%= voList.get(i).getClose() %></div>
-				        <div><%= voList.get(i).getDayoff() %> 휴무</div>
+				        <div><% for(int k = 0; k < voList.get(i).getOffDay().length; ++k) { %>
+                			<%= voList.get(i).getOffDay()[k] %>	
+                		<% } %> 휴무</div>
 			        </div>
-				<%}%>
-				
+				<% } %>
+			<% } else if(voList.size() == 0) { %>
+				<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
+			<% } %>
             </div>
             <div id="page-area">
         

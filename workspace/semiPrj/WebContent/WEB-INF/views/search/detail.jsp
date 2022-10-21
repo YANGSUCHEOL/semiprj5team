@@ -17,6 +17,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    @import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+	letter-spacing: -0.1em;
+}
         body {
             letter-spacing: -0.1em;
         }
@@ -154,12 +162,15 @@
                 <div><%= vo.getAddress() %></div>
                 <div><%= vo.getPhone() %></div>
                 <div><%= vo.getOpen() %> ~ <%= vo.getClose() %></div>
-                <div><%= vo.getDayoff() %></div>
+                <div><% for(int i = 0; i < vo.getOffDay().length; ++i) { %>
+                <%= vo.getOffDay()[i] %> 
+                <% } %>
+                 휴무</div>
             </div>
             <div id="res-navi">
-                <div class="btn-common" onclick="location-href=''">쿠폰 발급</div>
-                <div class="btn-common" onclick="location-href=''">예약하기</div>
-                <div class="btn-common" onclick="location-href=''">리뷰 작성</div>
+                <div><button class="btn-common" onclick="location-href=''">쿠폰 발급</button></div>
+                <div><a class="btn-common" href="/semiPrj/res?rno=<%= vo.getNo() %>">예약하기</a></div>
+                <div><a class="btn-common" href="/semiPrj/review/write?rno=<%= vo.getNo() %>">리뷰 작성</a></div>
             </div>
             <div id="res-menulist">
                 <div><span>대표 메뉴 안내</span></div>

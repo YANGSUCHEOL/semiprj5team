@@ -23,6 +23,14 @@ public class RestaurantService {
 		
 		voList = dao.selectList(conn, resName, pv);
 		
+		for(int i = 0; i < voList.size(); ++i) {
+			String a = voList.get(i).getDayoff();
+			String[] b = a.split(",");
+			String[] c = setDay(b);
+			
+			voList.get(i).setOffDay(c);
+		}
+		
 		JDBCTemplate.close(conn);
 		
 		return voList;
@@ -45,6 +53,12 @@ public class RestaurantService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		RestaurantVo vo = dao.selectOneByNo(conn, rNo);
+		
+		String a = vo.getDayoff();
+		String[] b = a.split(",");
+		String[] c = setDay(b);
+		
+		vo.setOffDay(c);
 		
 		JDBCTemplate.close(conn);
 		
@@ -77,6 +91,24 @@ public class RestaurantService {
 		JDBCTemplate.close(conn);
 		
 		return voList;
+		
+	}
+	
+	public String[] setDay(String[] d) {
+		
+		for(int i = 0; i < d.length; i++) {
+			switch(d[i]) {
+			case "0": d[i] = "일"; break;
+			case "1": d[i] = "월"; break;
+			case "2": d[i] = "화"; break;
+			case "3": d[i] = "수"; break;
+			case "4": d[i] = "목"; break;
+			case "5": d[i] = "금"; break;
+			case "6": d[i] = "토"; break;
+			}
+		}
+		
+		return d;
 		
 	}
 	
