@@ -2,12 +2,12 @@ package com.kh.semiPrj.restaurant.vo;
 
 public class RestaurantVo {
 	
-	public RestaurantVo() {
+public RestaurantVo() {
 		
 	}
 	
 	public RestaurantVo(String no, String district, String type, String name, String address, String dayoff,
-			String phone, String open, String close, String regYn, String photo) {
+			String[] offDay, String phone, String open, String close, String regYn, String photo) {
 		super();
 		this.no = no;
 		this.district = district;
@@ -15,19 +15,21 @@ public class RestaurantVo {
 		this.name = name;
 		this.address = address;
 		this.dayoff = dayoff;
+		this.offDay = offDay;
 		this.phone = phone;
 		this.open = open;
 		this.close = close;
 		this.regYn = regYn;
 		this.photo = photo;
 	}
-	
+
 	private String no;
 	private String district;
 	private String type;
 	private String name;
 	private String address;
 	private String dayoff;
+	private String[] offDay;
 	private String phone;
 	private String open;
 	private String close;
@@ -70,6 +72,12 @@ public class RestaurantVo {
 	public void setDayoff(String dayoff) {
 		this.dayoff = dayoff;
 	}
+	public String[] getOffDay() {
+		return offDay;
+	}
+	public void setOffDay(String[] offDay) {
+		this.offDay = offDay;
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -91,8 +99,8 @@ public class RestaurantVo {
 	public String getRegYn() {
 		return regYn;
 	}
-	public void setRegYn(String regYn) {
-		this.regYn = regYn;
+	public void setRegYn(String reg_Yn) {
+		this.regYn = reg_Yn;
 	}
 	public String getPhoto() {
 		return photo;
@@ -100,11 +108,12 @@ public class RestaurantVo {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
 	@Override
 	public String toString() {
 		return "RestaurantVo [no=" + no + ", district=" + district + ", type=" + type + ", name=" + name + ", address="
-				+ address + ", dayoff=" + dayoff + ", phone=" + phone + ", open=" + open + ", close=" + close
-				+ ", regYn=" + regYn + ", photo=" + photo + "]";
+				+ address + ", dayoff=" + dayoff + ", offDay=" + offDay + ", phone=" + phone + ", open=" + open
+				+ ", close=" + close + ", regYn=" + regYn + ", photo=" + photo + "]";
 	}
 
 }
