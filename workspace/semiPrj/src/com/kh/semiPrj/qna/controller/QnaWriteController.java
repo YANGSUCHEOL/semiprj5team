@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.kh.semiPrj.qna.service.QnaService;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
+import member.MemberVo;
+
 @WebServlet(urlPatterns = "/qna/write")
 public class QnaWriteController extends HttpServlet{
 	
@@ -22,8 +24,8 @@ public class QnaWriteController extends HttpServlet{
 		//로그인 안 되어있으면 로그인부터
 		if(req.getSession().getAttribute("loginMember") == null) {
 			req.setAttribute("msg", "로그인 후 이용해주세요");
-			req.getRequestDispatcher("views/common/errorPage.jsp").forward(req, resp);
-			
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
+			return;
 		}
 		
 		//(사업자회원이면)ㄴ
@@ -33,6 +35,8 @@ public class QnaWriteController extends HttpServlet{
 		//(일반회원이면)
 		//	req.getRequestDispatcher("/views/qna/write/customer.jsp").forward(req, resp);
 		// }
+		
+		req.getRequestDispatcher("/WEB-INF/views/qna/write/customer.jsp").forward(req, resp);
 		
 	}//doGet
 	
@@ -44,7 +48,7 @@ public class QnaWriteController extends HttpServlet{
 		HttpSession s = req.getSession();
 		
 		//로그인멤버 가져오기
-		//MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
@@ -70,7 +74,7 @@ public class QnaWriteController extends HttpServlet{
 		if(result == 1) {
 			//성공
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semiPrj/board/list");
+			resp.sendRedirect("/semiPrj/qna/list");
 		}else {
 			System.out.println("게시글 작성 실패");
 		}

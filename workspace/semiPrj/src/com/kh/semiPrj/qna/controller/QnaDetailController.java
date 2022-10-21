@@ -29,7 +29,7 @@ public class QnaDetailController extends HttpServlet{
 		
 		//화면선택
 		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/views/qna/detail/customer.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/qna/detail/customer.jsp").forward(req, resp);
 		
 	}
 

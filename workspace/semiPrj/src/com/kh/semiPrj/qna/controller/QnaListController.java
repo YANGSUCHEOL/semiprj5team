@@ -31,6 +31,6 @@ public class QnaListController extends HttpServlet{
 		
 		//화면선택 (데이터 담아서)
 		req.setAttribute("voList", voList);
-		req.getRequestDispatcher("/views/qna/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/qna/list/customer.jsp").forward(req, resp);
 	}
 }
