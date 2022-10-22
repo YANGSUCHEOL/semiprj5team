@@ -1,3 +1,4 @@
+<%@page import="member.MemberVo"%>
 <%@page import="faq.vo.FaqVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -139,6 +140,8 @@
 </head>
 <body>
 	
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -165,47 +168,27 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>4</td>
-                            <th>
-                                <a href="">리뷰는 어떻게 작성하나요?</a>
-                            </th>
-                            <td>2022-10-16</td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <th>
-                                <a href="#!">예약 내역은 어떻게 변경하나요?</a>
-                            </th>
-                            <td>2022-10-14</td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <th>
-                                <a href="#!">쿠폰은 어떻게 사용하나요?</a>
-                            </th>
-                            <td>2022-10-14</td>
-                        </tr>
-
-                        <tr>
-                            <td>1</td>
-                            <th>
-                                <a href="#!">예약은 어떻게 하나요?</a>
-                            </th>
-                            <td>2022-10-14</td>
+                        	<%for(int i = 0; i < voList.size(); ++i){%>
+                       			<td><%= voList.get(i).getNo() %></td>
+                                 <th>
+                                     <a href="/semiPrj/faq/detail?no=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle()%></a>
+                                 </th>
+                                 <td><%= voList.get(i).getEnrollDate()%></td>
+                       		<%}%>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div id="board-write">
-            <div class="container">
-                <button type="submit" class="btn btn-dark">글쓰기</button>
+        
+        <%if(loginMember.equals("admin")){%>
+       		<div id="board-write">
+                <div class="container">
+                    <button type="submit" class="btn btn-dark">글쓰기</button>
+                </div>
             </div>
-        </div>
-
+       	<%}%>
+        
     </section>
     
 </body>
