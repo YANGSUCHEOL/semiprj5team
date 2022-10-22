@@ -187,6 +187,7 @@ span[name="warning"] {
                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                 dateFormat: "yymmdd",
+                minDate: 0,
                 beforeShowDay: function(date){
                 	var day = date.getDay();
                 	for(let i = 0; i < 7; i++) {
@@ -206,13 +207,13 @@ span[name="warning"] {
 
 	<div id="main">
 		<div id="sidebar"></div>
-		<form action="/geb/booking" method="post">
+		<form action="/semiPrj/res" method="post">
 			<div id="content">
 				<div id="res-store">
 					<div id="res-picture"><%= vo.getPhoto() %></div>
 					<div id="res-name"><%= vo.getName() %></div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
-					<input type="hidden" name="mNo" value="1">
+					<input type="hidden" name="mNo" value="<%= loginMember.getNo() %>">
 				</div>
 				<div id="res-cnt">
 					<div>
@@ -242,63 +243,63 @@ span[name="warning"] {
 					<div id="timetable">
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="0900" 
-								name="time" value="09:00"><span>09:00</span></label>
+								name="time" value="0900"><span>09:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1000" 
-								name="time" value="10:00"><span>10:00</span></label>
+								name="time" value="1000"><span>10:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1100" 
-								name="time" value="11:00"><span>11:00</span></label>
+								name="time" value="1100"><span>11:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1200" 
-								name="time" value="12:00"><span>12:00</span></label>
+								name="time" value="1200"><span>12:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1300" 
-								name="time" value="13:00"><span>13:00</span></label>
+								name="time" value="1300"><span>13:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1400" 
-								name="time" value="14:00"><span>14:00</span></label>
+								name="time" value="1400"><span>14:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1500" 
-								name="time" value="15:00"><span>15:00</span></label>
+								name="time" value="1500"><span>15:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1600" 
-								name="time" value="16:00"><span>16:00</span></label>
+								name="time" value="1600"><span>16:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1700" 
-								name="time" value="17:00"><span>17:00</span></label>
+								name="time" value="1700"><span>17:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1800" 
-								name="time" value="18:00"><span>18:00</span></label>
+								name="time" value="1800"><span>18:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="1900" 
-								name="time" value="19:00"><span>19:00</span></label>
+								name="time" value="1900"><span>19:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="2000" 
-								name="time" value="20:00"><span>20:00</span></label>
+								name="time" value="2000"><span>20:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="2100" 
-								name="time" value="21:00"><span>21:00</span></label>
+								name="time" value="2100"><span>21:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="2200" 
-								name="time" value="22:00"><span>22:00</span></label>
+								name="time" value="2200"><span>22:00</span></label>
 						</div>
 						<div>
 							<label class="box-radio-input imsi"><input type="radio" id="2300" 
-								name="time" value="23:00"><span>23:00</span></label>
+								name="time" value="2300"><span>23:00</span></label>
 						</div>
 					</div>
 				</div>

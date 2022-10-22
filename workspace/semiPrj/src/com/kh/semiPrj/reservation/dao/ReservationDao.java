@@ -16,7 +16,7 @@ public class ReservationDao {
 	
 public int insertOne(Connection conn, ReservationVo vo) {
 		
-		String sql = "INSERT INTO RESERVATION ( NO, R_NO, M_NO, COU_NO, TIME, CNT, REQUEST ) VALUES ( SEQ_RESERVATION_NO.NEXTVAL, ?, ?, ?, ?, ?, ? )";
+		String sql = "INSERT INTO RESERVATION ( NO, R_NO, M_NO, COU_NO, RESDATE, RESTIME, CNT, REQUEST ) VALUES ( SEQ_RESERVATION_NO.NEXTVAL, ?, ?, ?, ?, ?, ?, ? )";
 
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -28,9 +28,10 @@ public int insertOne(Connection conn, ReservationVo vo) {
 			pstmt.setString(1, vo.getRestaurant());
 			pstmt.setString(2, vo.getMember());
 			pstmt.setString(3, vo.getCoupon());
-			pstmt.setString(4, vo.getTime());
-			pstmt.setString(5, vo.getCnt());
-			pstmt.setString(6, vo.getRequest());
+			pstmt.setString(4, vo.getDate());
+			pstmt.setString(5, vo.getTime());
+			pstmt.setString(6, vo.getCnt());
+			pstmt.setString(7, vo.getRequest());
 			
 			result = pstmt.executeUpdate();
 			
@@ -73,7 +74,7 @@ public int insertOne(Connection conn, ReservationVo vo) {
 
 	public ReservationVo selectOne(Connection conn, ReservationVo vo) {
 		
-		String sql = "SELECT NO, R_NO, M_NO, COU_NO, TIME, CNT FROM RESERVATION WHERE NO = ? AND M_NO = ?";
+		String sql = "SELECT R.NO, S.NAME AS RESTAURANT, M.NAME AS NAME, C.INFO AS COUPON, RESDATE, RESTIME, CNT, REQUEST FROM RESERVATION R INNER JOIN RESTAURANT S ON S.NO = R.R_NO LEFT OUTER JOIN COUPON C ON R.COU_NO = C.NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE R.R_NO = ? AND R.M_NO = ? AND R.RESDATE = ? AND R.RESTIME = ? AND R.CNT = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -83,27 +84,34 @@ public int insertOne(Connection conn, ReservationVo vo) {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, vo.getNo());
+			pstmt.setString(1, vo.getRestaurant());
 			pstmt.setString(2, vo.getMember());
+			pstmt.setString(3, vo.getDate());
+			pstmt.setString(4, vo.getTime());
+			pstmt.setString(5, vo.getCnt());
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				
 				String no = rs.getString("NO");
-				String rNo = rs.getString("R_NO");
-				String mNo = rs.getString("M_NO");
-				String couNo = rs.getString("COU_NO");
-				String time = rs.getString("TIME");
+				String rNo = rs.getString("RESTAURANT");
+				String mNo = rs.getString("NAME");
+				String couNo = rs.getString("COUPON");
+				String date = rs.getString("RESDATE");
+				String time = rs.getString("RESTIME");
 				String cnt = rs.getString("CNT");
+				String request = rs.getString("REQUEST");
 				
 				res = new ReservationVo();
 				res.setNo(no);
 				res.setRestaurant(rNo);
 				res.setMember(mNo);
 				res.setCoupon(couNo);
+				res.setDate(date);
 				res.setTime(time);
 				res.setCnt(cnt);
+				res.setRequest(request);
 				
 			}
 			

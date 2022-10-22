@@ -47,16 +47,18 @@ public class ReservationController extends HttpServlet {
 		vo.setRestaurant(rNo);
 		vo.setMember(mNo);
 		vo.setCoupon(couNo);
+		vo.setDate(date);
 		vo.setTime(time);
 		vo.setCnt(cnt);
 		vo.setRequest(request);
 		
 		int result = new ReservationService().reservation(vo);
+		ReservationVo detail = new ReservationService().selectOne(vo);
 		
 		if(result == 1) {
 			// 예약 내역 페이지 출력
 			HttpSession session = req.getSession();
-			session.setAttribute("reservation", vo);
+			session.setAttribute("reservation", detail);
 			resp.sendRedirect("/semiPrj/res/detail");
 		} else {
 			// 처음부터 다시 하게 만들기
