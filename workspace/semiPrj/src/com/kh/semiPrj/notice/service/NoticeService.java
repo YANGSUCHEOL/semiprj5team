@@ -59,5 +59,43 @@ public class NoticeService {
 		return noticeVo;
 		
 	}//selectNoticeDetail
+	
+	//공지 수정하기(update)
+	public int edit(NoticeVo vo) {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updateByNo(conn, vo);
+		
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+
+	}//edit
+	
+	//공지 삭제(delete)
+	public int delete(String no) {
+
+		Connection conn = getConnection();
+		
+		int result = dao.delete(conn, no);
+		
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+	
+		return result;
+		
+	}//delete
 
 }

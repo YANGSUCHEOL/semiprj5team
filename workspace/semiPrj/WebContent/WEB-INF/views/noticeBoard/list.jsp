@@ -1,3 +1,4 @@
+<%@page import="com.kh.semiPrj.admin.vo.AdminVo"%>
 <%@page import="com.kh.semiPrj.notice.vo.NoticeVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,8 @@
     
 <%
 	List<NoticeVo> voList = (List<NoticeVo>)request.getAttribute("voList");
-
+	HttpSession s = request.getSession();
+	AdminVo admin = (AdminVo)s.getAttribute("admin");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GET EAT VEGAN</title>
+    <title>notice list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
@@ -88,7 +90,7 @@ table {
   .board-table tbody th p{
     display: none;
   }
-  
+
   
   /* reset */
   
@@ -98,6 +100,7 @@ table {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
   }
   .clearfix:after {
     content: '';
@@ -110,7 +113,7 @@ table {
   }
   .blind {
     position: absolute;
-    overflow: hidden;
+    overflow: auto;
     clip: rect(0 0 0 0);
     margin: -1px;
     width: 1px;
@@ -155,14 +158,6 @@ table {
               </div>
       	</div>
         
-            
-       <div id="board-search">
-           <div class="container">
-               <div class="search-window">
-
-               </div>
-           </div>
-       </div>
        
        <!-- board list area -->
        <div id="board-list">
@@ -188,10 +183,11 @@ table {
                   <%}%>         
                    </tbody>
                </table>
+               <%if(admin.getId().equals("admin")) {%>
                 <div id="main-bot">
           			 <a href="/semiPrj/notice/write" class="btn btn-light" id="write">글쓰기</a>
       			 </div>
-
+				<%} %>
 	          	
               </div>
           </div>

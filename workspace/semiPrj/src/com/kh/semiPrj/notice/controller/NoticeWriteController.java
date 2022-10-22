@@ -13,14 +13,29 @@ import com.kh.semiPrj.admin.vo.AdminVo;
 import com.kh.semiPrj.notice.service.NoticeService;
 import com.kh.semiPrj.notice.vo.NoticeVo;
 
+import member.MemberVo;
+
 @WebServlet(urlPatterns = "/notice/write")
 public class NoticeWriteController extends HttpServlet {
 	
 	//화면 보여주기
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/noticeBoard/write.jsp").forward(req, resp);
+		//관리자일 때 포워딩
+		HttpSession s = req.getSession();
+		AdminVo admin = (AdminVo) s.getAttribute("admin");
+		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
 	
+		boolean isAdmin = admin != null && admin.getId().equals(admin) && loginMember != null;
+		
+		if(isAdmin) {
+			req.getRequestDispatcher("/WEB-INF/views/noticeBoard/write.jsp").forward(req, resp);			
+		} else {
+			//관리자 아님
+			req.setAttribute("msg", "글쓰기 권한이 없습니다.");
+			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
+		}
+		
 	}//get
 	
 	//공지사항 작성
