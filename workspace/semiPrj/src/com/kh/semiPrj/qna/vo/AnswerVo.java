@@ -1,43 +1,42 @@
 package com.kh.semiPrj.qna.vo;
 
-public class QuestionVo {
+public class AnswerVo {
 	
 	
 	
 	
-	
-	public QuestionVo() {
+	public AnswerVo() {
 	}
-	public QuestionVo(String no, String mNo, String title, String content, String enrollDate, String updateDate,
-			String deleteYn, String answerYn) {
+	public AnswerVo(String no, String qNo, String title, String content, String hit, String enrollDate,
+			String updateDate, String deleteYn) {
 		this.no = no;
-		this.mNo = mNo;
+		this.qNo = qNo;
 		this.title = title;
 		this.content = content;
+		this.hit = hit;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
 		this.deleteYn = deleteYn;
-		this.answerYn = answerYn;
 	}
-	private String no;
-	private String mNo;
-	private String title;
-	private String content;
-	private String enrollDate;
-	private String updateDate;
-	private String deleteYn;
-	private String answerYn;
+	public String no;
+	public String qNo;
+	public String title;
+	public String content;
+	public String hit;
+	public String enrollDate;
+	public String updateDate;
+	public String deleteYn;
 	public String getNo() {
 		return no;
 	}
 	public void setNo(String no) {
 		this.no = no;
 	}
-	public String getmNo() {
-		return mNo;
+	public String getqNo() {
+		return qNo;
 	}
-	public void setmNo(String mNo) {
-		this.mNo = mNo;
+	public void setqNo(String qNo) {
+		this.qNo = qNo;
 	}
 	public String getTitle() {
 		return title;
@@ -50,6 +49,12 @@ public class QuestionVo {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getHit() {
+		return hit;
+	}
+	public void setHit(String hit) {
+		this.hit = hit;
 	}
 	public String getEnrollDate() {
 		return enrollDate;
@@ -69,18 +74,11 @@ public class QuestionVo {
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
 	}
-	public String getAnswerYn() {
-		return answerYn;
-	}
-	public void setAnswerYn(String answerYn) {
-		this.answerYn = answerYn;
-	}
 	@Override
 	public String toString() {
-		return "QuestionVo [no=" + no + ", mNo=" + mNo + ", title=" + title + ", content=" + content + ", enrollDate="
-				+ enrollDate + ", updateDate=" + updateDate + ", deleteYn=" + deleteYn + ", answerYn=" + answerYn + "]";
+		return "AnswerVo [no=" + no + ", qNo=" + qNo + ", title=" + title + ", content=" + content + ", hit=" + hit
+				+ ", enrollDate=" + enrollDate + ", updateDate=" + updateDate + ", deleteYn=" + deleteYn + "]";
 	}
-	
 	
 	
 	

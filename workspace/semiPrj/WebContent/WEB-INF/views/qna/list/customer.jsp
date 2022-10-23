@@ -1,17 +1,32 @@
+<%@page import="com.kh.semiPrj.qna.vo.PageVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
+ 
+ <%
+ 	List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
+ 	PageVo pv = (PageVo)request.getAttribute("pv");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
     #background{
         box-sizing: border-box;
 
-    position: absolute;
-    width: 832px;
-    height: 468px;
+    position: relative;
+    width: 75vw;
+    height: 800px;
     left: 82px;
     top: 150px;
 
@@ -21,14 +36,15 @@
     }
 
     #top-back{
-        position: absolute;
-        width: 697px;
-        height: 41px;
-        left: 65px;
-        top: 25px;
+        position: relative;
+        width: 75%;
+        height: 5%;
+        --left: 65px;
+        --top: 25px;
         background: #FCFFED;
         border-radius: 10px;
         margin: auto;
+        margin-top: 20px;
         padding-top: 20px;
 
     }
@@ -37,9 +53,10 @@
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
-        font-size: 17px;
+        font-size: 20px;
         line-height: 21px;
         text-align: center;
+        margin: 0 auto;
 
         color: #000000;
     }
@@ -48,8 +65,8 @@
     #main-back{
         box-sizing: border-box;
 
-        position: absolute;
-        width: 697px;
+        position: relative;
+        width: 75vw;
         height: 362px;
         left: 65px;
         top: 100px;
@@ -63,22 +80,27 @@
     }
 
     #toptxt{
-        position: absolute;
-        left: 80px;
-        top: 105px;
+        position: relative;
+        left: 10vw;
+        top: 5vh;
+        font-size: 17px;
+        
+        --margin: 20px;
     }
 
     hr{
-        width: 85%;
-        margin-top: 17%;
+        width: 80%;
+        margin-top: 5%;
+        margin-bottom: 20px;
     }
     #list{
-        width: 85%;
+    	
+        width: 80%;
         display: grid;
         grid-template-rows: repeat(11 , 30px);
         grid-template-columns: 1.5fr 5fr 2.5fr 2fr 2fr;
         margin: 0 auto;
-        --border: 1px solid black;
+        border: 1px solid black;
         align-content: center;
         row-gap: 10px;
 
@@ -112,30 +134,52 @@
 
         <div id = "main">
             <div id="main-top">
-                <div id="toptxt">겟 잇 비건 온라인 상담실</div>
+                <div id="toptxt">겟 잇 비건 온라인 상담실</div> 
                 <hr>
             </div>
             <div id="list">
-                
+                <!-- <div id="ans-done"><div id="ans-expect"> -->
                 <div>글번호</div>
                 <div>제목</div>
                 <div>작성자</div>
                 <div>날짜</div>
                 <div>답변여부</div>
 
-                <div>25</div>
-                <div>안녕하세요</div>
-                <div>홈런왕</div>
-                <div>2022-10-12</div>
-                <div id="ans-done">답변완료</div>
-
-                <div>24</div>
-                <div>안녕~~~</div>
-                <div>홈런왕</div>
-                <div>2022-10-09</div>
-                <div id="ans-expect">답변예정</div>
-               
-
+                <%for(int i = 0; i < voList.size(); i++) { %>
+                	<div><%= voList.get(i).getNo() %></div> <!-- 타이틀은 제대로 가져와지는데 글번호는 뭔데 -->
+                	<div><a href="/semiPrj/WEB-INF/qna/detail/customer?bno=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle() %></a></div>
+               		<div><%= voList.get(i).getmNo() %></div>
+               		<div><%= voList.get(i).getEnrollDate() %></div>
+               		
+               		<div>
+               		<% if(voList.get(i).getAnswerYn() == "Y") {%>
+              		 	<div id="ans-done">답변완료</div>
+               		<%} else{%>
+               			<div id="ans-expect">답변예정</div>
+					<%} %>
+               		</div>
+               		
+               		<%} %>
+               		
+               	 <div id="page-area">
+        
+		        <%if(pv.getStartPage() != 1){%>
+		        	<a href="/semi/board/list?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">이전</a>
+		       	<%}%>
+	        
+	        
+		        <%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
+		        	<a href="/semi/board/list?pno=<%=i%>" class="btn btn-primary btn-sm"><%=i%></a>
+		        <%}%>
+		        
+		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
+			        <a href="/semi/board/list?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">다음</a>
+		        <%}%>
+        
+        </div>
+				
+				
+				
             </div>
 
 

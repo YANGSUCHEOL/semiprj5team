@@ -102,12 +102,14 @@
             <div id="top-name">개인회원 1:1 문의</div>
         </div>
 
-        <form action="">
+        <form action="" method="post">
             <div id="main-back">
                 <br>
-                제목  <input type="text" id="write-title">
-                <br><br>
-                내용 <textarea></textarea>
+                <div>제목</div>
+				<div><input type="text" name="title"></div>
+	
+				<div>내용</div>
+				<div><textarea name="content"></textarea></div>
                 <br><br>
                 <div id="btns">
                 <input type="submit" value="작성하기" id="submit-btn"></div>
