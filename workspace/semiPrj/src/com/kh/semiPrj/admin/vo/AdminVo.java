@@ -1,4 +1,4 @@
-package com.kh.vegan.admin.vo;
+package com.kh.semiPrj.admin.vo;
 
 public class AdminVo {
 

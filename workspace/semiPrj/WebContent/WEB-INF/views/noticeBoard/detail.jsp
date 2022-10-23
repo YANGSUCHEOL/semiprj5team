@@ -1,10 +1,16 @@
+<%@page import="member.MemberVo"%>
+<%@page import="com.kh.semiPrj.admin.vo.AdminVo"%>
 <%@page import="com.kh.semiPrj.notice.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
 	NoticeVo vo = (NoticeVo)request.getAttribute("noticeVo");
-
+	HttpSession s = request.getSession();
+	AdminVo admin = (AdminVo)s.getAttribute("admin");
+	MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+	
+	boolean isAdmin = admin != null && admin.getId().equals(admin) && loginMember != null;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +77,7 @@
 </head>
 
 <body>
-
+	
     <div id="main">
         <div id="notice">
             <h2 align="center">NOTICE🌱</h2>
@@ -90,8 +96,10 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/notice/list'">목록</button>
-            <a class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-            <a class="btn btn-outline-secondary" type="button">삭제</a>
+            <%if(isAdmin) {%>
+	            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
+	            <a href="/semiPrj/notice/delete?no=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
+			<%}%>
         </div>
 
 
