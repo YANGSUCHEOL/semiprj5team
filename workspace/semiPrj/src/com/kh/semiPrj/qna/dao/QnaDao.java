@@ -48,9 +48,9 @@ public class QnaDao {
 	
 	
 	//question 목록조회
-	public List<QuestionVo> selectQuestionList(Connection conn, QuestionVo vo, PageVo pv) {
+	public List<QuestionVo> selectQuestionList(Connection conn, QuestionVo vo) {
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM ( SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.HIT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN ,M.NICK AS M_NO FROM QUESTION Q JOIN MEMBER M ON B.WRITER = Q.M_NO WHERE Q.DELETE_YN = 'N' ORDER BY Q.NO DESC ) T ) WHERE M_NO = ? AND RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM QUESTION WHERE DELETE_YN = 'N' AND M_NO = ? ORDER BY NO DESC";
 		
 		//쿼리에 AND M_NO = '?' 지움
 		PreparedStatement pstmt = null;
@@ -59,13 +59,8 @@ public class QnaDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1;
-			int end = start + pv.getBoardLimit() - 1;
-			
+					
 			pstmt.setString(1, vo.getmNo());
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
 			
 			rs = pstmt.executeQuery();
 			
@@ -106,7 +101,7 @@ public class QnaDao {
 	
 	
 	//QUESTION 상세조회
-	public QuestionVo selectOne(Connection conn, String bno) {
+	public QuestionVo selectOne(Connection conn, String no) {
 		
 		String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN, M.NICK AS M_NO FROM QUESTION Q JOIN MEMBER M ON Q.M_NO= M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
 		
@@ -117,11 +112,11 @@ public class QnaDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, bno);
+			pstmt.setString(1, no);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				String no = rs.getString("NO");
+				String no1 = rs.getString("NO");
 				String mNo = rs.getString("M_NO");
 				String title = rs.getString("TITLE");
 				String content = rs.getString("CONTENT");
@@ -131,7 +126,7 @@ public class QnaDao {
 				String answerYn = rs.getString("ANSWER_YN");
 				
 				vo = new QuestionVo();
-				vo.setNo(no);
+				vo.setNo(no1);
 				vo.setmNo(mNo);
 				vo.setTitle(title);
 				vo.setContent(content);
@@ -187,34 +182,7 @@ public class QnaDao {
 	}
 	
 	
-	//QUESTION LIST 조회수 // 조회수 아니고 페이징 아니고?
-	public int selectCount(Connection conn, QuestionVo vo) {
-		//SQL
-		
-				String sql = "SELECT COUNT(*) AS CNT FROM QUESTION  WHERE DELETE_YN = 'N' AND M_NO = ?";
-				
-				PreparedStatement pstmt = null;
-				ResultSet rs = null;
-				int result = 0;
-				
-				try {
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, vo.getmNo());
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()) {
-						result = rs.getInt("CNT");
-					}
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					JDBCTemplate.close(rs);
-					JDBCTemplate.close(pstmt);
-				}
-				
-				return result;
-	}
+	
 	
 	//답변 작성
 	//public int insertAnswer(Connection conn, AnswerVo avo) {

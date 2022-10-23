@@ -30,59 +30,27 @@ public class QnaListController extends HttpServlet{
 		//로그인멤버 가져오기
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		
-//		if(req.getSession().getAttribute("loginMember") == null) {
-//			req.setAttribute("msg", "로그인 후 이용해주세요");
-//			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
-//			return;
-//		}
+		if(req.getSession().getAttribute("loginMember") == null) {
+			req.setAttribute("msg", "로그인 후 이용해주세요");
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
+			return;
+		}
 		// 데이터 꺼내기
 		// 데이터 뭉치기
 		QuestionVo vo = new QuestionVo();
-	//	vo.setmNo(loginMember.getNo());
+		vo.setmNo(loginMember.getNo());
 		
 		
-		//페이징처리
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		listCount = new QnaService().selectCount(vo);
-		currentPage = Integer.parseInt(req.getParameter("pno"));
-		pageLimit = 5;
-		boardLimit = 10;
-		
-		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		startPage = (currentPage-1) / pageLimit * pageLimit + 1;
-		
-		endPage = startPage + pageLimit - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageVo pv = new PageVo();
-		pv.setListCount(listCount);
-		pv.setCurrentPage(currentPage);
-		pv.setPageLimit(pageLimit);
-		pv.setBoardLimit(boardLimit);
-		pv.setMaxPage(maxPage);
-		pv.setStartPage(startPage);
-		pv.setEndPage(endPage);
 		
 		//디비다녀오기
 		//List<QuestionVo> x = new QnaService().selectList(pv);
 		//vo.setmNo(getServletInfo());
 		
-		List<QuestionVo> voList = new QnaService().selectQuestionList(pv, vo);
+		List<QuestionVo> voList = new QnaService().selectQuestionList(vo);
 		
 		//화면선택 (데이터 담아서)
 		req.setAttribute("voList", voList);
-		req.setAttribute("pv", pv);
+		
 		
 		req.getRequestDispatcher("/WEB-INF/views/qna/list/customer.jsp").forward(req, resp);
 	}

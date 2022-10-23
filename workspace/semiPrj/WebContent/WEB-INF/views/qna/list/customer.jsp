@@ -1,4 +1,3 @@
-<%@page import="com.kh.semiPrj.qna.vo.PageVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,7 +5,7 @@
  
  <%
  	List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
- 	PageVo pv = (PageVo)request.getAttribute("pv");
+
  %>
 <!DOCTYPE html>
 <html>
@@ -163,19 +162,7 @@
                		
                	 <div id="page-area">
         
-		        <%if(pv.getStartPage() != 1){%>
-		        	<a href="/semi/board/list?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">이전</a>
-		       	<%}%>
-	        
-	        
-		        <%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
-		        	<a href="/semi/board/list?pno=<%=i%>" class="btn btn-primary btn-sm"><%=i%></a>
-		        <%}%>
-		        
-		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-			        <a href="/semi/board/list?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">다음</a>
-		        <%}%>
-        
+		       
         </div>
 				
 				

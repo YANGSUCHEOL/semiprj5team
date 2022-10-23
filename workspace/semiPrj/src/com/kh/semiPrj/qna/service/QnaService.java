@@ -41,7 +41,7 @@ public class QnaService {
 
 
 		//목록 조회
-		public List<QuestionVo> selectQuestionList(PageVo pv, QuestionVo vo) {
+		public List<QuestionVo> selectQuestionList(QuestionVo vo) {
 			
 			//커넥션
 			//sql
@@ -49,7 +49,7 @@ public class QnaService {
 			
 			Connection conn = JDBCTemplate.getConnection();
 			
-			List<QuestionVo> voList = dao.selectQuestionList(conn, vo, pv);
+			List<QuestionVo> voList = dao.selectQuestionList(conn, vo);
 			
 			JDBCTemplate.close(conn);
 			
@@ -57,35 +57,24 @@ public class QnaService {
 			return voList;
 		}
 		
-		//갯수 조회
-		public int selectCount(QuestionVo vo) {
-			
-			Connection conn = JDBCTemplate.getConnection();
-			
-			int result = dao.selectCount(conn, vo);
-			
-			JDBCTemplate.close(conn);
-			
-			return result;
-		}
 				
 
 
 		//상세조회
-		public QuestionVo selectOne(String bno) {
+		public QuestionVo selectOne(String no) {
 			
 			//커넥션 준비
 			//sql
 			//트랜젝션 자원반납
 			
 			Connection conn = JDBCTemplate.getConnection();
-			
-			int result = dao.increaseHit(conn, bno);
-
 			QuestionVo vo = null;
+			
+			int result = dao.increaseHit(conn, no);
+
 			if(result == 1) {
 				JDBCTemplate.commit(conn);
-				vo = dao.selectOne(conn , bno);
+				vo = dao.selectOne(conn , no);
 			}
 			
 			JDBCTemplate.close(conn);
