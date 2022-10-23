@@ -122,6 +122,8 @@
 </head>
 <body>
 
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -132,7 +134,7 @@
 
         <div class="page-middle">
             <div class="container">
-                <h4>※ 공지사항 작성하기 ※</h4>
+                <h4>※ FAQ 작성하기 ※</h4>
             </div>
         </div>
 
@@ -159,7 +161,10 @@
 
         <div id="board-write">
             <div class="container">
-                <button type="submit" class="btn btn-dark">작성하기</button>
+            	<%if(loginMember.equals("admin")){%>
+           			<button type="submit" class="btn btn-dark" onclick="/semiPrj/WEB-INF/views/faq/list.jsp">작성하기</button>
+           		<%}%>
+                
             </div>
         </div>
 
