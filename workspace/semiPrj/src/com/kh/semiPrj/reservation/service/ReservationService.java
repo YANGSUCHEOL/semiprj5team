@@ -47,6 +47,18 @@ public int reservation(ReservationVo vo) {
 		return res;
 		
 	}
+	
+	public ReservationVo selectOne(ReservationVo vo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ReservationVo res = new ReservationDao().selectOne(conn, vo);
+		
+		JDBCTemplate.close(conn);
+		
+		return res;
+		
+	}
 
 	public String rsvTime(String date, String restaurant) {
 		
