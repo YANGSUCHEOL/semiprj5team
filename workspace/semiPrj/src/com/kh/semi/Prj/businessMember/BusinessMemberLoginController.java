@@ -1,4 +1,4 @@
-package member;
+package com.kh.semi.Prj.businessMember;
 
 import java.io.IOException;
 
@@ -9,39 +9,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/member/login")
-public class MemberLoginController extends HttpServlet{
-	
-	//로그인 (화면)
-	
-	//로그인
+@WebServlet(urlPatterns = "/businessmember/login")
+public class BusinessMemberLoginController extends HttpServlet{
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
+	
 		//데이터 꺼내기
-		String memberId = req.getParameter("memberId");
-		String memberPwd = req.getParameter("memberPwd");
+		String bsmemberId = req.getParameter("bsmemberId");
+		String bsmemberPwd = req.getParameter("bsmemberPwd");
 		
 		//데이터 뭉치기
-		MemberVo vo = new MemberVo();
-		vo.setId(memberId);
-		vo.setPwd(memberPwd);
+		BusinessMemberVo vo = new BusinessMemberVo();
+		vo.setId(bsmemberId);
+		vo.setPwd(bsmemberPwd);
 		
 		//디비다녀오기
-		MemberVo loginMember = new MemberService().login(vo);
+		BusinessMemberVo bsloginMember = new BusinessMemberService().login(vo);
 		
 		//화면선택
-		if(loginMember != null) {
+		if(bsloginMember != null) {
 			//로그인 성공
 			System.out.println("로그인 성공");
 			HttpSession s = req.getSession();
-			s.setAttribute("loginMember", loginMember);
+			s.setAttribute("bsloginMember", bsloginMember);
 			resp.sendRedirect("/semiPrj");
 		}else {
 			//로그인 실패
 			req.setAttribute("msg", "로그인 실패");
-			req.getRequestDispatcher("/views/errorPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
-		
 	}
 }

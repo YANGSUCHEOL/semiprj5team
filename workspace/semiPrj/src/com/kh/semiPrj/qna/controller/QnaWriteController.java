@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semi.Prj.member.MemberVo;
 import com.kh.semiPrj.qna.service.QnaService;
 import com.kh.semiPrj.qna.vo.QuestionVo;
-
-import member.MemberVo;
 
 @WebServlet(urlPatterns = "/qna/write")
 public class QnaWriteController extends HttpServlet{
