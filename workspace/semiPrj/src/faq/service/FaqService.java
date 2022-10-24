@@ -43,6 +43,62 @@ public class FaqService {
 		return result;
 	}
 
+	//FAQ 상세조회
+	public FaqVo selectFaqOne(String no) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		FaqVo vo = null;
+		int result = 0;
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+			vo = new FaqDao().selectFaqOne(conn, no);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
+	//FAQ 수정하기
+	public int edit(FaqVo vo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new FaqDao().updateOne(conn, vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//FAQ 삭제하기
+	public int delete(String no) {
+		
+		Connection conn = null;
+		
+		int result = new FaqDao().delet(conn, no);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	
+	
+	
+
 	
 	
 	

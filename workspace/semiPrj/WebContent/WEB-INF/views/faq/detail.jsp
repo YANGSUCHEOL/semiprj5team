@@ -1,5 +1,10 @@
+<%@page import="faq.vo.FaqVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	FaqVo vo = (FaqVo)request.getAttribute("vo");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +110,8 @@
 </head>
 <body>
 
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -118,18 +125,13 @@
                 <table class="board-table">
                     <thead>
                         <tr>
-                            <th scope="col" class="th-title">[공지사항] 예약은 어떻게 하나요?</th>
-                            <td>2022-10-16</td>
+                            <th scope="col" class="th-title"><%= vo.getTitle() %></th>
+                            <td><%= vo.getEnrollDate() %></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                예약하는 방법은 아래와 같습니다.<br>
-                                1. 메인 페이지 내 검색창에서 원하는 식당을 검색한 후,<br>
-                                2. 식당의 상세 정보 페이지 내 예약 버튼을 누른 뒤,<br>
-                                3. 예약 시간, 인원 수를 입력한 후 예약하기 버튼을 클릭하면 예약이 완료됩니다.
-                            </td>
+                            <td><%= vo.getContent() %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,8 +140,11 @@
 
         <div id="board-write">
             <div class="container">
-                <button type="submit" class="btn btn-dark">목록가기</button>
-                <button type="submit" class="btn btn-dark">수정하기</button>
+            	<%if(loginMember.equals("admin")){%>
+                	<button type="submit" class="btn btn-dark">삭제하기</button>
+               		<button type="submit" class="btn btn-dark">수정하기</button>
+               	<%}%>
+                
             </div>
         </div>
 
