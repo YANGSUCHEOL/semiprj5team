@@ -1,6 +1,6 @@
 package com.kh.semiPrj.notice.service;
 
-import static com.kh.semiPrj.common.JDBCTemplate.*;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
