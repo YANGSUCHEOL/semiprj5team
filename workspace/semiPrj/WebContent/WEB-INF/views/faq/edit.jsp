@@ -39,6 +39,17 @@
         border-radius: 10px;
         background: #FCFFED;
     }
+    .page-middle{
+        margin-bottom: 10px;
+    }
+    .page-middle h4{
+        height: 5vh;
+        font-size: 20px;
+        color: #333333;
+        font-weight: 400;
+        text-align: left;
+        line-height: 40px;
+    }
     .btn {
         margin-top: 10px;
         margin-left: 90%;
@@ -78,22 +89,28 @@
     }
     .board-table .th-title{
         width: 200px;
-        text-align: left;
     }
     .board-table th, .board-table td{
         padding: 18px 0;
     }
-    .board-table thead td{
-        width: 20vw;
-        text-align: right;
-        border-bottom: 1px solid #e7e7e7;
-    }
     .board-table tbody td{
-        width: 80vw;
-        height: 40vh;
+        border-top: 1px solid #e7e7e7;
+        text-align: center;
+    }
+    .board-table thead td{
+        text-align: left;
+    }
+    #title{
+        text-align: left;
+        width: 35vw;
+        height: 5vh;
+    }
+    .board-table tbody th{
+        width: 70%;
+        padding-left: 40px;
+        padding-right: 14px;
         border-top: 1px solid #e7e7e7;
         text-align: left;
-        vertical-align: text-top;
     }
     * {
         list-style: none;
@@ -111,7 +128,7 @@
 <body>
 
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-
+	
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -120,18 +137,27 @@
             </div>
         </div>
 
+        <div class="page-middle">
+            <div class="container">
+                <h4>※ FAQ 수정하기 ※</h4>
+            </div>
+        </div>
+
         <div id="faq-list">
             <div class="container">
                 <table class="board-table">
                     <thead>
                         <tr>
-                            <th scope="col" class="th-title"><%= vo.getTitle() %></th>
-                            <td><%= vo.getEnrollDate() %></td>
+                            <th scope="col" class="th-title">제목</th>
+                            <td scope="col"><input type="text" id="title" name="title" value="<%= vo.getTitle()%>"></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><%= vo.getContent() %></td>
+                            <td>내용</td>
+                            <td>
+                                <textarea name="content" cols="130" rows="26"><%= vo.getContent()%></textarea>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -140,11 +166,7 @@
 
         <div id="board-write">
             <div class="container">
-            	<%if(loginMember.equals("admin")){%>
-                	<button type="submit" class="btn btn-dark">삭제하기</button>
-               		<button type="submit" class="btn btn-dark">수정하기</button>
-               	<%}%>
-                
+                <button type="submit" class="btn btn-dark">수정하기</button>
             </div>
         </div>
 
