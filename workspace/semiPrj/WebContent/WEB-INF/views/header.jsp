@@ -139,9 +139,8 @@ input[name="pno"] {
             <div id="header-main-logo"><a href=""><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
-                    <input id="search" type="text" placeholder="식당 이름을 검색해 주세요." name="resName">
-                	<input type="text" name="pno" value="1">
-                    <input type="submit" id="searchImg" src="/semiPrj/resources/img/돋보기2.png" alt="돋보기" width="35px" height="auto" value="검색하기">
+                   <input id="search" type="text" placeholder="식당 이름을 검색해주세요 " name="resName">
+                   <input type="submit" id="searchImg" value="">
                     <!-- 검색하기에 이미지 씌워 주세요 -->
                 </form>
             </div>
