@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    #modal.modal-overlay {
+    #bs-modal.modal-overlay {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -23,7 +23,7 @@
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
 }
-#modal .modal-window {
+#bs-modal .modal-window {
     /* background: red; */
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 13.5px );
@@ -36,14 +36,14 @@
     /* top: -100px;
     padding: 10px; */
 }
-#title{
+#bs-title{
     width: 100%;
     height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#modal .close-area {
+#bs-modal .bs-loginclose-area {
     display: inline;
     float: right;
     padding-top: 10px;
@@ -54,13 +54,13 @@
     font-size: 20px;
 }
 
-#modal .content {
+#bs-modal .bs-content {
     margin-top: 20px;
     padding: 0px 10px;
     /* text-shadow: 1px 1px 2px gray; */
     color: black;
 }
-#id {
+#bs-id {
 border: none;
 width: 420px;
 height: 63px;
@@ -78,7 +78,7 @@ font-size: 20px;
 text-indent: 20px;
 }
 
-#pwd{
+#bs-pwd{
 border: none;
 width: 420px;
 height: 63px;
@@ -95,7 +95,7 @@ overflow: hidden;
 font-size: 20px;
 text-indent: 20px;
 }
-#login{
+#bs-login{
 border: none;
 width: 420px;
 height: 63px;
@@ -111,7 +111,7 @@ border-bottom-right-radius: 30px;
 overflow: hidden;
 font-size: 20px;
 }
-#forget{
+#bs-forget{
 width: 274px;
 color: rgba(60,179,113,1);
 position: absolute;
@@ -123,22 +123,22 @@ font-size: 20px;
 opacity: 1;
 text-align: left;
 }
-#signUp{
-width: 274px;
+#bs-signUp{
+width: 350px;
 position: absolute;
 top: 500px;
-left: 120px;
+left: 80px;
 font-family: Inter;
 font-weight: Regular;
 font-size: 20px;
 opacity: 1;
 text-align: left;
 }
-#signUp>a{
+#bs-signUp>a{
     color: rgba(60,179,113,1);
     text-decoration: none;
 }
-#businessLogin{
+#bs-businessLogin{
 width: 300px;
 position: absolute;
 top: 540px;
@@ -149,7 +149,7 @@ font-size: 20px;
 opacity: 1;
 text-align: left;
 }
-#businessLogin>a{
+#bs-businessLogin>a{
     color: rgba(60,179,113,1);
     text-decoration: none;
 }
@@ -158,68 +158,57 @@ text-align: left;
 </head>
 <body>
 
-    <div id="modal" class="modal-overlay">
+    <div id="bs-modal" class="modal-overlay">
         <div class="modal-window">
-            <div class="close-area">X</div>
-            <div id="title">
-                <img id="login-logo" src="/semiPrj/resources/img/로그인회원가입로고.png" alt="로고" width="260px" height="160px">
+            <div class="bs-loginclose-area">X</div>
+            <div id="bs-title">
+                <img id="bs-login-logo" src="/semiPrj/resources/img/로그인회원가입로고.png" alt="로고" width="260px" height="160px">
             </div>
-            <div class="content">
-                <form action="/semiPrj/member/login" method="post">
+            <div class="bs-content">
+                <form action="/semiPrj/businessmember/login" method="post">
                     <table>
                         <tr>
-                            <td><input id="id" type="text" name="memberId" placeholder="아이디"></td>
+                            <td><input id="bs-id" type="text" name="bsmemberId" placeholder="사업자 아이디"></td>
                         </tr>
                         <tr>
-                            <td><input id="pwd" type="password" name="memberPwd" placeholder="비밀번호"></td>
+                            <td><input id="bs-pwd" type="password" name="bsmemberPwd" placeholder="사업자 비밀번호"></td>
                         </tr>
                         <tr>
-                            <td><input id="login" type="submit" value="로그인"></td>
-                            <td><a href=""><span id="forget" >비밀번호를 잊어버리셨나요?</span></a></td>
-                            <td><span  id="signUp">계정이 없으신가요? <a id="login-join" href="#" onclick='loginjoin'>회원가입</a></span></td>
-                            <td><span  id="businessLogin">사업자 이신가요? <a id="login-login" href="#" onclick='login'>사업자 로그인</a></span></td>
+                            <td><input id="bs-login" type="submit" value="사업자 로그인"></td>
+                            <td><a href=""><span id="bs-forget" >비밀번호를 잊어버리셨나요?</span></a></td>
+                            <td><span  id="bs-signUp">계정이 없으신가요? <a id="bslogin-join" href="#" onclick='businessloginjoin'>사업자 회원가입</a></span></td>
                         </tr>
                     </table>
                 </form>
             </div>
         </div>
     </div>
-    <script>         
-        const modal = document.getElementById("modal")
-        const btnModal = document.getElementById("header-login")
-        btnModal.addEventListener("click", e => {
-                modal.style.display = "flex"
-        })
-       
-        const closeBtn = modal.querySelector(".close-area")
-        closeBtn.addEventListener("click", e => {
-        modal.style.display = "none"
-        })
-        //로그인 ->비지니스 로그인
-        const bslogin = document.getElementById("bs-modal")
-        const login = document.getElementById("login-login")
-        login.addEventListener("click", e => {
-                modal.style.display = "none"
-                bslogin.style.display = "flex"
-        })
-        
-         //로그인 -> 회원가입
-        const modal22 = document.getElementById("join-modal")
-        const loginjoin = document.getElementById("login-join")
-        loginjoin.addEventListener("click", e => {
-        modal.style.display = "none"
-        modal22.style.display = "flex"
+    <script>    
+         
+        const bslogin2 = document.getElementById("bs-modal")
+        const closeBtn4 = bslogin2.querySelector(".bs-loginclose-area")
+        closeBtn4.addEventListener("click", e => {
+            bslogin2.style.display = "none"
         })
 
-        // 회원가입 -> 로그인
-            // const modal33 = document.getElementById("join-modal")
-            const joinlogin33 = document.getElementById("join-loigin-button")
-            joinlogin33.addEventListener("click", e => {
-            modal22.style.display = "none"
-            modal.style.display = "flex"
+        //비지니스 로그인->비지니스 회원가입
+        const modal23 = document.getElementById("bsjoin-modal")
+        const businessloginjoin = document.getElementById("bslogin-join")
+        businessloginjoin.addEventListener("click", e => {
+            bslogin2.style.display = "none"
+            modal23.style.display = "flex"
         })
-     </script>
 
+        //비지니스 회원가입 -> 비지니스 로그인
+        const bsnlogin = document.getElementById("bslogin-bslogin")
+        bsnlogin.addEventListener("click", e => {
+            modal23.style.display = "none"
+            bslogin2.style.display = "flex"
+        })
+   </script>
+
+  
+         
 
 
 </body>

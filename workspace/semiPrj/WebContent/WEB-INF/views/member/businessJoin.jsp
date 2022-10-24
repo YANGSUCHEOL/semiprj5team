@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <style>
-    #join-modal.modal-overlay {
+    #bsjoin-modal.modal-overlay {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -22,7 +22,7 @@
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
     }
-    #join-modal .modal-window {
+    #bsjoin-modal .modal-window {
         /* background: red; */
         box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
         backdrop-filter: blur( 13.5px );
@@ -35,14 +35,14 @@
         max-height: calc(80vh - 200px);
     overflow-y: auto;
     }
-    #join-title{
+    #bsjoin-title{
         width: 100%;
         height: 25%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    #join-modal .close-area2 {
+    #bsjoin-modal .bsclose-area {
         display: inline;
         float: right;
         padding-top: 10px;
@@ -53,13 +53,13 @@
         font-size: 20px;
     }
 
-    #join-modal .join-content {
+    #bsjoin-modal .bsjoin-content {
         margin-top: 20px;
         padding: 0px 10px;
         /* text-shadow: 1px 1px 2px gray; */
         color: black;
     }
-    #join-id {
+    #bsjoin-restaurantname {
     border: none;
     width: 420px;
     height: 63px;
@@ -76,8 +76,7 @@
     font-size: 20px;
     text-indent: 20px;
     }
-
-    #join-pwd{
+    #bsjoin-id {
     border: none;
     width: 420px;
     height: 63px;
@@ -94,7 +93,8 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-pwd2{
+
+    #bsjoin-pwd{
     border: none;
     width: 420px;
     height: 63px;
@@ -111,7 +111,7 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-nick{
+    #bsjoin-pwd2{
     border: none;
     width: 420px;
     height: 63px;
@@ -128,7 +128,7 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-name{
+    #bsjoin-nick{
     border: none;
     width: 420px;
     height: 63px;
@@ -145,7 +145,7 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-phoneNum{
+    #bsjoin-name{
     border: none;
     width: 420px;
     height: 63px;
@@ -162,7 +162,7 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-birth{
+    #bsjoin-phoneNum{
     border: none;
     width: 420px;
     height: 63px;
@@ -179,11 +179,11 @@
     font-size: 20px;
     text-indent: 20px;
     }
-    #join-login{
+    #bsjoin-birth{
     border: none;
     width: 420px;
     height: 63px;
-    background-color: rgb(238,255,246);
+    background: rgba(236,236,236,0.6299999952316284);
     opacity: 1;
     position: absolute;
     top: 820px;
@@ -194,11 +194,28 @@
     border-bottom-right-radius: 30px;
     overflow: hidden;
     font-size: 20px;
+    text-indent: 20px;
     }
-    #join-join-login{
+    #bsjoin-login{
+    border: none;
+    width: 420px;
+    height: 63px;
+    background-color: rgb(238,255,246);
+    opacity: 1;
+    position: absolute;
+    top: 910px;
+    left: 33px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+    font-size: 20px;
+    }
+    #bsjoin-join-login{
     width: 274px;
     position: absolute;
-    top: 900px;
+    top: 980px;
     left: 130px;
     font-family: Inter;
     font-weight: Regular;
@@ -206,26 +223,11 @@
     opacity: 1;
     text-align: left;
     }
-    #join-join-login>a{
+    #bsjoin-join-login>a{
         color: rgba(60,179,113,1);
         text-decoration: none;
     }
-    #join-business-join{
-    width: 380px;
-    position: absolute;
-    top: 950px;
-    left: 70px;
-    font-family: Inter;
-    font-weight: Regular;
-    font-size: 20px;
-    opacity: 1;
-    text-align: left;
-    }
-    #join-business-join>a{
-        color: rgba(60,179,113,1);
-        text-decoration: none;
-    }
-    #join-business-join>a{
+    #bsjoin-business-join>a{
         color: rgba(60,179,113,1);
         text-decoration: none;
     }
@@ -238,55 +240,42 @@
 <body>
 
     </div>
-    <div id="join-modal" class="modal-overlay">
+    <div id="bsjoin-modal" class="modal-overlay">
         <div class="modal-window">
-            <div class="close-area2">X</div>
-            <div id="join-title">
-                <img id="join-login-logo" src="/semiPrj/resources/img/로그인회원가입로고.png" alt="로고" width="260px" height="160px">
+            <div class="bsclose-area">X</div>
+            <div id="bsjoin-title">
+                <img id="bsjoin-login-logo" src="/semiPrj/resources/img/로그인회원가입로고.png" alt="로고" width="260px" height="160px">
             </div>
-            <div class="join-content">
-                <form action="/semiPrj/member/join" method="post">
+            <div class="bsjoin-content">
+                <form action="/semiPrj/businessmember/join" method="post">
                     <table>
                         <tr>
-                            <td><input id="join-id" type="text" name="joinmemberId" placeholder="아이디"></td>
-                            <td><input id="join-pwd" type="password" name="joinmemberPwd" placeholder="비밀번호"></td>
-                            <td><input id="join-pwd2" type="password" name="joinmemberPwd2" placeholder="비밀번호확인"></td>
-                            <td><input id="join-nick" type="text" name="joinmemberNick" placeholder="닉네임"></td>
-                            <td><input id="join-name" type="text" name="joinmemberName" placeholder="이름"></td>
-                            <td><input id="join-phoneNum" type="text" name="joinphoneNum" placeholder="전화번호"></td>
-                            <td><input id="join-birth" type="text" name="joinbirth" placeholder="생년월일(6자리)"></td>
+                            <td><input id="bsjoin-restaurantname" type="text" name="bsrestaurantname" placeholder="식당이름"></td>
+                            <td><input id="bsjoin-id" type="text" name="bsjoinmemberId" placeholder="아이디"></td>
+                            <td><input id="bsjoin-pwd" type="password" name="bsjoinmemberPwd" placeholder="비밀번호"></td>
+                            <td><input id="bsjoin-pwd2" type="password" name="bsjoinmemberPwd2" placeholder="비밀번호확인"></td>
+                            <td><input id="bsjoin-nick" type="text" name="bsjoinmemberNick" placeholder="닉네임"></td>
+                            <td><input id="bsjoin-name" type="text" name="bsjoinmemberName" placeholder="이름"></td>
+                            <td><input id="bsjoin-phoneNum" type="text" name="bsjoinphoneNum" placeholder="전화번호"></td>
+                            <td><input id="bsjoin-birth" type="text" name="bsnumber" placeholder="사업자번호(10자리)"></td>
                         </tr>
                         <tr>
-                            <td><input id="join-login" type="submit" value="회원가입"></td>
-                            <td><span  id="join-join-login">이미 가입하셨나요? <a id="join-loigin-button" href="#" onclick='btnModal'>로그인</a></span></td>
-                            <td><span  id="join-business-join">사업자 회원이신가요? <a id="join-businessjoin-button" href="#" onclick='joinlogin33'>사업자 회원가입</a></span></td>
+                            <td><input id="bsjoin-login" type="submit" value="사업자 회원가입"></td>
+                            <td><span  id="bsjoin-join-login">이미 가입하셨나요?<a id="bslogin-bslogin" href="#" onclick='bsnlogin'>로그인</a></span></td>
                         </tr>
                     </table>
                 </form>
             </div>
         </div>
     </div>
-    <script>         
-        const modal2 = document.getElementById("join-modal")
-        const btnModal2 = document.getElementById("header-signup")
-        btnModal2.addEventListener("click", e => {
-                modal2.style.display = "flex"
+    <script>       
+         const businessjoin2 = document.getElementById("bsjoin-modal")      
+        const closeBtn3 = businessjoin2.querySelector(".bsclose-area")
+        closeBtn3.addEventListener("click", e => {
+            businessjoin2.style.display = "none"
         })
-       
-        const closeBtn2 = modal2.querySelector(".close-area2")
-        closeBtn2.addEventListener("click", e => {
-                modal2.style.display = "none"
-        })
-        //회원가입 -> 비지니스 회원가입
-        const businessjoin = document.getElementById("bsjoin-modal")
-        const btnModal3 = document.getElementById("join-businessjoin-button")
-        btnModal3.addEventListener("click", e => {
-                modal2.style.display = "none"
-                businessjoin.style.display = "flex"
-        })
-       
+
    </script>
-   
 
 </body>
 </html>

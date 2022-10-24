@@ -1,4 +1,4 @@
-package member;
+package com.kh.semi.Prj.member;
 
 public class MemberVo {
 	

@@ -1,8 +1,10 @@
-<%@page import="member.MemberVo"%>
+<%@page import="com.kh.semi.Prj.businessMember.BusinessMemberVo"%>
+<%@page import="com.kh.semi.Prj.member.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); 
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+	BusinessMemberVo bsLoginMember = (BusinessMemberVo)session.getAttribute("bsloginMember");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
 %>   
@@ -99,6 +101,13 @@ body {
     float: left;
     position: relative;
     left: 150px;
+    border: none;
+    width: 40px;
+    height: 40px;
+   background: url(/semiPrj/resources/img/돋보기2.png);
+   background-size: cover;
+   
+  
 }
 #header-main-2{
     position: relative;
@@ -115,7 +124,7 @@ input[name="pno"] {
             <div id="header-0"></div>
             <div id="header-customer"><a href="">고객센터</a></div>
             <div id="header-2">&nbsp&nbsp&nbsp|</div>
-            <%if(loginMember == null){%>
+            <%if(loginMember == null && bsLoginMember == null){%>
             <div id="header-login"><a href="#" onclick='btnModal'>로그인</a></div>
             <div id="header-signup"><a href="#" onclick='btnModal'>회원가입</a></div>
             <div id="header-5"></div>
@@ -127,7 +136,7 @@ input[name="pno"] {
             <%}%>
         </div>
         <div id="header-main">
-            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
+            <div id="header-main-logo"><a href=""><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
                     <input id="search" type="text" placeholder="식당 이름을 검색해 주세요." name="resName">
@@ -144,10 +153,10 @@ input[name="pno"] {
 
     </div>
     
-    <%@ include file="/WEB-INF/views/member/login.jsp" %>
+    <%@ include file="/WEB-INF/views/member/businessJoin.jsp" %>
+    <%@ include file="/WEB-INF/views/member/businessLogin.jsp" %>
     <%@ include file="/WEB-INF/views/member/join.jsp" %>
-    
-    
+    <%@ include file="/WEB-INF/views/member/login.jsp" %>
 
     
 

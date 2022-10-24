@@ -1,4 +1,4 @@
-package member;
+package com.kh.semi.Prj.member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
