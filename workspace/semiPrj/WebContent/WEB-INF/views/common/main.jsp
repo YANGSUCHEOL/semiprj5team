@@ -69,7 +69,7 @@
     </style>
 
     
-    
+    <%@ include file="/WEB-INF/views/header.jsp" %>
 </style>
 </head>
 <body>

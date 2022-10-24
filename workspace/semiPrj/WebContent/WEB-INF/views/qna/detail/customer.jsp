@@ -1,5 +1,14 @@
+<%@page import="java.util.List"%>
+
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+		QuestionVo vo = (QuestionVo)request.getAttribute("vo");
+	%>
+	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +18,7 @@
     #background{
         box-sizing: border-box;
 
-    position: absolute;
+    position: relative;
     width: 832px;
     height: 800px;
     left: 82px;
@@ -152,7 +161,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="background">
 
         <div id="top-back">
@@ -166,13 +175,18 @@
             </div>
            
             <div id="title">
-                <div>쿠폰 사용 어디서 하나요?</div>
-                <div>닉네임</div>
-                <div>2022-12-31</div>
-                <div id="ans-done">답변완료</div>
+                <div><%= vo.getTitle() %></div>
+                <div><%= vo.getmNo() %></div>
+                <div><%= vo.getEnrollDate() %></div>
+               
+                <% if(vo.getAnswerYn() == "Y") {%>
+              		 	<div id="ans-done">답변완료</div>
+               		<%} else{%>
+               			<div id="ans-expect">답변예정</div>
+					<%} %>
             </div>
             <div id="context">
-                <div>본문내용~~~~</div>
+                <div><%= vo.getContent() %></div>
             </div>
 
             <div id="answer">

@@ -5,6 +5,8 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import com.kh.semiPrj.qna.dao.QnaDao;
+import com.kh.semiPrj.qna.vo.AnswerVo;
+import com.kh.semiPrj.qna.vo.PageVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
 public class QnaService {
@@ -13,7 +15,7 @@ public class QnaService {
 
 
 		
-		//게시글 작성 // 질문 작성
+		// 질문 작성
 		public int write(QuestionVo vo) {
 			//커넥션 준비
 			//sql
@@ -38,7 +40,7 @@ public class QnaService {
 		}
 
 
-
+		//목록 조회
 		public List<QuestionVo> selectQuestionList(QuestionVo vo) {
 			
 			//커넥션
@@ -54,26 +56,46 @@ public class QnaService {
 			
 			return voList;
 		}
+		
+				
 
 
-
-		public QuestionVo selectOne(String qno) {
+		//상세조회
+		public QuestionVo selectOne(String no) {
 			
 			//커넥션 준비
 			//sql
 			//트랜젝션 자원반납
 			
 			Connection conn = JDBCTemplate.getConnection();
-			
 			QuestionVo vo = null;
 			
-			vo = dao.selectOne(conn, qno);
+			int result = dao.increaseHit(conn, no);
+
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+				vo = dao.selectOne(conn , no);
+			}
 			
+			JDBCTemplate.close(conn);
+			System.out.println("service 도니?");
 			return vo;
 			
 			
 			
 		}
+
+
+
+
+		//답 작성
+		//노션에 있음 붙여와
+
+		public int writeAnswer(AnswerVo avo) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
 		
 	
 
