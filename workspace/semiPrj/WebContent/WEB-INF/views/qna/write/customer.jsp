@@ -95,7 +95,7 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header.jsp" %>
+
     <div id="background">
 
         <div id="top-back">
@@ -105,11 +105,11 @@
         <form action="" method="post">
             <div id="main-back">
                 <br>
-                <div>제목</div>
-				<div><input type="text" name="title"></div>
-	
-				<div>내용</div>
-				<div><textarea name="content"></textarea></div>
+                <div>제목</div>  
+                <div><input type="text" name="title"></div>
+                <br><br>
+                <div>내용</div>
+                <div><textarea name="content"></textarea></div> 
                 <br><br>
                 <div id="btns">
                 <input type="submit" value="작성하기" id="submit-btn"></div>

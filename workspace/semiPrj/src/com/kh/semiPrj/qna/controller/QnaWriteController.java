@@ -13,6 +13,8 @@ import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.qna.service.QnaService;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
+
+
 @WebServlet(urlPatterns = "/qna/write")
 public class QnaWriteController extends HttpServlet{
 	
@@ -23,8 +25,10 @@ public class QnaWriteController extends HttpServlet{
 		//로그인 안 되어있으면 로그인부터
 		if(req.getSession().getAttribute("loginMember") == null) {
 			req.setAttribute("msg", "로그인 후 이용해주세요");
-			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
-			return;
+			req.getRequestDispatcher("views/common/errorPage.jsp").forward(req, resp);
+			
+		}else {
+			req.getRequestDispatcher("/WEB-INF/views/qna/write/customer.jsp").forward(req, resp);
 		}
 		
 		//(사업자회원이면)ㄴ
@@ -32,10 +36,8 @@ public class QnaWriteController extends HttpServlet{
 		//req.getRequestDispatcher("/views/qna/write/business.jsp").forward(req, resp);
 		//}else if() {
 		//(일반회원이면)
-		//	req.getRequestDispatcher("/views/qna/write/customer.jsp").forward(req, resp);
+			
 		// }
-		
-		req.getRequestDispatcher("/WEB-INF/views/qna/write/customer.jsp").forward(req, resp);
 		
 	}//doGet
 	
@@ -46,11 +48,9 @@ public class QnaWriteController extends HttpServlet{
 		//session
 		HttpSession s = req.getSession();
 		
-		
 		//로그인멤버 가져오기
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-		System.out.println("로그인멤버 됐나?");
-		
+		System.out.println("write 로그인멤버 가져옴?");
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
 		
@@ -67,7 +67,6 @@ public class QnaWriteController extends HttpServlet{
 		vo.setContent(content);
 		vo.setmNo(loginMember.getNo());
 		
-		
 		//vo.setaNo("aNo"); //aNo 0이면 답변예정 번호 있으면 답변완료
 	
 		//디비
@@ -77,7 +76,7 @@ public class QnaWriteController extends HttpServlet{
 		if(result == 1) {
 			//성공
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semiPrj/qna/list?pno=1");
+			resp.sendRedirect("/semiPrj/WEB-INF/views/qna/list/customer.jsp");
 		}else {
 			System.out.println("게시글 작성 실패");
 		}

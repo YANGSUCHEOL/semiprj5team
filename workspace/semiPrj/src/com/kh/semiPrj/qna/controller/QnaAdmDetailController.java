@@ -11,25 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.semiPrj.qna.service.QnaService;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
-@WebServlet(urlPatterns = "/qna/detail")
-public class QnaDetailController extends HttpServlet{
+@WebServlet(urlPatterns = "/qna/adminDetail")
+public class QnaAdmDetailController extends HttpServlet{
 	
 	//상세조회
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String bno = req.getParameter("bno");
 		
-		//데이터 꺼내기
-		//데이터 꺼내기
-		String no = req.getParameter("no");
-		
-		//데이터 뭉치기
-		
-		//디비 다녀오기
-		QuestionVo vo = new QnaService().selectOne(no);
+		//디비
+		QuestionVo vo = new QnaService().selectAdminOne(bno);
 		
 		//화면선택
 		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/WEB-INF/views/qna/detail/customer.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/qna/detail/answer_c.jsp").forward(req, resp);
+		
 		
 	}
 
