@@ -170,31 +170,31 @@
 
         <div class="page-middle">
             <div class="container">
-                <h4><a href="/semiPrj/WEB-INF/views/faq/list.jsp">Q. 자주 묻는 질문</a></h4>
+                <h4><a href="/semiPrj/faq/list">Q. 자주 묻는 질문</a></h4>
 	                <table class="board-table">
 	                    <tbody>
 	                        <tr>
 	                            <td>1.</td>
 	                            <th>
-	                                <a href="/semiPrj/WEB-INF/views/faq/list.jsp">리뷰는 어떻게 작성하나요?</a>
+	                                <a">리뷰는 어떻게 작성하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>2.</td>
 	                            <th>
-	                                <a href="/semiPrj/WEB-INF/views/faq/list.jsp">예약은 어떻게 하나요?</a>
+	                                <a>예약은 어떻게 하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>3.</td>
 	                            <th>
-	                                <a href="/semiPrj/WEB-INF/views/faq/list.jsp">리뷰는 어떻게 작성하나요?</a>
+	                                <a>리뷰는 어떻게 작성하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>4.</td>
 	                            <th>
-	                                <a href="/semiPrj/WEB-INF/views/faq/list.jsp">리뷰는 어떻게 작성하나요?</a>
+	                                <a>리뷰는 어떻게 작성하나요?</a>
 	                            </th>
 	                        </tr>
 	                    </tbody>

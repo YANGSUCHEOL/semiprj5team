@@ -64,7 +64,7 @@ public class FaqService {
 	//FAQ 수정
 	public int edit(FaqVo vo) {
 		
-		Connection conn = null;
+		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new FaqDao().updateByNo(conn, vo);
 		
@@ -85,7 +85,7 @@ public class FaqService {
 		//커넥션 준비
 		//SQL 준비
 		//트랜잭션 처리, 자원반납
-		Connection conn = null;
+		Connection conn = JDBCTemplate.getConnection();
 		
 		FaqVo vo = new FaqDao().selectFaqOne(conn, no);
 		
