@@ -1,5 +1,7 @@
 package com.kh.semiPrj.notice.dao;
 
+import static common.JDBCTemplate.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.semiPrj.notice.vo.NoticeVo;
-
-import static common.JDBCTemplate.*;
 
 public class NoticeDao {
 
@@ -95,7 +95,7 @@ public class NoticeDao {
 	//공지 게시글 상세 조회(select)
 	public NoticeVo selectNoticeDetail(Connection conn, String no) {
 		
-		String sql = "SELECT N.NO ,N.TITLE ,N.CONTENT ,N.HIT ,N.ENROLL_DATE ,N.MODIFY_DATE ,N.STATUS ,A.NICK AS WRITER FROM NOTICE N JOIN ADMIN A ON N.WRITER = A.NO WHERE N.NO = ? AND N.STATUS = 'O'";
+		String sql = "SELECT N.NO ,N.TITLE ,N.CONTENT ,N.HIT ,N.ENROLL_DATE ,N.MODIFY_DATE ,N.STATUS ,M.NICK AS WRITER FROM NOTICE N JOIN MEMBER M ON N.WRITER = M.NO WHERE N.NO = ? AND N.STATUS = 'O'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -137,6 +137,34 @@ public class NoticeDao {
 		
 	}//selectNoticeDetail
 	
+	
+	//공지 조회수 증가
+	public int increaseHit(Connection conn , String no) {
+		//SQL
+		
+		String sql = "UPDATE NOTICE SET HIT = HIT + 1 WHERE NO = ? AND STATUS = 'O'";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}//increaseHit
+
+
 	//공지 수정하기(update)
 	public int updateByNo(Connection conn, NoticeVo vo) {
 		
@@ -163,12 +191,12 @@ public class NoticeDao {
 		return result;
 		
 	}//updateByNo
-	
-	
+
+
 	//공지 삭제(delete)
 	public int delete(Connection conn, String no) {
 
-		String sql = "DELETE NOTICE WHERE NO = ?";
+		String sql = "UPDATE NOTICE SET STATUS = 'X' WHERE NO = ?";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -186,10 +214,11 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-	
 		return result;
 	}//delete
 	
+}//class
+	
 	
 
-}
+

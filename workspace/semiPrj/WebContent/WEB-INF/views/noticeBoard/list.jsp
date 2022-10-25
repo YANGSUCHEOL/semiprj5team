@@ -1,4 +1,5 @@
-<%@page import="com.kh.semiPrj.admin.vo.AdminVo"%>
+
+<%@page import="com.kh.semi.Prj.member.MemberVo"%>
 <%@page import="com.kh.semiPrj.notice.vo.NoticeVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,8 +7,6 @@
     
 <%
 	List<NoticeVo> voList = (List<NoticeVo>)request.getAttribute("voList");
-	HttpSession s = request.getSession();
-	AdminVo admin = (AdminVo)s.getAttribute("admin");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -108,7 +107,7 @@ table {
     clear: both;
   }
   .container {
-    width: 1100px;
+    width: 60vw;
     margin: 0 auto;
   }
   .blind {
@@ -147,7 +146,7 @@ table {
 	
 -->
 
-
+<%@ include file="/WEB-INF/views/common/header.jsp" --%>
 
 
   <section class="notice">
@@ -183,11 +182,14 @@ table {
                   <%}%>         
                    </tbody>
                </table>
-               <%if(admin.getId().equals("admin")) {%>
+               
+               
+ <%--프로젝트엔 관리자만 보이게 함 --%>
+ 		<%if(loginMember != null && loginMember.getId().equals("admin")){%>
                 <div id="main-bot">
           			 <a href="/semiPrj/notice/write" class="btn btn-light" id="write">글쓰기</a>
       			 </div>
-				<%} %>
+		<%} %>
 	          	
               </div>
           </div>
