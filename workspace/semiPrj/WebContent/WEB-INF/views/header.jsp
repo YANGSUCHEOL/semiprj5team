@@ -131,7 +131,7 @@ input[name="pno"] {
             
             <%}else{%>
             		<div id="header-logout"><a href="/semiPrj/member/logout">로그아웃</a></div>
-            		<div id="header-mypage"><a href="">마이페이지</a></div>	
+            		<div id="header-mypage"><a href="/semiPrj/mypage/mypage">마이페이지</a></div>	
             		<div id="header-5"></div>
             <%}%>
         </div>
@@ -139,7 +139,7 @@ input[name="pno"] {
             <div id="header-main-logo"><a href=""><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
-                   <input id="search" type="text" placeholder="식당 이름을 검색해주세요 " name="resName">
+                   <input id="search" type="text" placeholder="식당 이름을 검색해주세요   " name="resName">
                    <input type="submit" id="searchImg" value="">
                     <!-- 검색하기에 이미지 씌워 주세요 -->
                 </form>
