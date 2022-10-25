@@ -1,4 +1,4 @@
-package com.kh.semi.Prj.member;
+package com.kh.semiPrj.member;
 
 import java.io.IOException;
 

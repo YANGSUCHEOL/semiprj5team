@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.semiPrj.faq.service.FaqService;
 import com.kh.semiPrj.faq.vo.FaqVo;
-
-import com.kh.semi.Prj.member.*;
+import com.kh.semiPrj.member.*;
 
 @WebServlet(urlPatterns = "/faq/write")
 public class FaqWriteController extends HttpServlet {

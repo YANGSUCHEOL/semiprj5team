@@ -1,8 +1,8 @@
-package com.kh.semi.Prj.businessMember;
+package com.kh.semiPrj.businessMember;
 
 import java.sql.Connection;
 
-import com.kh.semi.Prj.member.MemberVo;
+import com.kh.semiPrj.member.MemberVo;
 
 import common.JDBCTemplate;
 
