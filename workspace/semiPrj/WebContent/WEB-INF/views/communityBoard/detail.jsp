@@ -1,12 +1,18 @@
+<%@page import="com.kh.semiPrj.community.vo.CommuVo"%>
+<%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	CommuVo vo = (CommuVo)request.getAttribute("vo");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GET EAT VEGAN</title>
+    <title>communityBoardDetail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <style>
@@ -37,7 +43,7 @@
     }
 
 
-    .foot {
+    .comment {
         width: 100%;
         height: 20vh;
         padding: 20px;
@@ -84,26 +90,29 @@
 
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <div class="container">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end" id="th">
-            <div id="category">일상</div>
-            <a class="btn btn-outline-secondary me-md-2" type="button">목록</a>
-            <a class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-            <a class="btn btn-outline-secondary" type="button">삭제</a>
+            <div id="category"><%= vo.getCategory() %></div>
+            
+            <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/community/list'">목록</button>
+           
+            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
+            <a href="/semiPrj/notice/delete?no=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
+           
         </div>
         <hr>
 
         <div class="body">
             <div id="bb"> 
-                <div id="title">제목입니다 안녕하세요</div>
-                <div id="info">두부조아 2022.10.12 23:25 111</div>
+                <div id="title"><%= vo.getTitle()%></div>
+                <div id="info"><%= vo.getWriter() %> | <%= vo.getEnrollDate() %> | <%= vo.getHit() %></div>
                 <br><br>
-                <div id="content">내용내용내용</div>
+                <div id="content"><%= vo.getContent() %></div>
             </div>
         </div>
 
-        <div class="foot">
+        <div class="comment">
             <form action="">
                 <div id="cmt">
                     <textarea name="" id="" cols="30" rows="10" required placeholder="댓글을 작성해 주세요"></textarea>

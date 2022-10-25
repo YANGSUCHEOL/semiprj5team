@@ -1,17 +1,17 @@
-<%@page import="com.kh.semiPrj.notice.vo.NoticeVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	NoticeVo vo = (NoticeVo)request.getAttribute("vo");
-%>    
-
+	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 작성</title>
+    <title>communityBoardWrite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 
@@ -35,6 +35,7 @@
         background-color: #EEFFF6;
         color: black;
         border: 1px solid #EEFFF6;
+        font-weight: 600;
         font-size: 12px;
     }
 
@@ -46,17 +47,34 @@
         border: 1px solid white;
         border-bottom: 1px solid rgb(217, 217, 217);
         margin-bottom: 10px;
-        padding: 10px;
     }
 
     #content {
         border: 1px solid rgb(217, 217, 217);
-        padding: 10px;
     }
 
     input:focus {outline: none;}
     textarea:focus {outline: none;}
 
+    .select {
+        width: 90px;
+        height: 30px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        outline: none;
+        margin-bottom: 30px;
+    }
+
+    .select:hover {
+        background-color: #EEFFF6;
+    }
+
+    .select option {
+        color: black;
+        padding: 3px 0;
+    }
+
+    
 
     #title-th {
         padding-top: 10px;
@@ -84,30 +102,45 @@
 </head>
 <body>
 
-    <%@ include file="/WEB-INF/views/header.jsp" %>
+ 	<%@ include file="/WEB-INF/views/header.jsp" %>
 
     <div id="main">
 
         <div class="outer">
           <br>
-          <h2 align="center">NOTICE EDIT🌱</h2>
+          <h2 align="center">COMMUNITY EDIT🌿</h2>
           <br>
   
             <form id="enroll-form" action="" method="post">
-                <button type="reset" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/notice/detail?no=<%= vo.getNo()%>'"></button>
+                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list'"></button>
                 <br><br>
-                <!-- 제목, 내용 -->
+                <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
                 <table>
-                    
+                    <tr>
+                        <th></th>
+                        <td width="500px">
+                            <select name="category" class="select">
+                                <!-- CTEGORY 테이블로부터 조회해오기 -->
+                                <%--카테고리가 null이면 DB에는 들어오지만 화면에 출력 안 됨--%>
+                                <option disabled selected>자유 🌱</option>
+                                <%for(int i = 0; i < cateList.size(); ++i){ %>
+                                <option value="<%= cateList.get(i).getcNo() %>"><%= cateList.get(i).getName() %></option>
+                                <%}%>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <th id="title-th">제목</th>
-                        <td width="500px"><input type="text" name="title" required id="title" value="<%= vo.getTitle()%>"></td>
+                        <td><input type="text" name="title" required id="title"></td>
                     </tr>
                     <tr>
                         <th id="content-th">내용</th>
-                        <td><textarea name="content" rows="10" style="resize:none;" required id="content"><%= vo.getContent()%></textarea></td>
+                        <td><textarea name="content" rows="10" style="resize:none;" required id="content"></textarea></td>
                     </tr>
-        
+                    <tr>
+                        <th></th>
+                        <td><input class="form-control form-control-sm" id="formFileSm" type="file"></td>
+                    </tr>
                 </table>
                 <br><br>
                 <div align="center">
