@@ -146,7 +146,7 @@ table {
 	
 -->
 
-<%@ include file="/WEB-INF/views/common/header.jsp" --%>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
 
   <section class="notice">

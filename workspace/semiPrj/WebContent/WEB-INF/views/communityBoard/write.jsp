@@ -1,12 +1,17 @@
+<%@page import="java.util.List"%>
+<%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GET EAT VEGAN</title>
+    <title>communityBoardWrite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 
@@ -97,17 +102,17 @@
 </head>
 <body>
 
- 
+ 	<%@ include file="/WEB-INF/views/header.jsp" %>
 
     <div id="main">
 
         <div class="outer">
           <br>
-          <h2 align="center">자유게시판</h2>
+          <h2 align="center">COMMUNITY🌿</h2>
           <br>
   
             <form id="enroll-form" action="" method="post">
-                <button type="reset" class="btn-close" aria-label="Close"></button>
+                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list'"></button>
                 <br><br>
                 <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
                 <table>
@@ -116,11 +121,11 @@
                         <td width="500px">
                             <select name="category" class="select">
                                 <!-- CTEGORY 테이블로부터 조회해오기 -->
+                                <%--카테고리가 null이면 DB에는 들어오지만 화면에 출력 안 됨--%>
                                 <option disabled selected>자유 🌱</option>
-                                <option value="10">일상</option>
-                                <option value="20">고민</option>
-                                <option value="30">추천</option>
-                                <option value="40">레시피</option>
+                                <%for(int i = 0; i < cateList.size(); ++i){ %>
+                                <option value="<%= cateList.get(i).getcNo() %>"><%= cateList.get(i).getName() %></option>
+                                <%}%>
                             </select>
                         </td>
                     </tr>
@@ -139,7 +144,7 @@
                 </table>
                 <br><br>
                 <div align="center">
-                    <button type="submit" class="btn btn-success" id="submit-btn">작성하기</button>
+                    <button type="submit" class="btn btn-success" id="submit-btn">작성하기</button>          
                 </div>
   
             </form>

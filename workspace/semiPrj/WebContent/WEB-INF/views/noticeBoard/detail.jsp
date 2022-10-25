@@ -71,7 +71,7 @@
 </head>
 
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="main">
         <div id="notice">
             <h2 align="center">NOTICE🌱</h2>
