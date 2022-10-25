@@ -10,7 +10,7 @@ import com.kh.semiPrj.notice.vo.NoticeVo;
 
 public class NoticeService {
 
-	NoticeDao dao = new NoticeDao();
+	private final NoticeDao dao = new NoticeDao();
 	
 	//공지 작성하기(insert)
 	public int write(NoticeVo vo) {
@@ -50,16 +50,24 @@ public class NoticeService {
 	//공지 게시글 상세 조회(select)
 	public NoticeVo selectNoticeDetail(String no) {
 		
+		// 조회수 증가 , 상세 조회
 		Connection conn = getConnection();
+		NoticeVo noticeVo = null;
 		
-		NoticeVo noticeVo = dao.selectNoticeDetail(conn, no);
+		int result = dao.increaseHit(conn, no);	
+		if(result == 1) {
+			commit(conn);
+			noticeVo = dao.selectNoticeDetail(conn, no);			
+		}
+		
 		
 		close(conn);
 		
 		return noticeVo;
 		
 	}//selectNoticeDetail
-	
+
+
 	//공지 수정하기(update)
 	public int edit(NoticeVo vo) {
 		
@@ -78,7 +86,8 @@ public class NoticeService {
 		return result;
 
 	}//edit
-	
+
+
 	//공지 삭제(delete)
 	public int delete(String no) {
 

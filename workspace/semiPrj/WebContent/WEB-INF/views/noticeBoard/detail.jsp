@@ -1,16 +1,10 @@
-<%@page import="member.MemberVo"%>
-<%@page import="com.kh.semiPrj.admin.vo.AdminVo"%>
+<%@page import="com.kh.semi.Prj.member.MemberVo"%>
 <%@page import="com.kh.semiPrj.notice.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
 	NoticeVo vo = (NoticeVo)request.getAttribute("noticeVo");
-	HttpSession s = request.getSession();
-	AdminVo admin = (AdminVo)s.getAttribute("admin");
-	MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-	
-	boolean isAdmin = admin != null && admin.getId().equals(admin) && loginMember != null;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GET EAT VEGAN</title>
+    <title>공지 상세 다듬은 거</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
@@ -77,7 +71,7 @@
 </head>
 
 <body>
-	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div id="main">
         <div id="notice">
             <h2 align="center">NOTICE🌱</h2>
@@ -96,12 +90,12 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/notice/list'">목록</button>
-            <%if(isAdmin) {%>
+           <%if(loginMember != null && loginMember.getId().equals("admin")){%>
 	            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-	            <a href="/semiPrj/notice/delete?no=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
+	            <a href="/semiPrj/notice/delete?no=<%= vo.getNo() %>" class="btn btn-outline-secondary" type="button">삭제</a>
 			<%}%>
         </div>
-
+			
 
     </div>
 

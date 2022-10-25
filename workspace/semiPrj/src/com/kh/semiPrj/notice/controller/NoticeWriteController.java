@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.semiPrj.admin.vo.AdminVo;
+import com.kh.semi.Prj.member.MemberVo;
 import com.kh.semiPrj.notice.service.NoticeService;
 import com.kh.semiPrj.notice.vo.NoticeVo;
-
-import member.MemberVo;
 
 @WebServlet(urlPatterns = "/notice/write")
 public class NoticeWriteController extends HttpServlet {
@@ -23,10 +21,10 @@ public class NoticeWriteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//관리자일 때 포워딩
 		HttpSession s = req.getSession();
-		AdminVo admin = (AdminVo) s.getAttribute("admin");
-		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-	
-		boolean isAdmin = admin != null && admin.getId().equals(admin) && loginMember != null;
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		
+		boolean isAdmin = loginMember != null && loginMember.getId().equals("admin");
+		
 		
 		if(isAdmin) {
 			req.getRequestDispatcher("/WEB-INF/views/noticeBoard/write.jsp").forward(req, resp);			
@@ -36,6 +34,10 @@ public class NoticeWriteController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
 		}
 		
+		
+		
+		
+	
 	}//get
 	
 	//공지사항 작성
@@ -44,11 +46,11 @@ public class NoticeWriteController extends HttpServlet {
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
 		
+		//세션 꺼내기
 		HttpSession s = req.getSession();
 		
-		//작성자 받아와야 댈 수도 있으니까 미리 적어둠..
-		//관리자 멤버로 writer 받아오기
-		AdminVo admin = (AdminVo)s.getAttribute("admin");
+		//로그인 멤버 가지고 오기
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		
 		//데이터 꺼내기
 		String title = req.getParameter("title");
@@ -58,7 +60,7 @@ public class NoticeWriteController extends HttpServlet {
 		NoticeVo vo = new NoticeVo();
 		vo.setTitle(title);
 		vo.setContent(content);
-		//vo.setWriter(loginMember.getNo());
+		vo.setWriter(loginMember.getNo());
 		
 		//디비 다녀오기
 		int result = new NoticeService().write(vo);
