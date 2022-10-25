@@ -135,7 +135,7 @@ public class FaqDao {
 	public FaqVo selectFaqOne(Connection conn, String no) {
 
 
-		String sql = "SELECT NO, TITLE, CONTENT, ENROLL_DATE, UPDATE_DATE, STATUS FROM FAQ WHERE NO = ? AND STATUS = 'O'";
+		String sql = "SELECT * FROM FAQ WHERE NO = ? AND STATUS = 'O'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -147,16 +147,22 @@ public class FaqDao {
 			pstmt.setString(1, no);
 			
 			rs = pstmt.executeQuery();
-			String title = rs.getString("TITLE");
-			String content = rs.getString("CONTENT");
-			String enrollDate = rs.getString("ENROLL_DATE");
-			String updateDate = rs.getString("UPDATE_DATE");
 			
-			vo = new FaqVo();
-			vo.setTitle(title);
-			vo.setContent(content);
-			vo.setEnrollDate(enrollDate);
-			vo.setUpdateDate(updateDate);
+			if(rs.next()) {
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String updateDate = rs.getString("UPDATE_DATE");
+				String status = rs.getString("STATUS");
+				
+				vo = new FaqVo();
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+				vo.setUpdateDate(updateDate);
+				vo.setStatus(status);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

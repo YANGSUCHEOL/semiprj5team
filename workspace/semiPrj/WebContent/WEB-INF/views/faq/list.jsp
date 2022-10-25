@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style>
     .header{
-        margin-bottom: 180px;
+        margin-bottom: 120px;
     }
     table{
         border-collapse: collapse;
@@ -165,25 +165,25 @@
                             <th scope="col" class="th-writer">작성일시</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                        	<%for(int i = 0; i < voList.size(); ++i){%>
+                    <%for(int i = 0; i < voList.size(); ++i){%>
+                    	<tbody>
+                       		<tr>
                        			<td><%= voList.get(i).getNo() %></td>
-                                 <th>
-                                     <a href="/semiPrj/faq/detail?no=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle()%></a>
-                                 </th>
-                                 <td><%= voList.get(i).getEnrollDate()%></td>
-                       		<%}%>
-                        </tr>
-                    </tbody>
+                            		<th>
+                                		<a href="/semiPrj/faq/detail?no=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle()%></a>
+                                 	</th>
+                                <td><%= voList.get(i).getEnrollDate()%></td>
+                        	</tr>
+                    	</tbody>
+                    <%}%>
                 </table>
             </div>
         </div>
         
-        <%if(loginMember.equals("admin")){%>
+        <%if(loginMember.getId().equals("admin")){%>
        		<div id="board-write">
                 <div class="container">
-                    <button type="submit" class="btn btn-dark">글쓰기</button>
+                    <button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/faq/write'">글쓰기</button>
                 </div>
             </div>
        	<%}%>

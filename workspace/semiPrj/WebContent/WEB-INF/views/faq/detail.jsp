@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style>
     .header{
-        margin-bottom: 180px;
+        margin-bottom: 120px;
     }
     table{
         border-collapse: collapse;
@@ -126,7 +126,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="th-title"><%= vo.getTitle() %></th>
-                            <td><%= vo.getEnrollDate() %></td>
+                            <td><%= vo.getEnrollDate()%></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,7 +140,7 @@
 
         <div id="board-write">
             <div class="container">
-            	<%if(loginMember.equals("admin")){%>
+            	<%if(loginMember.getId().equals("admin")){%>
                 	<button type="submit" class="btn btn-dark">삭제하기</button>
                		<button type="submit" class="btn btn-dark">수정하기</button>
                	<%}%>
