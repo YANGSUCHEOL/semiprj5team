@@ -70,6 +70,7 @@ span {
 	border: 1px solid #DEDEDE;
 	border-radius: 20px;
 	font-size: 20px;
+	cursor: pointer;
 }
 
 .box-radio-input input[type="radio"] {
@@ -111,9 +112,16 @@ span {
 }
 
 #res-store {
-	display: grid; grid-template-columns : 1fr 1fr;
-	column-gap: 20px;
+	display: grid;
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(3, minmax(70px, auto));
+	column-gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+#res-store>div:nth-child(1) {
+	grid-row: 1/4;
 }
 
 #res-cnt {
@@ -125,7 +133,7 @@ span {
 	align-items: center;
 }
 
-#res-day, #res-time, #res-want, #res-cou {
+#res-day, #res-time, #res-want {
 	display: grid;
 	justify-content: center;
 	align-items: center;
@@ -212,6 +220,11 @@ span[name="warning"] {
 				<div id="res-store">
 					<div id="res-picture"><%= vo.getPhoto() %></div>
 					<div id="res-name"><%= vo.getName() %></div>
+					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
+					<div id="res-cou">
+					<button id="cou-modal">쿠폰 선택</button>
+					<input type="hidden" name="couNo" value="">
+					</div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
 					<input type="hidden" name="mNo" value="<%= loginMember.getNo() %>">
 				</div>
@@ -301,12 +314,6 @@ span[name="warning"] {
 							<label class="box-radio-input imsi"><input type="radio" id="2300" 
 								name="time" value="2300"><span>23:00</span></label>
 						</div>
-					</div>
-				</div>
-				<div id="res-cou">
-					<span>쿠폰 선택</span>
-					<div>
-						<a href="">쿠폰 팝업</a>
 					</div>
 				</div>
 				<div id="res-want">

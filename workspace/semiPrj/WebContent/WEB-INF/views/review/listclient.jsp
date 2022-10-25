@@ -6,7 +6,6 @@
 <%
 	List<ReviewVo> voList = (List<ReviewVo>)request.getAttribute("review");
 	PageVo pv = (PageVo)request.getAttribute("pv");
-	String resNo = (String)session.getAttribute("resNo");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -50,7 +49,7 @@
         }
         #navigate {
             display: grid;
-            grid-template-columns: 1fr 5fr 1.5fr;
+            grid-template-columns: 1fr;
             border-bottom: 1px solid lightgray;
             align-items: center;
             padding: 20px;
@@ -116,11 +115,9 @@
     <div id="main">
         <div id="sidebar"></div>
         <div id="content">
-            <div id="backspace"><a href="/semiPrj/search/detail?rno=<%= resNo %>">뒤로 가기</a></div>
+            <div id="backspace"><a href="/semiPrj/mypage">뒤로 가기</a></div>
             <div id="navigate">
                 <div><span>사용자 리뷰</span></div>
-                <div><span>★ 5.0</span></div>
-                <div name="more-btn">더 보기</div>
             </div>
             <div class="review-list">
                 <div class="review">
@@ -146,15 +143,27 @@
                 <div class="page">
                 
                 <%if(pv.getStartPage() != 1){%>
-	        		<a href="/semiPrj/review/list?pno=<%=pv.getStartPage()-1%>&rno=<%= resNo %>" class="btn btn-primary btn-sm">이전</a>
+                	<form action="/semiPrj/review/list" method="post">
+                		<input type="button" name="pno" value="<%= pv.getStartPage()-1 %>">
+                		<input type="hidden" name="mno" value="<%= loginMember.getNo() %>">
+                		<input type="submit" value="이전" class="btn btn-primary btn-sm">
+                	</form>
 		       	<%}%>
 	        
 		        <%for(int i = pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
-		        	<a href="/semiPrj/review/list?pno=<%=i%>&rno=<%= resNo %>" class="btn btn-primary btn-sm"><%=i%></a>
+		        	<form action="/semiPrj/review/list" method="post">
+		        		<input type="button" name="pno" value="<%=i%>">
+                		<input type="hidden" name="mno" value="<%= loginMember.getNo() %>">
+                		<input type="submit" value="<%=i%>" class="btn btn-primary btn-sm">
+                	</form>
 		        <%}%>
 		        
 		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-			        <a href="/semiPrj/review/list?pno=<%=pv.getEndPage()+1%>&rno=<%= resNo %>" class="btn btn-primary btn-sm">다음</a>
+		        	<form action="/semiPrj/review/list" method="post">
+		        		<input type="button" name="pno" value="<%=pv.getEndPage()+1%>>">
+                		<input type="hidden" name="mno" value="<%= loginMember.getNo() %>">
+                		<input type="submit" value="다음" class="btn btn-primary btn-sm">
+                	</form>
 		        <%}%>
                 
                 </div>

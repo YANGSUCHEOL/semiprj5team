@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 import com.kh.semiPrj.restaurant.vo.MenuVo;
 import com.kh.semiPrj.restaurant.service.RestaurantService;
 import com.kh.semiPrj.restaurant.vo.RestaurantVo;
+import com.kh.semiPrj.review.service.ReviewService;
 import com.kh.semiPrj.review.vo.ReviewVo;
+
+import common.PageVo;
 
 @WebServlet(urlPatterns = "/search/detail")
 public class SearchDetailController extends HttpServlet {
@@ -25,17 +28,15 @@ public class SearchDetailController extends HttpServlet {
 		
 		RestaurantVo vo = new RestaurantService().detailView(rno);
 		List<MenuVo> menu = new RestaurantService().selectMenuList(rno);
-		List<ReviewVo> review = new RestaurantService().selectReviewList(rno);
+		List<ReviewVo> review = new ReviewService().searchList(rno);
 		
 		HttpSession s = req.getSession();
 		
 		s.setAttribute("restaurant", vo);
-		s.setAttribute("menu", menu);
-		s.setAttribute("review", review);
+		req.setAttribute("menu", menu);
+		req.setAttribute("review", review);
+		s.setAttribute("rno", rno);
 		
-//		req.setAttribute("vo", vo);
-//		req.setAttribute("menu", menu);
-//		req.setAttribute("review", review);
 		req.getRequestDispatcher("/WEB-INF/views/search/detail.jsp").forward(req, resp);
 		
 	}

@@ -47,7 +47,7 @@
             letter-spacing: -0.1em;
         }
         #msg-area {
-        	position: flex;
+        	position: absolute;
 			justify-content: center;
 			align-items: center;
 		}
@@ -77,6 +77,9 @@
             font-weight: 400;
         }
     </style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -86,19 +89,21 @@
     <div id="main">
         <div id="sidebar"></div>
         <div id="content">
-        	<form action="/semiPrj/districtS" method="get" id="frm">
+<!--         	<form action="/semiPrj/district" method="get" id="frm"> -->
 	        <div id="map" class="seoul">
 	        </div>
-	        <input type="hidden" id="district" name="district" value="">
-	        </form>
-	        	<span id="region-name"></span>
+<!-- 	        <input type="hidden" id="district" name="district" value="">
+	        </form> -->
+	        <div id="district-result">
+	        	<div id="district-view"></div>
+	        	<div id="district-result-list"></div>
+	        </div>
 			<div id="msg-area">
 				<div id="alertMsg">
 					<span>찾고자 하는 지역을<br>눌러 주세요!<br></span><br><button class="btn-common" onclick="없어지는이벤트();">확인</button>
 				</div>
 			</div>
 		</div>
-        </div>
     </div>
     
     <script src="resources/js/raphael-min.js"></script>
