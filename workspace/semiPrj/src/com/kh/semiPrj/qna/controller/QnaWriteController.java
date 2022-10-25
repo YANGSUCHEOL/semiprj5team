@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.kh.semiPrj.qna.service.QnaService;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
+import member.MemberVo;
+
 @WebServlet(urlPatterns = "/qna/write")
 public class QnaWriteController extends HttpServlet{
 	
@@ -24,6 +26,8 @@ public class QnaWriteController extends HttpServlet{
 			req.setAttribute("msg", "로그인 후 이용해주세요");
 			req.getRequestDispatcher("views/common/errorPage.jsp").forward(req, resp);
 			
+		}else {
+			req.getRequestDispatcher("/WEB-INF/views/qna/write/customer.jsp").forward(req, resp);
 		}
 		
 		//(사업자회원이면)ㄴ
@@ -31,7 +35,7 @@ public class QnaWriteController extends HttpServlet{
 		//req.getRequestDispatcher("/views/qna/write/business.jsp").forward(req, resp);
 		//}else if() {
 		//(일반회원이면)
-		//	req.getRequestDispatcher("/views/qna/write/customer.jsp").forward(req, resp);
+			
 		// }
 		
 	}//doGet
@@ -44,22 +48,23 @@ public class QnaWriteController extends HttpServlet{
 		HttpSession s = req.getSession();
 		
 		//로그인멤버 가져오기
-		//MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		System.out.println("write 로그인멤버 가져옴?");
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
 		
 		//데이터 꺼내기
-		String Title = req.getParameter("Title");
+		String title = req.getParameter("title");
 		//String Date = req.getParameter("Date");
-		String Content = req.getParameter("Content");
+		String content = req.getParameter("content");
 		
 		
 		//뭉치기
 		QuestionVo vo = new QuestionVo();
 		
-		vo.setTitle(Title);
-		vo.setContent(Content);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setmNo(loginMember.getNo());
 		
 		//vo.setaNo("aNo"); //aNo 0이면 답변예정 번호 있으면 답변완료
 	
@@ -70,7 +75,7 @@ public class QnaWriteController extends HttpServlet{
 		if(result == 1) {
 			//성공
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semiPrj/board/list");
+			resp.sendRedirect("/semiPrj/WEB-INF/views/qna/list/customer.jsp");
 		}else {
 			System.out.println("게시글 작성 실패");
 		}

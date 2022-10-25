@@ -99,7 +99,7 @@
     <div id="background">
 
         <div id="top-back">
-            <div id="top-name">개인회원 1:1 문의</div>
+            <div id="top-name">개인회원 문의 수정</div>
         </div>
 
         <form action="" method="post">
