@@ -1,5 +1,11 @@
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+	QuestionVo vo = (QuestionVo)request.getAttribute("vo");
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,18 +140,22 @@
             </div>
            
             <div id="title">
-                <div>쿠폰 사용 어디서 하나요?</div>
-                <div>닉네임</div>
-                <div>2022-12-31</div>
-                <div id="ans-done">답변완료</div>
+                <div><%= vo.getTitle() %></div>
+            	<div><%= vo.getmNo() %></div>
+            	<div><%= vo.getEnrollDate() %></div>
+                <% if(vo.getAnswerYn() == "Y") {%>
+          		 	<div id="ans-done">답변완료</div>
+           		<%} else{%>
+           			<div id="ans-expect">답변예정</div>
+				<%} %>
             </div>
             <div id="context">
-                <div>본문내용~~~~</div>
+                <div><%= vo.getContent() %></div>
             </div>
            
             <div id="btns">
                 <input type="submit" value="작성하기">
-                <a><button>목록</button></a>
+                <a href=""><button>목록</button></a>
             </div>
 
 

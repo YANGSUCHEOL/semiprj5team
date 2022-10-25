@@ -8,25 +8,27 @@ public class QuestionVo {
 	
 	public QuestionVo() {
 	}
-	public QuestionVo(String no, String mNo, String title, String content, String enrollDate, String updateDate,
-			String deleteYn, String answerYn) {
+	public QuestionVo(String no, String mNo, String title, String content, String hit, String enrollDate,
+			String updateDate, String deleteYn, String answerYn) {
 		this.no = no;
 		this.mNo = mNo;
 		this.title = title;
 		this.content = content;
+		this.hit = hit;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
 		this.deleteYn = deleteYn;
 		this.answerYn = answerYn;
 	}
-	private String no;
-	private String mNo;
-	private String title;
-	private String content;
-	private String enrollDate;
-	private String updateDate;
-	private String deleteYn;
-	private String answerYn;
+	public String no;
+	public String mNo;
+	public String title;
+	public String content;
+	public String hit;
+	public String enrollDate;
+	public String updateDate;
+	public String deleteYn;
+	public String answerYn;
 	public String getNo() {
 		return no;
 	}
@@ -50,6 +52,12 @@ public class QuestionVo {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getHit() {
+		return hit;
+	}
+	public void setHit(String hit) {
+		this.hit = hit;
 	}
 	public String getEnrollDate() {
 		return enrollDate;
@@ -77,11 +85,10 @@ public class QuestionVo {
 	}
 	@Override
 	public String toString() {
-		return "QuestionVo [no=" + no + ", mNo=" + mNo + ", title=" + title + ", content=" + content + ", enrollDate="
-				+ enrollDate + ", updateDate=" + updateDate + ", deleteYn=" + deleteYn + ", answerYn=" + answerYn + "]";
+		return "QuestionVo [no=" + no + ", mNo=" + mNo + ", title=" + title + ", content=" + content + ", hit=" + hit
+				+ ", enrollDate=" + enrollDate + ", updateDate=" + updateDate + ", deleteYn=" + deleteYn + ", answerYn="
+				+ answerYn + "]";
 	}
-	
-	
 	
 	
 	

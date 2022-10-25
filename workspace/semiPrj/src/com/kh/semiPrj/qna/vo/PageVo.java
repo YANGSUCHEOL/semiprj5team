@@ -2,7 +2,6 @@ package com.kh.semiPrj.qna.vo;
 
 public class PageVo {
 
-	
 	public int getListCount() {
 		return listCount;
 	}
@@ -52,11 +51,12 @@ public class PageVo {
 				+ endPage + "]";
 	}
 	public PageVo() {
-		
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public PageVo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
 			int endPage) {
-		
+		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
 		this.pageLimit = pageLimit;
