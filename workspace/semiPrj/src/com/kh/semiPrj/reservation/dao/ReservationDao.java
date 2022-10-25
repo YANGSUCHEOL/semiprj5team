@@ -151,7 +151,7 @@ public int insertOne(Connection conn, ReservationVo vo) {
 			}
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			
 		} finally {
 			JDBCTemplate.close(conn);
 			JDBCTemplate.close(pstmt);

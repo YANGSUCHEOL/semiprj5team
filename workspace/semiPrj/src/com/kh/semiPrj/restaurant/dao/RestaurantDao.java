@@ -253,4 +253,58 @@ public class RestaurantDao {
 		return voList;
 	}
 
+	public List<RestaurantVo> selectList(Connection conn, String district) {
+		
+		String sql = "SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE D.NAME = ? ) A";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<RestaurantVo> voList = new ArrayList<RestaurantVo>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, district);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String no = rs.getString("NO");
+				String dis = rs.getString("DISTRICT");
+				String type = rs.getString("TYPE");
+				String name = rs.getString("NAME");
+				String address = rs.getString("ADDRESS");
+				String dayoff = rs.getString("DAYOFF");
+				String phone = rs.getString("PHONE");
+				String open = rs.getString("OPEN");
+				String close = rs.getString("CLOSE");
+				String regYn = rs.getString("REG_YN");
+				String photo = rs.getString("PHOTO");
+				
+				RestaurantVo vo = new RestaurantVo();
+				vo.setNo(no);
+				vo.setDistrict(dis);
+				vo.setType(type);
+				vo.setName(name);
+				vo.setAddress(address);
+				vo.setDayoff(dayoff);
+				vo.setPhone(phone);
+				vo.setOpen(open);
+				vo.setClose(close);
+				vo.setRegYn(regYn);
+				vo.setPhoto(photo);
+				
+				voList.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return voList;
+		
+	}
+
 }

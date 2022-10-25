@@ -124,7 +124,7 @@ regions.push(YeongdeungpoGu);
 
 // 용산구
 var YongsanGu = rsr.path("m 452.54325,415.60746 c 5.60665,3.76342 7.59248,11.1127 18.45107,9.39817 0.66021,0.74257 2.68875,0.11663 3.88492,0.32399 1.9431,0 3.8849,0 5.82672,0 0.66021,0.74257 2.68876,0.11728 3.8849,0.32398 5.26815,2.07156 9.52588,5.15461 13.9189,8.10093 1.92045,10.18025 5.60794,20.30804 7.12256,29.81376 -11.40814,7.02983 -21.50166,18.25334 -31.40036,29.16581 -7.50056,8.2681 -15.03866,14.81131 -22.98326,22.36016 -4.80403,4.56496 -7.02999,7.7264 -14.24382,8.42556 -8.34006,0.80802 -23.57357,1.08146 -29.78088,-1.29659 -3.75287,-1.4372 -7.00152,-6.20756 -9.71098,-9.39751 -3.09784,-3.64678 -6.09794,-6.88015 -8.7401,-10.37012 -1.31137,-2.2517 -3.33991,-3.7861 -5.17881,-5.50905 -1.41556,-0.41859 -2.035,-1.63483 -2.91336,-2.59253 -1.26734,-1.53957 -2.66998,-2.94372 -4.20789,-4.21245 -1.1599,-1.43201 -2.45446,-2.72797 -3.88427,-3.88848 -3.55157,-3.46663 -6.71025,-7.3253 -10.03463,-11.01808 16.7384,-16.1889 34.69109,-31.16415 40.46343,-58.33096 8.94463,-0.44321 17.15201,-1.62446 26.22025,-1.94391 1.83437,0 3.66874,0 5.5031,0 1.5172,-0.20994 3.87584,0.42377 4.85581,-0.32398 2.158,0 4.31599,0 6.474,0 2.31981,0.16004 5.53479,-0.57475 6.4727,0.9713 z");
-YongsanGu.attr({fill: '#c8eaec','stroke-width': '0','stroke-opacity': '1'}).data({'id': 'YongsanGu', 'region': '용산구'});
+YongsanGu.attr({fill: '#c8eaec','stroke-width': '0','stroke-opacity': '1'}).data({'id': 'YongsanGu', 'region': '용산구', 'path': YongsanGu.path});
 regions.push(YongsanGu);
 
 
@@ -138,9 +138,14 @@ for (var i = 0; i < regions.length; i++) {
 
     // Showing off
     regions[i].mouseover(function(e){
+/*		var region = regions[i].clone();
+		region.translate(400, 0);
+		regions[i].animate({path: region.attr('path')}, 1000);
+		region.remove();*/
+		this.node.animate({transform: "t400,0"}, 1000);
 		this.node.style.opacity = 0.7;
         this.node.style.transition = '0.3s';
-		document.getElementById('region-name').innerHTML = this.data('region');
+/*		document.getElementById('region-name').innerHTML = this.data('region');*/
 	});
 
 	regions[i].mouseout(function(e){
@@ -148,8 +153,15 @@ for (var i = 0; i < regions.length; i++) {
         this.node.style.transition = '0.3s';
 	});
 	
-	regions[i].click(function(e){
+/*	regions[i].click(function(e) {
 		document.getElementById('district').value = String(this.data('region'));
 		document.getElementById('frm').submit();
+	});*/
+	
+	regions[i].click(function(e) {
+		document.getElementById('map').style.display = "none";
+		const element = document.getElementById('district-view');
+		element.innerHTML = this.data('path').data('path');
 	});
+	
 }

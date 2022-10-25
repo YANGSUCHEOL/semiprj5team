@@ -111,5 +111,27 @@ public class RestaurantService {
 		return d;
 		
 	}
+
+	public List<RestaurantVo> searchDistrictList(String district) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<RestaurantVo> voList = null;
+		
+		voList = dao.selectList(conn, district);
+		
+		for(int i = 0; i < voList.size(); ++i) {
+			String a = voList.get(i).getDayoff();
+			String[] b = a.split(",");
+			String[] c = setDay(b);
+			
+			voList.get(i).setOffDay(c);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return voList;
+		
+	}
 	
 }

@@ -136,7 +136,7 @@
 			        </div>
 				<% } %>
 			<% } else if(voList.size() == 0) { %>
-						<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
+					<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
 			<% } %>
             </div>
             <div id="page-area">

@@ -25,18 +25,19 @@ public class ReviewWriteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String rno = req.getParameter("rno");
-		
 		HttpSession s = req.getSession();
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+//		String rno = req.getParameter("rno");
+		RestaurantVo res = (RestaurantVo)s.getAttribute("restaurant");
 		
+		String rno = res.getNo();
 		String mno = loginMember.getNo();
 		
-		RestaurantVo vo = new RestaurantService().detailView(rno);
+//		RestaurantVo vo = new RestaurantService().detailView(rno);
 		List<ReservationVo> voList = new ReservationService().getReservationByRMNo(mno, rno);
 		
-		req.setAttribute("restaurant", vo);
-		req.setAttribute("reservationbymno", voList);
+//		req.setAttribute("restaurant", vo);
+		req.setAttribute("reservationbyrmno", voList);
 
 		req.getRequestDispatcher("/WEB-INF/views/review/write.jsp").forward(req, resp);
 	
@@ -65,12 +66,8 @@ public class ReviewWriteController extends HttpServlet {
 		int result = new ReviewService().reviewWrite(vo);
 		
 		if(result == 1) {
-			// 리뷰가 성공적으로 작성되었습니다. 페이지로 넘어가서 상세 페이지
-			System.out.println("리뷰 작성 성공!");
 			resp.sendRedirect("/semiPrj/search/detail?rno=" + rNo);
 		} else {
-			// 에러 팝업 출력 -> 앞으로 돌아가기
-			System.out.println("리뷰 작성 실패!");
 			resp.sendRedirect("/semiPrj");
 		}
 	

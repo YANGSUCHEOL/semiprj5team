@@ -20,12 +20,6 @@ public class ReservationController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String rno = req.getParameter("rno");
-		RestaurantVo vo = new RestaurantService().detailView(rno);
-		
-		HttpSession s = req.getSession();
-		s.setAttribute("restaurant", vo);
-		
 		req.getRequestDispatcher("/WEB-INF/views/res/res.jsp").forward(req, resp);
 	
 	}

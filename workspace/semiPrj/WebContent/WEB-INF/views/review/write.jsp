@@ -5,8 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	RestaurantVo vo = (RestaurantVo)request.getAttribute("restaurant");
-	List<ReservationVo> voList = (List<ReservationVo>)request.getAttribute("reservationbymno");
+	RestaurantVo vo = (RestaurantVo)session.getAttribute("restaurant");
+	List<ReservationVo> voList = (List<ReservationVo>)request.getAttribute("reservationbyrmno");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -158,7 +158,7 @@
         	<div><span><%= loginMember.getNick() %> 님, <%= vo.getName() %> 에서의 식사는 어떠셨나요?</span></div>
             <div id="text"><span>예약 내역</span></div>
             <div id="history">
-            <% if(voList != null) { %>
+            <% if(voList.size() != 0) { %>
             	<% for(int i = 0; i < voList.size(); ++i) { %>
 	            	<div class="review-list">
 	            	<label class="box-radio-input review-res-list">
