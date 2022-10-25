@@ -1,5 +1,5 @@
-<%@page import="com.kh.semi.Prj.businessMember.BusinessMemberVo"%>
-<%@page import="com.kh.semi.Prj.member.MemberVo"%>
+<%@page import="com.kh.semiPrj.businessMember.BusinessMemberVo"%>
+<%@page import="com.kh.semiPrj.member.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

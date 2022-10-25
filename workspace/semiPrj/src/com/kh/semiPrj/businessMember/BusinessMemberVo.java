@@ -1,4 +1,4 @@
-package com.kh.semi.Prj.businessMember;
+package com.kh.semiPrj.businessMember;
 
 public class BusinessMemberVo {
 
