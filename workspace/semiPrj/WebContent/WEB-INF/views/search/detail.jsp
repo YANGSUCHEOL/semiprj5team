@@ -8,6 +8,7 @@
 	RestaurantVo vo = (RestaurantVo)session.getAttribute("restaurant");
 	List<MenuVo> menu = (List<MenuVo>)request.getAttribute("menu");
 	List<ReviewVo> review = (List<ReviewVo>)request.getAttribute("review");
+	String score = vo.getScore();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -228,7 +229,13 @@ div[name="user-review"] {
 					<span>사용자 리뷰</span>
 				</div>
 				<div name="star">
-					<span>★ 5.0</span>
+					<span>★ 
+					<% if(score == null) { %>
+					0.0
+					<% } else {%>
+					<%= score %>
+					<% } %>
+					</span>
 				</div>
 				<div name="more-btn">
 					<a href="/semiPrj/review/list?pno=1&rno=<%=vo.getNo()%>">더 보기</a>

@@ -20,7 +20,7 @@ public class RestaurantDao {
 		
 		// SQL
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NAME LIKE '%' || ? || '%' ) A ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NAME LIKE '%' || ? || '%' GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO ) A ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -45,6 +45,7 @@ public class RestaurantDao {
 				String name = rs.getString("NAME");
 				String address = rs.getString("ADDRESS");
 				String dayoff = rs.getString("DAYOFF");
+				String score = rs.getString("SCORE");
 				String phone = rs.getString("PHONE");
 				String open = rs.getString("OPEN");
 				String close = rs.getString("CLOSE");
@@ -58,6 +59,7 @@ public class RestaurantDao {
 				vo.setName(name);
 				vo.setAddress(address);
 				vo.setDayoff(dayoff);
+				vo.setScore(score);
 				vo.setPhone(phone);
 				vo.setOpen(open);
 				vo.setClose(close);
@@ -108,7 +110,7 @@ public class RestaurantDao {
 
 	public RestaurantVo selectOneByNo(Connection conn, String rNo) {
 		
-		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NO = ?";
+		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NO = ? GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -129,6 +131,7 @@ public class RestaurantDao {
 				String name = rs.getString("NAME");
 				String address = rs.getString("ADDRESS");
 				String dayoff = rs.getString("DAYOFF");
+				String score = rs.getString("SCORE");
 				String phone = rs.getString("PHONE");
 				String open = rs.getString("OPEN");
 				String close = rs.getString("CLOSE");
@@ -142,6 +145,7 @@ public class RestaurantDao {
 				vo.setName(name);
 				vo.setAddress(address);
 				vo.setDayoff(dayoff);
+				vo.setScore(score);
 				vo.setPhone(phone);
 				vo.setOpen(open);
 				vo.setClose(close);
@@ -255,7 +259,14 @@ public class RestaurantDao {
 
 	public List<RestaurantVo> selectList(Connection conn, String district) {
 		
-		String sql = "SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE D.NAME = ? ) A";
+		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS,\r\n"
+				+ "AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO\r\n"
+				+ "FROM RESTAURANT R\r\n"
+				+ "INNER JOIN DISTRICT D ON R.D_NO = D.NO\r\n"
+				+ "LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO\r\n"
+				+ "INNER JOIN TYPE T ON R.T_NO = T.NO\r\n"
+				+ "WHERE D.NAME = ? \r\n"
+				+ "GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -275,6 +286,7 @@ public class RestaurantDao {
 				String name = rs.getString("NAME");
 				String address = rs.getString("ADDRESS");
 				String dayoff = rs.getString("DAYOFF");
+				String score = rs.getString("SCORE");
 				String phone = rs.getString("PHONE");
 				String open = rs.getString("OPEN");
 				String close = rs.getString("CLOSE");

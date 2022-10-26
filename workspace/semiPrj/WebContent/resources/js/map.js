@@ -138,18 +138,15 @@ for (var i = 0; i < regions.length; i++) {
 
     // Showing off
     regions[i].mouseover(function(e){
-/*		var region = regions[i].clone();
-		region.translate(400, 0);
-		regions[i].animate({path: region.attr('path')}, 1000);
-		region.remove();*/
-		this.node.animate({transform: "t400,0"}, 1000);
 		this.node.style.opacity = 0.7;
+		this.animate({transform: ['t', 20, 0]}, 300);
         this.node.style.transition = '0.3s';
 /*		document.getElementById('region-name').innerHTML = this.data('region');*/
 	});
 
 	regions[i].mouseout(function(e){
 		this.node.style.opacity = 1;
+		this.animate({transform: ['t', 0, 0]}, 300);
         this.node.style.transition = '0.3s';
 	});
 	
@@ -160,8 +157,40 @@ for (var i = 0; i < regions.length; i++) {
 	
 	regions[i].click(function(e) {
 		document.getElementById('map').style.display = "none";
+		callVoList(this.data('region'));
 		const element = document.getElementById('district-view');
-		element.innerHTML = this.data('path').data('path');
+		element.innerHTML = '<img src="/semiPrj/resources/img/' + this.data('id'); + '.png>';
 	});
+	
+	function callVoList(district) {
+		$.ajax({
+			url: "/semiPrj/district",
+			method: "post",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			data: {
+				district: district
+			},
+			success: function(result){
+				console.log(result);
+				var data = JSON.parse(result);
+				console.log(data);
+				$.each(data, function(i, item){
+					var cmd = "<div class=\"district-res\">";
+						cmd += "<div><span onclick=\"location-href='semiPrj/search/detail?rno=" + item.no + ">" + item.photo + "</span></div>";
+						cmd += "<div><span onclick=\"location-href='semiPrj/search/detail?rno=" + item.no + ">" + item.name + "</span></div>";
+						cmd += "<div><span>" + item.type + "</span></div>";
+						cmd += "<div><span>" + item.score + "</span></div>";
+						cmd += "<div><span>" + item.open + "~" + item.close + "</span></div>";
+						cmd += "</div>";
+						console.log(cmd);
+					$("#district-result-list").append(cmd);
+				});
+					$("#district-result-list").append("<span>웅웅</span>");
+			},
+			error: function(){
+				console.log("error");
+			}
+		})
+	}
 	
 }

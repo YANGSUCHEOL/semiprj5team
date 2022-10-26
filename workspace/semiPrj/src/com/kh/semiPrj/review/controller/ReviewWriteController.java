@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.reservation.service.ReservationService;
 import com.kh.semiPrj.reservation.vo.ReservationVo;
 import com.kh.semiPrj.restaurant.service.RestaurantService;
 import com.kh.semiPrj.restaurant.vo.RestaurantVo;
 import com.kh.semiPrj.review.service.ReviewService;
 import com.kh.semiPrj.review.vo.ReviewVo;
-
-import member.MemberVo;
 
 @WebServlet(urlPatterns = "/review/write")
 public class ReviewWriteController extends HttpServlet {

@@ -21,14 +21,18 @@ public class DistrictController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		resp.setCharacterEncoding("UTF-8");
+
 		PrintWriter out = resp.getWriter();
 		
-		String district = req.getParameter("d");
+		String district = req.getParameter("district");
+		System.out.println(district);
 		
 		List<RestaurantVo> voList = new RestaurantService().searchDistrictList(district);
 		
 		Gson gson = new Gson();
 		String str = gson.toJson(voList);
+		System.out.println(str);
 		
 		out.write(str);
 		

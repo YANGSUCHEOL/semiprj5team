@@ -1,5 +1,7 @@
 package com.kh.semiPrj.restaurant.vo;
 
+import java.util.Arrays;
+
 public class RestaurantVo {
 	
 public RestaurantVo() {
@@ -7,7 +9,7 @@ public RestaurantVo() {
 	}
 	
 	public RestaurantVo(String no, String district, String type, String name, String address, String dayoff,
-			String[] offDay, String phone, String open, String close, String regYn, String photo) {
+			String[] offDay, String score, String phone, String open, String close, String regYn, String photo) {
 		super();
 		this.no = no;
 		this.district = district;
@@ -16,6 +18,7 @@ public RestaurantVo() {
 		this.address = address;
 		this.dayoff = dayoff;
 		this.offDay = offDay;
+		this.score = score;
 		this.phone = phone;
 		this.open = open;
 		this.close = close;
@@ -30,6 +33,7 @@ public RestaurantVo() {
 	private String address;
 	private String dayoff;
 	private String[] offDay;
+	private String score;
 	private String phone;
 	private String open;
 	private String close;
@@ -78,6 +82,14 @@ public RestaurantVo() {
 	public void setOffDay(String[] offDay) {
 		this.offDay = offDay;
 	}
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
@@ -112,8 +124,9 @@ public RestaurantVo() {
 	@Override
 	public String toString() {
 		return "RestaurantVo [no=" + no + ", district=" + district + ", type=" + type + ", name=" + name + ", address="
-				+ address + ", dayoff=" + dayoff + ", offDay=" + offDay + ", phone=" + phone + ", open=" + open
-				+ ", close=" + close + ", regYn=" + regYn + ", photo=" + photo + "]";
+				+ address + ", dayoff=" + dayoff + ", offDay=" + Arrays.toString(offDay) + ", score=" + score
+				+ ", phone=" + phone + ", open=" + open + ", close=" + close + ", regYn=" + regYn + ", photo=" + photo
+				+ "]";
 	}
 
 }
