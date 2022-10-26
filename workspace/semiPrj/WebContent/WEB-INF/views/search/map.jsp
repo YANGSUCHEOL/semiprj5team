@@ -89,11 +89,8 @@
     <div id="main">
         <div id="sidebar"></div>
         <div id="content">
-<!--         	<form action="/semiPrj/district" method="get" id="frm"> -->
 	        <div id="map" class="seoul">
 	        </div>
-<!-- 	        <input type="hidden" id="district" name="district" value="">
-	        </form> -->
 	        <div id="district-result">
 	        	<div id="district-view"></div>
 	        	<div id="district-result-list"></div>
