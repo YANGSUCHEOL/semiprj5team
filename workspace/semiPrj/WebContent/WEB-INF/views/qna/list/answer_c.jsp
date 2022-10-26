@@ -138,7 +138,7 @@
 
 				<%for(int i = 0; i < voList.size(); ++i){%>
 					<div><%= voList.get(i).getNo() %></div>
-		       		<div><a href="/semiPrj/qna/adminList?bno=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle() %></a></div>
+		       		<div><a href="/semiPrj/qna/adminDetail?bno=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle() %></a></div>
 	                <div><%= voList.get(i).getmNo() %></div>
 	                <div><%= voList.get(i).getEnrollDate() %></div>
 	               

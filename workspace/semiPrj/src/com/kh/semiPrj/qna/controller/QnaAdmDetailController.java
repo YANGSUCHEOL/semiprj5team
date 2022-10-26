@@ -19,6 +19,8 @@ public class QnaAdmDetailController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String bno = req.getParameter("bno");
 		
+		System.out.println(bno);
+		
 		//디비
 		QuestionVo vo = new QnaService().selectAdminOne(bno);
 		

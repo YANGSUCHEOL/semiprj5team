@@ -96,9 +96,9 @@ public class QnaDao {
 		}
 		
 		//QUESTION 상세조회
-		public QuestionVo selectOne(Connection conn, String no) {
+		public QuestionVo selectOne(Connection conn, String bno) {
 		
-			String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN, M.NICK AS M_NO FROM QUESTION Q JOIN MEMBER M ON Q.M_NO= M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
+			String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN , M.NICK AS NICK FROM QUESTION Q JOIN MEMBER M ON Q.M_NO= M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
 		
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -107,12 +107,12 @@ public class QnaDao {
 			try {
 				pstmt = conn.prepareStatement(sql);
 		
-				pstmt.setString(1, no);
+				pstmt.setString(1, bno);
 				rs = pstmt.executeQuery();
 		
 				if(rs.next()) {
-					//String no1 = rs.getString("NO");
-					String mNo = rs.getString("M_NO");
+					String no = rs.getString("NO");
+					String mNo = rs.getString("NICK");
 					String title = rs.getString("TITLE");
 					String content = rs.getString("CONTENT");
 					String enrollDate = rs.getString("ENROLL_DATE");
@@ -314,7 +314,7 @@ public class QnaDao {
 	//관리자 상세 조회
 	public QuestionVo selectAdminOne(Connection conn, String bno) {
 		
-	String sql = "SELECT Q.NO , Q.TYPE , Q.TITLE , Q.CONTENT , Q.HIT , Q.ENROLL_DATE , Q.MODIFY_DATE , Q.STATUS , M.NICK AS Q.M_NO FROM QUESTION Q JOIN MEMBER M ON Q.M_NO = M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
+	String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.HIT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN , M.NICK AS NICK FROM QUESTION Q JOIN MEMBER M ON Q.M_NO = M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
 	System.out.println("여기까지 왔어? 관리자 detail dao");
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -329,10 +329,9 @@ public class QnaDao {
 		rs = pstmt.executeQuery();
 		
 		if(rs.next()) {
-		
 			
 			String no = rs.getString("NO");
-			String mNo = rs.getString("M_NO");
+			String mNo = rs.getString("NICK");
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
 			String hit = rs.getString("HIT");
@@ -352,6 +351,7 @@ public class QnaDao {
 			vo.setUpdateDate(updateDate);
 			vo.setDeleteYn(deleteYn);
 			vo.setAnswerYn(answerYn);
+			
 		}
 		
 	} catch (SQLException e) {
