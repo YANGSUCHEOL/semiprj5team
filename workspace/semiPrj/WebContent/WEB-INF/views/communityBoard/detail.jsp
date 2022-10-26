@@ -97,8 +97,8 @@
             
             <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/community/list'">목록</button>
            
-            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-            <a href="/semiPrj/notice/delete?no=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
+            <a href="/semiPrj/notice/edit?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
+            <a href="/semiPrj/notice/delete?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
            
         </div>
         <hr>

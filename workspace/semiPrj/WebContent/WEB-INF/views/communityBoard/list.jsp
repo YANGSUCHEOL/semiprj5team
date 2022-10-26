@@ -1,4 +1,4 @@
-<%@page import="com.kh.semiPrj.common.PageVo"%>
+<%@page import="common.PageVo"%>
 <%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@page import="com.kh.semiPrj.community.vo.CommuVo"%>
 <%@page import="java.util.List"%>
@@ -114,7 +114,7 @@ pageEncoding="UTF-8"%>
 				
 	            <div class="list"><%= voList.get(i).getNo() %></div>
 	            <div class="list"><%= voList.get(i).getCategory() %></div>
-	            <div class="list"><a href="/semiPrj/community/detail?no=<%= voList.get(i).getNo()%>"><%= voList.get(i).getTitle()%></a></div>
+	            <div class="list"><a href="/semiPrj/community/detail?bno=<%= voList.get(i).getNo()%>"><%= voList.get(i).getTitle()%></a></div>
 	            <div class="list"><%= voList.get(i).getWriter() %></div>
 	            <div class="list"><%= voList.get(i).getEnrollDate() %></div>
 	            <div class="list"><%= voList.get(i).getHit() %></div>

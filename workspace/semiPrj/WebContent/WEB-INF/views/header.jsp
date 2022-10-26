@@ -122,7 +122,7 @@ input[name="pno"] {
     <div id="header">
         <div id="header-header">
             <div id="header-0"></div>
-            <div id="header-customer"><a href="">고객센터</a></div>
+            <div id="header-customer"><a href="/semiPrj/faq/center">고객센터</a></div>
             <div id="header-2">&nbsp&nbsp&nbsp|</div>
             <%if(loginMember == null && bsLoginMember == null){%>
             <div id="header-login"><a href="#" onclick='btnModal'>로그인</a></div>
@@ -136,18 +136,16 @@ input[name="pno"] {
             <%}%>
         </div>
         <div id="header-main">
-            <div id="header-main-logo"><a href=""><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
+            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
-                   <input id="search" type="text" placeholder="식당 이름을 검색해주세요   " name="resName">
+                   <input id="search" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
+                   <input id="hidden" name="pno" value="1">
                    <input type="submit" id="searchImg" value="">
-                    <!-- 검색하기에 이미지 씌워 주세요 -->
                 </form>
             </div>
-            <div id="header-main-area"><a href="">지역별 찾기</a></div>
-            <div id="header-main-review"><a href="">리뷰</a></div>
-            <div id="header-main-reservation"><a href="">예약</a></div>
-            <div id="header-main-community"><a href="">커뮤니티</a></div>
+            <div id="header-main-area"><a href="/semiPrj/map">지역별 찾기</a></div>
+            <div id="header-main-community"><a href="/semiPrj/community/list?pno=1">커뮤니티</a></div>
         </div>
 
     </div>

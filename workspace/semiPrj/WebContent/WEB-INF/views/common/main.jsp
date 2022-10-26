@@ -11,6 +11,7 @@
     #wrap{
         width: 80vw;
         border: 1px solid gray;
+        justify-content: center;
         align-items: center;
     }
     #top-main{
@@ -68,11 +69,11 @@
     
     </style>
 
-    
-    <%@ include file="/WEB-INF/views/header.jsp" %>
 </style>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
     <div id="wrap">
         <div id="top-main">
             <div>지금 뜨는 식당</div>

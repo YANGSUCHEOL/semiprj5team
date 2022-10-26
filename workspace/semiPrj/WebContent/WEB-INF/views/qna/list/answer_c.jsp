@@ -5,9 +5,9 @@
     pageEncoding="UTF-8"%>
     
     <%
-	List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
-	PageVo pv = (PageVo)request.getAttribute("pv");
-	%>
+   List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
+   PageVo pv = (PageVo)request.getAttribute("pv");
+   %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,34 +136,34 @@
                 <div>날짜</div>
                 <div>답변여부</div>
 
-				<%for(int i = 0; i < voList.size(); ++i){%>
-					<div><%= voList.get(i).getNo() %></div>
-		       		<div><a href="/semiPrj/qna/adminList?bno=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle() %></a></div>
-	                <div><%= voList.get(i).getmNo() %></div>
-	                <div><%= voList.get(i).getEnrollDate() %></div>
-	               
-	                <% if(voList.get(i).getAnswerYn() == "Y") {%>
-		          		 	<div id="ans-done">답변완료</div>
-		           		<%} else{%>
-		           			<div id="ans-expect">답변예정</div>
-						<%} %>
-						
-						<%} %>
+            <%for(int i = 0; i < voList.size(); ++i){%>
+               <div><%= voList.get(i).getNo() %></div>
+                   <div><a href="/semiPrj/qna/adminDetail?bno=<%= voList.get(i).getNo() %>"><%= voList.get(i).getTitle() %></a></div>
+                   <div><%= voList.get(i).getmNo() %></div>
+                   <div><%= voList.get(i).getEnrollDate() %></div>
+                  
+                   <% if(voList.get(i).getAnswerYn() == "Y") {%>
+                          <div id="ans-done">답변완료</div>
+                       <%} else{%>
+                          <div id="ans-expect">답변예정</div>
+                  <%} %>
+                  
+                  <%} %>
 
                 <div id="page-area">
         
-	        <%if(pv.getStartPage() != 1){%>
-	        	<a href="/semiPrj/qna/adminList?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">이전</a>
-	       	<%}%>
+           <%if(pv.getStartPage() != 1){%>
+              <a href="/semiPrj/qna/adminList?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">이전</a>
+             <%}%>
         
         
-	        <%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
-	        	<a href="/semiPrj/qna/adminList?pno=<%=i%>" class="btn btn-primary btn-sm"><%=i%></a>
-	        <%}%>
-	        
-	        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-		        <a href="/semiPrj/qna/adminList?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">다음</a>
-	        <%}%>
+           <%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
+              <a href="/semiPrj/qna/adminList?pno=<%=i%>" class="btn btn-primary btn-sm"><%=i%></a>
+           <%}%>
+           
+           <%if(pv.getEndPage() != pv.getMaxPage()){%>
+              <a href="/semiPrj/qna/adminList?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">다음</a>
+           <%}%>
         
         </div>
 

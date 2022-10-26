@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-	<%@ include file="/WEB-INF/views/header.jsp" %>
+	<%@ include file="/WEB-INF/views/common/main.jsp" %>
 
 </body>
 </html>
