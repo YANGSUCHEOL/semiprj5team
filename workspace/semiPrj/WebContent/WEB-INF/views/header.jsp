@@ -22,6 +22,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+*{
+   font-family: 'Noto Sans KR', sans-serif;
+   letter-spacing: -0.1em;
+}
  
 body {
     padding: 0;
@@ -43,9 +50,7 @@ body {
     display: grid;
     grid-template-columns: 10fr 1fr 0.5fr 1fr 1fr 1fr;
     background-color: rgb(217 217 217);
-    font-family: Inter;
-    font-weight: Regular;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 #header-header > div{
     
