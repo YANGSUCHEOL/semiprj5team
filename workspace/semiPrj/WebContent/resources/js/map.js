@@ -139,14 +139,12 @@ for (var i = 0; i < regions.length; i++) {
     // Showing off
     regions[i].mouseover(function(e){
 		this.node.style.opacity = 0.7;
-		this.animate({transform: ['t', 20, 0]}, 300);
         this.node.style.transition = '0.3s';
-/*		document.getElementById('region-name').innerHTML = this.data('region');*/
+		document.getElementById('region-name').innerHTML = this.data('region');
 	});
 
 	regions[i].mouseout(function(e){
 		this.node.style.opacity = 1;
-		this.animate({transform: ['t', 0, 0]}, 300);
         this.node.style.transition = '0.3s';
 	});
 	
@@ -159,7 +157,7 @@ for (var i = 0; i < regions.length; i++) {
 		document.getElementById('map').style.display = "none";
 		callVoList(this.data('region'));
 		const element = document.getElementById('district-view');
-		element.innerHTML = '<img src="/semiPrj/resources/img/' + this.data('id'); + '.png>';
+		element.innerHTML = '<img src="resources/img/' + this.data('id') + '.svg">';
 	});
 	
 	function callVoList(district) {
@@ -175,17 +173,14 @@ for (var i = 0; i < regions.length; i++) {
 				var data = JSON.parse(result);
 				console.log(data);
 				$.each(data, function(i, item){
-					var cmd = "<div class=\"district-res\">";
-						cmd += "<div><span onclick=\"location-href='semiPrj/search/detail?rno=" + item.no + ">" + item.photo + "</span></div>";
-						cmd += "<div><span onclick=\"location-href='semiPrj/search/detail?rno=" + item.no + ">" + item.name + "</span></div>";
-						cmd += "<div><span>" + item.type + "</span></div>";
-						cmd += "<div><span>" + item.score + "</span></div>";
-						cmd += "<div><span>" + item.open + "~" + item.close + "</span></div>";
-						cmd += "</div>";
-						console.log(cmd);
+					if(item.score == undefined) {
+						item.score = '0.0';
+					}
+					var cmd = '<div class="swiper-slide"><div id="district-res"><div class="res-photo"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.photo + '</a></div><div class="res-name"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.name + '</a></div><div class="res-type"><span>' + item.type + '</span></div><div class="res-score"><span>' + item.score + '</span></div><div class="res-time"><span>' + item.open + '~' + item.close + '</span></div></div></div>';
 					$("#district-result-list").append(cmd);
 				});
-					$("#district-result-list").append("<span>웅웅</span>");
+					$("#fraction").append('<span class="current">1</span>/<span class="all">' + data.length);
+					$(".parent").css("visibility", "visible");
 			},
 			error: function(){
 				console.log("error");
