@@ -79,8 +79,8 @@ body {
 	            </form>
 	        </div>
 	        
-	        <div id="header-main-4"><a href="">마이페이지</a></div>
-	        <div id="header-main-5"><a href="">로그아웃</a></div>
+	        <div id="header-main-4"><a href="/semiPrj/mypage/mypage">마이페이지</a></div>
+	        <div id="header-main-5"><a href="/semiPrj/member/logout">로그아웃</a></div>
 	        <div></div>
     	</div>
 	</div>
