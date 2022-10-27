@@ -17,7 +17,7 @@ public class FaqDao {
 	public List<FaqVo> selectFaqList(Connection conn) {
 
 		//SQL (준비, 완성, 실행 및 결과 저장)
-		String sql = "SELECT * FROM FAQ WHERE STATUS = 'O' ORDER BY NO DESC ";
+		String sql = "SELECT * FROM FAQ WHERE STATUS = 'O' ORDER BY NO ASC";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -54,81 +54,6 @@ public class FaqDao {
 		
 		return voList;
 		
-	}
-
-	//FAQ 작성
-	public int insertFaq(Connection conn, FaqVo vo) {
-		
-		String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT) VALUES (SEQ_FAQ_NO.NEXTVAL, ?, ?)";
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContent());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-
-	//FAQ 삭제
-	public int delete(Connection conn, String no) {
-		
-		String sql = "UPDATE FAQ SET STATUS = 'X' WHERE NO = ?";
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, no);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-	}
-
-	//FAQ 수정
-	public int updateByNo(Connection conn, FaqVo vo) {
-		
-		String sql = "UPDATE FAQ SET TITLE = ?, CONTENT = ?, UPDATE_DATE = SYSDATE WHRER NO = ?";
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(1, vo.getContent());
-			pstmt.setString(1, vo.getNo());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
 	}
 
 	//FAQ 상세조회

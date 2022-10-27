@@ -1,4 +1,3 @@
-<%@page import="com.kh.semiPrj.restaurant.vo.RestaurantVo"%>
 <%@page import="com.kh.semiPrj.coupon.CouponVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,16 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
+<!-- 제이쿼리 CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <style>
     .header{
-        margin-bottom: 100px;
+        margin-bottom: 180px;
     }
     table{
         border-collapse: collapse;
         border-spacing: 0;
     }
     section.faq{
-        width: 70vw;
+        width: 80vw;
         padding: 80px 0;
         margin: 0 auto;
         border: 1px solid #ccc;
@@ -52,12 +55,21 @@
         word-break: break-all;
         vertical-align: middle;
     }
+    .board-table a:hover{
+        text-decoration: underline;
+    }
+    .board-table tbody tr:hover{
+        background-color: #FCFFED;
+    }
     .board-table th{
         text-align: center;
     }
     .board-table .th-num{
         width: 100px;
         text-align: center;
+    }
+    .board-table .th-title{
+        width: 200px;
     }
     .board-table th, .board-table td{
         padding: 18px 0;
@@ -84,7 +96,12 @@
         width: 1100px;
         margin: 0 auto;
     }
-    
+    .page-middle{
+        border: 1px solie #ccc;
+        margin: 0 auto;
+    }
+
+
     /*모달*/
     .modal{
         position: fixed;
@@ -129,45 +146,32 @@
     .modal-content > p{
         margin-bottom: 20px;
     }
-
+    
 </style>
 </head>
 <body>
-
-	<%@ include file="/WEB-INF/views/header.jsp" %>
-
-    <div class="header"></div>
+	
+	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
             <div class="container">
                 <h3>쿠폰</h3>
             </div>
         </div>
+        <div class="page-middle">
+            <div>< 10% 할인 쿠폰 ></div>
+            <!--모달-->
+            <a class="modal-notice" href="#none"><img src="/semiPrj/resources/img/coupon2.png" alt="쿠폰" width="100px" height="auto"></a>
+        </div>
 
-        <div id="faq-list">
-            <div class="container">
-                <table class="board-table">
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <th>
-                                <a>5% 할인</a>
-                            </th>
-                            <td><a class="modal-notice" href="#none">다운로드</a></td>
-                            
-                            <div class="modal">
-				            <div class="modal-content">
-				                <a class="btn-close" href="#none">X</a>
-				                <h3>쿠폰을 다운로드 받으시겠습니까?</h3>
-				                <p>
-				                    발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
-				                </p>
-				                <a class="btn-guide" href="/semiPrj/coupon/list">다운로드</a>
-				            </div>
-					        </div>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="modal">
+            <div class="modal-content">
+                <a class="btn-close" href="#none">X</a>
+                <h3>쿠폰을 다운로드 받으시겠습니까?</h3>
+                <p>
+                    발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
+                </p>
+                <a class="btn-guide" href="/semiPrj/coupon/download">다운로드</a>
             </div>
         </div>
         
@@ -181,9 +185,8 @@
         </script>
         
         <i class="bi bi-bookmarks"></i>
-        
 
     </section>
-
+    
 </body>
 </html>
