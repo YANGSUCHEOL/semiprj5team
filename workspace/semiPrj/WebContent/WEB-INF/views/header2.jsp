@@ -90,7 +90,6 @@ body {
 
             const header2 = document.getElementById("main-header2")
 
-			console.log(window.scrollX, window.scrollY);
             if(window.scrollY > 180){
                 header2.style.display = "flex"
               }else{
