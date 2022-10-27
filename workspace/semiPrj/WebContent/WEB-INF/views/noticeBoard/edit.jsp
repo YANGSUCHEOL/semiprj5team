@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 작성</title>
+    <title>GET EAT VEGAN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 
@@ -19,9 +19,9 @@
     .outer{
        background: white;
        color: black;
-       width: 60%;
+       width: 60vw;
        height: 550px;
-       margin: auto;
+       margin: 50px auto;
        padding-top: 50px;
     }
  
@@ -35,7 +35,9 @@
         background-color: #EEFFF6;
         color: black;
         border: 1px solid #EEFFF6;
+        font-weight: 600;
         font-size: 12px;
+        margin-bottom : 50px;
     }
 
     #submit-btn:hover {

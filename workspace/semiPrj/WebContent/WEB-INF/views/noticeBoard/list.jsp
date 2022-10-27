@@ -22,11 +22,15 @@
   <style>
 
 table {
+	
     border-collapse: collapse;
     border-spacing: 0;
+    
   }
   section.notice {
+  	margin: 100px;
     padding: 80px 0;
+   
   }
   
   .page-title {

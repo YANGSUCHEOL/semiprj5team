@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>communityBoardWrite</title>
+    <title>GET EAT VEGAN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 
@@ -19,7 +20,7 @@
     .outer{
        background: white;
        color: black;
-       width: 60%;
+       width: 70vw;
        height: 550px;
        margin: auto;
        padding-top: 50px;

@@ -19,7 +19,7 @@
        color: black;
        width: 60vw;
        height: 550px;
-       margin: auto;
+       margin: 50px auto;
        padding-top: 50px;
     }
  
@@ -95,7 +95,7 @@
           <h2 align="center">NOTICE🌱</h2>
           <br>
   
-            <form id="enroll-form" action="/notice/write" method="post">
+            <form id="enroll-form" action="" method="post">
                 <button type="button" class="btn-close" aria-label="Close" id="reset" onclick="location.href='/semiPrj/notice/list'"></button>
                 <br><br>
                 <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
