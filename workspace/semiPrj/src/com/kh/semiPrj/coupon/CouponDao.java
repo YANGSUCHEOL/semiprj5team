@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import common.JDBCTemplate;
 
@@ -13,7 +12,7 @@ public class CouponDao {
 	//쿠폰 조회
 	public CouponVo selectCouponList(Connection conn, String rno) {
 		
-		String sql = "SELECT C.NO, C.R_NO, C.INFO, R.NAME FROM COUPON C JOIN RESTAURANT R ON C.R_NO = R.NO JOIN COU_CATEGORY G ON C.C_NO = G.NO WHERE R.NO = ?";
+		String sql = "SELECT C.NO, C.R_NO, C.C_NO, C.INFO FROM COUPON C JOIN RESTAURANT R ON C.R_NO = R.NO JOIN COU_CATEGORY G ON C.C_NO = G.NO WHERE R.NO = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
