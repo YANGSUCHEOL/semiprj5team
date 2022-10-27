@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+*{
+   font-family: 'Noto Sans KR', sans-serif;
+   letter-spacing: -0.1em;
+}
 #main {
 	width: 65vw;
 	display: grid;
