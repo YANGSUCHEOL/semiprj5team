@@ -1,3 +1,4 @@
+<%@page import="java.lang.reflect.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -80,7 +81,21 @@
     text-decoration: none;
     color: black;
     font-size: 1.5rem;
-}      
+}
+#qna{
+    border: none;
+    width: 100px;
+    height: 63px;
+    background-color: yellow;
+    position: absolute;
+    left: 1000px;
+    font-size: 18px;
+}
+#qna > a{
+text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}     
 </style>
 </head>
 <body>
@@ -94,8 +109,8 @@
                 <div class="title">이름</div>
                 <div class="title">등급</div>
                 <div class="title">쿠폰</div>
-                <div class="myinfo">김비건</div>
-                <div class="myinfo">일반회원</div>
+                <div class="myinfo"><%= loginMember.getNick() %></div>
+                <div class="myinfo"><%= loginMember.getGradeNo() %>등급</div>
                 <div class="myinfo">2장</div>
             </div>
             <div id="content-detail">
@@ -103,15 +118,22 @@
                 <div><a href=""><img src="/semiPrj/resources/img/예약내역.png" alt="예약내역" width="150px" height="auto"></a></div>
                 <div><a href=""><img src="/semiPrj/resources/img/내리뷰.png" alt="내리뷰" width="150px" height="auto"></a></div>
                 <div><a href="/semiPrj/qna/list"><img src="/semiPrj/resources/img/문의내역.png" alt="문의내역" width="150px" height="auto"></a></div>
-                <div><a href=""><img src="/semiPrj/resources/img/정보수정.png" alt="정보수정" width="150px" height="auto"></a></div>
+                <div id="changePwd"><a href="#" onclick='changeBtn'><img src="/semiPrj/resources/img/정보수정.png" alt="정보수정" width="150px" height="auto"></a></div>
                 <div><a href="">찜한 내역</a></div>
                 <div><a href="">예약 내역</a></div>
                 <div><a href="">내 리뷰&nbsp&nbsp&nbsp&nbsp</a></div>
                 <div><a href="/semiPrj/qna/list">문의 내역&nbsp&nbsp&nbsp&nbsp</a></div>
-                <div><a href="">정보수정</a></div>
+                <div id="changePwd2"><a href="#" onclick='changeBtn2'>정보수정</a></div>
             </div>
         </div>
     </div>
+   	 <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
+    <div id="qna">
+    	<a href="/qna/adminList?pno=1">admin전용게시판</a>
+    </div>
+    <%}%>
+    
+   <%@ include file="/WEB-INF/views/mypage/changePwd.jsp" %>
 
 </body>
 </html>
