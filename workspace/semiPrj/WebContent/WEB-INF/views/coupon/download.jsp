@@ -101,11 +101,69 @@
         margin: 0 auto;
     }
 
+    /*첫번째 모달*/
+    .modal2{
+        position: fixed;
+        background-color: rgb(0, 0, 0, .2);
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        display: none;
+    }
+    .modal-content2{
+        background-color: white;
+        width: 450px;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px;
+        box-shadow: 0 0 10px rgb(117, 117, 117);
+        text-align: center;
+    }
+    .btn-close2{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+    .btn-guide2{
+        background-color: #FCFFED;
+        color: black;
+        border-radius: 5px;
+        font-size: 14px;
+        padding: 7px;
+        display: block;
+    }
+    .btn-guide2:hover{
+        background-color: rgb(217, 245, 235);
+    }
+    .modal-content2 > h3{
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+    .modal-content2 > p{
+        margin-bottom: 20px;
+    }
+    .coupon{
+        text-align: center;
+    }
+    .modal-notice2{
+        font-size: 20px;
+        border: 1px solid #ccc;
+    }
+    .modal-notice2:hover{
+        background-color: #FCFFED;
+        font-weight: 600;
+    }
 
-    /*모달*/
+
+    /*두번째 모달*/
     .modal{
         position: fixed;
-        background-color: rgb(0, 0, 0, .5);
+        background-color: rgb(0, 0, 0, .2);
         top: 0;
         left: 0;
         height: 100vh;
@@ -121,7 +179,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 30px;
-        box-shadow: 0 0 15px black;
+        box-shadow: 0 0 10px rgb(117, 117, 117);
         text-align: center;
     }
     .btn-close{
@@ -158,10 +216,22 @@
                 <h3>쿠폰</h3>
             </div>
         </div>
-        <div class="page-middle">
-            <div>< 10% 할인 쿠폰 ></div>
-            <!--모달-->
-            <a class="modal-notice" href="#none"><img src="/semiPrj/resources/img/coupon2.png" alt="쿠폰" width="100px" height="auto"></a>
+
+        <div class="coupon">
+            <a class="modal-notice2" href="#none">쿠폰 발급</a>
+        </div>
+        
+   		<div class="modal2">
+            <div class="modal-content2">
+                <a class="btn-close2" href="#none">X</a>
+                
+                <h3>10% 할인 쿠폰</h3>
+                <div> ↓ 아래 쿠폰 클릭 ↓ </div>
+                <a class="cou-btn" href="#none"><img src="/semiPrj/resources/img/coupon2.png" alt="쿠폰" width="150px" height="auto"></a>
+                <p>
+                    발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
+                </p class="mypagego">
+            </div>
         </div>
 
         <div class="modal">
@@ -171,12 +241,23 @@
                 <p>
                     발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
                 </p>
-                <a class="btn-guide" href="/semiPrj/coupon/download">다운로드</a>
+                <a class="btn-guide" href="/semiPrj/mypage/mypage">다운로드</a>
             </div>
         </div>
         
         <script>
-            $('.modal-notice').click(function(){
+            $('.modal-notice2').click(function(){
+                $('.modal2').fadeIn(150)
+            })
+            $('.btn-close2').click(function(){
+                $('.modal2').fadeOut(100)
+            })
+           
+        </script>
+
+        <script>
+            //두번째 모달
+            $('.cou-btn').click(function(){
                 $('.modal').fadeIn(150)
             })
             $('.btn-close').click(function(){

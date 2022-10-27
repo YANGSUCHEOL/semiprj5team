@@ -12,14 +12,14 @@
 <title>Insert title here</title>
 <style>
     .header{
-        margin-bottom: 100px;
+        margin-bottom: 180px;
     }
     table{
         border-collapse: collapse;
         border-spacing: 0;
     }
     section.faq{
-        width: 70vw;
+        width: 80vw;
         padding: 80px 0;
         margin: 0 auto;
         border: 1px solid #ccc;
@@ -59,6 +59,9 @@
         width: 100px;
         text-align: center;
     }
+    .board-table .th-title{
+        width: 200px;
+    }
     .board-table th, .board-table td{
         padding: 18px 0;
     }
@@ -84,51 +87,6 @@
         width: 1100px;
         margin: 0 auto;
     }
-    
-    /*모달*/
-    .modal{
-        position: fixed;
-        background-color: rgb(0, 0, 0, .5);
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100%;
-        display: none;
-    }
-    .modal-content{
-        background-color: white;
-        width: 450px;
-        border-radius: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 30px;
-        box-shadow: 0 0 15px black;
-        text-align: center;
-    }
-    .btn-close{
-        position: absolute;
-        top: 15px;
-        right: 15px;
-    }
-    .btn-guide{
-        background-color: #FCFFED;
-        color: black;
-        border-radius: 5px;
-        font-size: 14px;
-        padding: 7px;
-        display: block;
-    }
-    .btn-guide:hover{
-        background-color: rgb(217, 245, 235);
-    }
-    .modal-content > h3{
-        margin-bottom: 30px;
-    }
-    .modal-content > p{
-        margin-bottom: 20px;
-    }
 
 </style>
 </head>
@@ -140,48 +98,32 @@
     <section class="faq">
         <div class="page-title">
             <div class="container">
-                <h3>쿠폰</h3>
+                <h3>쿠폰 사용 내역</h3>
             </div>
         </div>
 
         <div id="faq-list">
             <div class="container">
                 <table class="board-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="th-num">쿠폰 번호</th>
+                            <th scope="col" class="th-title">가게명</th>
+                            <th scope="col" class="th-writer">사용여부</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
                             <th>
-                                <a>5% 할인</a>
+                                <a>어디어디가게</a>
                             </th>
-                            <td><a class="modal-notice" href="#none">다운로드</a></td>
-                            
-                            <div class="modal">
-				            <div class="modal-content">
-				                <a class="btn-close" href="#none">X</a>
-				                <h3>쿠폰을 다운로드 받으시겠습니까?</h3>
-				                <p>
-				                    발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
-				                </p>
-				                <a class="btn-guide" href="/semiPrj/coupon/list">다운로드</a>
-				            </div>
-					        </div>
+                            <td>X</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        
-        <script>
-            $('.modal-notice').click(function(){
-                $('.modal').fadeIn(150)
-            })
-            $('.btn-close').click(function(){
-                $('.modal').fadeOut(100)
-            })
-        </script>
-        
-        <i class="bi bi-bookmarks"></i>
-        
 
     </section>
 
