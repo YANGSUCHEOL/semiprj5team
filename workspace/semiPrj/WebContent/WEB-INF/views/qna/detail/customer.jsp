@@ -17,127 +17,128 @@ pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#background{
-box-sizing: border-box;
-
-
-position: relative;
-width: 832px;
-height: 800px;
-left: 82px;
-top: 150px;
-
-background: rgba(255, 255, 255, 0.45);
-border: 1px solid #DADADA;
-border-radius: 10px;
-}
-
-#top-back{
-    position: absolute;
-    width: 697px;
-    height: 41px;
-    left: 65px;
-    top: 25px;
-    background: #FCFFED;
-    border-radius: 10px;
-    margin: auto;
-    padding-top: 20px;
-
-}
-
-#top-name{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17px;
-    --line-height: 21px;
-    text-align: center;
-
-    color: #000000;
-}
-
-#main{
-    width: 85%;
-    margin: auto;
-}
-
-#main-back{
+	#background{
     box-sizing: border-box;
 
-    position: absolute;
-    width: 697px;
-    height: 500px;
-    left: 65px;
-    top: 100px;
+    --position: absolute;
+    width: 70vw;
+    height: 800px;
+    --left: 82px;
+    --top: 150px;
+    margin: 0 auto;
+    margin-top:50px;
 
-    background: #FFFFFF;
-    border: 2px solid #868787;
-}
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid #DADADA;
+    border-radius: 10px;
+    }
 
-#main-back>div{
-    text-align: center;
-}
+    #top-back{
+        --position: absolute;
+        width: 80%;
+        height: 41px;
+        left: 65px;
+        top: 25px;
+        background: #FCFFED;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 30px;
+        padding-top: 20px;
 
-#main-top{
-    padding-bottom: 20px;
-    border-bottom: 1px solid #868787;
+    }
 
-}
+    #top-name{
+        
+        font-style: normal;
+        font-weight: 400;
+        
+        --line-height: 21px;
+        text-align: center;
 
-#toptxt{
-    position: absolute;
-    --left: 80px;
-    --top: 105px;
-    padding: 10px;
-    -border: 1px solid #DEDEDE;
+        color: #000000;
+    }
 
-}
+    #main{
+        width: 85%;
+        margin: auto;
+    }
 
-hr{
-    width: 90%;
-    margin-top: 20%;
-    color: #DEDEDE;
-}
 
-#title{
+    #main-back{
+        box-sizing: border-box;
+
+        --position: absolute;
+        width: 697px;
+        height: 362px;
+        left: 65px;
+        top: 100px;
+
+        background: #FFFFFF;
+        border: 2px solid #868787;
+    }
+
+    
+
+    #main-back>div{
+        text-align: center;
+    }
+
+    #main-top{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #868787;
+
+    }
+
+    #toptxt{
+        font-size: 17px;
+        margin-top: 20px;
+        --border-bottom :1px solid #868787;
+        
+    }
+
+
+    #title{
     width: 90%;
     display: grid;
     grid-template-columns: 6fr 2.5fr 2fr 2fr;
     margin: 0 auto;
     padding: 10px;
     --align-content: center;
+    --text-align: center;
     border-bottom: 1px solid #DEDEDE;
 
 }
 
-#title>div{
+	#title>div{
 	display: grid;
     grid-template-columns: 6fr 2.5fr 2fr 2fr;
-    justify-content: center;
+    --justify-content: center;
+    --text-align: center;
 }
 
-#context{
-    width: 87%;
-    padding: 15px;
-    height: 260px;
-    --border: 1px solid red;
-}
+    #context{
+        width: 90%;
+        height: 300px;
+        padding: 10px;
+      
+    }
 
-#ans-done{
-    color: #82A994;
-}
-#ans-expect{
-    color: #7E7E7E;
-}
+    #ans-done{
+        color: #82A994;
+    }
+    #ans-expect{
+        color: #7E7E7E;
+    }
 
-#btns{
-    text-align: center;
-}
-
-#answer{
+    #btns{
+        text-align: center;
+        color: #FCFFED;
+    }
+    
+    #answer{
 
     border-top: 1px solid #DEDEDE;
-    border-bottom: 1px solid #DEDEDE;
+    --border-bottom: 1px solid #DEDEDE;
     display: grid;
     grid-template-columns: 8.5fr 4fr;
 }
@@ -165,6 +166,7 @@ hr{
 		margin : 0 auto;
 		text-align : center;
 	}
+    
 
 
 

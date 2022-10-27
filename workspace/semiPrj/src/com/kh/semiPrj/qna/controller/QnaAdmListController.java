@@ -45,7 +45,7 @@ public class QnaAdmListController extends HttpServlet{
 			
 			listCount = new QnaService().selectCount();
 			currentPage = Integer.parseInt(req.getParameter("pno"));
-			System.out.println("pno ::: " + req.getParameter("pno"));
+			
 			pageLimit = 5;
 			boardLimit = 10;
 			

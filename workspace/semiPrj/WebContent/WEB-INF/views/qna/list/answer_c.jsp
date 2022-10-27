@@ -20,13 +20,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     #background{
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-    position: absolute;
-    width: 832px;
-    height: 468px;
-    left: 82px;
-    top: 150px;
+    --position: absolute;
+    width: 70vw;
+    height: 800px;
+    --left: 82px;
+    --top: 150px;
+    margin: 0 auto;
+    margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -34,34 +36,40 @@
     }
 
     #top-back{
-        position: absolute;
-        width: 697px;
+        --position: absolute;
+        width: 80%;
         height: 41px;
         left: 65px;
         top: 25px;
         background: #FCFFED;
         border-radius: 10px;
         margin: auto;
+        margin-top: 30px;
         padding-top: 20px;
 
     }
 
     #top-name{
-        font-family: 'Inter';
+        
         font-style: normal;
         font-weight: 400;
-        font-size: 17px;
-        line-height: 21px;
+        
+        --line-height: 21px;
         text-align: center;
 
         color: #000000;
+    }
+
+    #main{
+        width: 85%;
+        margin: auto;
     }
 
 
     #main-back{
         box-sizing: border-box;
 
-        position: absolute;
+        --position: absolute;
         width: 697px;
         height: 362px;
         left: 65px;
@@ -71,20 +79,26 @@
         border: 2px solid #868787;
     }
 
+    
+
     #main-back>div{
         text-align: center;
     }
 
-    #toptxt{
-        position: absolute;
-        left: 80px;
-        top: 105px;
+    #main-top{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #868787;
+
     }
 
-    hr{
-        width: 85%;
-        margin-top: 17%;
+    #toptxt{
+        font-size: 17px;
+        margin-top: 20px;
+        --border-bottom :1px solid #868787;
+        
     }
+
+    
     #list{
         width: 85%;
         display: grid;
@@ -116,7 +130,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="background">
 
         <div id="top-back">
@@ -126,7 +140,7 @@
         <div id = "main">
             <div id="main-top">
                 <div id="toptxt">겟 잇 비건 온라인 상담실</div>
-                <hr>
+                
             </div>
             <div id="list">
                 

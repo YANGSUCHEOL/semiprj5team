@@ -76,7 +76,8 @@ public class QnaWriteController extends HttpServlet{
 		if(result == 1) {
 			//성공
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semiPrj/WEB-INF/views/qna/list/customer.jsp");
+			//resp.sendRedirect("/semiPrj/WEB-INF/views/qna/list/customer.jsp");
+			resp.sendRedirect("/semiPrj/qna/list");
 		}else {
 			System.out.println("게시글 작성 실패");
 		}

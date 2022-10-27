@@ -7,13 +7,15 @@
 <title>Insert title here</title>
 <style>
     #background{
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-    position: absolute;
-    width: 832px;
-    height: 468px;
-    left: 82px;
-    top: 150px;
+    --position: absolute;
+    width: 70vw;
+    height: 800px;
+    --left: 82px;
+    --top: 150px;
+    margin: 0 auto;
+    margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -21,23 +23,24 @@
     }
 
     #top-back{
-        position: absolute;
-        width: 697px;
+        --position: absolute;
+        width: 80%;
         height: 41px;
         left: 65px;
         top: 25px;
         background: #FCFFED;
         border-radius: 10px;
         margin: auto;
+        margin-top: 30px;
         padding-top: 20px;
 
     }
 
     #top-name{
-        font-family: 'Inter';
+        
         font-style: normal;
         font-weight: 400;
-        font-size: 17px;
+        
         --line-height: 21px;
         text-align: center;
 
@@ -53,7 +56,7 @@
     #main-back{
         box-sizing: border-box;
 
-        position: absolute;
+        --position: absolute;
         width: 697px;
         height: 362px;
         left: 65px;
@@ -76,32 +79,37 @@
     }
 
     #toptxt{
-        position: absolute;
-        --left: 80px;
-        --top: 105px;
+        font-size: 17px;
+        margin-top: 20px;
+        --border-bottom :1px solid #868787;
         
-    }
-
-    hr{
-        margin-top: 17%;
-        color: #FFFFFF;
     }
 
 
     #title{
-        width: 90%;
-        display: grid;
-        grid-template-columns: 6fr 2.5fr 2fr 2fr;
-        margin: 0 auto;
-        padding: 3px;
-        align-content: center;
-        border-bottom: 1px solid #DEDEDE;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 6fr 2.5fr 2fr 2fr;
+    margin: 0 auto;
+    padding: 10px;
+    align-content: center;
+    text-align: center;
+    border-bottom: 1px solid #DEDEDE;
 
-    }
+}
+
+	#title>div{
+	display: grid;
+    grid-template-columns: 6fr 2.5fr 2fr 2fr;
+    justify-content: center;
+    text-align: center;
+}
 
     #context{
         width: 90%;
-        padding: 15px;
+        height: 300px;
+        padding: 10px;
+      
     }
 
     #ans-done{
@@ -113,6 +121,7 @@
 
     #btns{
         text-align: center;
+        color: #FCFFED;
     }
     
 

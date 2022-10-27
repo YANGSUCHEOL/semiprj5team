@@ -9,6 +9,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 
+import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.PageVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
@@ -84,7 +85,7 @@ public class QnaDao {
       
          } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("qnadao 목록조회 돌아가니?");
+           
          } finally {
             common.JDBCTemplate.close(rs);
             common.JDBCTemplate.close(pstmt);
@@ -200,7 +201,7 @@ public class QnaDao {
             return result;
       
    }
-
+   //질문 삭제
    public int delete(Connection conn, String no) {
       //SQL (준비 , 완성 , 실행)
       
@@ -261,7 +262,7 @@ public class QnaDao {
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       List<QuestionVo> voList = new ArrayList<QuestionVo>();
-      System.out.println("여기까지 왔어? 관리자 select dao");
+      
       try {
          pstmt = conn.prepareStatement(sql);
          
@@ -314,7 +315,7 @@ public class QnaDao {
    public QuestionVo selectAdminOne(Connection conn, String bno) {
       
    String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.HIT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN , M.NICK AS NICK FROM QUESTION Q JOIN MEMBER M ON Q.M_NO = M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
-   System.out.println("여기까지 왔어? 관리자 detail dao");
+   
    PreparedStatement pstmt = null;
    ResultSet rs = null;
    
@@ -353,16 +354,45 @@ public class QnaDao {
          
       }
       
-   } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-   } finally {
-      JDBCTemplate.close(rs);
-      JDBCTemplate.close(pstmt);
-   }
-   return vo;
+	   } catch (SQLException e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	   } finally {
+	      JDBCTemplate.close(rs);
+	      JDBCTemplate.close(pstmt);
+	   }
+	   return vo;
+	   
+	   }
    
-   }
+   //답변 작성
+	public int insertAnswer(Connection conn, AnswerVo avo) {
+	
+		String sql = "INSERT INTO ANSWER(NO, Q_NO, M_NO, CONTENT) VALUES (SEQ_A_NO.NEXTVAL, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+	    int result = 0;
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, avo.getqNo());
+			pstmt.setString(2, avo.getmNo());
+			pstmt.setString(3, avo.getContent());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+	    
+	    return result;
+		
+		
+	}
    
    //답변 작성
    //public int insertAnswer(Connection conn, AnswerVo avo) {
