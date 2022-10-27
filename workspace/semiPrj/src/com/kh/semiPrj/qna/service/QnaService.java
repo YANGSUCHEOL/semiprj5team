@@ -7,6 +7,7 @@ import common.JDBCTemplate;
 
 
 import com.kh.semiPrj.qna.dao.QnaDao;
+import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.PageVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
@@ -70,7 +71,7 @@ public class QnaService {
 			}
 	
 			JDBCTemplate.close(conn);
-			System.out.println("service 도니?");
+			
 			return vo;
 	
 		}
@@ -173,6 +174,25 @@ public class QnaService {
 		JDBCTemplate.close(conn);
 		
 		return vo;	
+		}
+
+		
+		//////답변 작성
+		public int insertAnswer(AnswerVo avo) {
+			Connection conn = JDBCTemplate.getConnection();
+			
+			int result = new QnaDao().insertAnswer(conn, avo);
+			
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+				
+			}else{
+				JDBCTemplate.rollback(conn);
+			}
+			
+			JDBCTemplate.close(conn);
+			
+			return result;
 		}
 		
 		

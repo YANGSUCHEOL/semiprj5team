@@ -9,22 +9,31 @@
 <style>
 
     #wrap{
-        width: 80vw;
-        border: 1px solid gray;
-        justify-content: center;
-        align-items: center;
+        width: 70vw;
+        height: 1000px;
+        border: 1px solid #DEDEDE;
+        border-radius: 20px;
+       --display:flex;
+        margin:auto;
+        margin-top: 20px;
     }
     #top-main{
-        width: 80vw;
-        height: 8vh;
+        width: 70vw;
+        height: 60px;
         display: grid;
         grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
         background: #EEFFF6;
-        margin: auto;
+        margin: 0 auto;
+        margin-bottom: 50px;
         text-align: center;
+        font-size: 20px;
+        place-content: center;
      
     }
 
+	.slidewrap{
+		position: relative
+	}
     
 	/* 브라우저 마진과 패딩 리셋 */
 	* {margin:0;padding:0;}
@@ -41,8 +50,8 @@
 
 	/* 좌우로 넘기는 LABEL버튼에 대한 스타일 */
 	.section .slidelist label {position:absolute;z-index:1;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
-	.section .slidelist .left {left:30px;background:url('/semi01/resources/img/left.png') center center / 100% no-repeat;}
-	.section .slidelist .right {right:30px;background:url('/semi01/resources/img/right.png') center center / 100% no-repeat;}
+	.section .slidelist .left {left:30px;background:url('/semiPrj/resources/img/left.png') center center / 100% no-repeat;}
+	.section .slidelist .right {right:30px;background:url('/semiPrj/resources/img/right.png') center center / 100% no-repeat;}
 
 	/* INPUT 체크되면 변화값이 li까지 전달되는 스타일 */
 	.section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
@@ -55,7 +64,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
         margin: auto;
         text-align: center;
-        padding: 50px;
+        padding: 30px;
     }
 
     #main-bottom > div{
@@ -67,6 +76,9 @@
         grid-template-columns: 1fr 1fr;
     }
     
+    #review, #community{
+    	font-size: 20px;
+    }
     </style>
 
 </style>
@@ -96,21 +108,21 @@
                     <li>
                         <a>
                             <label for="slide03" class="left"></label>
-                            <img src="/semi01/resources/img/1copy.png">
+                            <img src="/semiPrj/resources/img/mainslide1.png">
                             <label for="slide02" class="right"></label>
                         </a>
                     </li>
                     <li>
                         <a>
                             <label for="slide01" class="left"></label>
-                            <img src="/semi01/resources/img/coupon1.jpg">
+                            <img src="/semiPrj/resources/img/mainslide2.jpg">
                             <label for="slide03" class="right"></label>
                         </a>
                     </li>
                     <li>
                         <a>
                             <label for="slide02" class="left"></label>
-                            <img src="/semi01/resources/img/vegan.jpg">
+                            <img src="/semiPrj/resources/img/mainslide3.jpg">
                             <label for="slide01" class="right"></label>
                         </a>
                     </li>
@@ -119,10 +131,10 @@
         </div>
 
         <div id="main-bottom">
-            <div><a><img src="/semi01/resources/01.png"></a></div>
-            <div><a><img src="/semi01/resources/02.png"></a></div>
-            <div><a><img src="/semi01/resources/03.png"></a></div>
-            <div><a><img src="/semi01/resources/04.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/mainlist01.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/mainlist02.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/mainlist03.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/mainlist04.png"></a></div>
 
             <div>비건 토마토파스타 레시피가 궁금하다면?!</div>
             <div>맛있겠따///</div>
@@ -145,6 +157,8 @@
             </div>
 
         </div>
+        
+        
     </div>
 </body>
 </html>
