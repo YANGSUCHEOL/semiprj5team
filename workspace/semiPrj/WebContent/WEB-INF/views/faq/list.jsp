@@ -12,14 +12,14 @@
 <title>Insert title here</title>
 <style>
     .header{
-        margin-bottom: 120px;
+        margin-bottom: 100px;
     }
     table{
         border-collapse: collapse;
         border-spacing: 0;
     }
     section.faq{
-        width: 80vw;
+        width: 70vw;
         padding: 80px 0;
         margin: 0 auto;
         border: 1px solid #ccc;
@@ -49,37 +49,6 @@
         font-weight: 400;
         text-align: left;
         line-height: 40px;
-    }
-    .btn {
-        margin-top: 10px;
-        margin-left: 90%;
-        display: inline-block;
-        padding: 0 30px;
-        font-size: 15px;
-        font-weight: 400;
-        background: transparent;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        border: 1px solid #ccc;
-        text-transform: uppercase;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 20px;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        -ms-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    .btn:hover{
-        background-color: #EEFFF6;
     }
     .board-table{
         font-size: 16px;
@@ -179,14 +148,6 @@
                 </table>
             </div>
         </div>
-        
-        <%if(loginMember.getId().equals("admin")){%>
-       		<div id="board-write">
-                <div class="container">
-                    <button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/faq/write'">글쓰기</button>
-                </div>
-            </div>
-       	<%}%>
         
     </section>
     

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
     .header{
-        margin-bottom: 180px;
+        margin-bottom: 100px;
     }
     table{
         border-collapse: collapse;
@@ -176,19 +176,19 @@
 	                        <tr>
 	                            <td>1.</td>
 	                            <th>
-	                                <a">리뷰는 어떻게 작성하나요?</a>
+	                                <a>예약은 어떻게 하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>2.</td>
 	                            <th>
-	                                <a>예약은 어떻게 하나요?</a>
+	                                <a>쿠폰은 어떻게 사용하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>3.</td>
 	                            <th>
-	                                <a>리뷰는 어떻게 작성하나요?</a>
+	                                <a>예약 내역 변경은 어떻게 하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
@@ -209,7 +209,7 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><button type="submit" class="btn btn-dark" onclick="/semiPrj/WEB-INF/views/customer.jsp">개인 회원 1:1 문의</button></td>
+                                <td><button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/qna/list'">개인 회원 1:1 문의</button></td>
                                 <td><button type="submit" class="btn btn-dark" onclick="/semiPrj/WEB-INF/views/business.jsp">사업자 회원 1:1 문의</button></td>
                             </tr>
                         </tbody>

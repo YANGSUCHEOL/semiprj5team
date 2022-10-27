@@ -19,7 +19,7 @@
         border-spacing: 0;
     }
     section.faq{
-        width: 80vw;
+        width: 70vw;
         padding: 80px 0;
         margin: 0 auto;
         border: 1px solid #ccc;
@@ -140,10 +140,7 @@
 
         <div id="board-write">
             <div class="container">
-            	<%if(loginMember.getId().equals("admin")){%>
-                	<button type="submit" class="btn btn-dark">삭제하기</button>
-               		<button type="submit" class="btn btn-dark">수정하기</button>
-               	<%}%>
+                	<button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/faq/list'">목록가기</button>
                 
             </div>
         </div>
