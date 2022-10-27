@@ -129,7 +129,7 @@ text-decoration: none;
     </div>
    	 <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
     <div id="qna">
-    	<a href="/qna/adminList?pno=1">admin전용게시판</a>
+    	<a href="/semiPrj/qna/adminList?pno=1">admin전용게시판</a>
     </div>
     <%}%>
     
