@@ -7,18 +7,79 @@
    viewBox="0 0 105.83333 105.83333"
    version="1.1"
    id="svg201"
+   sodipodi:docname="SeongdongGu.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview16658"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.0925"
+     inkscape:cx="200"
+     inkscape:cy="200.23895"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg201" />
   <defs
-     id="defs198" />
+     id="defs198">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter17513"
+       x="-0.015379002"
+       y="-0.016886591"
+       width="1.056709"
+       height="1.0798036">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(212,212,212)"
+         result="flood"
+         id="feFlood17503" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite17505" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.5"
+         result="blur"
+         id="feGaussianBlur17507" />
+      <feOffset
+         dx="2.02492"
+         dy="3.27103"
+         result="offset"
+         id="feOffset17509" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite17511" />
+    </filter>
+  </defs>
   <g
-     id="layer1">
+     id="layer1"
+     style="stroke:none;filter:url(#filter17513)">
     <path
        id="Seongdong-gu"
        fill-rule="evenodd"
        clip-rule="evenodd"
        fill="#c8c8c8"
        d="m 40.543241,20.639539 c 0.85851,0 1.716221,0 2.574742,0 2.105874,-1.2622 1.672264,-5.067036 5.743453,-4.361403 0.274424,0.452311 1.378045,0.07413 1.979958,0.198208 3.732608,-0.03568 7.145657,0.248549 10.694134,0.396412 1.011751,2.886331 1.877777,5.918554 2.772725,8.921828 9.730291,3.410399 19.875984,6.403766 28.91448,10.507504 -1.80532,10.825824 -3.331084,19.632683 -8.120198,27.161093 -1.626329,2.557302 -4.696058,4.523149 -5.544667,7.137143 -0.669617,2.062568 -0.279963,4.372116 -0.593987,6.3443 -0.57537,3.603851 -1.873829,6.706629 -2.574729,10.309289 C 68.019876,82.99161 59.6316,76.643352 48.861436,74.168895 46.639532,73.658699 43.500901,73.736397 40.741241,73.574256 32.667381,73.099754 26.914022,73.942138 19.946953,75.556755 18.392292,69.380933 16.837632,63.205509 15.194261,57.118877 c 2.513753,-4.091844 4.174149,-9.03798 6.535443,-13.283229 1.072743,-0.908197 2.062719,-1.899648 2.970726,-2.973945 1.138474,-0.974399 2.194976,-2.031653 3.16793,-3.172145 2.370405,-2.055039 3.441564,-5.409943 5.149465,-8.128198 0.457768,-0.665588 0.06969,-2.177532 0.197999,-3.17215 0,-1.123455 0,-2.246904 0,-3.370364 0.455389,-0.469358 0.07127,-1.779524 0.198,-2.577121 0,-0.991039 0,-1.98249 0,-2.973547 1.91026,0.796809 2.378321,3.038171 5.149464,2.973547 0.274429,0.451523 1.37805,0.07334 1.979955,0.197814 z"
-       style="stroke-width:0.396204;fill:#d0eeee;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+       style="stroke-width:0.396204;fill:#d0eeee;fill-opacity:1;stroke:none;stroke-opacity:1" />
   </g>
 </svg>

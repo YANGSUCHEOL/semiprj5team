@@ -9,6 +9,7 @@
 	List<MenuVo> menu = (List<MenuVo>)request.getAttribute("menu");
 	List<ReviewVo> review = (List<ReviewVo>)request.getAttribute("review");
 	String score = vo.getScore();
+	String root = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,6 +18,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<link rel="stylesheet" href="../resources/css/style.css">
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
@@ -32,17 +34,13 @@ body {
 }
 
 #main {
+	padding-top: 70px;
 	width: 70vw;
 	display: grid;
 	margin: 0 auto;
-	grid-template-rows: 70px minmax(100px, auto);
+	grid-template-rows: 1fr;
 	row-gap: 30px;
 	align-content: center;
-}
-
-#sidebar {
-	background: #EEFFF6;
-	display: flex;
 }
 
 #content {
@@ -57,12 +55,13 @@ body {
 	border-radius: 10px;
 	padding: 10%;
 	row-gap: 30px;
+	padding-top: 100px;
 }
 
 #res-info {
 	display: grid;
+	grid-template-columns: 1fr 1fr;
 	grid-template-rows: repeat(6, minmax(30px, auto));
-	row-gap: 10px;
 	column-gap: 50px;
 }
 
@@ -72,6 +71,12 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: right;
+}
+
+.res-image>img {
+	width: 80%;
+	height: 80%;
+	object-fit: cover;
 }
 
 .res-name {
@@ -125,6 +130,9 @@ div[name="more-btn"] {
 div[name="menu-picture"] {
 	grid-row: 1/3;
 }
+.res-name {
+	font-size: 16pt;
+}
 
 #res-reviewlist {
 	display: grid;
@@ -163,6 +171,23 @@ div[name="star"] {
 div[name="user-review"] {
 	grid-column: 2/4;
 }
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.btn.btn-primary {
+	background: #EEFFF6;
+	border-color: #EEFFF6;
+	color: black;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary:focus {
+	background: #d1edee !important;
+	border-color: #d1edee !important;
+	color: gray;
+}
 </style>
 </head>
 
@@ -171,10 +196,11 @@ div[name="user-review"] {
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 
 	<div id="main">
-		<div id="sidebar"></div>
 		<div id="content">
 			<div id="res-info">
-				<div class="res-image"><%=vo.getPhoto()%></div>
+				<div class="res-image">
+					<img src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img>
+				</div>
 				<div class="res-name"><%=vo.getName()%></div>
 				<div><%=vo.getType()%></div>
 				<div><%=vo.getAddress()%></div>
@@ -195,20 +221,25 @@ div[name="user-review"] {
 			</div>
 			<div id="res-navi">
 				<div>
-					<button onclick="location.href = '/semiPrj/res'">쿠폰 발급</button>
+					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
+						onclick='resCheck();'>쿠폰 발급</button>
 				</div>
 				<div>
-					<button onclick='resCheck();'>예약하기</button>
+					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
+						onclick='resCheck();'>예약하기</button>
 				</div>
 				<div>
-					<button onclick='revCheck();'>리뷰 작성</button>
+					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
+						onclick='revCheck();'>리뷰 작성</button>
 				</div>
 			</div>
 			<div id="res-menulist">
 				<div>
 					<span>대표 메뉴 안내</span>
 				</div>
-				<div name="more-btn"><button onclick="location-href='/semiPrj/menu/list'">더 보기</button></div>
+				<div name="more-btn">
+					<a href='/semiPrj/menu/list'">더 보기</a>
+				</div>
 				<%
 				for (int i = 0; i < 4; ++i) {
 					if(i == menu.size()) break;
@@ -229,12 +260,8 @@ div[name="user-review"] {
 					<span>사용자 리뷰</span>
 				</div>
 				<div name="star">
-					<span>★ 
-					<% if(score == null) { %>
-					0.0
-					<% } else {%>
-					<%= score %>
-					<% } %>
+					<span>★ <% if(score == null) { %> 0.0 <% } else {%> <%= score %>
+						<% } %>
 					</span>
 				</div>
 				<div name="more-btn">
@@ -275,7 +302,12 @@ div[name="user-review"] {
             }
         }
     </script>
-	
+
+	<script src="../resources/js/jquery.min.js"></script>
+	<script src="../resources/js/popper.js"></script>
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="../resources/js/main.js"></script>
+
 </body>
 
 </html>

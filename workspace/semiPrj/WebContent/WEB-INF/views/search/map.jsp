@@ -8,6 +8,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.3/dist/sweetalert2.all.min.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
@@ -25,21 +26,16 @@ body {
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 	letter-spacing: -0.1em;
-	margin: 0px;
 }
 
 #main {
+	padding-top: 70px;
 	width: 70vw;
 	display: grid;
 	margin: 0 auto;
-	grid-template-rows: 70px minmax(100px, auto);
+	grid-template-rows: 1fr;
 	row-gap: 30px;
 	align-content: center;
-}
-
-#sidebar {
-	background: #EEFFF6;
-	display: flex;
 }
 
 #content {
@@ -58,24 +54,10 @@ body {
 	padding-top: 100px;
 }
 
-#msg-area {
-	position: absolute;
-	top: 50%;
-	left: 45%;
-}
-
-#alertMsg {
-	box-sizing: border-box;
-	position: flex;
-	margin: auto;
-	justify-content: center;
-	align-items: center;
-	width: 222px;
-	height: 189px;
-	background: #FFFFFF;
-	opacity: 0.9;
-	border-radius: 20px;
-	line-height: 200%;
+.swiper-slide img {
+	width: 80%;
+	height: 80%;
+	object-fit: cover;
 }
 
 .btn-common {
@@ -91,6 +73,11 @@ body {
 	font-weight: 400;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
 #district-view {
 	grid-row: 1/3;
 }
@@ -101,17 +88,21 @@ body {
 	grid-template-rows: 1fr;
 }
 
+.res-photo, .res-name, .res-time {
+	grid-column: 1/3;
+}
+
+.res-photo, .res-name {text-align: center;}
+.res-score {text-align: right;}
+.res-name {font-weight: bold; font-size: 13pt;}
+
 .district-res {
-	width: 100%;
-	height: 100%;
-	margin: 0 auto;
-	padding: 30px 10px 20px 10px;
-	border: 1px solid #DEDEDE;
+	width: 60%;
 	border-radius: 10px;
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(5, minmax(30px, auto));
-	row-gap: 10px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 40% 20% 20% 20%;
+	row-gap: 5px;
 	align-items: center;
 }
 
@@ -135,9 +126,9 @@ body {
 .swiper-slide {
 	max-width: 600px;
 	width: 100%;
-	height: 360px;
-	text-align: center;
-	font-size: 18px;
+	height: 340px;
+	text-align: left;
+	font-size: 15px;
 	background: #fff;
 	border: 1px solid #DEDEDE;
 	border-radius: 10px;
@@ -213,6 +204,13 @@ body {
 	margin: 15px 5px 0 0;
 }
 
+#region-name {
+	position: absolute;
+	top: 400px;
+	left: 600px;
+	font-size: 25px;
+}
+
 </style>
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
@@ -227,13 +225,11 @@ body {
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 
 	<div id="main">
-		<div id="sidebar"></div>
 		<div id="content">
 			<div id="map" class="seoul">
-				<div id="region-name"></div>
 			</div>
 			<div id="district-result">
-				<div id="district-view"></div>
+				<div id="district-view"><div id="region-name"></div></div>
 				<div class="igemoya">
 				<div class="parent">
 					<div class="wrapper" id="wrapper">
@@ -248,12 +244,6 @@ body {
 				</div>
 				</div>
 			</div>
-			<div id="msg-area">
-				<div id="alertMsg">
-					<span>찾고자 하는 지역을<br>눌러 주세요!<br></span><br>
-					<button class="btn-common" onclick="remove();">확인</button>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -262,11 +252,34 @@ body {
 	<script src="resources/js/move.js"></script>
 	
 	<script>
+	 $().ready(function() {
+		 let timerInterval
+		 Swal.fire({
+		   title: '찾고자 하는 지역을 눌러 주세요!',
+		   html: '이 알림은 <b></b> 초 후에 꺼집니다.',
+		   timer: 1500,
+		   timerProgressBar: true,
+		   didOpen: () => {
+		     Swal.showLoading()
+		     const b = Swal.getHtmlContainer().querySelector('b')
+		     timerInterval = setInterval(() => {
+		       b.textContent = Swal.getTimerLeft()
+		     }, 100)
+		   },
+		   willClose: () => {
+		     clearInterval(timerInterval)
+		   }
+		 }).then((result) => {
+		   /* Read more about handling dismissals below */
+		   if (result.dismiss === Swal.DismissReason.timer) {
+		     console.log('I was closed by the timer')
+		   }
+		 })
+	 });
 	
 		function remove() {
-			$('#alertMsg').css("display", "none");
-		}
-	
+			$('#alertMsg').fadeOut(500);
+		};
 	</script>
 
 </body>

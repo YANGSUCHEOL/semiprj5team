@@ -146,6 +146,7 @@ for (var i = 0; i < regions.length; i++) {
 	regions[i].mouseout(function(e){
 		this.node.style.opacity = 1;
         this.node.style.transition = '0.3s';
+        document.getElementById('region-name').innerHTML = " ";
 	});
 	
 /*	regions[i].click(function(e) {
@@ -176,10 +177,10 @@ for (var i = 0; i < regions.length; i++) {
 					if(item.score == undefined) {
 						item.score = '0.0';
 					}
-					var cmd = '<div class="swiper-slide"><div id="district-res"><div class="res-photo"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.photo + '</a></div><div class="res-name"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.name + '</a></div><div class="res-type"><span>' + item.type + '</span></div><div class="res-score"><span>' + item.score + '</span></div><div class="res-time"><span>' + item.open + '~' + item.close + '</span></div></div></div>';
+					var cmd = '<div class="swiper-slide"><div class="district-res"><div class="res-photo"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'><img src="/semiPrj/resources/img/' + item.photo + '.jpg"></img></a></div><div class="res-name"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.name + '</a></div><div class="res-type"><span>' + item.type + '</span></div><div class="res-score"><span>★ ' + item.score + '</span></div><div class="res-time"><span>' + item.open + '~' + item.close + '</span></div></div></div>';
 					$("#district-result-list").append(cmd);
 				});
-					$("#fraction").append('<span class="current">1</span>/<span class="all">' + data.length);
+					$("#fraction").append('<span class="current">1</span>/<span class="all">' + (data.length - 1));
 					$(".parent").css("visibility", "visible");
 			},
 			error: function(){
