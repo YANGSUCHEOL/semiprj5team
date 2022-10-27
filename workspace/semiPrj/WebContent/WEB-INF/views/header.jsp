@@ -33,15 +33,19 @@ body {
 }
 #header{
     width: 100vw;
-    height: 216px;
+    height: 15vh;
     margin:auto;
+    z-index:100;
 }
 #header-header{
     width: 100%;
     height: 26%;
+    display: grid;
+    grid-template-columns: 10fr 1fr 0.5fr 1fr 1fr 1fr;
     background-color: rgb(217 217 217);
     font-family: Inter;
     font-weight: Regular;
+    font-size: 1.2rem;
 }
 #header-header > div{
     
@@ -53,11 +57,14 @@ body {
 #header-main{
     width: 100%;
     height: 74%;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr 0.5fr
 }
 #header-main > div{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.4rem
 }
 #header-main > div > form{
     display: flex;
@@ -68,22 +75,6 @@ body {
     text-decoration: none;
     color: black;
 }
-#header-0{width: 74%; height: 100%; float: left;  font-size: 1.2rem;}
-#header-customer{width: 6%; height: 100%; float: left;  font-size: 1.2rem;}
-#header-2{width: 3%; height: 100%; float: left; font-size: 1.4rem;}
-#header-login{width: 5%; height: 100%; float: left;  font-size: 1.2rem;}
-#header-signup{width: 7%; height: 100%; float: left;  font-size: 1.2rem;}
-#header-5{width: 6%; height: 100%; float: left;  font-size: 1.2rem;}
-
-#header-logout{width: 5%; height: 100%; float: left;  font-size: 1.2rem;}
-#header-mypage{width: 7%; height: 100%; float: left;  font-size: 1.2rem;}
-
-#header-main-logo{width: 200px; height: 100%; float: left; }
-#header-main-search{width: 700px; height: 100%; float: left;  font-size: 1.4rem;}
-#header-main-area{width: 200px; height: 100%; float: left;  font-size: 1.4rem;}
-#header-main-review{width: 200px; height: 100%; float: left;  font-size: 1.4rem;}
-#header-main-reservation{width: 200px; height: 100%; float: left;  font-size: 1.4rem;}
-#header-main-community{width: 200px; height: 100%; float: left;  font-size: 1.4rem;}
 
 #search{
     border-top-left-radius: 30px;
@@ -92,25 +83,21 @@ body {
     border-bottom-right-radius: 30px;
     /* border-color: gainsboro; */
     width: 350px;
-    height: 60px;
-    font-size: 22px;
+    height: 50px;
+    font-size: 21px;
     text-align: center;
     position: absolute;
 }
 #searchImg{
     float: left;
     position: relative;
-    left: 150px;
+    left: 145px;
     border: none;
-    width: 40px;
-    height: 40px;
-   background: url(/semiPrj/resources/img/돋보기2.png);
+    width: 33px;
+    height: 33px;
+   background: url(/semiPrj/resources/img/search.svg);
    background-size: cover;
    
-  
-}
-#header-main-2{
-    position: relative;
 }
 input[name="pno"] {
 	display: none;
@@ -119,24 +106,23 @@ input[name="pno"] {
 </style>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/header2.jsp" %>
     <div id="header">
         <div id="header-header">
             <div id="header-0"></div>
-            <div id="header-customer"><a href="/semiPrj/faq/center">고객센터</a></div>
-            <div id="header-2">&nbsp&nbsp&nbsp|</div>
+            <div id="header-customer"><a href="">공지사항</a></div>
+            <div>|</div>
             <%if(loginMember == null && bsLoginMember == null){%>
             <div id="header-login"><a href="#" onclick='btnModal'>로그인</a></div>
             <div id="header-signup"><a href="#" onclick='btnModal'>회원가입</a></div>
-            <div id="header-5"></div>
             
             <%}else{%>
             		<div id="header-logout"><a href="/semiPrj/member/logout">로그아웃</a></div>
             		<div id="header-mypage"><a href="/semiPrj/mypage/mypage">마이페이지</a></div>	
-            		<div id="header-5"></div>
             <%}%>
         </div>
         <div id="header-main">
-            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고.png" alt="로고" width="230px" height="auto"></a></div>
+            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고1.png" alt="로고" width="auto" height="100px"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
                    <input id="search" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
@@ -146,6 +132,7 @@ input[name="pno"] {
             </div>
             <div id="header-main-area"><a href="/semiPrj/map">지역별 찾기</a></div>
             <div id="header-main-community"><a href="/semiPrj/community/list?pno=1">커뮤니티</a></div>
+             <div id="header-customer"><a href="/semiPrj/faq/center">고객센터</a></div>
         </div>
 
     </div>
