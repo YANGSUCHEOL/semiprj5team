@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 
 <style>
+	#section{
+	z-index:1;
+	}
 
     #wrap{
         width: 70vw;

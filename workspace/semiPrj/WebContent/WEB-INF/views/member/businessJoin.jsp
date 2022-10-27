@@ -21,6 +21,7 @@
             backdrop-filter: blur(1.5px);
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
+            z-index:100;
             
     }
     #bsjoin-modal .modal-window {
