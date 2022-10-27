@@ -7,18 +7,79 @@
    viewBox="0 0 105.83333 105.83333"
    version="1.1"
    id="svg201"
+   sodipodi:docname="GwangjinGu.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview15054"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.0925"
+     inkscape:cx="200"
+     inkscape:cy="200.23895"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg201" />
   <defs
-     id="defs198" />
+     id="defs198">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter15909"
+       x="-0.023012016"
+       y="-0.017809394"
+       width="1.0802211"
+       height="1.0774308">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(212,212,212)"
+         result="flood"
+         id="feFlood15899" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite15901" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.5"
+         result="blur"
+         id="feGaussianBlur15903" />
+      <feOffset
+         dx="2.02492"
+         dy="3.27103"
+         result="offset"
+         id="feOffset15905" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite15907" />
+    </filter>
+  </defs>
   <g
-     id="layer1">
+     id="layer1"
+     style="filter:url(#filter15909);stroke:none">
     <path
        id="Gwangjin-gu"
        fill-rule="evenodd"
        clip-rule="evenodd"
        fill="#c8c8c8"
        d="m 20.824955,87.337379 c 0.900126,-5.649796 2.797159,-10.301613 2.915706,-16.734229 3.428731,-4.614463 7.095324,-8.485013 9.330107,-14.398988 2.265864,-5.998807 2.427548,-13.087419 4.275998,-19.847633 0.848823,-3.102899 2.647145,-6.101522 3.887346,-9.145666 1.314049,-3.222736 2.237111,-6.51783 3.88735,-9.145273 5.074695,-0.924062 10.297852,0.280135 14.77285,-0.973081 4.030765,-1.128714 7.490589,-5.287569 13.411781,-4.086098 1.417043,-0.316321 0.532846,1.671867 0.777311,2.529391 -0.715904,3.347633 -4.764151,5.920213 -5.053314,9.340206 -0.174503,2.060554 1.610981,4.606289 2.137616,6.810415 0.795573,3.325835 -0.09639,7.213116 2.138387,9.339817 0.841833,0 1.684438,0 2.527052,0 0.652173,0.44977 2.1345,0.06846 3.110035,0.194536 1.101445,0 2.2029,0 3.304354,0 -1.035379,2.544954 -1.678217,4.905094 -2.138387,7.783493 -0.4318,2.700198 -0.508754,5.995295 -1.360304,8.756191 -0.798688,2.587377 -2.91726,5.925655 -4.471111,8.951125 -1.537913,2.99434 -3.846927,5.501948 -5.636297,7.783106 -1.84068,2.346538 -3.93516,4.721464 -6.025743,7.394431 -1.795211,2.294 -4.024546,6.397213 -6.025734,7.394421 -2.688733,1.338813 -6.255054,1.386292 -9.71876,1.556318 -0.907133,0 -1.814254,0 -2.721374,0 -1.295784,0 -2.591568,0 -3.887352,0 -0.590758,0.122157 -1.674727,-0.249409 -1.944061,0.194528 -7.182383,0.121785 -12.946947,-1.178122 -17.493456,-3.69701 z"
-       style="stroke-width:0.388866;fill:#dff3f4;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+       style="stroke-width:0.388866;fill:#dff3f4;fill-opacity:1;stroke:none;stroke-opacity:1" />
   </g>
 </svg>

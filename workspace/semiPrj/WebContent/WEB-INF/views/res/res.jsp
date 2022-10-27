@@ -7,6 +7,7 @@
 	int close = Integer.parseInt(vo.getClose().replace(":", ""));
 	String rno = vo.getNo();
 	String[] dayoff = vo.getDayoff().split(",");
+	String root = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,23 +29,19 @@
 }
 
 #main {
-	width: 65vw;
+	padding-top: 70px;
+	width: 70vw;
 	display: grid;
 	margin: 0 auto;
-	grid-template-rows: 70px minmax(100px, auto);
+	grid-template-rows: 1fr;
 	row-gap: 30px;
 	align-content: center;
-}
-
-#sidebar {
-	background: #EEFFF6;
-	display: flex;
 }
 
 #content {
 	box-sizing: border-box;
 	display: grid;
-	justify-content: center;
+	justify-items: center;
 	align-items: center;
 	text-align: center;
 	grid-template-rows: repeat(7, minmax(70px, auto));
@@ -113,10 +110,11 @@ span {
 
 #res-store {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	width: 80%;
+	grid-template-columns: 1.5fr 1fr;
 	grid-template-rows: repeat(3, minmax(70px, auto));
-	column-gap: 20px;
 	justify-content: center;
+	justify-items: start;
 	align-items: center;
 }
 
@@ -171,6 +169,12 @@ span[name="warning"] {
 	color: lightgray;
 }
 
+#res-picture>img{
+	width: 80%;
+	height: 80%;
+	object-fit: cover;
+}
+
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -214,11 +218,10 @@ span[name="warning"] {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 	<div id="main">
-		<div id="sidebar"></div>
 		<form action="/semiPrj/res" method="post">
 			<div id="content">
 				<div id="res-store">
-					<div id="res-picture"><%= vo.getPhoto() %></div>
+					<div id="res-picture"><img src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img></div>
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">

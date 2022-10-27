@@ -15,6 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../resources/css/style.css">
     <style>
     @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
@@ -26,18 +27,16 @@
 }
         body {
             letter-spacing: -0.1em;
+            font-size: 16px;
         }
         #main {
-            width: 65vw;
+        	padding-top: 70px;
+            width: 70vw;
             display: grid;
             margin: 0 auto;
-            grid-template-rows: 70px minmax(100px, auto);
+            grid-template-rows: 1fr;
             row-gap: 30px;
             align-content: center;
-        }
-        #sidebar {
-            background: #EEFFF6;
-            display: flex;
         }
         #content {
             box-sizing: border-box;
@@ -71,14 +70,18 @@
         .review {
             border: 1px solid #DEDEDE;
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px;
             display: grid;
             margin-left: 100px;
             margin-right: 100px;
-            grid-template-columns: 60px minmax(20px, auto) 5fr;
-            grid-template-rows: 20px 30px auto;
-            row-gap: 10px;
+            grid-template-columns: 60px 3fr minmax(100px, auto);
+            grid-template-rows: 30px 30px minmax(30px, auto);
             column-gap: 10px;
+        }
+        .btn-block {
+        	width: 60px;
+        	height: 40px;
+        	line-height: 14px;
         }
         .page {
             display: flex;
@@ -87,15 +90,12 @@
             margin: auto;
             padding: 50px;
         }
-        .rev-profile {
-            grid-column: 1/2;
-            grid-row: 1/3;
-        }
         .rev-nickname, .rev-best {
             display: flex;
+            align-items: center;
         }
         .rev-day {
-            grid-column: 2/4;
+            grid-column: 1/4;
             display: flex;
             align-items: center;
         }
@@ -106,6 +106,34 @@
         }
         div[name="more-btn"] {
             text-align: right;
+        }
+        .none {
+			text-align: center;
+        }
+        .active {
+        	font-family: "Poppins", Arial, sans-serif;
+		    color: gray;
+		    text-align: center;
+		    display: inline-block;
+		    width: 40px;
+		    height: 40px;
+		    line-height: 40px;
+		    border-radius: 50%;
+		    border: 1px solid #e6e6e6;
+        }
+        .active:hover {
+        	background-color: #EEFFF6;
+        	color: #e6e6e6;
+        }
+        .btn.btn-primary {
+        	background: #EEFFF6;
+        	border-color: #EEFFF6;
+        	color: black;
+        }
+        .btn.btn-primary:hover, .btn.btn-primary:focus {
+        	background: #d1edee !important;
+        	border-color: #d1edee !important;
+        	color: gray;
         }
     </style>
 </head>
@@ -120,21 +148,25 @@
             <div id="navigate">
                 <div><span>사용자 리뷰</span></div>
                 <div><span>★ 5.0</span></div>
-                <div name="more-btn">더 보기</div>
             </div>
             <div class="review-list">
-                <div class="review">
-                    <div class="rev-profile">이미지</div>
-                    <div class="rev-nickname">닉네임</div>
-                    <div class="rev-best">아이콘</div>
-                    <div class="rev-day">작성 일자</div>
-                    <span class="rev-content">음식이 친절하고 사장님이 맛있어요</span>
-                </div>
                 <% if(voList.size() != 0) { %>
 					<%for(int i = 0; i < voList.size(); ++i){%>
 						<div class="review">
 							<div class="rev-nickname"><%= voList.get(i).getWriter() %></div>
-							<div class="rev-best"><%= voList.get(i).getScore() %></div>
+							<div class="rev-best">★ <%= voList.get(i).getScore() %></div>
+							<div class="col-md-3 rev-button">
+								<div class="dropdown d-block">
+									<button class="btn mb-2 mb-md-0 btn-primary btn-block btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											    …
+									</button>
+									<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="#">자세히 보기</a>
+										<a class="dropdown-item" href="#">수정하기</a>
+										<a class="dropdown-item" href="#">삭제하기</a>
+									</div>
+								</div>
+							</div>
 							<div class="rev-day"><%= voList.get(i).getEnrollDate() %></div>
 					        <div class="rev-content"><%= voList.get(i).getContent() %></div>
 					    </div>
@@ -142,19 +174,20 @@
 				<% } else if(voList.size() == 0) { %>
 						<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
 				<% } %>
+			</div>
 				
                 <div class="page">
                 
                 <%if(pv.getStartPage() != 1){%>
-	        		<a href="/semiPrj/review/list?pno=<%=pv.getStartPage()-1%>&rno=<%= resNo %>" class="btn btn-primary btn-sm">이전</a>
+	        		<a href="/semiPrj/review/list?pno=<%=pv.getStartPage()-1%>&rno=<%= resNo %>" class="active"><</a>
 		       	<%}%>
 	        
 		        <%for(int i = pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
-		        	<a href="/semiPrj/review/list?pno=<%=i%>&rno=<%= resNo %>" class="btn btn-primary btn-sm"><%=i%></a>
+		        	<a href="/semiPrj/review/list?pno=<%=i%>&rno=<%= resNo %>" class="active"><%=i%></a>
 		        <%}%>
 		        
 		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-			        <a href="/semiPrj/review/list?pno=<%=pv.getEndPage()+1%>&rno=<%= resNo %>" class="btn btn-primary btn-sm">다음</a>
+			        <a href="/semiPrj/review/list?pno=<%=pv.getEndPage()+1%>&rno=<%= resNo %>" class="active">></a>
 		        <%}%>
                 
                 </div>
@@ -162,5 +195,11 @@
         </div>
     </div>
     
+    <script src="../resources/js/jquery.min.js"></script>
+    <script src="../resources/js/popper.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/main.js"></script>
+    
 </body>
+
 </html>

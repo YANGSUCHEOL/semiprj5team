@@ -7,18 +7,79 @@
    viewBox="0 0 105.83333 105.83333"
    version="1.1"
    id="svg201"
+   sodipodi:docname="SeongbukGu.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.0925"
+     inkscape:cx="200"
+     inkscape:cy="200.23895"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg201" />
   <defs
-     id="defs198" />
+     id="defs198">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4456"
+       x="-0.018735083"
+       y="-0.020515556"
+       width="1.0631992"
+       height="1.0919716">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(212,212,212)"
+         result="flood"
+         id="feFlood4446" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4448" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0.5"
+         result="blur"
+         id="feGaussianBlur4450" />
+      <feOffset
+         dx="2.02492"
+         dy="3.27103"
+         result="offset"
+         id="feOffset4452" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4454" />
+    </filter>
+  </defs>
   <g
-     id="layer1">
+     id="layer1"
+     style="filter:url(#filter4456);stroke:none;stroke-opacity:1">
     <path
        id="Seongbuk-gu"
        fill-rule="evenodd"
        clip-rule="evenodd"
        fill="#c8c8c8"
        d="m 22.947883,20.720682 c 1.153179,0.828773 1.590545,2.787076 2.77826,3.627207 1.553834,1.09931 3.815035,0.993656 5.555552,1.934606 1.065033,0.575648 2.098428,1.616927 3.140517,2.418135 3.170225,2.438445 6.355417,4.98085 9.299831,7.375535 0.898636,3.856638 1.888076,7.62165 2.77826,11.486511 1.495151,0.799997 2.470584,2.121005 5.072548,1.813483 0.845747,0 1.691009,0 2.53627,0 0.486393,-0.0776 1.284323,0.157143 1.570263,-0.120881 0.76508,0 1.53017,0 2.29477,0 0.84574,0 1.691,0 2.53627,0 0.48639,-0.07762 1.28432,0.157147 1.57026,-0.120881 3.4849,0.46564 4.55742,-1.48323 6.6428,-2.418135 2.01559,-3.987914 4.14566,-7.860271 6.28056,-11.728274 1.25098,1.57655 2.40078,3.398495 3.74428,5.320046 0.88148,1.260318 2.66088,4.498765 3.98576,5.199159 2.33535,1.234693 5.65892,0.845942 8.33383,2.176371 0,0.564283 0,1.128323 0,1.692602 -0.2816,1.89447 -0.0406,4.312364 -0.12071,6.408232 -5.81204,1.919853 -13.26581,2.196675 -17.39214,5.80381 -0.93632,0.836265 -1.82216,1.722823 -2.65751,2.659904 -1.38479,2.079421 -2.42881,4.500702 -3.7438,6.649997 -3.45133,1.167481 -5.50798,2.60115 -8.09231,4.594507 -0.82546,0.636808 -1.98202,1.098339 -2.41552,1.813721 -0.7419,1.223574 -0.62839,3.357155 -1.32876,4.836515 -0.27265,0.57564 -1.915121,2.64733 -2.41552,2.78078 -1.224902,0.32663 -3.005028,-0.25772 -4.468787,-0.36264 -1.499013,-0.10735 -2.982089,-0.20188 -4.590022,-0.24177 -3.844261,-4.25241 -5.568835,-10.627034 -8.575314,-15.718368 -1.704778,-0.354188 -3.084007,-1.56132 -5.07255,-2.055487 -3.480071,-0.864794 -7.476718,-0.458629 -9.662566,-2.297255 0.06883,-1.502811 0.297046,-2.846304 0.483004,-4.231861 1.283835,-0.367481 2.416972,-0.88583 3.623525,-1.329948 0.472625,-1.844187 1.854264,-3.104027 2.053263,-4.957395 0.377712,-3.514786 -1.222732,-6.291459 -2.174016,-8.826372 -0.567533,-1.512724 -1.329237,-3.107411 -1.81176,-4.71563 -1.348073,-4.494416 -1.829633,-9.177651 -3.381535,-12.937339 -1.169846,-0.84449 -2.603415,-1.424485 -3.502771,-2.539263 1.58209,-0.43566 3.181566,0.229194 4.348033,-0.241765 1.488147,-0.600546 1.578712,-2.889579 2.777777,-3.74785 z"
-       style="stroke-width:0.241634;fill:#dff3f4;fill-opacity:1;stroke:#ffffff;stroke-opacity:1" />
+       style="stroke-width:0.241634;fill:#dff3f4;fill-opacity:1;stroke:none;stroke-opacity:1" />
   </g>
 </svg>
