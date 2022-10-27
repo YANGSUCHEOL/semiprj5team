@@ -21,6 +21,7 @@
             backdrop-filter: blur(1.5px);
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
+            z-index:100;
     }
     #join-modal .modal-window {
         background: white;
@@ -34,7 +35,6 @@
         position: relative;
         max-height: calc(80vh - 200px);
     overflow-y: auto;
-
     }
     #join-title{
         width: 100%;

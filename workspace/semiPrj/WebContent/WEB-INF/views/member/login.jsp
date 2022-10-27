@@ -22,6 +22,7 @@
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index:100;
           
 }
 #modal .modal-window {
