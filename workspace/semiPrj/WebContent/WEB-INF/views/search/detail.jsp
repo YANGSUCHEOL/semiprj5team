@@ -32,7 +32,7 @@ body {
 }
 
 #main {
-	width: 65vw;
+	width: 70vw;
 	display: grid;
 	margin: 0 auto;
 	grid-template-rows: 70px minmax(100px, auto);
