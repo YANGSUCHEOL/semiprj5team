@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>communityBoardWrite</title>
+    <title>GET EAT VEGAN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 
@@ -37,6 +37,7 @@
         border: 1px solid #EEFFF6;
         font-weight: 600;
         font-size: 12px;
+        margin-bottom : 50px;
     }
 
     #submit-btn:hover {
@@ -108,11 +109,11 @@
 
         <div class="outer">
           <br>
-          <h2 align="center">COMMUNITY🌿</h2>
+          <h2 align="center">🍆🥦🍅🥑🥕🌿</h2>
           <br>
   
             <form id="enroll-form" action="" method="post">
-                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list'"></button>
+                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list?pno=1'"></button>
                 <br><br>
                 <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
                 <table>

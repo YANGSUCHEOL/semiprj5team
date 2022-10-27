@@ -7,12 +7,12 @@
 	NoticeVo vo = (NoticeVo)request.getAttribute("noticeVo");
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지 상세 다듬은 거</title>
+    <title>GET EAT VEGAN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
@@ -20,24 +20,26 @@
         #main{
             width: 60vw;
             height: 70vh;
-            margin: 0 auto;
-            --border: 1px solid lightgray;
+            margin: 100px auto;
+            border: 1px solid lightgray;
             border-radius: 10px;
+        	padding: 50px;
+        	width: 70vw;
+        	height: 800px;
         }
 
-        #notice > h2 {
+        #notice {
             padding: 20px;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid lightgray;
         }
 
         #title{
             box-sizing: border-box;
             display: grid;
             grid-template-columns: 6fr 1.5fr 1fr 1fr;
-            grid-template-rows: 30px;
-            text-align: center;
-            padding: 10px;
-            border-bottom: 1px solid lightgray;
+            grid-template-rows: 10px;
+            --text-align: center;
+            --border-bottom: 1px solid lightgray;
         }
 
         #content{
@@ -74,13 +76,20 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="main">
         <div id="notice">
-            <h2 align="center">NOTICE🌱</h2>
+            <h4>NOTICE🌱</h4>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/notice/list'">목록</button>
+           <%if(loginMember != null && loginMember.getId().equals("admin")){%>
+	            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
+	            <a href="/semiPrj/notice/delete?no=<%= vo.getNo() %>" class="btn btn-outline-secondary" type="button">삭제</a>
+			<%}%>
+        </div>
         </div>
 
         <div id="title">
-            <div><%= vo.getTitle() %></div>
-            <div><%= vo.getEnrollDate() %></div>
-            <div><%= vo.getWriter() %></div>
+            <div><b><%= vo.getTitle() %></b></div>
+            <div>&nbsp;|&nbsp;<%= vo.getEnrollDate() %>&nbsp;|&nbsp;</div>
+            <div><%= vo.getWriter() %>&nbsp;|&nbsp;</div>
             <div><%= vo.getHit() %></div>
         </div>
 
@@ -88,13 +97,7 @@
             <div><%= vo.getContent() %></div>
         </div>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/notice/list'">목록</button>
-           <%if(loginMember != null && loginMember.getId().equals("admin")){%>
-	            <a href="/semiPrj/notice/edit?no=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-	            <a href="/semiPrj/notice/delete?no=<%= vo.getNo() %>" class="btn btn-outline-secondary" type="button">삭제</a>
-			<%}%>
-        </div>
+        
 			
 
     </div>

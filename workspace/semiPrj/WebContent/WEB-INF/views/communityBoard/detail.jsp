@@ -1,5 +1,4 @@
 <%@page import="com.kh.semiPrj.community.vo.CommuVo"%>
-<%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -12,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>communityBoardDetail</title>
+    <title>GET EAT VEGAN</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <style>
@@ -22,12 +21,12 @@
         border-radius: 10px;
         background: white;
         color: black;
-        width: 60%;
+        width: 70vw;
         height: 800px;
-        margin: 0 auto;
+        margin: 100px auto;
         padding-top: 50px;
         padding: 50px;
-        box-sizing: border-box
+        --box-sizing: border-box
         
     }
 
@@ -37,6 +36,7 @@
     }
 
     #bb{
+    	box-sizing: border-box
         --border: 1px solid lightgray; 
         width: 100%;
         height: 60vh;
@@ -44,8 +44,8 @@
 
 
     .comment {
-        width: 100%;
-        height: 20vh;
+        --width: 100%;
+        height: 30vh;
         padding: 20px;
     }
 
@@ -95,10 +95,10 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end" id="th">
             <div id="category"><%= vo.getCategory() %></div>
             
-            <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/community/list'">목록</button>
+            <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/community/list?pno=1'">목록</button>
            
-            <a href="/semiPrj/notice/edit?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
-            <a href="/semiPrj/notice/delete?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
+            <a href="/semiPrj/community/edit?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
+            <a href="/semiPrj/community/delete?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
            
         </div>
         <hr>
