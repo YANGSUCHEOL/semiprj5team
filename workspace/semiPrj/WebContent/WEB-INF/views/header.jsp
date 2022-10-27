@@ -115,7 +115,7 @@ input[name="pno"] {
     <div id="header">
         <div id="header-header">
             <div id="header-0"></div>
-            <div id="header-customer"><a href="">공지사항</a></div>
+            <div id="header-customer"><a href="/semiPrj/notice/list">공지사항</a></div>
             <div>|</div>
             <%if(loginMember == null && bsLoginMember == null){%>
             <div id="header-login"><a href="#" onclick='btnModal'>로그인</a></div>
