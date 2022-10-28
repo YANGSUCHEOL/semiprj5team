@@ -17,7 +17,7 @@ public class CouponDwonloadController extends HttpServlet {
 		
 		String rno = req.getParameter("rno");
 		
-		CouponVo vo = new CouponService().selectCouList(rno);
+		CouponVo vo = new CouponService().donwloadCoupon(rno);
 		
 		req.setAttribute("vo", vo);
 		req.getRequestDispatcher("/WEB-INF/views/coupon/download.jsp").forward(req, resp);

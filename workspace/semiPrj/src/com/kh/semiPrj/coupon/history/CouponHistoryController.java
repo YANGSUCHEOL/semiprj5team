@@ -1,6 +1,7 @@
 package com.kh.semiPrj.coupon.history;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,10 @@ public class CouponHistoryController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		
+		List<CouponHistoryVo> voList = new CouponHistoryService().selectCouponList();
+		
+		req.setAttribute("voList", voList);
+		req.getRequestDispatcher("/WEB-INF/views/coupon/list.jsp").forward(req, resp);
 	}
 }
