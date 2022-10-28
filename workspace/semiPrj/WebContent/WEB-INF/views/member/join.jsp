@@ -215,7 +215,7 @@
     width: 380px;
     position: absolute;
     top: 950px;
-    left: 70px;
+    left: 85px;
     font-family: Inter;
     font-weight: Regular;
     font-size: 20px;
