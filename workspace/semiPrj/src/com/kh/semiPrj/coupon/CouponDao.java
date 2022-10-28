@@ -10,7 +10,7 @@ import common.JDBCTemplate;
 public class CouponDao {
 
 	//쿠폰 조회
-	public CouponVo selectCouponList(Connection conn, String rno) {
+	public CouponVo donwloadCoupon(Connection conn, String rno) {
 		
 		String sql = "SELECT C.NO, C.R_NO, C.C_NO, C.INFO FROM COUPON C JOIN RESTAURANT R ON C.R_NO = R.NO JOIN COU_CATEGORY G ON C.C_NO = G.NO WHERE R.NO = ?";
 		
