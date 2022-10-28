@@ -129,7 +129,7 @@ text-align: left;
 width: 350px;
 position: absolute;
 top: 500px;
-left: 80px;
+left: 95px;
 font-family: Inter;
 font-weight: Regular;
 font-size: 20px;
