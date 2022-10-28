@@ -13,12 +13,12 @@
 
     #wrap{
         width: 70vw;
-        height: 1000px;
+        height: 1300px;
         border: 1px solid #DEDEDE;
         border-radius: 20px;
        --display:flex;
         margin:auto;
-        margin-top: 20px;
+        margin-top: 80px;
     }
     #top-main{
         width: 70vw;
@@ -31,11 +31,13 @@
         text-align: center;
         font-size: 20px;
         place-content: center;
+        border-radius: 20px;
      
     }
 
 	.slidewrap{
 		position: relative
+		margin-top: 100px;
 	}
     
 	/* 브라우저 마진과 패딩 리셋 */
@@ -45,7 +47,7 @@
 	.section input[id*="slide"] {display:none;}
 
 	/* 슬라이드 영역 - max-width 크기를 조절해주면 됩니다*/
-	.section .slidewrap {max-width:800px;margin:0 auto;overflow:hidden;}
+	.section .slidewrap {max-width:1400px;margin:0 auto;overflow:hidden;}
 	.section .slidelist {white-space:nowrap;font-size:0;}
 	.section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
 	.section .slidelist > li > a {display:block;position:relative;}
@@ -66,21 +68,28 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         margin: auto;
+        margin-top:50px;
         text-align: center;
         padding: 30px;
     }
 
     #main-bottom > div{
         --border: 1px solid black;
+        font-size: 20px;
     }
 
     #board-list{
         display: grid;
         grid-template-columns: 1fr 1fr;
+        margin-top:100px;
     }
     
     #review, #community{
-    	font-size: 20px;
+    	font-size: 23px;
+    }
+    
+    #review-title, #community-title{
+    	font-size: 25px;
     }
     </style>
 
@@ -111,21 +120,21 @@
                     <li>
                         <a>
                             <label for="slide03" class="left"></label>
-                            <img src="/semiPrj/resources/img/mainslide1.png">
+                            <img src="/semiPrj/resources/img/01.png">
                             <label for="slide02" class="right"></label>
                         </a>
                     </li>
                     <li>
                         <a>
                             <label for="slide01" class="left"></label>
-                            <img src="/semiPrj/resources/img/mainslide2.jpg">
+                            <img src="/semiPrj/resources/img/02.jpg">
                             <label for="slide03" class="right"></label>
                         </a>
                     </li>
                     <li>
                         <a>
                             <label for="slide02" class="left"></label>
-                            <img src="/semiPrj/resources/img/mainslide3.jpg">
+                            <img src="/semiPrj/resources/img/03.png">
                             <label for="slide01" class="right"></label>
                         </a>
                     </li>
@@ -147,17 +156,21 @@
         </div>
 
         <div id="board-list">
-            <div id="review">리뷰 페이지
+            <div id="review">
+            	<div id="review-title">리뷰 페이지</div>
                 <div>[안국] 어디어디 리뷰</div>
                 <div>[역삼] 어디어디 리뷰</div>
                 <div>[서촌] 어디어디 리뷰</div>
-            </div>
-            <div id="community">커뮤니티 페이지
+                </div>
+            
+            <div id="community">
+            	<div id="community-title">커뮤니티 페이지</div>
                 <div>제 레시피 구경하고 가세용~~~~</div>
                 <div>믿고 갔는데 실망이에요ㅡㅡ</div>
                 <div>거북목이 되어 목이 아파요</div>
+                </div>
 
-            </div>
+            
 
         </div>
         

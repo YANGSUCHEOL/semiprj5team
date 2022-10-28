@@ -1,9 +1,11 @@
+<%@page import="com.kh.semiPrj.qna.vo.AnswerVo"%>
 <%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
 	QuestionVo vo = (QuestionVo)request.getAttribute("vo");
+    AnswerVo avo = (AnswerVo)request.getAttribute("avo");
 	%>
     
 <!DOCTYPE html>
@@ -130,9 +132,16 @@
         color: #FCFFED;
     }
     
+	#answer{
 
+    border-top: 1px solid #DEDEDE;
+    --border-bottom: 1px solid #DEDEDE;
+    display: grid;
+    grid-template-columns: 8.5fr 4fr;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header.jsp" %>
@@ -173,46 +182,50 @@
                 <a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
             </div>
             
+            <!-- <div id="answer"> -->
+	            <!-- <div id="answer-title">=avo.getmNo() %></div> -->
+	            <!-- <div id="answer-date">=avo.getEnrollDate() %></div> -->
+	            <!--<div id="answer-content">=avo.getContent() %></div>  -->
+
+        	<!-- </div> -->
             
+            
+         </div>
+
+        
+    </div>   
                     	
 
 
-            <script>
+          <script>
 
-                function insertAnswer(){
+              function insertAnswer(){
 
-                    $.ajax({
+                  $.ajax({
 
-                    	url:"/semiPrj/qna/adminWrite"
-                    	,data : {
-	                        content: $("#answer").val()
-	                        , qNo : <%=vo.getNo()%>
-                    	}
-                    	, type:"post"
-                    	, success : function(result){
-	                        if(result>0){
-	                        selectAnswerList();
-	                        $("#answer").val("");
-	                        }
-                    	}
-                    })
-                };
+                  	url:"/semiPrj/qna/adminWrite"
+                  	,data : {
+                       content: $("#answer").val()
+                       , qNo : <%=vo.getNo()%>
+                  	}
+                  	, type:"post"
+                  	, success : function(result){
+                       if(result>0){
+                       selectAnswerList();
+                       $("#answer").val("");
+                       }
+                  	}
+                  })
+              };
+              
+              
+              
+          </script>
+
 
                 
-            </script>
 
-
-                
-
-
-               
-
-           
-
-
-        </div>
 
         
-    </div>
 </body>
 </html>

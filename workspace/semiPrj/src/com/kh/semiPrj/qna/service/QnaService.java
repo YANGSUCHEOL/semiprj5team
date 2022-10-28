@@ -1,6 +1,7 @@
 package com.kh.semiPrj.qna.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import common.JDBCTemplate;
@@ -193,6 +194,18 @@ public class QnaService {
 			JDBCTemplate.close(conn);
 			
 			return result;
+		}
+
+		
+		//댓글 확인
+		public ArrayList<AnswerVo> selectAnswerList(String qNo) {
+			Connection conn = JDBCTemplate.getConnection();
+			
+			ArrayList<AnswerVo> list = new QnaDao().selectAnswerList(conn, qNo);
+			JDBCTemplate.close(conn);
+			
+			return list;
+		
 		}
 		
 		

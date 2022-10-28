@@ -6,61 +6,77 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    #background{
-        box-sizing: border-box;
+ 	#background{
+box-sizing: border-box;
 
-    position: absolute;
-    width: 832px;
-    height: 468px;
-    left: 82px;
-    top: 150px;
 
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid #DADADA;
+position: relative;
+width: 70vw;
+height: 800px;
+
+margin: auto;
+margin-top:50px;
+
+background: rgba(255, 255, 255, 0.45);
+border: 1px solid #DADADA;
+border-radius: 10px;
+}
+
+#top-back{
+    position: relative;
+    width: 75%;
+    height: 5%;
+    --left: 65px;
+    --top: 25px;
+    background: #FCFFED;
     border-radius: 10px;
-    }
+    margin: auto;
+    margin-top: 20px;
+    padding-top: 20px;
 
-    #top-back{
-        position: absolute;
-        width: 697px;
-        height: 41px;
-        left: 65px;
-        top: 25px;
-        background: #FCFFED;
-        border-radius: 10px;
-        margin: auto;
-        padding-top: 20px;
+}
 
-    }
+#top-name{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    text-align: center;
+    margin: 0 auto;
 
-    #top-name{
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 21px;
-        text-align: center;
+    color: #000000;
+}
 
-        color: #000000;
-    }
+#main-back{
+    box-sizing: border-box;
 
+    position: relative;
+    width: 80%;
+    height: 600px;
+  	margin: auto;
+  	margin-top:50px;
 
-    #main-back{
-        box-sizing: border-box;
+    background: #FFFFFF;
+    border: 2px solid #868787;
+}
 
-        position: absolute;
-        width: 697px;
-        height: 362px;
-        left: 65px;
-        top: 100px;
+#main-back>div{
+    text-align: center;
+}
 
-        background: #FFFFFF;
-        border: 2px solid #868787;
-    }
+#toptxt{
+    position: relative;
+    left: 10vw;
+    top: 5vh;
+    font-size: 17px;
+
+    --margin: 20px;
+}
 
     textarea {
         width: 85%;
-        height: 18em;
+        height: 350px;
         resize: none;
         background: #FFFFFF;
         border: 1px solid #D9D9D9;
@@ -95,7 +111,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="background">
 
         <div id="top-back">
@@ -106,7 +122,7 @@
             <div id="main-back">
                 <br>
                 <div>제목</div>  
-                <div><input type="text" name="title"></div>
+                <div><input type="text" name="title"  style="width:905px;"></div>
                 <br><br>
                 <div>내용</div>
                 <div><textarea name="content"></textarea></div> 

@@ -95,6 +95,7 @@
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
     <div id="background">
 
