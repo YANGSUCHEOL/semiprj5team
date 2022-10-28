@@ -126,6 +126,12 @@
         color: #7E7E7E;
     }
     
+    .btn {
+        	background: #ffffff;
+        	color: gray;
+        	border: 1px solid gray;
+        }
+    
 
 </style>
 </head>

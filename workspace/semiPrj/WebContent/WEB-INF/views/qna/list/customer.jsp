@@ -23,12 +23,13 @@ List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
 #background{
 box-sizing: border-box;
 
-```
+
 position: relative;
-width: 75vw;
+width: 70vw;
 height: 800px;
-left: 82px;
-top: 150px;
+
+margin: auto;
+margin-top:50px;
 
 background: rgba(255, 255, 255, 0.45);
 border: 1px solid #DADADA;
@@ -158,14 +159,13 @@ hr{
 	           			<div id="ans-expect">답변예정</div>
 					<%} %>
 	
-	           		
-	           		
-	
 	           		<%} %>
 	
-	           	 <div id="page-area">
+	           	 
 	
 	    </div>
+	    <div id="page-area" align="center">
+	           	 	<a href="/semiPrj/qna/write">작성하기</a>
 	
 	        </div>
 	

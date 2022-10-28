@@ -393,6 +393,45 @@ public class QnaDao {
 		
 		
 	}
+	
+	///댓글 조회
+
+	public ArrayList<AnswerVo> selectAnswerList(Connection conn, String qNo) {
+		String sql = "SELECT A.NO , A.Q_NO , M.NICK AS WRITER , A.CONTENT , A.ENROLL_DATE FROM ANSWER A JOIN MEMBER M ON A.M_NO = M.NO WHERE A.DELETE_YN = 'N' AND A.Q_NO = ? ORDER BY A.NO DESC";
+		
+		ArrayList<AnswerVo> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, qNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				list.add(new AnswerVo(rs.getString("NO")
+									, rs.getString("Q_NO")
+									, rs.getString("M_NO")
+									, rs.getString("CONTENT")
+									, rs.getString("ENROLL_DATE")
+									, rs.getString("UPDATE_DATE")
+									, rs.getString("DELETE_YN")
+									));
+									
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	
+	}
    
    //답변 작성
    //public int insertAnswer(Connection conn, AnswerVo avo) {
