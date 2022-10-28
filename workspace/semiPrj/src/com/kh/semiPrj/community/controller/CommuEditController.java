@@ -15,67 +15,70 @@ import com.kh.semiPrj.community.service.CommuService;
 import com.kh.semiPrj.community.vo.CategoryVo;
 import com.kh.semiPrj.community.vo.CommuVo;
 
-@WebServlet(urlPatterns = "/community/write")
-public class CommuWriteController extends HttpServlet {
-
+@WebServlet(urlPatterns = "/community/edit")
+public class CommuEditController extends HttpServlet {
+	
 	private final CommuService cs = new CommuService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		if(req.getSession().getAttribute("loginMember") == null) {
-			
-			req.setAttribute("msg", "로그인 후 이용해 주세요");
-			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
-
-		}
 		
+		//현재 게시글 번호만 조회(꺼내오기)
+		String bno = req.getParameter("bno");
 		
 		//디비 다녀오기
+		CommuVo vo = cs.selectOne(bno);
 		List<CategoryVo> cateList = cs.selectCategoryList();
-		req.setAttribute("cateList", cateList);
 		
-		req.getRequestDispatcher("/WEB-INF/views/communityBoard/write.jsp").forward(req, resp);
+
+		
+		//화면 선택
+		req.setAttribute("cateList", cateList);
+		req.setAttribute("vo", vo);
+		req.getRequestDispatcher("/WEB-INF/views/communityBoard/edit.jsp").forward(req, resp);
+
 	
 	}//get
 	
-	//게시글 작성
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		//인코딩
+		req.setCharacterEncoding("UTF-8");
+		
 		//세션 불러오기
 		HttpSession s = req.getSession();
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		
-		//인코딩
-		req.setCharacterEncoding("UTF-8");
-		
-		//데이터 꺼내기
+		// 데이터 꺼내기
+		String bno = req.getParameter("bno");
 		String category = req.getParameter("category");
+		System.out.println(category);
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		
-		//데이터 뭉치기
 		CommuVo vo = new CommuVo();
+		vo.setNo(bno);
 		vo.setCategory(category);
+		System.out.println(vo.getCategory());
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setWriter(loginMember.getNo());
 		
-		//디비 다녀오기
-		int result = cs.write(vo);
+		// 디비 다녀오기
+		int result = cs.edit(vo);
 		
-		//화면 선택
-		if(result ==1) {
-			//작성 성공 -> 알림이랑 리스트로
-			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semiPrj/community/list?pno=1");
-		} else {
-			//작성 실패 -> 에러 페이지로
-			req.setAttribute("msg", "게시글 작성 실패...");
+		// 화면선택
+		if(result == 1) {
+			//성공
+			req.getSession().setAttribute("alertMsg", "게시글 수정 성공!");
+			resp.sendRedirect("/semiPrj/community/detail?bno=" + bno);
+		}else {
+			//실패
+			req.setAttribute("msg", "게시글 수정 실패 ...");
 			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
 		}
 	
 	}//post
-	
-	
+
 }
