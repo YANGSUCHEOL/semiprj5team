@@ -1,9 +1,13 @@
+<%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
+<%@page import="java.util.List"%>
 <%@page import="com.kh.semiPrj.community.vo.CommuVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
 	CommuVo vo = (CommuVo)request.getAttribute("vo");
+	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -82,6 +86,19 @@
     #submit-btn:hover {
         background-color: #e0fbed;
     }
+    
+    .btn{
+            margin-right: 10px;
+            background-color: #EEFFF6;
+	        color: black;
+	        border: 1px solid #EEFFF6;
+	        font-size: 12px;
+        }
+        
+    .btn:hover {
+    	border: 1px solid #e0fbed;
+    	background-color: #e0fbed;
+	}
 
     </style>
 
@@ -96,10 +113,10 @@
             <div id="category"><%= vo.getCategory() %></div>
             
             <button class="btn btn-outline-secondary me-md-2" type="button" onclick="location.href='/semiPrj/community/list?pno=1'">목록</button>
-           
+          
             <a href="/semiPrj/community/edit?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary me-md-2" type="button">수정</a>
             <a href="/semiPrj/community/delete?bno=<%= vo.getNo()%>" class="btn btn-outline-secondary" type="button">삭제</a>
-           
+	
         </div>
         <hr>
 

@@ -97,6 +97,45 @@ public class CommuService {
 		
 	}//selectOne
 	
+	//게시글 수정하기(update)
+	public int edit(CommuVo vo) {
+		Connection conn = getConnection();
+		
+		int result = dao.updateByNo(conn, vo);
+		
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	
+	}//edit
+
+
+	//게시글 삭제하기
+	public int delete(String bno) {
+
+		Connection conn = getConnection();
+		
+		int result = dao.delete(conn, bno);
+	
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	
+	}
+	
+	
 	
 
 }

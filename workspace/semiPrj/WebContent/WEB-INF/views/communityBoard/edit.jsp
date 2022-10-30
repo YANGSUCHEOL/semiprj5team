@@ -1,10 +1,11 @@
+<%@page import="com.kh.semiPrj.community.vo.CommuVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
-
+	CommuVo vo = (CommuVo)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -113,7 +114,7 @@
           <br>
   
             <form id="enroll-form" action="" method="post">
-                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list'"></button>
+                <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/detail?bno=<%= vo.getNo()%>'"></button>
                 <br><br>
                 <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
                 <table>
@@ -123,7 +124,7 @@
                             <select name="category" class="select">
                                 <!-- CTEGORY 테이블로부터 조회해오기 -->
                                 <%--카테고리가 null이면 DB에는 들어오지만 화면에 출력 안 됨--%>
-                                <option disabled selected>자유 🌱</option>
+                                
                                 <%for(int i = 0; i < cateList.size(); ++i){ %>
                                 <option value="<%= cateList.get(i).getcNo() %>"><%= cateList.get(i).getName() %></option>
                                 <%}%>
@@ -132,11 +133,11 @@
                     </tr>
                     <tr>
                         <th id="title-th">제목</th>
-                        <td><input type="text" name="title" required id="title"></td>
+                        <td><input type="text" name="title" required id="title" value="<%= vo.getTitle()%>"></td>
                     </tr>
                     <tr>
                         <th id="content-th">내용</th>
-                        <td><textarea name="content" rows="10" style="resize:none;" required id="content"></textarea></td>
+                        <td><textarea name="content" rows="10" style="resize:none;" required id="content"><%= vo.getContent()%></textarea></td>
                     </tr>
                     <tr>
                         <th></th>

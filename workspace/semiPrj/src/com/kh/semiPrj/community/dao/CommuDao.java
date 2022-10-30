@@ -251,6 +251,64 @@ public class CommuDao {
 	
 	}//increaseHit
 
+	//게시글 수정하기(update)
+	public int updateByNo(Connection conn, CommuVo vo) {
+
+		String sql = "UPDATE COMMUNITY SET CATEGORY = ?, TITLE = ?, CONTENT = ?, MODIFY_DATE = SYSDATE WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getCategory());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContent());
+			pstmt.setString(4, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("dao" + vo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
+	
+	}//updateByNo
+
+
+	
+	
+	//게시글 삭제하기
+	public int delete(Connection conn, String bno) {
+		
+		String sql = "UPDATE COMMUNITY SET STATUS = 'X' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 	
 			
