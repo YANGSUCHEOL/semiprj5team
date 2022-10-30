@@ -33,13 +33,14 @@
             border-bottom: 1px solid lightgray;
         }
 
-        #title{
+        #title1{
             box-sizing: border-box;
             display: grid;
-            grid-template-columns: 6fr 1.5fr 1fr 1fr;
-            grid-template-rows: 10px;
-            --text-align: center;
+            grid-template-columns: 5fr 2fr 1fr 1fr;
+            grid-template-rows: 50px;
+            text-align: center;
             --border-bottom: 1px solid lightgray;
+            margin: 30px auto;
         }
 
         #content{
@@ -86,10 +87,10 @@
         </div>
         </div>
 
-        <div id="title">
+        <div id="title1">
             <div><b><%= vo.getTitle() %></b></div>
-            <div>&nbsp;|&nbsp;<%= vo.getEnrollDate() %>&nbsp;|&nbsp;</div>
-            <div><%= vo.getWriter() %>&nbsp;|&nbsp;</div>
+            <div><%= vo.getEnrollDate() %></div>
+            <div><%= vo.getWriter() %></div>
             <div><%= vo.getHit() %></div>
         </div>
 

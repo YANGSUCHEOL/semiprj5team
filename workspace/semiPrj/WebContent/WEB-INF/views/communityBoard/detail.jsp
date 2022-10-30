@@ -95,10 +95,10 @@
 	        font-size: 12px;
         }
         
-        .btn:hover {
-        	border: 1px solid #e0fbed;
-        	background-color: #e0fbed;
-    	}
+    .btn:hover {
+    	border: 1px solid #e0fbed;
+    	background-color: #e0fbed;
+	}
 
     </style>
 
