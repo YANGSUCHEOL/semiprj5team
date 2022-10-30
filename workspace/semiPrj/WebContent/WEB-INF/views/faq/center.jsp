@@ -210,7 +210,7 @@
                         <tbody>
                             <tr>
                                 <td><button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/qna/list'">개인 회원 1:1 문의</button></td>
-                                <td><button type="submit" class="btn btn-dark" onclick="/semiPrj/WEB-INF/views/business.jsp">사업자 회원 1:1 문의</button></td>
+                                <td><button type="submit" class="btn btn-dark" onclick="location.href='/semiPrj/bqna/list'">사업자 회원 1:1 문의</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -223,7 +223,7 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><button type="submit" class="btn btn-dark" onclick="">사업자 입점 신청</button></td>
+                                <td><button type="submit" class="btn btn-dark" onclick="window.open('https://forms.gle/Tx7KesSjGNFJRpsMA')">사업자 입점 신청</button></td>
                             </tr>
                         </tbody>
                     </table>

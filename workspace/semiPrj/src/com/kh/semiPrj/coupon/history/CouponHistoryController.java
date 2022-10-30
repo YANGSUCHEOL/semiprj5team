@@ -15,9 +15,12 @@ public class CouponHistoryController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<CouponHistoryVo> voList = new CouponHistoryService().selectCouponList();
+		String mno = req.getParameter("mno");
+		List<CouponHistoryVo> voList = new CouponHistoryService().couponList(mno);
 		
 		req.setAttribute("voList", voList);
 		req.getRequestDispatcher("/WEB-INF/views/coupon/list.jsp").forward(req, resp);
 	}
+	
+	
 }
