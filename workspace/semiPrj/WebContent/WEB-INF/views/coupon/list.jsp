@@ -1,9 +1,11 @@
-<%@page import="com.kh.semiPrj.restaurant.vo.RestaurantVo"%>
 <%@page import="com.kh.semiPrj.coupon.CouponVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.semiPrj.coupon.history.CouponHistoryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	CouponVo vo = (CouponVo)request.getAttribute("vo");
+	List<CouponHistoryVo> voList = (List<CouponHistoryVo>)request.getAttribute("voList");
+	CouponVo vo = (CouponVo)session.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html>
@@ -103,27 +105,28 @@
         </div>
 
         <div id="faq-list">
-            <div class="container">
                 <table class="board-table">
                     <thead>
                         <tr>
-                            <th scope="col" class="th-num">쿠폰 번호</th>
+                            <th scope="col" class="th-num">No</th>
                             <th scope="col" class="th-title">가게명</th>
                             <th scope="col" class="th-writer">사용여부</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <th>
-                                <a>어디어디가게</a>
-                            </th>
-                            <td>X</td>
-                        </tr>
-                    </tbody>
+                    <%for(int i = 0; i < voList.size(); ++i){%>
+                    	<tbody>
+	                        <tr>
+                        		<td><%= voList.get(i).getNo() %></td>
+	                            <th>
+	                                <a><%= voList.get(i).getrName() %></a>
+	                            </th>
+	                            <td><%= voList.get(i).getUsedYn() %></td>
+	                        </tr>
+	                    </tbody>
+                   	<%}%>
+                    
                 </table>
             </div>
-        </div>
 
     </section>
 

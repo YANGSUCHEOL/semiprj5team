@@ -7,15 +7,16 @@ import common.JDBCTemplate;
 
 public class CouponHistoryService {
 
-	public List<CouponHistoryVo> selectCouponList() {
+	//마이페이지 내 쿠폰 목록 조회
+	public List<CouponHistoryVo> couponList(String mno) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<CouponHistoryVo> voList = new CouponHistoryDao().selectCouponList(conn);
+		List<CouponHistoryVo> voList = new CouponHistoryDao().couponList(conn, mno);
 		
 		JDBCTemplate.close(conn);
 		
 		return voList;
 	}
-
+	
 }

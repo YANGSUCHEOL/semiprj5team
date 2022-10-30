@@ -16,12 +16,10 @@ public class CouponDwonloadController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String rno = req.getParameter("rno");
+		List<CouponVo> voList = new CouponService().donwloadCoupon(rno);
 		
-		CouponVo vo = new CouponService().donwloadCoupon(rno);
-		
-		req.setAttribute("vo", vo);
+		req.setAttribute("voList", voList);
 		req.getRequestDispatcher("/WEB-INF/views/coupon/download.jsp").forward(req, resp);
-		
 		
 	}
 }

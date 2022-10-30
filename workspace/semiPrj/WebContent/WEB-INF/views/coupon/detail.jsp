@@ -1,10 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="com.kh.semiPrj.coupon.CouponVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	List<CouponVo> voList = (List<CouponVo>)request.getAttribute("voList");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,35 +145,6 @@
         font-weight: 600;
         text-decoration-line: none;
     }
-
-
-    /*두번째 모달*/
-    .modal{
-        position: fixed;
-        background-color: rgb(0, 0, 0, .2);
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100%;
-        display: none;
-    }
-    .modal-content{
-        background-color: white;
-        width: 450px;
-        border-radius: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 30px;
-        box-shadow: 0 0 10px rgb(117, 117, 117);
-        text-align: center;
-    }
-    .btn-close{
-        position: absolute;
-        top: 15px;
-        right: 15px;
-    }
     .btn-guide{
         background-color: #FCFFED;
         color: black;
@@ -190,11 +156,9 @@
     .btn-guide:hover{
         background-color: rgb(217, 245, 235);
     }
-    .modal-content > h3{
-        margin-bottom: 30px;
-    }
-    .modal-content > p{
-        margin-bottom: 20px;
+    .font{
+    	font-size: 20px;
+    	font-weight: 800;
     }
     
 </style>
@@ -212,15 +176,13 @@
         <div id="coupon-list">
             <div class="container">
                 <table class="coupon-table">
-                    <%for(int i = 0; i < voList.size(); ++i){%>
                         <thead>
                             <tr>
-                                <th scope="col" class="th-num"><%= voList.get(i).getNo() %></th>
-                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
-                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 발급</a></th>
+                                <th scope="col" class="th-num">1</th>
+                                <th scope="col" class="th-title">10% 할인 쿠폰</th>
+                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 선택</a></th>
                             </tr>
                         </thead>
-                    <%}%>
                 </table>
             </div>
         </div>
@@ -229,26 +191,10 @@
             <div class="modal-content2">
                 <a class="btn-close2" href="#none">X</a>
                 
-                <h3>10% 할인 쿠폰</h3>
-                <div> ↓ 아래 쿠폰 클릭 ↓ </div>
-                <a class="cou-btn" href="#none"><img src="/semiPrj/resources/img/coupon2.png" alt="쿠폰" width="150px" height="auto"></a>
-                <p>
-                    발급된 쿠폰은 마이페이지에서 확인이 가능합니다:)
-                </p class="mypagego">
+                <p class="font">👇👇 쿠폰을 사용하시겠습니까? 👇👇</p>
+                <a class="btn-guide" href="/semiPrj/res">사용하기</a>
             </div>
         </div>
-		<form action="" method="post">
-	        <div class="modal">
-	            <div class="modal-content">
-	                <a class="btn-close" href="#none">X</a>
-	                <h3>쿠폰을 다운로드 받으시겠습니까?</h3>
-	                <p>
-	                    쿠폰을 다운로드하시면 마이페이지로 이동합니다:)
-	                </p>
-	                <a class="btn-guide" href="/semiPrj/mypage/mypage">다운로드</a>
-	            </div>
-	        </div>
-        </form>
         
         <script>
         	//첫번째 모달
@@ -259,16 +205,6 @@
                 $('.modal2').fadeOut(100)
             })
            
-        </script>
-
-        <script>
-            //두번째 모달
-            $('.cou-btn').click(function(){
-                $('.modal').fadeIn(150)
-            })
-            $('.btn-close').click(function(){
-                $('.modal').fadeOut(100)
-            })
         </script>
         
         <i class="bi bi-bookmarks"></i>
