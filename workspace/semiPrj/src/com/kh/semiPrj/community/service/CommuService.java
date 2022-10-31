@@ -7,7 +7,9 @@ import static common.JDBCTemplate.*;
 
 import common.PageVo;
 import com.kh.semiPrj.community.dao.CommuDao;
+import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CategoryVo;
+import com.kh.semiPrj.community.vo.CommentVo;
 import com.kh.semiPrj.community.vo.CommuVo;
 
 public class CommuService {
@@ -29,13 +31,20 @@ public class CommuService {
 
 	
 	//커뮤니티 글 작성하기(insert)
-	public int write(CommuVo vo) {
+	public int write(CommuVo vo, AttachmentVo attachmentVo) {
 		
 		Connection conn = getConnection();
 		
+		//게시글 insert
 		int result = dao.insertBoard(conn, vo);
 		
-		if(result == 1) {
+		//첨부파일 insert
+		int result2 = 1;
+		if(attachmentVo != null) {
+			result2 = dao.insertAttachment(conn, attachmentVo);			
+		}
+		
+		if(result * result2 == 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -43,7 +52,7 @@ public class CommuService {
 		
 		close(conn);
 		
-		return result;
+		return result * result2;
 		
 	}//write
 
@@ -134,6 +143,28 @@ public class CommuService {
 		return result;
 	
 	}
+
+
+	//게시글에 댓글 달기(insert)
+	public int insertReply(CommentVo r) {
+
+		Connection conn = getConnection();
+		
+		int result = new CommuDao().insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		close(conn);
+		
+		return result;
+	
+	}
+	
+	
 	
 	
 	

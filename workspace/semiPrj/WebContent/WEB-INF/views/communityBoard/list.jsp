@@ -32,9 +32,9 @@ pageEncoding="UTF-8"%>
             align-content: center;
         }
 
-        #title{
+        #title1{
             display: grid;
-            grid-template-rows: 50px;
+            grid-template-rows: 100px;
             margin: 0 auto;
             text-align: center;
             place-items: center;
@@ -88,7 +88,7 @@ pageEncoding="UTF-8"%>
             padding: 20px;
             display: flex;
             justify-content: center;
-            margin-left: 250px;
+            margin-left: 450px;
             
         }
 
@@ -98,7 +98,7 @@ pageEncoding="UTF-8"%>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="main">
-        <div id="title">
+        <div id="title1">
             <div>COMMUNITY🌿</div>
         </div>
 
@@ -131,20 +131,18 @@ pageEncoding="UTF-8"%>
         <div id="page-area" class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
             <div id="page-area2" class="btn-group me-2" role="group" aria-label="First group">
             
-            <%if(pv.getStartPage() != 1){%>
-	        	<a href="/semiPrj/community/list?pno=<%=pv.getStartPage()-1%>" class="btn btn-outline-secondary"><</a>
-	       	<%}%>
-        
-           	<%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
-	        	<a href="/semiPrj/community/list?pno=<%=i%>" class="btn btn-outline-secondary"><%=i%></a>
-	        <%}%>
+	            <%if(pv.getStartPage() != 1){%>
+		        	<a href="/semiPrj/community/list?pno=<%=pv.getStartPage()-1%>" class="btn btn-outline-secondary"><</a>
+		       	<%}%>
 	        
-	        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-		        <a href="/semiPrj/community/list?pno=<%=pv.getEndPage()+1%>" class="btn btn-outline-secondary">></a>
-	        <%}%>    
-                
-                
-                
+	           	<%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
+		        	<a href="/semiPrj/community/list?pno=<%=i%>" class="btn btn-outline-secondary"><%=i%></a>
+		        <%}%>
+		        
+		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
+			        <a href="/semiPrj/community/list?pno=<%=pv.getEndPage()+1%>" class="btn btn-outline-secondary">></a>
+		        <%}%>    
+
                 
             </div>
         </div>

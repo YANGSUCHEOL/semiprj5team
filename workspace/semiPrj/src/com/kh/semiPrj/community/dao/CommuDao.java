@@ -10,7 +10,11 @@ import java.util.List;
 import static common.JDBCTemplate.*;
 
 import common.PageVo;
+import oracle.jdbc.proxy.annotation.Pre;
+
+import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CategoryVo;
+import com.kh.semiPrj.community.vo.CommentVo;
 import com.kh.semiPrj.community.vo.CommuVo;
 
 public class CommuDao {
@@ -269,7 +273,7 @@ public class CommuDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println("dao" + vo);
+			//System.out.println("dao" + vo);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -309,6 +313,68 @@ public class CommuDao {
 		return result;
 	}
 
+
+
+	//댓글 작성하기(insert)
+	public int insertReply(Connection conn, CommentVo r) {
+
+		String sql = "INSERT INTO COMMUNITY_CMT ( NO, CONTENT, COMMU_NO, M_NO ) VALUES ( SEQ_COMMUNITY_CMT_NO.NEXTVAL, ?, ?, ? )";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getContent());
+			pstmt.setInt(2, r.getCommuNo());
+			pstmt.setInt(3, r.getmNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+			
+	}
+
+
+	//첨부파일 insert
+	public int insertAttachment(Connection conn, AttachmentVo attachmentVo) {
+
+		String sql = "INSERT INTO ATTACHMENT ( NO ,COMMUNITY_NO ,ORIGIN_NAME ,CHANGE_NAME ,FILE_PATH ) VALUES ( SEQ_ATTACHMENT_NO.NEXTVAL ,SEQ_COMMUNITY_NO.CURRVAL , ? , ? , ? )";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, attachmentVo.getOriginName());
+			pstmt.setString(2, attachmentVo.getChangeName());
+			pstmt.setString(3, attachmentVo.getFilePath());
+			
+			result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
+	
+	}//insertAttachment
+
+
+
+
+	
+	
 
 	
 			

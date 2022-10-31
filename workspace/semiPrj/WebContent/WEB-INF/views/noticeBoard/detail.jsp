@@ -38,9 +38,10 @@
             display: grid;
             grid-template-columns: 5fr 2fr 1fr 1fr;
             grid-template-rows: 50px;
-            text-align: center;
+            text-align: left;
             --border-bottom: 1px solid lightgray;
-            margin: 30px auto;
+            margin: 20px auto;
+            padding: 20px;
         }
 
         #content{

@@ -112,7 +112,7 @@
           <h2 align="center">🍆🥦🍅🥑🥕🌿</h2>
           <br>
   
-            <form id="enroll-form" action="" method="post">
+            <form id="enroll-form" action="" method="post" enctype="multipart/form-data">
                 <button type="button" class="btn-close" aria-label="Close" onclick="location.href='/semiPrj/community/list?pno=1'"></button>
                 <br><br>
                 <!-- 카테고리, 제목, 내용, 첨부파일 한개 -->
@@ -126,7 +126,7 @@
                                 <option disabled selected>자유 🌱</option>
                                 <%for(int i = 0; i < cateList.size(); ++i){ %>
                                 <option value="<%= cateList.get(i).getcNo() %>"><%= cateList.get(i).getName() %></option>
-                                <%}%>
+                                <% } %>
                             </select>
                         </td>
                     </tr>
@@ -140,7 +140,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td><input class="form-control form-control-sm" id="formFileSm" type="file"></td>
+                        <td><input class="form-control form-control-sm" id="formFileSm" type="file" name="f"></td>
                     </tr>
                 </table>
                 <br><br>
