@@ -1,21 +1,35 @@
 package com.kh.semiPrj.community.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.community.service.CommuService;
+import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CategoryVo;
 import com.kh.semiPrj.community.vo.CommuVo;
 
 @WebServlet(urlPatterns = "/community/write")
+@MultipartConfig(
+		fileSizeThreshold = 1024 * 1024,
+		maxFileSize = 1024 * 1024 * 50,
+		maxRequestSize = 1024 * 1024 * 50 * 5
+		)
 public class CommuWriteController extends HttpServlet {
 
 	private final CommuService cs = new CommuService();
@@ -26,7 +40,7 @@ public class CommuWriteController extends HttpServlet {
 			
 			req.setAttribute("msg", "로그인 후 이용해 주세요");
 			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
-
+			return;
 		}
 		
 		
@@ -38,7 +52,7 @@ public class CommuWriteController extends HttpServlet {
 	
 	}//get
 	
-	//게시글 작성
+	//게시글 작성 + 파일
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -53,6 +67,49 @@ public class CommuWriteController extends HttpServlet {
 		String category = req.getParameter("category");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		Part f = req.getPart("f");
+		
+		// ---------------- 파일 업로드 start ----------------
+		
+		// 0. 준비
+		String originName = f.getSubmittedFileName();
+		String ext = originName.substring(originName.lastIndexOf("."), originName.length());
+		String changeName = "GetEatVegan" + System.currentTimeMillis() + ext;
+		
+		// 1. 파일 객체 준비 (경로 + 파일명)
+		String filePath = "upload/img";
+		String path = req.getServletContext().getRealPath("/" + filePath + "/"); //최상단경로
+		File target = new File(path + changeName);
+		
+		// 2. 데이터 넣기	
+		BufferedInputStream bis = new BufferedInputStream(f.getInputStream()); //BufferedInputStream == bis
+		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(target)); //BufferedOutputStream == bos
+		
+		byte[] buf = new byte[1024];
+
+		int size = 0;
+		while((size = bis.read(buf)) != -1) {
+			bos.write(buf, 0, size);					
+		}
+		
+		bos.flush();
+		bis.close();
+		bos.close();
+		
+		
+		// ---------------- 파일 업로드 end - ----------------
+
+		// 파일 정보 db에 저장(파일이 있을 때만)
+		AttachmentVo attachmentVo = null;
+		
+		if(f.getSubmittedFileName().length() > 0) {
+			attachmentVo = new AttachmentVo();
+			
+			//attachmentVo.setCommunityNo(게시글번호);
+			attachmentVo.setChangeName(changeName);
+			attachmentVo.setOriginName(originName);
+			attachmentVo.setFilePath(filePath);			
+		}
 		
 		//데이터 뭉치기
 		CommuVo vo = new CommuVo();
@@ -61,8 +118,9 @@ public class CommuWriteController extends HttpServlet {
 		vo.setContent(content);
 		vo.setWriter(loginMember.getNo());
 		
+		
 		//디비 다녀오기
-		int result = cs.write(vo);
+		int result = cs.write(vo, attachmentVo);
 		
 		//화면 선택
 		if(result ==1) {
