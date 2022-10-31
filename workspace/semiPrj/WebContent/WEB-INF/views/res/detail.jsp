@@ -1,8 +1,10 @@
+<%@page import="com.kh.semiPrj.restaurant.vo.RestaurantVo"%>
 <%@page import="com.kh.semiPrj.reservation.vo.ReservationVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ReservationVo vo = (ReservationVo)session.getAttribute("reservation");
+	RestaurantVo res = (RestaurantVo)session.getAttribute("restaurant");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.3/dist/sweetalert2.all.min.js"></script>
     <style>
         * {
             letter-spacing: -0.1rem;
@@ -65,11 +68,15 @@
         .btn-common {
             display: flex;
             padding: 10px 10px;
-            background: #FFFFFF;
+            background-color: #FFFFFF;
             border: 1px solid #DEDEDE;
             border-radius: 20px;
             font-size: 17px;
             font-weight: 400;
+            cursor: pointer;
+        }
+        .btn-common:hover {
+        	color: lightgray;
         }
         span[name="alertMsg"] {
             font-size: 24px;
@@ -91,7 +98,7 @@
             <table>
                 <tr>
                     <th>상호명</th>
-                    <td><%= vo.getRestaurant() %></td>
+                    <td><%= res.getName() %></td>
                 </tr>
                 <tr>
                     <th>인원 수</th>
@@ -111,11 +118,31 @@
                 </tr>
             </table>
             <div>
-                <button class="btn-common" onclick="location.href=''";>수정하러 가기</button>
-                <button class="btn-common" onclick="location.href='/semiPrj'";>메인으로 돌아가기</button>
+                <button class="btn-common" onclick="location.href='/semiPrj/res/edit?no=<%= vo.getNo() %>'">수정하기</button>
+                <button class="btn-common" onclick="javascript:cancelAlert()">취소하기</button>
+                <%-- <button class="btn-common" onclick="location.href='/semiPrj/res/cancel?no=<%= vo.getNo() %>'";>취소하러 가기</button> --%>
+                <button class="btn-common" onclick="location.href='/semiPrj'">메인으로 돌아가기</button>
             </div>
         </div>
     </div>
+    
+    <script>
+    	function cancelAlert() {
+    		Swal.fire({
+    			  title: '예약을 취소하시겠습니까?',
+    			  text: "<%= vo.getDate().substring(0, 4) %>년 <%= vo.getDate().substring(4, 6) %>월 <%= vo.getDate().substring(6, 8) %>일 <%= vo.getTime().substring(0, 2) %>:<%= vo.getTime().substring(2, 4) %> <%= vo.getCnt() %>명 예약을 취소합니다.",
+    			  icon: 'warning',
+    			  showCancelButton: true,
+    			  confirmButtonColor: '#3085d6',
+    			  cancelButtonColor: '#d33',
+    			  confirmButtonText: '취소해 주세요!',
+    			  cancelButtonText: '창 닫기'
+    			}).then((result) => {
+    			  location.href='/semiPrj/res/cancel?no=<%= vo.getNo() %>';
+    			})
+    	}
+    </script>
+    
 </body>
 
 </html>

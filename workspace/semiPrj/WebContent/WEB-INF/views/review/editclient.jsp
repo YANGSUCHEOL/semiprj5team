@@ -5,8 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	RestaurantVo vo = (RestaurantVo)session.getAttribute("restaurant");
-	List<ReservationVo> voList = (List<ReservationVo>)request.getAttribute("reservationbyrmno");
+	ReviewVo vo = (ReviewVo)request.getAttribute("myReview");
+	ReservationVo book = (ReservationVo)request.getAttribute("myBooking");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -58,12 +58,11 @@
 	font-size: 24px;
 }
 
-.review {
+input[name="review"] {
 	width: 48vw;
 	height: 40vh;
 	letter-spacing: -0.1em;
 	align-self: flex-start;
-	resize: none;
 }
 
 body {
@@ -152,6 +151,15 @@ body {
 .forlabel {
 	font-size: 15pt;
 }
+
+.review {
+	width: 48vw;
+	height: 40vh;
+	letter-spacing: -0.1em;
+	align-self: flex-start;
+	resize: none;
+}
+
 </style>
 </head>
 
@@ -167,29 +175,27 @@ body {
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 
 	<div id="main">
-		<form action="/semiPrj/review/write" method="post">
+		<form action="/semiPrj/review/edit/user" method="post">
 			<div id="content">
 				<div>
-					<span><%= loginMember.getNick() %> 님, <%= vo.getName() %>
+					<span><%= vo.getWriter() %> 님, <%= vo.getRestaurant() %>
 						에서의 식사는 어떠셨나요?</span>
 				</div>
 				<div id="text">
 					<span>예약 내역</span>
 				</div>
 				<div id="history">
-					<% if(voList.size() != 0) { %>
-					<% for(int i = 0; i < voList.size(); ++i) { %>
+					<% if(book != null) { %>
 					<div class="review-list">
 						<label class="box-radio-input review-res-list"> <input
-							type="radio" name="reNo" value="<%= voList.get(i).getNo() %>">
-							<span><%= voList.get(i).getDate() %> / <%= voList.get(i).getRestaurant() %>
-								/ <%= voList.get(i).getCnt() %> 인 / <%= voList.get(i).getTime() %></span>
+							type="radio" name="reNo" value="<%= book.getNo() %>" checked>
+							<span><%= book.getDate() %> / <%= book.getRestaurant() %>
+								/ <%= book.getCnt() %> 인 / <%= book.getTime() %></span>
 						</label>
 					</div>
-					<% } %>
 					<% } else { %>
 					<div>
-						<span>예약하신 내역이 확인되지 않습니다.</span>
+						<span>본 리뷰에는 예약하신 내역이 없습니다.</span>
 					</div>
 					<% } %>
 				</div>
@@ -213,16 +219,46 @@ body {
 					</div>
 				</div>
 				<div id="review">
-					<textarea class="review" name="review" placeholder="내용을 입력해 주세요"></textarea>
+					<textarea class="review" name="review" placeholder="내용을 입력해 주세요"><%= vo.getContent() %></textarea>
 					<input type="hidden" name="rno" value="<%= vo.getNo() %>">
 					<input type="hidden" name="mno" value="<%= loginMember.getNo() %>">
 				</div>
 				<div>
-					<input type="submit" value="작성하기">
+					<input type="submit" value="수정하기">
 				</div>
 		</form>
 	</div>
 	</div>
+	
+	<script>
+		// 별점 체크
+		const ratingArr = document.querySelectorAll('input[name=rating]');
+		const ratingStr = '<%= vo.getScore() %>';
+		
+		for(let i = 0; i < ratingArr.length; i++) {
+			const v = ratingArr[i].value;
+			
+			const result = ratingStr.search(v);
+			if(result >= 0) {
+				ratingArr[i].checked = true;
+			}
+		}
+		
+		// 공개 여부 체크
+		const releaseArr = document.querySelectorAll('input[name=release]');
+		const releaseStr = '<%= vo.getReleaseYn() %>';
+		
+		for(let j = 0; j < releaseArr.length; j++) {
+			const val = releaseArr[j].value;
+			
+			const result = releaseStr.search(val);
+			if(result >= 0) {
+				releaseArr[j].checked = true;
+			}
+		}
+	
+	</script>
+	
 </body>
 
 </html>

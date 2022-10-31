@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.reservation.service.ReservationService;
 import com.kh.semiPrj.reservation.vo.ReservationVo;
 import com.kh.semiPrj.review.service.ReviewService;
 import com.kh.semiPrj.review.vo.ReviewVo;
 
-@WebServlet(urlPatterns = "/review/edit")
-public class ReviewEditController extends HttpServlet {
+@WebServlet(urlPatterns = "/review/edit/user")
+public class ReviewEditUserController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +28,7 @@ public class ReviewEditController extends HttpServlet {
 		req.setAttribute("myReview", vo);
 		req.setAttribute("myBooking", res);
 		
-		req.getRequestDispatcher("/WEB-INF/views/review/edit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/review/editclient.jsp").forward(req, resp);
 		
 	}
 	
@@ -48,9 +49,10 @@ public class ReviewEditController extends HttpServlet {
 		vo.setScore(Integer.parseInt(rating));
 		
 		int result = new ReviewService().editOne(vo);
+		MemberVo member = (MemberVo)req.getSession().getAttribute("loginMember");
 		
 		if(result == 1) {
-			resp.sendRedirect("/semiPrj/review/list?pno=1&rno=" + req.getSession().getAttribute("resNo"));
+			resp.sendRedirect("/semiPrj/review/user?pno=1&mno=" + member.getNo());
 		} else {
 			resp.sendRedirect("/semiPrj");
 		}

@@ -65,6 +65,24 @@ public class RestaurantService {
 		return vo;
 		
 	}
+	
+	public RestaurantVo resFindVo(String rNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		RestaurantVo vo = dao.selectOneByReNo(conn, rNo);
+		
+		String a = vo.getDayoff();
+		String[] b = a.split(",");
+		String[] c = setDay(b);
+		
+		vo.setOffDay(c);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+		
+	}
 
 	public List<MenuVo> selectMenuList(String rno) {
 		

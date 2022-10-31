@@ -26,7 +26,6 @@ public class DistrictController extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		String district = req.getParameter("district");
-		System.out.println(district);
 		
 		List<RestaurantVo> voList = new RestaurantService().searchDistrictList(district);
 		

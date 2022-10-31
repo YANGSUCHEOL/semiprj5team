@@ -140,12 +140,14 @@ for (var i = 0; i < regions.length; i++) {
     regions[i].mouseover(function(e){
 		this.node.style.opacity = 0.7;
         this.node.style.transition = '0.3s';
+        this.node.style.animation = 'fadeIn 1s infinite';
 		document.getElementById('region-name').innerHTML = this.data('region');
 	});
 
 	regions[i].mouseout(function(e){
 		this.node.style.opacity = 1;
         this.node.style.transition = '0.3s';
+        this.node.style.animation = 'fadeIn';
         document.getElementById('region-name').innerHTML = " ";
 	});
 	
@@ -158,7 +160,7 @@ for (var i = 0; i < regions.length; i++) {
 		document.getElementById('map').style.display = "none";
 		callVoList(this.data('region'));
 		const element = document.getElementById('district-view');
-		element.innerHTML = '<img src="resources/img/' + this.data('id') + '.svg">';
+		element.innerHTML = '<img src="resources/img/' + this.data('id') + '.svg" class=" animate__animated animate__jackInTheBox">';
 	});
 	
 	function callVoList(district) {
@@ -170,9 +172,7 @@ for (var i = 0; i < regions.length; i++) {
 				district: district
 			},
 			success: function(result){
-				console.log(result);
 				var data = JSON.parse(result);
-				console.log(data);
 				$.each(data, function(i, item){
 					if(item.score == undefined) {
 						item.score = '0.0';
@@ -180,7 +180,7 @@ for (var i = 0; i < regions.length; i++) {
 					var cmd = '<div class="swiper-slide"><div class="district-res"><div class="res-photo"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'><img src="/semiPrj/resources/img/' + item.photo + '.jpg"></img></a></div><div class="res-name"><a href=\'/semiPrj/search/detail?rno=' + item.no + '\'>' + item.name + '</a></div><div class="res-type"><span>' + item.type + '</span></div><div class="res-score"><span>★ ' + item.score + '</span></div><div class="res-time"><span>' + item.open + '~' + item.close + '</span></div></div></div>';
 					$("#district-result-list").append(cmd);
 				});
-					$("#fraction").append('<span class="current">1</span>/<span class="all">' + (data.length - 1));
+					$("#fraction").append('<span class="current">1</span>/<span class="all">' + (data.length));
 					$(".parent").css("visibility", "visible");
 			},
 			error: function(){

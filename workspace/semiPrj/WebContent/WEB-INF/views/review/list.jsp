@@ -144,10 +144,12 @@
     <div id="main">
         <div id="sidebar"></div>
         <div id="content">
-            <div id="backspace"><a href="/semiPrj/search/detail?rno=<%= resNo %>">뒤로 가기</a></div>
+            <div id="backspace">
+            <a href="/semiPrj/search/detail?rno=<%= resNo %>">뒤로 가기</a>
+            </div>
             <div id="navigate">
                 <div><span>사용자 리뷰</span></div>
-                <div><span>★ 5.0</span></div>
+                <div><span></span></div>
             </div>
             <div class="review-list">
                 <% if(voList.size() != 0) { %>
@@ -162,17 +164,36 @@
 									</button>
 									<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown-item" href="#">자세히 보기</a>
-										<a class="dropdown-item" href="#">수정하기</a>
-										<a class="dropdown-item" href="#">삭제하기</a>
+										
+										<!-- 여기부터 로그인했을 때만 보이는 버튼들 (수정, 삭제) -->
+										<% if(loginMember != null) { %>
+										
+											<!-- 리뷰 writer와 로그인한 사람 닉네임이 같을 때, 혹은 로그인한 사람이 관리자일 때 -->
+											<% if(voList.get(i).getWriter().equals(loginMember.getNick()) || loginMember.getId().equals("admin")) { %>
+												<a class="dropdown-item" href="/semiPrj/review/edit?no=<%= voList.get(i).getNo() %>
+												<% if(voList.get(i).getReNo() != null) { // 리뷰에 예약 내역 있을 때 (없을 때는 값 안 넣게) %>
+												&reno=<%= voList.get(i).getReNo() %>
+												<% } %>
+												">수정하기</a>
+												
+												<!-- 여기는 리뷰 넘버랑 지금 uri 받아서 넘겨서 삭제 -->
+												<form action="/semiPrj/review/delete" method="post" id="deleteForm">
+												<input type="hidden" name="no" value="<%= voList.get(i).getNo() %>">
+												<input type="hidden" name="uri" id="deleteuri" value="">
+												<button class="dropdown-item" id="deletebtn" onclick="reviewDelete();">삭제하기</a>
+												</form>
+											<% } %>
+										<% } %>
+										<!-- 여기까지 끝 -->
 									</div>
 								</div>
 							</div>
-							<div class="rev-day"><%= voList.get(i).getEnrollDate() %></div>
+							<div class="rev-day"><%= voList.get(i).getUpdateDate() %></div>
 					        <div class="rev-content"><%= voList.get(i).getContent() %></div>
 					    </div>
 					<% } %>
 				<% } else if(voList.size() == 0) { %>
-						<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
+						<div class="none"><span>작성된 리뷰가 없습니다.</span></div>
 				<% } %>
 			</div>
 				
@@ -199,6 +220,14 @@
     <script src="../resources/js/popper.js"></script>
     <script src="../resources/js/bootstrap.min.js"></script>
     <script src="../resources/js/main.js"></script>
+    
+    <script>
+    const deleteForm = document.getElementById("deleteForm");
+    function reviewDelete() {
+    	document.getElementById('deleteuri').value = sessionStorage.getItem("requestURI");
+    	deleteForm.submit();
+    }
+    </script>
     
 </body>
 
