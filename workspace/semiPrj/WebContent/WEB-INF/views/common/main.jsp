@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>겟 잇 비건 GET EAT VEGAN</title>
+<script src="https://kit.fontawesome.com/d599d9ce45.js" crossorigin="anonymous"></script>
 
 <style>
 	#section{
@@ -13,7 +14,7 @@
 
     #wrap{
         width: 70vw;
-        height: 1300px;
+        height: 1500px;
         border: 1px solid #DEDEDE;
         border-radius: 20px;
        --display:flex;
@@ -70,7 +71,7 @@
         margin: auto;
         margin-top:50px;
         text-align: center;
-        padding: 30px;
+        padding: 25px;
     }
 
     #main-bottom > div{
@@ -85,11 +86,17 @@
     }
     
     #review, #community{
-    	font-size: 23px;
+    	font-size: 20px;
+    }
+    #review>div, #community>div{
+    	margin: 10px;
+    	margin-left:40px;
+    	margin-right:40px;
     }
     
     #review-title, #community-title{
     	font-size: 25px;
+    	border-bottom:1px solid #DEDEDE;
     }
     </style>
 
@@ -143,10 +150,10 @@
         </div>
 
         <div id="main-bottom">
-            <div><a><img src="/semiPrj/resources/img/mainlist01.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/mainlist02.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/mainlist03.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/mainlist04.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/main02.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/main01.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/main03.png"></a></div>
+            <div><a><img src="/semiPrj/resources/img/main04.png"></a></div>
 
             <div>비건 토마토파스타 레시피가 궁금하다면?!</div>
             <div>맛있겠따///</div>
@@ -157,17 +164,19 @@
 
         <div id="board-list">
             <div id="review">
-            	<div id="review-title">리뷰 페이지</div>
+            	<div id="review-title"><i class="fa-regular fa-pen-to-square"></i> 이 달의 리뷰</div>
                 <div>[안국] 어디어디 리뷰</div>
                 <div>[역삼] 어디어디 리뷰</div>
                 <div>[서촌] 어디어디 리뷰</div>
+                <div>[강남] 어디어디 리뷰</div>
                 </div>
             
             <div id="community">
-            	<div id="community-title">커뮤니티 페이지</div>
+            	<div id="community-title"><i class="fa-regular fa-comment"></i> 커뮤니티 추천글</div>
                 <div>제 레시피 구경하고 가세용~~~~</div>
                 <div>믿고 갔는데 실망이에요ㅡㅡ</div>
                 <div>거북목이 되어 목이 아파요</div>
+                <div>졸립다..</div>
                 </div>
 
             

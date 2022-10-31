@@ -1,4 +1,4 @@
-package com.kh.semiPrj.qna.controller;
+package com.kh.semiPrj.bqna.controller;
 
 import java.io.IOException;
 
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semiPrj.bqna.service.BqnaService;
+import com.kh.semiPrj.bqna.vo.BanswerVo;
 import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.qna.service.QnaService;
-import com.kh.semiPrj.qna.vo.AnswerVo;
 
-@WebServlet(urlPatterns = "/qna/adminWrite")
-public class QnaAdmWriteController extends HttpServlet{
-	
-	
+@WebServlet(urlPatterns = "/bqna/adminWrite")
+public class BqnaAdmWriteController extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession s = req.getSession();
@@ -26,18 +26,14 @@ public class QnaAdmWriteController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		
 		String answerContent = req.getParameter("content");
-		String qno = req.getParameter("qNo");
-		//String mno = req.getParameter("mNo");
+		String bno = req.getParameter("bNo");
 		
-		AnswerVo avo = new AnswerVo();
-		avo.setContent(answerContent);
-		avo.setqNo(qno);
-		avo.setmNo(loginMember.getNo());
+		BanswerVo bavo = new BanswerVo();
+		bavo.setContent(answerContent);
+		bavo.setbNo(bno);
+		bavo.setmNo(loginMember.getNo());
 		
-		int result = new QnaService().insertAnswer(avo);
-		//여기부터  답변완료 수정
-		
-		System.out.println("result ::: " + result);
+		int result = new BqnaService().insertAnswer(bavo);
 	}
 	
 	@Override

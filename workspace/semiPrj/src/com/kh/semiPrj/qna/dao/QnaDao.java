@@ -9,6 +9,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 
+import com.kh.semiPrj.bqna.vo.BanswerVo;
 import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.PageVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
@@ -64,7 +65,7 @@ public class QnaDao {
       
                String no = rs.getString("NO");
                String mNo = rs.getString("M_NO");
-               String title = rs.getString("CONTENT");
+               String title = rs.getString("TITLE");
                String enrollDate = rs.getString("ENROLL_DATE");
                String updateDate = rs.getString("UPDATE_DATE");
                String deleteYn = rs.getString("DELETE_YN");
@@ -278,7 +279,7 @@ public class QnaDao {
             
             
             String no = rs.getString("NO");
-            String mNo = rs.getString("M_NO");
+            String mNo = rs.getString("WRITER");
             String title = rs.getString("TITLE");
             String content = rs.getString("CONTENT");
             String hit = rs.getString("HIT");
@@ -396,12 +397,13 @@ public class QnaDao {
 	
 	///댓글 조회
 
-	public ArrayList<AnswerVo> selectAnswerList(Connection conn, String qNo) {
+	public AnswerVo selectAnswerList(Connection conn, String qNo) {
 		String sql = "SELECT A.NO , A.Q_NO , M.NICK AS WRITER , A.CONTENT , A.ENROLL_DATE FROM ANSWER A JOIN MEMBER M ON A.M_NO = M.NO WHERE A.DELETE_YN = 'N' AND A.Q_NO = ? ORDER BY A.NO DESC";
 		
-		ArrayList<AnswerVo> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
+		AnswerVo avo = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -409,16 +411,24 @@ public class QnaDao {
 			pstmt.setString(1, qNo);
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				
-				list.add(new AnswerVo(rs.getString("NO")
-									, rs.getString("Q_NO")
-									, rs.getString("M_NO")
-									, rs.getString("CONTENT")
-									, rs.getString("ENROLL_DATE")
-									, rs.getString("UPDATE_DATE")
-									, rs.getString("DELETE_YN")
-									));
+				String no = rs.getString("NO");
+				String qNo1 = rs.getString("Q_NO");
+				String mNo = rs.getString("M_NO");
+				String content = rs.getString("CONTENT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String updateDate = rs.getString("UPDATE_DATE");
+				String deleteYN = rs.getString("DELETE_YN");
+				
+				avo = new AnswerVo();
+				avo.setNo(no);
+				avo.setqNo(qNo1);
+				avo.setmNo(mNo);
+				avo.setContent(content);
+				avo.setEnrollDate(enrollDate);
+				avo.setUpdateDate(updateDate);
+				avo.setDeleteYN(deleteYN);
 									
 			}
 			
@@ -429,8 +439,78 @@ public class QnaDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-		return list;
+		return avo;
 	
+	}
+
+	//답변완료 바뀌게
+	public int updateYn(Connection conn, String qno) {
+		String sql = "UPDATE QUESTION SET ANSWER_YN = 'Y' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+        int result = 0;
+
+        try {
+           pstmt = conn.prepareStatement(sql);
+
+           pstmt.setString(1, qno);
+
+           result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+           e.printStackTrace();
+        } finally {
+           JDBCTemplate.close(pstmt);
+        }
+
+        return result;
+	
+	}
+
+	public AnswerVo selectAnswerOne(Connection conn, String bno) {
+		String sql = "SELECT NO , CONTENT , ENROLL_DATE , UPDATE_DATE , DELETE_YN FROM ANSWER WHERE Q_NO = ? AND DELETE_YN = 'N'";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		AnswerVo avo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				String no = rs.getString("NO");			
+				//String bNo = rs.getString("B_NO");
+				
+				String content = rs.getString("CONTENT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String updateDate = rs.getString("UPDATE_DATE");
+				String deleteYN = rs.getString("DELETE_YN");
+				
+				avo = new AnswerVo();
+				avo.setNo(no);
+				//bavo.setbNo(bNo);
+				
+				avo.setContent(content);
+				avo.setEnrollDate(enrollDate);
+				avo.setUpdateDate(updateDate);
+				avo.setDeleteYN(deleteYN);
+									
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return avo;
 	}
    
    //답변 작성

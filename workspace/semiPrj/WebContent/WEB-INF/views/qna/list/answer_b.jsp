@@ -1,19 +1,35 @@
+<%@page import="com.kh.semiPrj.bqna.vo.BquestionVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.PageVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+   List<BquestionVo> bvoList = (List<BquestionVo>)request.getAttribute("bvoList");
+   PageVo pv = (PageVo)request.getAttribute("pv");
+   %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     #background{
-        box-sizing: border-box;
+    box-sizing: border-box;
 
-    position: absolute;
-    width: 832px;
-    height: 468px;
-    left: 82px;
-    top: 150px;
+    --position: absolute;
+    width: 70vw;
+    height: 800px;
+    --left: 82px;
+    --top: 150px;
+    margin: 0 auto;
+    margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -21,34 +37,40 @@
     }
 
     #top-back{
-        position: absolute;
-        width: 697px;
+        --position: absolute;
+        width: 80%;
         height: 41px;
         left: 65px;
         top: 25px;
         background: #FCFFED;
         border-radius: 10px;
         margin: auto;
+        margin-top: 30px;
         padding-top: 20px;
 
     }
 
     #top-name{
-        font-family: 'Inter';
+        
         font-style: normal;
         font-weight: 400;
-        font-size: 17px;
-        line-height: 21px;
+        
+        --line-height: 21px;
         text-align: center;
 
         color: #000000;
+    }
+
+    #main{
+        width: 85%;
+        margin: auto;
     }
 
 
     #main-back{
         box-sizing: border-box;
 
-        position: absolute;
+        --position: absolute;
         width: 697px;
         height: 362px;
         left: 65px;
@@ -58,20 +80,26 @@
         border: 2px solid #868787;
     }
 
+    
+
     #main-back>div{
         text-align: center;
     }
 
-    #toptxt{
-        position: absolute;
-        left: 80px;
-        top: 105px;
+    #main-top{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #868787;
+
     }
 
-    hr{
-        width: 85%;
-        margin-top: 17%;
+    #toptxt{
+        font-size: 17px;
+        margin-top: 20px;
+        --border-bottom :1px solid #868787;
+        
     }
+
+    
     #list{
         width: 85%;
         display: grid;
@@ -99,6 +127,12 @@
         color: #7E7E7E;
     }
     
+    .btn {
+        	background: #ffffff;
+        	color: gray;
+        	border: 1px solid gray;
+        }
+    
 
 </style>
 </head>
@@ -107,13 +141,13 @@
     <div id="background">
 
         <div id="top-back">
-            <div id="top-name">사업자 문의 확인하기</div>
+            <div id="top-name">사업자회원 문의 확인하기</div>
         </div>
 
         <div id = "main">
             <div id="main-top">
                 <div id="toptxt">겟 잇 비건 온라인 상담실</div>
-                <hr>
+                
             </div>
             <div id="list">
                 
@@ -123,29 +157,36 @@
                 <div>날짜</div>
                 <div>답변여부</div>
 
-                <div>25</div>
-                <div>사업자등록어떻게하나요?</div>
-                <div>백종원</div>
-                <div>2022-10-12</div>
-                <div id="ans-done">답변완료</div>
+            <%for(int i = 0; i < bvoList.size(); ++i){%>
+               <div><%= bvoList.get(i).getNo() %></div>
+                   <div><a href="/semiPrj/bqna/adminDetail?bno=<%= bvoList.get(i).getNo() %>"><%= bvoList.get(i).getTitle() %></a></div>
+                   <div><%= bvoList.get(i).getbNo() %></div>
+                   <div><%= bvoList.get(i).getEnrollDate() %></div>
+                  
+                   <% if(bvoList.get(i).getAnswerYn() == "Y") {%>
+                          <div id="ans-done">답변완료</div>
+                       <%} else{%>
+                          <div id="ans-expect">답변예정</div>
+                  <%} %>
+                  
+                  <%} %>
 
-                <div>24</div>
-                <div>안녕~~~</div>
-                <div>홈런왕</div>
-                <div>2022-10-09</div>
-                <div id="ans-expect">답변예정</div>
-
-                <div>23</div>
-                <div>제보할게요~~~</div>
-                <div>랄랄랄라</div>
-                <div>2022-10-09</div>
-                <div id="ans-expect">답변예정</div>
-
-                <div>22</div>
-                <div>저녁뭐먹지</div>
-                <div>fdsfasd</div>
-                <div>2022-09-30</div>
-                <div id="ans-done">답변완료</div>
+                <div id="page-area">
+        
+           <%if(pv.getStartPage() != 1){%>
+              <a href="/semiPrj/bqna/adminList?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">이전</a>
+             <%}%>
+        
+        
+           <%for(int i = pv.getStartPage() ; i <= pv.getEndPage(); ++i){%>
+              <a href="/semiPrj/bqna/adminList?pno=<%=i%>" class="btn btn-primary btn-sm"><%=i%></a>
+           <%}%>
+           
+           <%if(pv.getEndPage() != pv.getMaxPage()){%>
+              <a href="/semiPrj/bqna/adminList?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">다음</a>
+           <%}%>
+        
+        </div>
 
 
                
