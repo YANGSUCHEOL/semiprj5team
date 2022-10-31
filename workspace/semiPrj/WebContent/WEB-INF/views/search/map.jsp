@@ -9,6 +9,10 @@
 	href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.3/dist/sweetalert2.all.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
@@ -255,31 +259,15 @@ a {
 	 $().ready(function() {
 		 let timerInterval
 		 Swal.fire({
-		   title: '찾고자 하는 지역을 눌러 주세요!',
-		   html: '이 알림은 <b></b> 초 후에 꺼집니다.',
-		   timer: 1500,
-		   timerProgressBar: true,
-		   didOpen: () => {
-		     Swal.showLoading()
-		     const b = Swal.getHtmlContainer().querySelector('b')
-		     timerInterval = setInterval(() => {
-		       b.textContent = Swal.getTimerLeft()
-		     }, 100)
-		   },
-		   willClose: () => {
-		     clearInterval(timerInterval)
-		   }
-		 }).then((result) => {
-		   /* Read more about handling dismissals below */
-		   if (result.dismiss === Swal.DismissReason.timer) {
-		     console.log('I was closed by the timer')
-		   }
-		 })
+			  title: '검색하고자 하는 지역을 눌러 주세요!',
+			  showClass: {
+			    popup: 'animate__animated animate__fadeInDown'
+			  },
+			  hideClass: {
+			    popup: 'animate__animated animate__fadeOutUp'
+			  }
+			})
 	 });
-	
-		function remove() {
-			$('#alertMsg').fadeOut(500);
-		};
 	</script>
 
 </body>

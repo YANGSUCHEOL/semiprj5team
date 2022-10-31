@@ -1,11 +1,12 @@
 <%@page import="common.PageVo"%>
-<%@page import="com.kh.semiPrj.review.vo.ReviewVo"%>
+<%@page import="com.kh.semiPrj.reservation.vo.ReservationVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<ReviewVo> voList = (List<ReviewVo>)request.getAttribute("review");
+	List<ReservationVo> voList = (List<ReservationVo>)request.getAttribute("reservation");
 	PageVo pv = (PageVo)request.getAttribute("pv");
+	String resNo = (String)session.getAttribute("resNo");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -147,59 +148,55 @@
             <a href="/semiPrj/mypage/mypage">뒤로 가기</a>
             </div>
             <div id="navigate">
-                <div><span>사용자 리뷰</span></div>
+                <div><span>예약 내역 확인</span></div>
+                <div><span></span></div>
             </div>
             <div class="review-list">
                 <% if(voList.size() != 0) { %>
 					<%for(int i = 0; i < voList.size(); ++i){%>
 						<div class="review">
-							<div class="rev-nickname"><%= voList.get(i).getWriter() %></div>
-							<div class="rev-best">★ <%= voList.get(i).getScore() %></div>
+							<div class="rev-nickname"><%= voList.get(i).getRestaurant() %></div>
+							<div class="rev-best"><%= voList.get(i).getCnt() %></div>
 							<div class="col-md-3 rev-button">
 								<div class="dropdown d-block">
 									<button class="btn mb-2 mb-md-0 btn-primary btn-block btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											    …
 									</button>
 									<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="#">자세히 보기</a>
-										<% if(loginMember != null) { %>
-											<% if(voList.get(i).getWriter().equals(loginMember.getNick()) || loginMember.getId().equals("admin")) { %>
-												<a class="dropdown-item" href="/semiPrj/review/edit/user?no=<%= voList.get(i).getNo() %>
-												<% if(voList.get(i).getReNo() != null) { %>
-												&reno=<%= voList.get(i).getReNo() %>
-												<% } %>
-												">수정하기</a>
-												<form action="/semiPrj/review/delete" method="post" id="deleteForm">
+											<% if(voList.get(i).getMember().equals(loginMember.getName()) || loginMember.getId().equals("admin")) { %>
+												<a class="dropdown-item" href="/semiPrj/res/edit?no=<%= voList.get(i).getNo() %>">수정하기</a>
+												
+												<!-- 여기는 리뷰 넘버랑 지금 uri 받아서 넘겨서 삭제 -->
+												<form action="/semiPrj/res/cancel" method="post" id="deleteForm">
 												<input type="hidden" name="no" value="<%= voList.get(i).getNo() %>">
-												<input type="hidden" name="uri" id="deleteuri" value="">
-												<button class="dropdown-item" id="deletebtn" onclick="reviewDelete();">삭제하기</a>
+												<button class="dropdown-item" id="deletebtn" onclick="resCancel();">취소하기</a>
 												</form>
 											<% } %>
-										<% } %>
+										<!-- 여기까지 끝 -->
 									</div>
 								</div>
 							</div>
-							<div class="rev-day"><%= voList.get(i).getUpdateDate() %></div>
-					        <div class="rev-content"><%= voList.get(i).getContent() %></div>
+							<div class="rev-day"><%= voList.get(i).getDate() %></div>
+					        <div class="rev-content"><%= voList.get(i).getTime() %></div>
 					    </div>
 					<% } %>
 				<% } else if(voList.size() == 0) { %>
-						<div class="none"><span>작성된 리뷰가 없습니다.</span></div>
+						<div class="none"><span>검색 결과가 없습니다. 다시 검색해 주세요.</span></div>
 				<% } %>
 			</div>
 				
                 <div class="page">
                 
                 <%if(pv.getStartPage() != 1){%>
-	        		<a href="/semiPrj/review/user?pno=<%=pv.getStartPage()-1%>" class="active"><</a>
+	        		<a href="/semiPrj/res/list?pno=<%=pv.getStartPage()-1%>" class="active"><</a>
 		       	<%}%>
 	        
 		        <%for(int i = pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
-		        	<a href="/semiPrj/review/user?pno=<%=i%>" class="active"><%=i%></a>
+		        	<a href="/semiPrj/res/list?pno=<%=i%>" class="active"><%=i%></a>
 		        <%}%>
 		        
 		        <%if(pv.getEndPage() != pv.getMaxPage()){%>
-			        <a href="/semiPrj/review/user?pno=<%=pv.getEndPage()+1%>" class="active">></a>
+			        <a href="/semiPrj/res/list?pno=<%=pv.getEndPage()+1%>" class="active">></a>
 		        <%}%>
                 
                 </div>

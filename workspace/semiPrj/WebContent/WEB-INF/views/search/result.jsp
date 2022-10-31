@@ -88,6 +88,7 @@ body {
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(5, auto);
 	row-gap: 10px;
+	cursor: pointer;
 }
 
 .result>div>img {

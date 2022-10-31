@@ -1,4 +1,4 @@
-package com.kh.semiPrj.review.controller;
+package com.kh.semiPrj.reservation.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,21 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.semiPrj.restaurant.service.RestaurantService;
-import com.kh.semiPrj.review.service.ReviewService;
-import com.kh.semiPrj.review.vo.ReviewVo;
+import com.kh.semiPrj.member.MemberVo;
+import com.kh.semiPrj.reservation.service.ReservationService;
+import com.kh.semiPrj.reservation.vo.ReservationVo;
 
 import common.PageVo;
 
-@WebServlet(urlPatterns = "/review/list")
-public class ReviewListController extends HttpServlet {
+@WebServlet(urlPatterns = "/res/list")
+public class ReservationListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String rno = req.getParameter("rno");
+		HttpSession s = req.getSession();
+		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		String mno = loginMember.getNo();
 		
 		int listCount;
 		int currentPage;
@@ -35,7 +38,7 @@ public class ReviewListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new ReviewService().selectCount(rno);
+		listCount = new ReservationService().selectCountMember(mno);
 		currentPage = Integer.parseInt(req.getParameter("pno"));
 		pageLimit = 5;
 		voLimit = 4;
@@ -58,14 +61,12 @@ public class ReviewListController extends HttpServlet {
 		pv.setStartPage(startPage);
 		pv.setEndPage(endPage);
 		
-		List<ReviewVo> voList = new ReviewService().searchList(rno, pv);
-		HttpSession s = req.getSession();
+		List<ReservationVo> voList = new ReservationService().getListByMNo(mno, pv);
 		
-		s.setAttribute("resNo", rno);
-		req.setAttribute("review", voList);
+		req.setAttribute("reservation", voList);
 		req.setAttribute("pv", pv);
 		
-		req.getRequestDispatcher("/WEB-INF/views/review/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/res/list.jsp").forward(req, resp);
 		
 	}
 

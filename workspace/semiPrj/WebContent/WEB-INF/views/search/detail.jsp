@@ -222,7 +222,7 @@ a {
 			<div id="res-navi">
 				<div>
 					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
-						onclick='resCheck();'>쿠폰 발급</button>
+						onclick='rexCheck();'>쿠폰 발급</button>
 				</div>
 				<div>
 					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
@@ -286,6 +286,14 @@ a {
 	<script type="text/javascript">
     	const loginMember = '<%= loginMember %>';
     	
+    	function couCheck(){
+     		if(loginMember != 'null'){
+	  			location.href = '/semiPrj/coupon/download';
+            } else {
+                document.getElementById("header-login").click();
+            }
+        }
+    	
     	function resCheck(){
      		if(loginMember != 'null'){
 	  			location.href = '/semiPrj/res';
@@ -300,7 +308,15 @@ a {
             } else {
                 document.getElementById("header-login").click();
             }
-        }
+    	}
+        
+    	function rexCheck(){
+            if(loginMember != 'null') {
+               location.href = '/semiPrj/coupon/download?rno= <%= vo.getNo()%>';
+             } else {
+                 document.getElementById("header-login").click();
+             }
+         }
     </script>
 
 	<script src="../resources/js/jquery.min.js"></script>

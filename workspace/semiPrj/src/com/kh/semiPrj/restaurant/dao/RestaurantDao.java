@@ -20,7 +20,7 @@ public class RestaurantDao {
 		
 		// SQL
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NAME LIKE '%' || ? || '%' GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO ) A ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, TRUNC(AVG(S.SCORE), 1) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NAME LIKE '%' || ? || '%' GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO ) A ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -110,7 +110,7 @@ public class RestaurantDao {
 
 	public RestaurantVo selectOneByNo(Connection conn, String rNo) {
 		
-		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NO = ? GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO";
+		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, TRUNC(AVG(S.SCORE), 1) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO WHERE R.NO = ? GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -132,6 +132,62 @@ public class RestaurantDao {
 				String address = rs.getString("ADDRESS");
 				String dayoff = rs.getString("DAYOFF");
 				String score = rs.getString("SCORE");
+				String phone = rs.getString("PHONE");
+				String open = rs.getString("OPEN");
+				String close = rs.getString("CLOSE");
+				String regYn = rs.getString("REG_YN");
+				String photo = rs.getString("PHOTO");
+				
+				vo = new RestaurantVo();
+				vo.setNo(no);
+				vo.setDistrict(district);
+				vo.setType(type);
+				vo.setName(name);
+				vo.setAddress(address);
+				vo.setDayoff(dayoff);
+				vo.setScore(score);
+				vo.setPhone(phone);
+				vo.setOpen(open);
+				vo.setClose(close);
+				vo.setRegYn(regYn);
+				vo.setPhoto(photo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return vo;
+		
+	}
+	
+	public RestaurantVo selectOneByReNo(Connection conn, String rNo) {
+		
+		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS, TRUNC(AVG(S.SCORE), 1) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO FROM RESTAURANT R INNER JOIN DISTRICT D ON R.D_NO = D.NO LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO INNER JOIN TYPE T ON R.T_NO = T.NO INNER JOIN RESERVATION E ON R.NO = E.R_NO WHERE E.NO = ? GROUP BY R.NO, D.NAME, T.NAME, R.NAME, R.ADDRESS, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		RestaurantVo vo = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String no = rs.getString("NO");
+				String district = rs.getString("DISTRICT");
+				String type = rs.getString("TYPE");
+				String name = rs.getString("NAME");
+				String address = rs.getString("ADDRESS");
+				String score = rs.getString("SCORE");
+				String dayoff = rs.getString("DAYOFF");
 				String phone = rs.getString("PHONE");
 				String open = rs.getString("OPEN");
 				String close = rs.getString("CLOSE");
@@ -206,6 +262,7 @@ public class RestaurantDao {
 		
 	}
 
+	// 페이징 없이 네 개만 보여 줄 리뷰
 	public List<ReviewVo> selectReviewList(Connection conn, String rno) {
 		
 		String sql = "SELECT R.NO, R.R_NO, S.NAME, R.RE_NO, M.NICK, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN MEMBER M ON M.NO = R.M_NO INNER JOIN RESTAURANT S ON S.NO = R.R_NO WHERE S.NO = ?";
@@ -260,7 +317,7 @@ public class RestaurantDao {
 	public List<RestaurantVo> selectList(Connection conn, String district) {
 		
 		String sql = "SELECT R.NO, D.NAME AS DISTRICT, T.NAME AS TYPE, R.NAME, R.ADDRESS,\r\n"
-				+ "AVG(S.SCORE) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO\r\n"
+				+ "TRUNC(AVG(S.SCORE), 1) AS SCORE, R.DAYOFF, R.PHONE, R.OPEN, R.CLOSE, R.REG_YN, R.PHOTO\r\n"
 				+ "FROM RESTAURANT R\r\n"
 				+ "INNER JOIN DISTRICT D ON R.D_NO = D.NO\r\n"
 				+ "LEFT OUTER JOIN REVIEW S ON R.NO = S.R_NO\r\n"

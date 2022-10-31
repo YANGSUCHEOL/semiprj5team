@@ -26,16 +26,13 @@ public class ReviewWriteController extends HttpServlet {
 		
 		HttpSession s = req.getSession();
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		String rno = req.getParameter("rno");
 		RestaurantVo res = (RestaurantVo)s.getAttribute("restaurant");
 		
 		String rno = res.getNo();
 		String mno = loginMember.getNo();
 		
-//		RestaurantVo vo = new RestaurantService().detailView(rno);
 		List<ReservationVo> voList = new ReservationService().getReservationByRMNo(mno, rno);
 		
-//		req.setAttribute("restaurant", vo);
 		req.setAttribute("reservationbyrmno", voList);
 
 		req.getRequestDispatcher("/WEB-INF/views/review/write.jsp").forward(req, resp);
@@ -63,6 +60,9 @@ public class ReviewWriteController extends HttpServlet {
 		vo.setWriter(mNo);
 		
 		int result = new ReviewService().reviewWrite(vo);
+		if(reNo != null) {
+			int result2 = new ReservationService().reviewYnCheck(reNo);
+		}
 		
 		if(result == 1) {
 			resp.sendRedirect("/semiPrj/search/detail?rno=" + rNo);
