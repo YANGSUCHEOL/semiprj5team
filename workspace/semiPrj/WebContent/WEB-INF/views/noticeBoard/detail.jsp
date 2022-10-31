@@ -33,14 +33,13 @@
             border-bottom: 1px solid lightgray;
         }
 
-        #title1{
+        #title{
             box-sizing: border-box;
             display: grid;
-            grid-template-columns: 5fr 2fr 1fr 1fr;
-            grid-template-rows: 50px;
-            text-align: center;
+            grid-template-columns: 6fr 1.5fr 1fr 1fr;
+            grid-template-rows: 10px;
+            --text-align: center;
             --border-bottom: 1px solid lightgray;
-            margin: 30px auto;
         }
 
         #content{
