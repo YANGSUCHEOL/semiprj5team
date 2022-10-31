@@ -1,5 +1,16 @@
+<%@page import="com.kh.semiPrj.bqna.vo.BanswerVo"%>
+<%@page import="com.kh.semiPrj.bqna.vo.BquestionVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.AnswerVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+	BquestionVo bvo = (BquestionVo)request.getAttribute("bvo");
+    AnswerVo avo = (AnswerVo)request.getAttribute("avo");
+	BanswerVo bavo = (BanswerVo)request.getAttribute("bavo");
+	%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,43 +135,89 @@
         color: #FCFFED;
     }
     
+	    #answer{
 
+    border-top: 1px solid #DEDEDE;
+    --border-bottom: 1px solid #DEDEDE;
+    display: grid;
+    grid-template-columns: 8.5fr 4fr;
+}
+
+#answer>div{
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+}
+
+#answer-title{
+    padding-left: 10px;
+    color: #82A994;
+}
+
+#answer-content{
+    border-top: 1px solid #DEDEDE;
+    padding: 10px;
+    grid-column: span 2;
+    height: 150px;
+}
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="background">
 
         <div id="top-back">
-            <div id="top-name">사업자 문의 확인하기</div>
+            <div id="top-name">사업자 회원 문의 확인하기</div>
         </div>
 
         <div id = "main">
             <div id="main-top">
                 <div id="toptxt">겟 잇 비건 온라인 상담실</div>
-                <hr>
+                
             </div>
            
             <div id="title">
-                <div>쿠폰 사용 어디서 하나요?</div>
-                <div>닉네임</div>
-                <div>2022-12-31</div>
-                <div id="ans-done">답변완료</div>
+                <div><%= bvo.getTitle() %></div>
+            	<div><%= bvo.getbNo() %></div>
+            	<div><%= bvo.getEnrollDate() %></div>
+                
+                <% if(bvo.getAnswerYn() == "Y") {%>
+          		 	<div id="ans-done">답변완료</div>
+           		<%} else{%>
+           			<div id="ans-expect">답변예정</div>
+				<%} %>
             </div>
             <div id="context">
-                <div>본문내용~~~~</div>
+                <div><%= bvo.getContent() %></div>
             </div>
+            
+            <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
+			
+			<div id="answer-wrap">
+                <label for="answer"></label>
+            	<div><input type="text" id="answer" style="width:900px; height:150px;"></div>
+            </div>
+            
            
             <div id="btns">
-                <input type="submit" value="작성하기">
-                <a><button>목록</button></a>
+               <button onclick="insertAnswer();">작성하기</button>
+                <a href="/semiPrj/bqna/adminList?pno=1"><button>목록</button></a>
             </div>
+		<%} %>
+		
+		<%if (bavo == null){ %> 
+		<div id="answer-title">답변 예정입니다.</div>
+            <div id="answer-date"></div>
+            <div id="answer-content"></div>
+		<%} else {%>
+		 <div id="answer-title">고객님 질문 답변 드립니다~</div>
+            <div id="answer-date"><%=bavo.getEnrollDate() %></div>
+            <div id="answer-content"><%=bavo.getContent() %></div>
+		<%} %>
 
-
-                
-
-
-               
 
            
 
@@ -169,5 +226,32 @@
 
         
     </div>
+    
+     <script type="text/javascript">
+
+              function insertAnswer(){
+
+                  $.ajax({
+
+                  	url:"/semiPrj/bqna/adminWrite"
+                  	,data : {
+                       content: $("#answer").val()
+                       , bNo : <%=bvo.getNo()%>
+                  	}
+                  	, type:"post"
+                  	, success : function(result){
+                  		alert("답변 작성 완료!");
+                  		if(result>0){
+                       selectAnswerList();
+                       $("#answer").val("");
+                       
+                       }
+                  	}
+                  })
+              };
+              
+              
+              
+          </script>
 </body>
 </html>

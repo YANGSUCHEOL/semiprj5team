@@ -1,3 +1,4 @@
+<%@page import="com.kh.semiPrj.qna.vo.AnswerVo"%>
 <%@page import="java.util.List"%>
 
 <%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
@@ -7,6 +8,7 @@ pageEncoding="UTF-8"%>
 
 <%
 	QuestionVo vo = (QuestionVo)request.getAttribute("vo");
+	AnswerVo avo = (AnswerVo)request.getAttribute("avo");
 %>
 
 
@@ -22,7 +24,7 @@ pageEncoding="UTF-8"%>
 
     --position: absolute;
     width: 70vw;
-    height: 800px;
+    height: 1200px;
     --left: 82px;
     --top: 150px;
     margin: 0 auto;
@@ -171,6 +173,7 @@ pageEncoding="UTF-8"%>
 
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header.jsp" %>
@@ -200,26 +203,74 @@ pageEncoding="UTF-8"%>
         <div id="context">
             <div><%= vo.getContent() %></div>
         </div>
+        
+        
         <div id="main-bot">
 			<a href="/semiPrj/qna/edit?no=<%= vo.getNo() %>">수정하기</a>
 			<a href="/semiPrj/qna/delete?no=<%= vo.getNo() %>">삭제하기</a>
 		</div>
-
-        <div id="answer">
-            <div id="answer-title">고객님 질문 답변 드립니다~</div>
-            <div id="answer-date">2022.10.01</div>
-            <div id="answer-content">어쩌구 저쩌구 저쩌구 어쩌구~~~~</div>
-
-        </div>
-
-        <div id="btns">
+		
+		<%if(loginMember !=null && loginMember.getId().equals("admin")){%>
+			
+			<div id="answer-wrap">
+                <label for="answer"></label>
+            	<div><input type="text" id="answer" style="width:900px; height:150px;"></div>
+            </div>
+            
+			<div id="btns">
+               <button onclick="insertAnswer();">작성하기</button>
+                <a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
+            </div>
+		<%} %>
+		
+		<%System.out.println(avo); %>
+			<div id="answer">
+			<% if(avo == null) {%>
+            <div id="answer-title">답변 예정입니다.</div>
+<!--             <div id="answer-date"></div> -->
+<!--             <div id="answer-content"></div> -->
+            <div id="btns">
             <a href="/semiPrj/qna/list"><button>목록</button></a>
         </div>
+		<% } else {%>
+        	
+            <div id="answer-title">고객님 질문 답변 드립니다~</div>
+            <div id="answer-date"><%=avo.getEnrollDate() %></div>
+            <div id="answer-content"><%=avo.getContent() %></div>
+			<%} %>
+        </div>
+
+<!--         <div id="btns"> -->
+<!--             <a href="/semiPrj/qna/list"><button>목록</button></a> -->
+<!--         </div> -->
 
     </div>
 
 </div>
 
+<script type="text/javascript">
+
+function insertAnswer(){
+
+    $.ajax({
+
+    	url:"/semiPrj/qna/adminWrite"
+    	,data : {
+         content: $("#answer").val()
+         , qNo : <%=vo.getNo()%>
+    	}
+    	, type:"post"
+    	, success : function(result){
+    		alert("답변 작성 완료!");
+    		if(result>0){
+         selectAnswerList();
+         $("#answer").val("");
+         
+         }
+    	}
+    })
+};
+</script>
 
 
 </body>

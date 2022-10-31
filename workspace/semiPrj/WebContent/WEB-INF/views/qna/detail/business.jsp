@@ -1,17 +1,32 @@
+<%@page import="com.kh.semiPrj.bqna.vo.BanswerVo"%>
+<%@page import="com.kh.semiPrj.bqna.vo.BquestionVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.AnswerVo"%>
+<%@page import="java.util.List"%>
+
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+
+
+<%
+	BquestionVo bvo = (BquestionVo)request.getAttribute("bvo");
+	BanswerVo bavo = (BanswerVo)request.getAttribute("bavo");
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
- #background{
+	#background{
     box-sizing: border-box;
 
     --position: absolute;
     width: 70vw;
-    height: 800px;
+    height: 1200px;
     --left: 82px;
     --top: 150px;
     margin: 0 auto;
@@ -92,8 +107,8 @@
     grid-template-columns: 6fr 2.5fr 2fr 2fr;
     margin: 0 auto;
     padding: 10px;
-    align-content: center;
-    text-align: center;
+    --align-content: center;
+    --text-align: center;
     border-bottom: 1px solid #DEDEDE;
 
 }
@@ -101,11 +116,11 @@
 	#title>div{
 	display: grid;
     grid-template-columns: 6fr 2.5fr 2fr 2fr;
-    justify-content: center;
-    text-align: center;
+    --justify-content: center;
+    --text-align: center;
 }
 
-   #context{
+    #context{
         width: 90%;
         height: 300px;
         padding: 10px;
@@ -124,7 +139,7 @@
         color: #FCFFED;
     }
     
-     #answer{
+    #answer{
 
     border-top: 1px solid #DEDEDE;
     --border-bottom: 1px solid #DEDEDE;
@@ -157,49 +172,92 @@
 	}
     
 
+
+
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
+<div id="background">
 
-    <div id="background">
+    <div id="top-back">
+        <div id="top-name">내 문의 확인하기</div>
+    </div>
 
-        <div id="top-back">
-            <div id="top-name">사업자 문의 확인하기</div>
+    <div id = "main">
+        <div id="main-top">
+            <div id="toptxt">겟 잇 비건 온라인 상담실</div>
+            <hr>
         </div>
 
-        <div id = "main">
-            <div id="main-top">
-                <div id="toptxt">겟 잇 비건 온라인 상담실</div>
-                <hr>
-            </div>
-           
-            <div id="title">
-                <div>쿠폰 사용 어디서 하나요?</div>
-                <div>닉네임</div>
-                <div>2022-12-31</div>
-                <div id="ans-done">답변완료</div>
-            </div>
-            <div id="context">
-                <div>본문내용~~~~</div>
-            </div>
+        <div id="title">
+            <div><%= bvo.getTitle() %></div>
+            <div><%= bvo.getbNo() %></div>
+            <div><%= bvo.getEnrollDate() %></div>
 
-            <div id="answer">
-                <div id="answer-title">고객님 질문 답변 드립니다~</div>
-                <div id="answer-date">2022.10.01</div>
-                <div id="answer-content">어쩌구 저쩌구 저쩌구 어쩌구~~~~</div>
-
-
+            <% if(bvo.getAnswerYn() == "Y") {%>
+          		 	<div id="ans-done">답변완료</div>
+           		<%} else{%>
+           			<div id="ans-expect">답변예정</div>
+				<%} %>
+        </div>
+        <div id="context">
+            <div><%= bvo.getContent() %></div>
+        </div>
+        
+        
+        <div id="main-bot">
+			<a href="/semiPrj/bqna/edit?no=<%= bvo.getNo() %>">수정하기</a>
+			<a href="/semiPrj/bqna/delete?no=<%= bvo.getNo() %>">삭제하기</a>
+		</div>
+		
+		<%if(loginMember !=null && loginMember.getId().equals("admin")){%>
+			
+			<div id="answer-wrap">
+                <label for="answer"></label>
+            	<div><input type="text" id="answer" style="width:900px; height:150px;"></div>
             </div>
-           
+            
+			<div id="btns">
+               <button onclick="insertAnswer();">작성하기</button>
+                <a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
+            </div>
+		<%} %>
+		
+		<%System.out.println(bavo); %>
+			<div id="answer">
+			<% if(bavo == null) {%>
+            <div id="answer-title">답변 예정입니다.</div>
+            <div id="answer-date"></div>
+            <div id="answer-content"></div>
             <div id="btns">
-                <a><button>목록</button></a>
-            </div>
-
-
-
+            <a href="/semiPrj/bqna/list"><button>목록</button></a>
+        </div>
+		<% } else {%>
+        	
+            <div id="answer-title">고객님 질문 답변 드립니다~</div>
+            <div id="answer-date"><%=bavo.getEnrollDate() %></div>
+            <div id="answer-content"><%=bavo.getContent() %></div>
+			<div id="btns">
+            <a href="/semiPrj/bqna/list"><button>목록</button></a>
+        	</div>
+			<%} %>
         </div>
 
         
+
     </div>
+
+</div>
+
+<!-- <script type="text/javascript"> -->
+
+<!-- // 	 function insertAnswer(){ -->
+<!-- //                   location.href='/semiPrj/qna/adminWrite'; -->
+<!-- //               }; -->
+<!-- </script> -->
+
+
 </body>
 </html>

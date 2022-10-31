@@ -6,7 +6,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 
-
+import com.kh.semiPrj.bqna.vo.BanswerVo;
 import com.kh.semiPrj.qna.dao.QnaDao;
 import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.PageVo;
@@ -179,13 +179,15 @@ public class QnaService {
 
 		
 		//////답변 작성
-		public int insertAnswer(AnswerVo avo) {
+		public int insertAnswer(AnswerVo avo /*String qno*/) {
 			Connection conn = JDBCTemplate.getConnection();
+			//QuestionVo vo = null;
 			
 			int result = new QnaDao().insertAnswer(conn, avo);
 			
 			if(result == 1) {
 				JDBCTemplate.commit(conn);
+				//vo = dao.updateYn(conn , qno);
 				
 			}else{
 				JDBCTemplate.rollback(conn);
@@ -198,15 +200,41 @@ public class QnaService {
 
 		
 		//댓글 확인
-		public ArrayList<AnswerVo> selectAnswerList(String qNo) {
+		public AnswerVo selectAnswerList(String qNo) {
 			Connection conn = JDBCTemplate.getConnection();
+			AnswerVo avo = null;
 			
-			ArrayList<AnswerVo> list = new QnaDao().selectAnswerList(conn, qNo);
+			//커넥션 준비
+			//sql
+			//트랜젝션 자원반납
+
+			avo = dao.selectAnswerList(conn , qNo);
+			JDBCTemplate.close(conn);
+			return avo;
+
+		}
+
+		public AnswerVo selectAnswerOne(String bno) {
+			Connection conn = JDBCTemplate.getConnection();
+			AnswerVo avo = null;
+
+			int result = dao.increaseHit(conn, bno);
+
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+				avo = dao.selectAnswerOne(conn , bno);
+			}
+
 			JDBCTemplate.close(conn);
 			
-			return list;
+			return avo;
 		
 		}
+
+	
+		
+		
+		
 		
 		
 	
@@ -220,4 +248,4 @@ public class QnaService {
 	
 	
 	
-	}
+}

@@ -1,4 +1,4 @@
-package com.kh.semiPrj.qna.controller;
+package com.kh.semiPrj.bqna.controller;
 
 import java.io.IOException;
 
@@ -9,47 +9,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semiPrj.bqna.service.BqnaService;
+import com.kh.semiPrj.bqna.vo.BquestionVo;
+import com.kh.semiPrj.businessMember.BusinessMemberVo;
 import com.kh.semiPrj.member.MemberVo;
-import com.kh.semiPrj.qna.service.QnaService;
-import com.kh.semiPrj.qna.vo.QuestionVo;
 
+@WebServlet(urlPatterns = "/bqna/write")
+public class BqnaWriteController extends HttpServlet {
 
-
-@WebServlet(urlPatterns = "/qna/write")
-public class QnaWriteController extends HttpServlet{
+	private final BqnaService bqs = new BqnaService();
 	
-	private final QnaService qs = new QnaService();
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//로그인 안 되어있으면 로그인부터
-		if(req.getSession().getAttribute("loginMember") == null) {
-			req.setAttribute("msg", "로그인 후 이용해주세요");
-			req.getRequestDispatcher("views/common/errorPage.jsp").forward(req, resp);
-			
-		}else {
-			req.getRequestDispatcher("/WEB-INF/views/qna/write/customer.jsp").forward(req, resp);
-		}
-		
-		//(사업자회원이면)ㄴ
-		//if() {
-		//req.getRequestDispatcher("/views/qna/write/business.jsp").forward(req, resp);
-		//}else if() {
-		//(일반회원이면)
-			
-		// }
-		
-	}//doGet
-	
-	//작성
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//session
 		HttpSession s = req.getSession();
 		
+		BusinessMemberVo bsloginMember = (BusinessMemberVo)s.getAttribute("bsloginMember");
+		
+		//로그인 안 되어있으면 로그인부터
+		if(req.getSession().getAttribute("bsloginMember") == null) {
+			req.setAttribute("msg", "로그인 후 이용해주세요");
+			req.getRequestDispatcher("views/common/errorPage.jsp").forward(req, resp);
+			
+		}else {
+			req.getRequestDispatcher("/WEB-INF/views/qna/write/business.jsp").forward(req, resp);
+		}
+	
+	}//doGet
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//session
+		HttpSession s = req.getSession();
+		
 		//로그인멤버 가져오기
-		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		BusinessMemberVo bsloginMember = (BusinessMemberVo)s.getAttribute("bsloginMember");
 		
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
@@ -61,29 +58,21 @@ public class QnaWriteController extends HttpServlet{
 		
 		
 		//뭉치기
-		QuestionVo vo = new QuestionVo();
+		BquestionVo bvo = new BquestionVo();
 		
-		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setmNo(loginMember.getNo());
+		bvo.setTitle(title);
+		bvo.setContent(content);
+		bvo.setbNo(bsloginMember.getNo());
 		
-		//vo.setaNo("aNo"); //aNo 0이면 답변예정 번호 있으면 답변완료
-	
-		//디비
-		int result = qs.write(vo);
-		
+		int result = bqs.write(bvo);
 		
 		if(result == 1) {
 			//성공
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
 			//resp.sendRedirect("/semiPrj/WEB-INF/views/qna/list/customer.jsp");
-			resp.sendRedirect("/semiPrj/qna/list");
+			resp.sendRedirect("/semiPrj/bqna/list");
 		}else {
 			System.out.println("게시글 작성 실패");
 		}
-		
 	}
-	
-	
-
-}
+}//class

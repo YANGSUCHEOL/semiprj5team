@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semiPrj.qna.service.QnaService;
+import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
 
 @WebServlet(urlPatterns = "/qna/adminDetail")
@@ -23,10 +24,12 @@ public class QnaAdmDetailController extends HttpServlet{
       
       //디비
       QuestionVo vo = new QnaService().selectAdminOne(bno);
+      AnswerVo avo = new QnaService().selectAnswerOne(bno);
       
       //화면선택
       req.setAttribute("vo", vo);
-      req.getRequestDispatcher("/WEB-INF/views/qna/detail/answer_c.jsp").forward(req, resp);
+      req.setAttribute("avo", avo);
+      req.getRequestDispatcher("/WEB-INF/views/qna/detail/customer.jsp").forward(req, resp);
       
       
    }

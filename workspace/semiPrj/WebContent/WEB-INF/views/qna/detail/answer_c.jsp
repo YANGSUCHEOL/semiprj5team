@@ -172,22 +172,39 @@
             </div>
             
             
-            <div id="answer-wrap">
+            <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
+			
+			<div id="answer-wrap">
                 <label for="answer"></label>
             	<div><input type="text" id="answer" style="width:900px; height:150px;"></div>
             </div>
+            
            
             <div id="btns">
-                <button onclick="insertAnswer();">작성하기</button>
+               <button onclick="insertAnswer();">작성하기</button>
                 <a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
             </div>
+		<%} %>
+		
+		<%if (avo == null){ %> 
+		<div id="answer-title">답변 예정입니다.</div>
+            <div id="answer-date"></div>
+            <div id="answer-content"></div>
+		<%} else {%>
+		 <div id="answer-title">고객님 질문 답변 드립니다~</div>
+            <div id="answer-date"><%=avo.getEnrollDate() %></div>
+            <div id="answer-content"><%=avo.getContent() %></div>
+		<%} %>
             
-            <!-- <div id="answer"> -->
-	            <!-- <div id="answer-title">=avo.getmNo() %></div> -->
-	            <!-- <div id="answer-date">=avo.getEnrollDate() %></div> -->
-	            <!--<div id="answer-content">=avo.getContent() %></div>  -->
 
-        	<!-- </div> -->
+				</div>
+			</div>
+
+<!-- 			<div id="answer"> -->
+<%--             <div id="answer-date"><%=avo.getEnrollDate() %></div> --%>
+<%--             <div id="answer-content"><%=avo.getContent() %></div> --%>
+
+<!--         </div> -->
             
             
          </div>
@@ -198,6 +215,11 @@
 
 
           <script>
+          
+          $(function(){
+        	  selectAnswerList();
+        	  insertAnswer();
+        	  })
 
               function insertAnswer(){
 
@@ -219,6 +241,12 @@
               };
               
               
+              
+             
+            	  
+            	  
+   	        
+
               
           </script>
 
