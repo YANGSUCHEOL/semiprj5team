@@ -188,4 +188,31 @@ public class ChatDao {
 		
 	}
 
+	public int insertAnswer(Connection conn, ChatVo vo) {
+		
+		String sql = "INSERT INTO CHAT VALUES (SEQ_CHAT_NO.NEXTVAL, ?, ?, ?, SYSDATE, 'N')";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getRoomNo());
+			pstmt.setString(2, vo.getmNo());
+			pstmt.setString(3, vo.getChat());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
 }
