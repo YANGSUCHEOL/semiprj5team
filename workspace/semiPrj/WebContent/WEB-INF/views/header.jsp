@@ -48,7 +48,7 @@ body {
     width: 100%;
     height: 26%;
     display: grid;
-    grid-template-columns: 10fr 1fr 0.5fr 1fr 1fr 1fr;
+    grid-template-columns: 8fr 2fr 1fr 0.5fr 1fr 1fr 2.35fr;
     background-color: rgb(217 217 217);
     font-size: 1.1rem;
 }
@@ -63,7 +63,12 @@ body {
     width: 100%;
     height: 74%;
     display: grid;
-    grid-template-columns: 1.5fr 2fr 1fr 1fr 1fr 0.5fr
+    grid-template-columns: 0.8fr 1.5fr 2fr 1fr 1fr 1fr 1fr
+}
+#header-id{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #header-main > div{
     display: flex;
@@ -115,6 +120,13 @@ input[name="pno"] {
     <div id="header">
         <div id="header-header">
             <div id="header-0"></div>
+            
+            <%if(loginMember == null && bsLoginMember == null){%>
+                <div></div>
+            <%}else{%>
+            		<div id="header-id"><%= loginMember.getNick() %> 님 환영합니다~</div>
+            <%}%>
+           
             <div id="header-customer"><a href="/semiPrj/notice/list">공지사항</a></div>
             <div>|</div>
             <%if(loginMember == null && bsLoginMember == null){%>
@@ -127,6 +139,7 @@ input[name="pno"] {
             <%}%>
         </div>
         <div id="header-main">
+            <div></div>
             <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고1.png" alt="로고" width="auto" height="100px"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
