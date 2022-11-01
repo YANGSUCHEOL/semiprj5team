@@ -150,7 +150,7 @@ public class CommuService {
 
 		Connection conn = getConnection();
 		
-		int result = new CommuDao().insertReply(conn, r);
+		int result = dao.insertReply(conn, r);
 		
 		if(result > 0) {
 			commit(conn);
@@ -161,6 +161,19 @@ public class CommuService {
 		close(conn);
 		
 		return result;
+	
+	}
+
+	//댓글 리스트 (select)
+	public List<CommentVo> selectReplyList(String commuNo) {
+
+		Connection conn = getConnection();
+		
+		List<CommentVo> list = dao.selectReplyList(conn, commuNo);
+		
+		close(conn);
+		
+		return list;
 	
 	}
 	

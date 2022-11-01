@@ -318,7 +318,7 @@ public class CommuDao {
 	//댓글 작성하기(insert)
 	public int insertReply(Connection conn, CommentVo r) {
 
-		String sql = "INSERT INTO COMMUNITY_CMT ( NO, CONTENT, COMMU_NO, M_NO ) VALUES ( SEQ_COMMUNITY_CMT_NO.NEXTVAL, ?, ?, ? )";
+		String sql = "INSERT INTO COMMUNITY_CMT ( NO, CONTENT, COMMU_NO, M_NO, NICK ) VALUES ( SEQ_COMMUNITY_CMT_NO.NEXTVAL, ?, ?, ?, ? )";
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -326,8 +326,9 @@ public class CommuDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, r.getContent());
-			pstmt.setInt(2, r.getCommuNo());
-			pstmt.setInt(3, r.getmNo());
+			pstmt.setString(2, r.getCommuNo());
+			pstmt.setString(3, r.getmNo());
+			pstmt.setString(4, r.getNick());
 			
 			result = pstmt.executeUpdate();
 			
@@ -369,6 +370,56 @@ public class CommuDao {
 		return result;
 	
 	}//insertAttachment
+
+
+
+	//커뮤니티 댓글 리스트(select)
+	public List<CommentVo> selectReplyList(Connection conn, String commuNo) {
+		
+		String sql = "SELECT NO, CONTENT, NICK, ENROLL_DATE FROM COMMUNITY_CMT WHERE COMMU_NO = ? AND DELETE_YN = 'N' ORDER BY ENROLL_DATE DESC";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<CommentVo> list = new ArrayList<CommentVo>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, commuNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				String no = rs.getString("NO");
+				String content = rs.getString("CONTENT");
+				String nick = rs.getString("NICK");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String deleteYn = rs.getString("DELETE_YN");
+
+				
+				
+				CommentVo vo = new CommentVo();
+				vo.setNo(no);
+				vo.setNo(content);
+				vo.setNo(nick);
+				vo.setNo(enrollDate);
+				vo.setNo(deleteYn);
+				
+				list.add(vo);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}//selectReplyList
 
 
 

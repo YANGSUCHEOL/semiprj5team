@@ -23,6 +23,7 @@ import com.kh.semiPrj.community.service.CommuService;
 import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CategoryVo;
 import com.kh.semiPrj.community.vo.CommuVo;
+import com.kh.semiPrj.community.vo.FileUploader;
 
 @WebServlet(urlPatterns = "/community/write")
 @MultipartConfig(
@@ -69,47 +70,13 @@ public class CommuWriteController extends HttpServlet {
 		String content = req.getParameter("content");
 		Part f = req.getPart("f");
 		
-		// ---------------- 파일 업로드 start ----------------
-		
-		// 0. 준비
-		String originName = f.getSubmittedFileName();
-		String ext = originName.substring(originName.lastIndexOf("."), originName.length());
-		String changeName = "GetEatVegan" + System.currentTimeMillis() + ext;
-		
-		// 1. 파일 객체 준비 (경로 + 파일명)
-		String filePath = "upload/img";
-		String path = req.getServletContext().getRealPath("/" + filePath + "/"); //최상단경로
-		File target = new File(path + changeName);
-		
-		// 2. 데이터 넣기	
-		BufferedInputStream bis = new BufferedInputStream(f.getInputStream()); //BufferedInputStream == bis
-		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(target)); //BufferedOutputStream == bos
-		
-		byte[] buf = new byte[1024];
-
-		int size = 0;
-		while((size = bis.read(buf)) != -1) {
-			bos.write(buf, 0, size);					
-		}
-		
-		bos.flush();
-		bis.close();
-		bos.close();
-		
-		
-		// ---------------- 파일 업로드 end - ----------------
-
-		// 파일 정보 db에 저장(파일이 있을 때만)
 		AttachmentVo attachmentVo = null;
-		
+		// ---------------- 파일 업로드 start ----------------		
+		// 파일 정보 db에 저장(파일이 있을 때만)
 		if(f.getSubmittedFileName().length() > 0) {
-			attachmentVo = new AttachmentVo();
-			
-			//attachmentVo.setCommunityNo(게시글번호);
-			attachmentVo.setChangeName(changeName);
-			attachmentVo.setOriginName(originName);
-			attachmentVo.setFilePath(filePath);			
+			attachmentVo = FileUploader.uploadFile(f, req.getServletContext().getRealPath("/"));
 		}
+		// ---------------- 파일 업로드 end - ----------------		
 		
 		//데이터 뭉치기
 		CommuVo vo = new CommuVo();

@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class CommentVo {
 
-	private int no;
-	private int mNo;
-	private int commuNo;
+	private String no;
+	private String mNo;
+	private String commuNo;
 	private String content;
 	private String nick;
 	private Date enrollDate;
@@ -17,8 +17,8 @@ public class CommentVo {
 		super();
 	}
 
-	public CommentVo(int no, int mNo, int commuNo, String content, String nick, Date enrollDate, Date modifyDate,
-			String deleteYn) {
+	public CommentVo(String no, String mNo, String commuNo, String content, String nick, Date enrollDate,
+			Date modifyDate, String deleteYn) {
 		super();
 		this.no = no;
 		this.mNo = mNo;
@@ -30,27 +30,27 @@ public class CommentVo {
 		this.deleteYn = deleteYn;
 	}
 
-	public int getNo() {
+	public String getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 
-	public int getmNo() {
+	public String getmNo() {
 		return mNo;
 	}
 
-	public void setmNo(int mNo) {
+	public void setmNo(String mNo) {
 		this.mNo = mNo;
 	}
 
-	public int getCommuNo() {
+	public String getCommuNo() {
 		return commuNo;
 	}
 
-	public void setCommuNo(int commuNo) {
+	public void setCommuNo(String commuNo) {
 		this.commuNo = commuNo;
 	}
 
@@ -100,8 +100,6 @@ public class CommentVo {
 				+ nick + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn + "]";
 	}
 
-	
-	
 	
 	
 	
