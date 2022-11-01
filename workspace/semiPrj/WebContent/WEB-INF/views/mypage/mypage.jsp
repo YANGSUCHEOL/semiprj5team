@@ -392,12 +392,12 @@ text-decoration: none;
                 <div class="myinfo">2장</div>
             </div>
             <div id="content-detail">
-                <div><a href=""><img src="/semiPrj/resources/img/찜한내역.png" alt="찜한내역" width="150px" height="auto"></a></div>
+                <div><a href="/semiPrj/coupon/list?mno= <%= loginMember.getNo()%>"><img src="/semiPrj/resources/img/쿠폰.png" alt="찜한내역" width="150px" height="auto"></a></div>
                 <div><a href=""><img src="/semiPrj/resources/img/예약내역.png" alt="예약내역" width="150px" height="auto"></a></div>
                 <div><a href=""><img src="/semiPrj/resources/img/내리뷰.png" alt="내리뷰" width="150px" height="auto"></a></div>
                 <div><a href="/semiPrj/qna/list"><img src="/semiPrj/resources/img/문의내역.png" alt="문의내역" width="150px" height="auto"></a></div>
                 <div id="changePwd"><a href="#" onclick='changeBtn'><img src="/semiPrj/resources/img/정보수정.png" alt="정보수정" width="150px" height="auto"></a></div>
-                <div><a href="">찜한 내역</a></div>
+                <div><a href="/semiPrj/coupon/list?mno= <%= loginMember.getNo()%>">쿠폰</a></div>
                 <div><a href="">예약 내역</a></div>
                 <div><a href="">내 리뷰&nbsp&nbsp&nbsp&nbsp</a></div>
                 <div><a href="/semiPrj/qna/list">문의 내역&nbsp&nbsp&nbsp&nbsp</a></div>

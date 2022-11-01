@@ -273,6 +273,11 @@
         btnModal2.addEventListener("click", e => {
                 modal2.style.display = "flex"
         })
+
+        const btnModal2_1 = document.getElementById("header-signup_1")
+        btnModal2_1.addEventListener("click", e => {
+                modal2.style.display = "flex"
+        })
        
         const closeBtn2 = modal2.querySelector(".close-area2")
         closeBtn2.addEventListener("click", e => {

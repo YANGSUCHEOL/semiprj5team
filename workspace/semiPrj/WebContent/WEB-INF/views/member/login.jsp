@@ -192,6 +192,11 @@ text-align: left;
         btnModal.addEventListener("click", e => {
                 modal.style.display = "flex"
         })
+
+        const btnModal_1 = document.getElementById("header-login_1")
+        btnModal_1.addEventListener("click", e => {
+                modal.style.display = "flex"
+        })
        
         const closeBtn = modal.querySelector(".close-area")
         closeBtn.addEventListener("click", e => {
