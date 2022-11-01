@@ -98,7 +98,7 @@ body {
    
 }
 
-/* 위쪽이 해더2 ------------*/
+/* 위쪽이 해더2 --------------------------------------------------------------------*/
 
 
 #header-header>div>a{
@@ -107,13 +107,13 @@ body {
 }
 #header{
     width: 100vw;
-    height: 15vh;
+    height: 20vh;
     margin:auto;
     z-index:100;
 }
 #header-header{
     width: 100%;
-    height: 26%;
+    height: 19.5%;
     display: grid;
     grid-template-columns: 8fr 2fr 1fr 0.5fr 1fr 1fr 2.35fr;
     background-color: rgb(217 217 217);
@@ -128,9 +128,13 @@ body {
 }
 #header-main{
     width: 100%;
-    height: 74%;
+    height: 55.5%;
     display: grid;
     grid-template-columns: 0.8fr 1.5fr 2fr 1fr 1fr 1fr 1fr
+}
+#header-bot{
+    width: 100%;
+    height: 25%;
 }
 #header-id{
     display: flex;
@@ -143,6 +147,7 @@ body {
     align-items: center;
     font-size: 1.4rem
 }
+
 #header-main > div > form{
     display: flex;
     justify-content: center;
@@ -152,7 +157,6 @@ body {
     text-decoration: none;
     color: black;
 }
-
 #search{
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -216,7 +220,16 @@ input[name="pno"] {
         <div id="header-header">
             <div id="header-0"></div>
             
-            <div></div>
+            <%if(loginMember == null && bsLoginMember == null){%>
+           	<div></div>
+            
+            <%}else{%>
+            		<%if(loginMember == null){%>
+            			<div><%= bsLoginMember.getNick()%> 님 환영합니다~</div>
+            		<%}else{%>
+            			<div><%= loginMember.getNick() %>님 환영합니다~</div>
+            		<%}%>
+            <%}%>
            
             <div id="header-customer"><a href="/semiPrj/notice/list">공지사항</a></div>
             <div>|</div>
@@ -243,7 +256,7 @@ input[name="pno"] {
             <div id="header-main-community"><a href="/semiPrj/community/list?pno=1">커뮤니티</a></div>
              <div id="header-customer"><a href="/semiPrj/faq/center">고객센터</a></div>
         </div>
-
+        <div id="header-bot"></div>
     </div>
     
     <script>
