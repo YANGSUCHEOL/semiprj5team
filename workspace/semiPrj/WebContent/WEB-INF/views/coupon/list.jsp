@@ -5,7 +5,6 @@
     pageEncoding="UTF-8"%>
 <%
 	List<CouponHistoryVo> voList = (List<CouponHistoryVo>)request.getAttribute("voList");
-	CouponVo vo = (CouponVo)session.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html>
@@ -111,6 +110,7 @@
                             <th scope="col" class="th-num">No</th>
                             <th scope="col" class="th-title">가게명</th>
                             <th scope="col" class="th-writer">사용여부</th>
+                            <th scope="col" class="th-date">발급일자</th>
                         </tr>
                     </thead>
                     <%for(int i = 0; i < voList.size(); ++i){%>
@@ -118,13 +118,13 @@
 	                        <tr>
                         		<td><%= voList.get(i).getNo() %></td>
 	                            <th>
-	                                <a><%= voList.get(i).getrName() %></a>
+	                                <a><%= voList.get(i).getrNo() %></a>
 	                            </th>
 	                            <td><%= voList.get(i).getUsedYn() %></td>
+	                            <td><%= voList.get(i).getEnrollDate() %></td>
 	                        </tr>
 	                    </tbody>
                    	<%}%>
-                    
                 </table>
             </div>
 
