@@ -15,7 +15,7 @@
    letter-spacing: -0.1em;
 }
 #main {
-	width: 65vw;
+	width: 70vw;
 	display: grid;
 	margin: 0 auto;
 	grid-template-rows: 70vh;
@@ -44,7 +44,7 @@
     text-align: center;
     line-height: 50px;
     border-radius: 10px;
-    background: #FCFFED;
+    background-color : #EEFFF6;
     
 }
 #content-myinfo{
@@ -102,7 +102,21 @@
 text-decoration: none;
     color: black;
     font-size: 1.3rem;
-}     
+}
+#qna2{
+    border: none;
+    width: 100px;
+    height: 63px;
+    background-color: yellow;
+    position: absolute;
+    left: 1200px;
+    font-size: 18px;
+}
+#qna2 > a{
+text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}      
 </style>
 </head>
 <body>
@@ -136,7 +150,10 @@ text-decoration: none;
     </div>
    	 <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
     <div id="qna">
-    	<a href="/semiPrj/qna/adminList?pno=1">admin전용게시판</a>
+    	<a href="/semiPrj/qna/adminList?pno=1">개인회원 문의확인</a>
+    </div>
+    <div id="qna2">
+    	<a href="/semiPrj/bqna/adminList?pno=1"">사업자회원 문의확인</a>
     </div>
     <%}%>
     
