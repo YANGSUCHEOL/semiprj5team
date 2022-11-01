@@ -10,7 +10,7 @@ import common.JDBCTemplate;
 public class CouponService {
 
 	//쿠폰 조회
-	public List<CouponVo> donwloadCoupon(String rno) {
+	public List<CouponVo> downloadCoupon(String rno) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -22,14 +22,17 @@ public class CouponService {
 	}
 
 	//쿠폰 디테일
-	public CouponHistoryVo couponDetail(String mNo, String rNo) {
+	public List<CouponHistoryVo> couponDetail(String mNo, String rNo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		CouponHistoryVo vo = new CouponDao().couponDetail(conn, mNo, rNo);
+		List<CouponHistoryVo> detail = new CouponDao().couponDetail(conn, mNo, rNo);
 		
 		JDBCTemplate.close(conn);
 		
-		return vo;
+		return detail;
 	}
+
+	
+	
 }

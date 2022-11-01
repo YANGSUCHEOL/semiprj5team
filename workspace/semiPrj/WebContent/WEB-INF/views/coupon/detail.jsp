@@ -1,5 +1,10 @@
+<%@page import="com.kh.semiPrj.coupon.history.CouponHistoryVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<CouponHistoryVo> detail = (List<CouponHistoryVo>)request.getAttribute("detail");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,15 +180,17 @@
 
         <div id="coupon-list">
             <div class="container">
-                <table class="coupon-table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="th-num">1</th>
-                                <th scope="col" class="th-title">10% 할인 쿠폰</th>
-                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 선택</a></th>
-                            </tr>
-                        </thead>
-                </table>
+            	<%-- <%for(int i = 0; i > 5; ++i){%> --%>
+           			<table class="coupon-table">
+	                        <thead>
+	                            <tr>
+	                                <th scope="col" class="th-num">1</th>
+	                                <th scope="col" class="th-title">10% 할인 쿠폰</th>
+	                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 선택</a></th>
+	                            </tr>
+	                        </thead>
+	                </table>
+           		<%-- <%}%> --%>
             </div>
         </div>
         
@@ -192,7 +199,7 @@
                 <a class="btn-close2" href="#none">X</a>
                 
                 <p class="font">👇👇 쿠폰을 사용하시겠습니까? 👇👇</p>
-                <a class="btn-guide" href="/semiPrj/res">사용하기</a>
+                <a class="btn-guide" href="/semiPrj/res/res">사용하기</a>
             </div>
         </div>
         

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("UTF-8");
 	List<CouponVo> voList = (List<CouponVo>)request.getAttribute("voList");
 %>
 <!DOCTYPE html>
@@ -73,6 +74,9 @@
         width: 150vw;
         text-align: left;
         font-size: 20px;
+    }
+    .coupon-table .th-coupon{
+		border-style:none;
     }
     .coupon-table .th-coupon{
         width: 50vw;
@@ -201,6 +205,8 @@
 </head>
 <body>
 	
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -211,17 +217,17 @@
 
         <div id="coupon-list">
             <div class="container">
-                <table class="coupon-table">
-                    <%for(int i = 0; i < voList.size(); ++i){%>
-                        <thead>
-                            <tr>
-                                <th scope="col" class="th-num"><%= voList.get(i).getNo() %></th>
-                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
-                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 발급</a></th>
-                            </tr>
-                        </thead>
-                    <%}%>
-                </table>
+            	<%for(int i = 0; i < voList.size(); ++i){%>
+	                <table class="coupon-table">
+	                        <thead>
+	                            <tr>
+	                                <th scope="col" class="th-num"><%= voList.get(i).getNo() %></th>
+	                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
+	                                <th scope="col" class="th-coupon"><a class="modal-notice2" href="#none">쿠폰 발급</a></th>
+	                            </tr>
+	                        </thead>
+	                </table>
+                <%}%>
             </div>
         </div>
         
@@ -229,7 +235,7 @@
             <div class="modal-content2">
                 <a class="btn-close2" href="#none">X</a>
                 
-                <h3>10% 할인 쿠폰</h3>
+                <h3>쿠폰 다운로드</h3>
                 <div> ↓ 아래 쿠폰 클릭 ↓ </div>
                 <a class="cou-btn" href="#none"><img src="/semiPrj/resources/img/coupon2.png" alt="쿠폰" width="150px" height="auto"></a>
                 <p>
