@@ -14,11 +14,11 @@
         border-spacing: 0;
     }
     section.faq{
-        width: 80vw;
+        width: 70vw;
         padding: 80px 0;
         margin: 0 auto;
         border: 1px solid #ccc;
-        border-radius: 20px;
+        border-radius: 10px;
     }
     .page-title{
         margin-bottom: 40px;
@@ -45,7 +45,7 @@
         width: 26vw;
         height: 28vh;
         margin-top: 30px;
-        margin-left: 240px;
+        margin-left: 144px;
         padding: 30px;
         border:  2px solid #ccc;
     }
@@ -53,7 +53,7 @@
         width: 26vw;
         height: 28vh;
         margin-top: 30px;
-        margin-left: 295px;
+        margin-left: 200px;
         padding: 30px;
         border:  2px solid #ccc;
     }

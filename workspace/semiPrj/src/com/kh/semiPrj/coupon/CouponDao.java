@@ -97,4 +97,30 @@ public class CouponDao {
 		
 		return detail;
 	}
+
+	//쿠폰 인서트
+	public int insertCoupon(Connection conn, CouponHistoryVo vo) {
+		
+		String sql = "INSERT INTO COU_HISTORY (NO, R_NO, C_NO, M_NO) VALUES(SEQ_COU_HISTORY_NO.NEXTVAL, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getrNo());
+			pstmt.setString(2, vo.getcNo());
+			pstmt.setString(3, vo.getmNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 }
