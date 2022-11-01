@@ -8,6 +8,7 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.kh.semiPrj.coupon.CouponVo;
 import com.kh.semiPrj.reservation.dao.ReservationDao;
 import com.kh.semiPrj.reservation.vo.ReservationVo;
 import com.kh.semiPrj.review.vo.ReviewVo;
@@ -182,6 +183,20 @@ public int reservation(ReservationVo vo) {
 		List<ReservationVo> voList = null;
 
 		voList = new ReservationDao().getListByMNo(conn, mno, pv);
+
+		JDBCTemplate.close(conn);
+
+		return voList;
+		
+	}
+
+	public List<CouponVo> callCouList(String mno, String resno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<CouponVo> voList = null;
+
+		voList = new ReservationDao().callCouList(conn, mno, resno);
 
 		JDBCTemplate.close(conn);
 

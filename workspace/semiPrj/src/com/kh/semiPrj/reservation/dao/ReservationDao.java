@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.semiPrj.coupon.CouponVo;
 import com.kh.semiPrj.reservation.vo.ReservationVo;
 import com.kh.semiPrj.restaurant.vo.RestaurantVo;
 
@@ -495,6 +496,41 @@ public class ReservationDao {
 
 		return result;
 		
+	}
+
+	public List<CouponVo> callCouList(Connection conn, String mno, String resno) {
+		
+		String sql = "SELECT C.NO, R.NAME, C.C_NO, C.INFO, H.ENROLL_DATE FROM COUPON C INNER JOIN RESTAURANT R ON C.R_NO = R.NO LEFT OUTER JOIN COU_HISTORY H ON C.NO = H.C_NO WHERE H.USED_YN = 'X' AND H.M_NO = ? AND H.R_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<CouponVo> voList = new ArrayList<CouponVo>(); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mno);
+			pstmt.setString(2, resno);
+			
+			while(rs.next()) {
+				String no = rs.getString("NO");
+				String rname = rs.getString("NAME");
+				String cno = rs.getString("C_NO");
+				String info = rs.getString("INFO");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				
+				CouponVo vo = new CouponVo();
+				vo.setNo(no);
+				vo.setInfo(info);
+				vo.setrName(rname);
+				vo.setcNo(cno);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

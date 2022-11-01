@@ -210,7 +210,8 @@ span[name="warning"] {
            });    
     });
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 
 <body>
@@ -225,11 +226,15 @@ span[name="warning"] {
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">
-					<button id="cou-modal">쿠폰 선택</button>
-					<input type="hidden" name="couNo" value="">
+					<a id="cou-modal" class="btn-common" href="#coupon">쿠폰 선택</a>
+					<input type="hidden" name="couNo" id="couNo" value="">
 					</div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
 					<input type="hidden" name="mNo" value="<%= loginMember.getNo() %>">
+				</div>
+				<div id="coupon" class="modal">
+				
+				
 				</div>
 				<div id="res-cnt">
 					<div>
@@ -414,6 +419,31 @@ span[name="warning"] {
 		})
 	};
 	// request focus => 값 비워 주는 함수
+</script>
+<script>
+    $('a[href="#coupon"]').click(function(event) {
+      event.preventDefault();
+ 
+      $(this).modal({
+        fadeDuration: 250
+      });
+    });
+    function callCouNo() {
+    	$.ajax({
+    		url: "/semiPrj/res/coupon",
+    		method: "get",
+    		data: {
+    			mno: <%= loginMember.getNo() %>,
+    			rno: <%= vo.getNo() %>
+    		},
+    		success: function(e){
+    			
+    		},
+    		error: function() {
+    			console.log('error');
+    		}
+    	})
+    }
 </script>
 </body>
 </html>

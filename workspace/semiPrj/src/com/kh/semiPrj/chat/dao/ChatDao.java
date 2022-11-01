@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.semiPrj.chat.vo.ChatVo;
 
@@ -117,6 +119,72 @@ public class ChatDao {
 		}
 		
 		return result;
+		
+	}
+
+	public List<String> findChatRoomList(Connection conn) {
+		
+		String sql = "SELECT ROOM_NO FROM CHAT GROUP BY ROOM_NO ORDER BY ROOM_NO";
+		
+		PreparedStatement pstmt = null;
+		List<String> chat = new ArrayList<String>();
+		ResultSet rs = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String r = rs.getString("ROOM_NO");
+				chat.add(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return chat;
+	}
+
+	public List<ChatVo> findChatList(Connection conn, String num) {
+		
+		String sql = "SELECT M_NO, CONTENT FROM CHAT WHERE ROOM_NO = ? ORDER BY CHATTIME";
+		
+		PreparedStatement pstmt = null;
+		List<ChatVo> chat = new ArrayList<ChatVo>();
+		ResultSet rs = null;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String mno = rs.getString("M_NO");
+				String content = rs.getString("CONTENT");
+				
+				ChatVo vo = new ChatVo();
+				
+				vo.setmNo(mno);
+				vo.setChat(content);
+				
+				chat.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return chat;
 		
 	}
 
