@@ -45,6 +45,62 @@ body {
     padding: 0;
     margin: 0;
 }
+
+
+#main-header2{
+	display : none;
+ 	position: fixed;
+ 	z-index: 101;
+}
+#header2{
+    background-color: #eefff6;
+    width: 100vw;
+    height: 14vh;
+    margin:auto;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 1.5fr 1fr 3fr 1fr 1fr 1.2fr;
+}
+#header2> div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+#header2> div > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#header2> div>a{
+    text-decoration: none;
+    color: black;
+}
+#search2{
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 350px;
+    height: 60px;
+    font-size: 22px;
+    text-align: center;
+    position: absolute;
+}
+#searchImg2{
+    float: left;
+    position: relative;
+    left: 140px;
+    border: none;
+    width: 33px;
+    height: 33px;
+   background: url(/semiPrj/resources/img/search.svg);
+   background-size: cover;
+   
+}
+
+/* 위쪽이 해더2 ------------*/
+
+
 #header-header>div>a{
     text-decoration: none;
     color: black;
@@ -127,16 +183,40 @@ input[name="pno"] {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header2.jsp" %>
+
+	<div id="main-header2">
+		<div id="header2">
+            <div></div>
+	        <div id="header-main-1"><a href=""><img src="/semiPrj/resources/img/메뉴바.2png" alt="" width="50px" height="auto"></a></div>
+	        <div id="header-main-2"><a href=""><img src="/semiPrj/resources/img/메인로고2.png" alt="로고" width="190px" height="auto"></a></div>
+	        <div></div>
+	        <div id="header-main-3">
+	            <form action="">
+	                <input id="search2" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
+	                <input id="hidden" name="pno" value="1">
+	              <input type="submit" id="searchImg2" value="">
+	            </form>
+	        </div>
+	        <%if(loginMember == null && bsLoginMember == null){%>
+            <div id="header-login_1"><a href="#" onclick='btnModal'>로그인</a></div>
+            <div id="header-signup_1"><a href="#" onclick='btnModal'>회원가입</a></div>
+            
+            <%}else{%>
+            		<div id="header-logout"><a href="/semiPrj/member/logout">로그아웃</a></div>
+            		<div id="header-mypage"><a href="/semiPrj/mypage/mypage">마이페이지</a></div>	
+            <%}%>
+	        
+	        <div></div>
+    	</div>
+	</div>
+
+    <!-- 위쪽이 해더2 (스크롤내리면 나오는 해더) -->
+
     <div id="header">
         <div id="header-header">
             <div id="header-0"></div>
             
-            <%if(loginMember == null && bsLoginMember == null){%>
-                <div></div>
-            <%}else{%>
-            		<div id="header-id"><%= loginMember.getNick() %> 님 환영합니다~</div>
-            <%}%>
+            <div></div>
            
             <div id="header-customer"><a href="/semiPrj/notice/list">공지사항</a></div>
             <div>|</div>
@@ -151,7 +231,7 @@ input[name="pno"] {
         </div>
         <div id="header-main">
             <div></div>
-            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고1.png" alt="로고" width="auto" height="100px"></a></div>
+            <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고1.png" alt="로고" width="auto" height="95px"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
                    <input id="search" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
@@ -165,6 +245,20 @@ input[name="pno"] {
         </div>
 
     </div>
+    
+    <script>
+      window.addEventListener('scroll', () => { 
+
+            const header2 = document.getElementById("main-header2")
+
+            if(window.scrollY > 180){
+                header2.style.display = "flex"
+              }else{
+            	  header2.style.display = "none"
+              }
+			});
+
+    </script>
     
     <%@ include file="/WEB-INF/views/member/businessJoin.jsp" %>
     <%@ include file="/WEB-INF/views/member/businessLogin.jsp" %>
