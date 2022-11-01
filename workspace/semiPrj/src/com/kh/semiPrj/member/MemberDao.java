@@ -114,6 +114,33 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int updateOneByNo(Connection conn, MemberVo vo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql ="UPDATE MEMBER SET NICK = ? , ID = ? , PWD = ? , BIRTH = ? , NAME = ? , PHONE = ? WHERE NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getNick());
+			pstmt.setString(2, vo.getId());
+			pstmt.setString(3, vo.getPwd());
+			pstmt.setString(4, vo.getBirth());
+			pstmt.setString(5, vo.getName());
+			pstmt.setString(6, vo.getPhone());
+			pstmt.setString(7, vo.getNo());
+						
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 
 }

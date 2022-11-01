@@ -359,13 +359,13 @@ text-decoration: none;
                 <form action="/semiPrj/member/change" method="post">
                     <table>
                         <tr>
-                            <td><input id="change-id" type="text" name="joinmemberId" value="<%=loginMember.getId() %>"></td>
-                            <td><input id="change-pwd" type="password" name="joinmemberPwd" placeholder="비밀번호"></td>
-                            <td><input id="change-pwd2" type="password" name="joinmemberPwd2" placeholder="비밀번호확인"></td>
-                            <td><input id="change-nick" type="text" name="joinmemberNick" value="<%=loginMember.getNick() %>"></td>
-                            <td><input id="change-name" type="text" name="joinmemberName" value="<%=loginMember.getName() %>"></td>
-                            <td><input id="change-phoneNum" type="text" name="joinphoneNum" value="<%=loginMember.getPhone() %>"></td>
-                            <td><input id="change-birth" type="text" name="joinbirth" value="<%=loginMember.getBirth() %>"></td>
+                            <td><input id="change-id" type="text" name="updatenmemberId" value="<%=loginMember.getId() %>"></td>
+                            <td><input id="change-pwd" type="password" name="updatememberPwd" placeholder="비밀번호"></td>
+                            <td><input id="change-pwd2" type="password" name="updatememberPwd2" placeholder="비밀번호확인"></td>
+                            <td><input id="change-nick" type="text" name="updatememberNick" value="<%=loginMember.getNick() %>"></td>
+                            <td><input id="change-name" type="text" name="updatememberName" value="<%=loginMember.getName() %>"></td>
+                            <td><input id="change-phoneNum" type="text" name="updatephoneNum" value="<%=loginMember.getPhone() %>"></td>
+                            <td><input id="change-birth" type="text" name="updatebirth" value="<%=loginMember.getBirth() %>"></td>
                         </tr>
                         <tr>
                             <td><input id="change-login" type="submit" value="정보수정"></td>   
