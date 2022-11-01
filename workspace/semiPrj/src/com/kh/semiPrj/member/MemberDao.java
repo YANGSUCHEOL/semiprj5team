@@ -93,4 +93,27 @@ public class MemberDao {
 		return loginMember;
 	}
 
+	public int quit(Connection conn, String no) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE MEMBER SET QUIT_YN = 'Y' WHERE NO = ?";
+		try {
+			pstmt = conn.prepareCall(sql);
+			
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
 }
