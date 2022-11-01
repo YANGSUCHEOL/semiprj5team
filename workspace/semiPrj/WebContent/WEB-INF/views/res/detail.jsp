@@ -98,7 +98,7 @@
             <table>
                 <tr>
                     <th>상호명</th>
-                    <td><%= res.getName() %></td>
+                    <td><%= vo.getRestaurant() %></td>
                 </tr>
                 <tr>
                     <th>인원 수</th>

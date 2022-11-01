@@ -1,4 +1,4 @@
-package com.kh.semiPrj.restaurant.controller;
+package com.kh.semiPrj.chat.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,30 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semiPrj.restaurant.service.RestaurantService;
-import com.kh.semiPrj.restaurant.vo.RestaurantVo;
-
 import com.google.gson.Gson;
+import com.kh.semiPrj.chat.service.ChatService;
 
-@WebServlet(urlPatterns = "/district")
-public class DistrictController extends HttpServlet {
-
+@WebServlet(urlPatterns = "/chat/roomguide")
+public class ChatRoomGuideController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		resp.setCharacterEncoding("UTF-8");
-
+		
 		PrintWriter out = resp.getWriter();
 		
-		String district = req.getParameter("district");
-		
-		List<RestaurantVo> voList = new RestaurantService().searchDistrictList(district);
+		List<String> list = new ChatService().findChatRoomList();
 		
 		Gson gson = new Gson();
-		String str = gson.toJson(voList);
+		String str = gson.toJson(list);
 		
 		out.write(str);
 		
 	}
-	
+
 }

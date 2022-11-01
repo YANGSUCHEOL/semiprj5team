@@ -1,6 +1,7 @@
 package com.kh.semiPrj.chat.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.semiPrj.chat.dao.ChatDao;
 import com.kh.semiPrj.chat.vo.ChatVo;
@@ -62,6 +63,29 @@ public class ChatService {
 		JDBCTemplate.close(conn);
 				
 		return result;
+	}
+
+	public List<String> findChatRoomList() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<String> chat = dao.findChatRoomList(conn);
+
+		JDBCTemplate.close(conn);
+
+		return chat;
+	}
+
+	public List<ChatVo> findChatList(String num) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<ChatVo> chat = dao.findChatList(conn, num);
+
+		JDBCTemplate.close(conn);
+
+		return chat;
+		
 	}
 
 }

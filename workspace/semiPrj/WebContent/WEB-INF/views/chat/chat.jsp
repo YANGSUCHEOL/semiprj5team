@@ -1,5 +1,7 @@
+<%@page import="com.kh.semiPrj.member.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% MemberVo member = (MemberVo)session.getAttribute("loginMember"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,7 @@
 	
 }
 
-#chat-area {
+.chat-area {
 	position: fixed;
 	width: 500px;
 	height: 700px;
@@ -45,7 +47,12 @@
 	z-index: 1;
 	display: none;
 }
-
+.alert {
+	width: 100%;
+	height: 90%;
+	border-radius: 20px;
+	overflow: auto;
+}
 #chat-header {
 	width: 100%;
 	height: 10%;
@@ -56,7 +63,6 @@
 	align-items: center;
 	position: sticky;
 }
-
 .chat-alert {
 	padding: 10px 30px 10px 30px;
 	display: grid;
@@ -70,6 +76,10 @@
 }
 .bubble-client {
 	width: 100%;
+}
+.bubble-room-guide {
+	width: 100%;
+	cursor: pointer;
 }
 .bubble {
 	display: flex;
@@ -183,8 +193,20 @@ a {
 			<img class="btn-image" src="/semiPrj/resources/img/livechat.png">
 		</button>
 	</div>
+	<% if(member != null && member.getId().equals("admin")) { %>
 	<div>
-		<div id="chat-area" class="animate__animated animate__zoomInLeft">
+		<div id="admin-chat-area" class="chat-area animate__animated animate__zoomInLeft">
+			<div id="chat-header">
+				<h3>∘✧₊⁺관리자 상담실⁺₊✧∘</h3>
+			</div>
+			<div id="admin-alert" class="alert">
+				<div id="alert1" class="guide">어서 오세요, 노예야. 채팅방에 입장해 주세요.</div>
+			</div>
+		</div>
+	</div>
+	<% } else { %>
+	<div>
+		<div id="chat-area" class="chat-area animate__animated animate__zoomInLeft">
 			<div id="chat-header">
 				<h3>∘✧₊⁺온라인 상담실⁺₊✧∘</h3>
 			</div>
@@ -233,12 +255,66 @@ a {
 			</div>
 		</div>
 	</div>
+	<% } %>
 
 	<script>
 	$('#toggle-area').click(function() {
+		$('#admin-chat-area').toggle();
+		roomGuide();
 		$('#chat-area').toggle();
 		show_area();
 	})
+	
+	function roomGuide() {
+		$.ajax({
+			url: "/semiPrj/chat/roomguide",
+			method: "get",
+			success: function(e){
+				var data = JSON.parse(e);
+				$.each(data, function(i, item){
+					var cmd = '<div class="chat-client"><div class="bubble bubble-room-guide" onclick="roomEnter(this)">' + item + ' 번 채팅방 입장하기</div></div>';
+					$("#admin-alert").append(cmd);
+				})
+			},
+			error: function() {
+				console.log('room error !');
+			}
+		})
+	}
+	
+	$('.bubble-room-guide').on('click', function() {
+		var target = $(this);
+		console.log(target);
+/* 		target.querySelector('.bubble-room-guide').innerText;
+		console.log(target.querySelector('.bubble-room-guide').innerText); */
+	})
+	
+	
+	function roomEnter(room) {
+		$('#admin-alert').toggle();
+/* 		$('').toggle(); */
+		console.log(room.innerText);
+		var text = room.innerText;
+		text = text.split(' ');
+		console.log(text[0]);
+		$.ajax({
+			url: "/semiPrj/chat/list",
+			method: "get",
+			data: {
+				num: text[0]
+			},
+			success: function(e) {
+				var data = JSON.parse(e);
+				console.log(data);
+/* 				$.each(data, function(i, item) {
+					
+				}) */
+			},
+			error: function() {
+				console.log('room enter error !');
+			}
+		})
+	}
 	
 	function chatRefresh() {
 		$.ajax({
@@ -314,6 +390,16 @@ a {
 			$('#chat-connect-btn').css('display', 'flex');
 		}, 5000);
 	}
+	
+	const loginMember = '<%= member %>';
+	
+	function couCheck(){
+ 		if(loginMember != 'null'){
+  			hide_area()
+        } else {
+            document.getElementById("header-login").click();
+        }
+    }
 	
 	function hide_area() {
 		$('#alert').css('display', 'none');
