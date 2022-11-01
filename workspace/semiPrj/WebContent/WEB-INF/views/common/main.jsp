@@ -28,7 +28,7 @@
         grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
         background: #EEFFF6;
         margin: 0 auto;
-        margin-bottom: 50px;
+        --margin-bottom: 50px;
         text-align: center;
         font-size: 20px;
         place-content: center;
@@ -37,8 +37,8 @@
     }
 
 	.slidewrap{
-		position: relative
-		margin-top: 100px;
+		position: relative;
+		--margin-top: 100px;
 	}
     
 	/* 브라우저 마진과 패딩 리셋 */

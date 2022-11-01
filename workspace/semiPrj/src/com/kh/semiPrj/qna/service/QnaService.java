@@ -1,5 +1,10 @@
 package com.kh.semiPrj.qna.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +16,7 @@ import com.kh.semiPrj.qna.dao.QnaDao;
 import com.kh.semiPrj.qna.vo.AnswerVo;
 import com.kh.semiPrj.qna.vo.PageVo;
 import com.kh.semiPrj.qna.vo.QuestionVo;
+import com.kh.semiPrj.reservation.dao.ReservationDao;
 
 public class QnaService {
 
@@ -179,15 +185,15 @@ public class QnaService {
 
 		
 		//////답변 작성
-		public int insertAnswer(AnswerVo avo /*String qno*/) {
+		public int insertAnswer(AnswerVo avo ,String qno) {
 			Connection conn = JDBCTemplate.getConnection();
-			//QuestionVo vo = null;
+			QuestionVo vo = null;
 			
-			int result = new QnaDao().insertAnswer(conn, avo);
+			int result = dao.insertAnswer(conn, avo);
 			
 			if(result == 1) {
 				JDBCTemplate.commit(conn);
-				//vo = dao.updateYn(conn , qno);
+				
 				
 			}else{
 				JDBCTemplate.rollback(conn);
@@ -229,6 +235,22 @@ public class QnaService {
 			
 			return avo;
 		
+		}
+
+		public int answerYnCheck(String qno) {
+			Connection conn = getConnection();
+			
+			int result = new QnaDao().editAnswerYn(conn, qno);
+			
+			if(result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
 		}
 
 	

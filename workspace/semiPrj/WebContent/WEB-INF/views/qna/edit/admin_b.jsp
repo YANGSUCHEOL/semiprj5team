@@ -118,7 +118,7 @@ border-radius: 10px;
             <div id="top-name">사업자 답변 수정</div>
         </div>
 
-        <form action="" method="post">
+        <form action="/semiPrj/bqna/editAnswer" method="post">
             <div id="main-back">
                 
                 

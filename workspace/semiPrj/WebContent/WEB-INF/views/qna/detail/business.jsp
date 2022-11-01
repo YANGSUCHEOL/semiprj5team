@@ -196,7 +196,7 @@ pageEncoding="UTF-8"%>
             <div><%= bvo.getbNo() %></div>
             <div><%= bvo.getEnrollDate() %></div>
 
-            <% if(bvo.getAnswerYn() == "Y") {%>
+            <% if(bvo.getAnswerYn().equals("Y")) {%>
           		 	<div id="ans-done">답변완료</div>
            		<%} else{%>
            			<div id="ans-expect">답변예정</div>
@@ -241,6 +241,7 @@ pageEncoding="UTF-8"%>
             <div id="answer-content"><%=bavo.getContent() %></div>
 			<div id="btns">
             <a href="/semiPrj/bqna/list"><button>목록</button></a>
+           
         	</div>
 			<%} %>
         </div>

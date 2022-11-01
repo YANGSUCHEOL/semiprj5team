@@ -47,7 +47,7 @@ public class BqnaWriteController extends HttpServlet {
 		
 		//로그인멤버 가져오기
 		BusinessMemberVo bsloginMember = (BusinessMemberVo)s.getAttribute("bsloginMember");
-		
+		//BquestionVo bvo = new BqnaService().
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
 		
