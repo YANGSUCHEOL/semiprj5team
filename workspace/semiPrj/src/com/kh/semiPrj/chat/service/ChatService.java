@@ -88,4 +88,22 @@ public class ChatService {
 		
 	}
 
+	public int insertAnswer(ChatVo vo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = dao.insertAnswer(conn, vo);
+
+		if (result == 1) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+
+		return result;
+		
+	}
+
 }

@@ -142,7 +142,17 @@
 	justify-content: center;
 	align-items: center;
 }
-#chat-client {
+#admin-input-area {
+	width: 100%;
+	height: 15%;
+	display: none;
+	border: none;
+	position: fixed;
+	align-items: end;
+	bottom: 0;
+	grid-template-columns: 0.8fr 0.2fr;
+}
+#chat-client, #admin-answer {
 	height: 100%;
 	font-size: 16px;
 	border: 1px solid white;
@@ -150,12 +160,12 @@
 	border-radius: 10px;
 	padding-left: 5px;
 }
-#submit {
+#submit, #admin-submit {
 	border: none;
 	height: 100%;
 	border-radius: 10px;
 }
-#submit:hover {
+#submit:hover, #admin-submit:hover {
 	background-color: #FCFFED;
 	border-radius: 10px;
 }
@@ -201,6 +211,12 @@ a {
 			</div>
 			<div id="admin-alert" class="alert">
 				<div id="alert1" class="guide">어서 오세요, 노예야. 채팅방에 입장해 주세요.</div>
+				<input type="hidden" id="adminRoomNum" value="">
+			</div>
+			<div id="chat-room">
+			</div>
+			<div id="admin-input-area">
+				<textarea id="admin-answer" placeholder="답변할 내용을 입력해 주세요."></textarea><button id="admin-submit">전송</button>
 			</div>
 		</div>
 	</div>
@@ -233,7 +249,7 @@ a {
 				</div>
 				<div id="chat-connect-btn">
 					<input type="hidden" id="roomNum" value="">
-					<button class="btn-common" onclick="hide_area()">예</button>
+					<button class="btn-common" onclick="logCheck()">예</button>
 					<button class="btn-common" onclick="stop()">아니오</button>
 				</div>
 			</div>
@@ -265,6 +281,7 @@ a {
 		show_area();
 	})
 	
+	// 채팅방 몇 번까지 있는지 출력
 	function roomGuide() {
 		$.ajax({
 			url: "/semiPrj/chat/roomguide",
@@ -282,21 +299,16 @@ a {
 		})
 	}
 	
-	$('.bubble-room-guide').on('click', function() {
-		var target = $(this);
-		console.log(target);
-/* 		target.querySelector('.bubble-room-guide').innerText;
-		console.log(target.querySelector('.bubble-room-guide').innerText); */
-	})
-	
-	
+	// 방 들어가서 채팅 내역 출력
 	function roomEnter(room) {
-		$('#admin-alert').toggle();
-/* 		$('').toggle(); */
+		$('#admin-alert').css('display', 'none');
+		$('#chat-room').css('display', 'inline-block');
+		$('#admin-input-area').css('display', 'grid');
 		console.log(room.innerText);
 		var text = room.innerText;
 		text = text.split(' ');
 		console.log(text[0]);
+		$('#adminRoomNum').attr('value', text[0]);
 		$.ajax({
 			url: "/semiPrj/chat/list",
 			method: "get",
@@ -306,9 +318,16 @@ a {
 			success: function(e) {
 				var data = JSON.parse(e);
 				console.log(data);
-/* 				$.each(data, function(i, item) {
-					
-				}) */
+				$.each(data, function(i, item) {
+					if(item.mNo == '1') {
+						var admin = '<div class="chat-alert"><div><img src="./resources/img/admin.png"></div><div class="bubble">' + item.chat + '</div></div>';
+					} else {
+						var client = '<div class="chat-client"><div class="bubble bubble-client">' + item.chat + '</div></div>';
+					}
+					$('#chat-room').append(admin);
+					$('#chat-room').append(client);
+				})
+					$('#chat-room').scrollTop($('#chat-room')[0].scrollHeight);
 			},
 			error: function() {
 				console.log('room enter error !');
@@ -316,6 +335,7 @@ a {
 		})
 	}
 	
+	// 채팅 새로고침
 	function chatRefresh() {
 		$.ajax({
 			url: "/semiPrj/chat/admin",
@@ -362,6 +382,29 @@ a {
 		})
 	})
 	
+	// 전송 버튼 누르면 admin 채팅 내역이 db 안으로 + 동시에 출력
+	$('#admin-submit').click(function() {
+		$.ajax({
+			url: "/semiPrj/chat/answer",
+			method: "get",
+			data: {
+				chat: $('#admin-answer').val(),
+				room: $('#adminRoomNum').val(),
+				mno: 1
+			},
+			success: function(e) {
+				var s = '<div class="chat-alert"><div><img src="./resources/img/admin.png"></div><div class="bubble">' + e + '</div></div>';
+				$('#chat-room').append(s);
+				$('#admin-answer').val('');
+				$('#chat-room').scrollTop($('#chat-room')[0].scrollHeight);
+			},
+			error: function(){
+				console.log('error');
+			}
+		})
+	})
+	
+	// 채팅방 입장 후 상담 종료
 	function stopIt() {
 		clearInterval(refresh);
 		$('#submit').attr('disabled', 'true');
@@ -371,6 +414,8 @@ a {
 			$('#chat-area').css('display', 'none');
 		}, 5000);
 	}
+	
+	// 채팅방 입장 전 상담 종료
 	function stop() {
 		var s = '<div class="guide">상담이 종료되었습니다. 5초 뒤에 채팅창이 닫힙니다.</div>';
 		$('#alert').append(s);
@@ -379,6 +424,7 @@ a {
 		}, 5000);
 	}
 	
+	// 채팅방 입장 후 안내 문구 출력
 	function show_area() {
 		setTimeout(function() {
 			$('#alert2').css('visibility', 'visible');
@@ -393,7 +439,8 @@ a {
 	
 	const member = '<%= member %>';
 	
-	function couCheck(){
+	// 로그인 체크
+	function logCheck(){
  		if(member != 'null'){
   			hide_area()
         } else {
@@ -401,6 +448,7 @@ a {
         }
     }
 	
+	// 유저 기준 채팅방 이동
 	function hide_area() {
 		$('#alert').css('display', 'none');
 		$('#chat-room').css('display', 'inline-block');
