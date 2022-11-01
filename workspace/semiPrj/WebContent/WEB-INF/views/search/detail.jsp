@@ -222,15 +222,15 @@ a {
 			<div id="res-navi">
 				<div>
 					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
-						onclick='rexCheck();'>쿠폰 발급</button>
+						onclick='rexCheck()'>쿠폰 발급</button>
 				</div>
 				<div>
 					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
-						onclick='resCheck();'>예약하기</button>
+						onclick='resCheck()'>예약하기</button>
 				</div>
 				<div>
 					<button type="button" class="btn mb-2 mb-md-0 btn-primary"
-						onclick='revCheck();'>리뷰 작성</button>
+						onclick='revCheck()'>리뷰 작성</button>
 				</div>
 			</div>
 			<div id="res-menulist">

@@ -107,9 +107,9 @@ body {
 }
 #header{
     width: 100vw;
-    height: 20vh;
-    margin:auto;
-    z-index:100;
+    height: 22vh;
+    margin: auto;
+    z-index: 100;
 }
 #header-header{
     width: 100%;
@@ -120,21 +120,19 @@ body {
     font-size: 1.1rem;
 }
 #header-header > div{
-    
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 #header-main{
     width: 100%;
-    height: 55.5%;
+    height: 70%;
     display: grid;
     grid-template-columns: 0.8fr 1.5fr 2fr 1fr 1fr 1fr 1fr
 }
 #header-bot{
     width: 100%;
-    height: 25%;
+    height: 11.5%;
 }
 #header-id{
     display: flex;
@@ -147,7 +145,6 @@ body {
     align-items: center;
     font-size: 1.4rem
 }
-
 #header-main > div > form{
     display: flex;
     justify-content: center;
@@ -180,12 +177,12 @@ body {
    background-size: cover;
    
 }
-input[name="pno"] {
-	display: none;
-}
 
 </style>
 </head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <body>
 
 	<div id="main-header2">
@@ -195,8 +192,8 @@ input[name="pno"] {
 	        <div id="header-main-2"><a href=""><img src="/semiPrj/resources/img/메인로고2.png" alt="로고" width="190px" height="auto"></a></div>
 	        <div></div>
 	        <div id="header-main-3">
-	            <form action="">
-	                <input id="search2" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
+	            <form action="/semiPrj/search" method="get">
+	                <input id="search2" type="text" placeholder="식당 이름을 검색해 주세요" name="resName" required>
 	                <input id="hidden" name="pno" value="1">
 	              <input type="submit" id="searchImg2" value="">
 	            </form>
@@ -247,7 +244,7 @@ input[name="pno"] {
             <div id="header-main-logo"><a href="/semiPrj"><img src="/semiPrj/resources/img/메인로고1.png" alt="로고" width="auto" height="95px"></a></div>
             <div id="header-main-search">
                 <form action="/semiPrj/search" method="get">
-                   <input id="search" type="text" placeholder="식당 이름을 검색해 주세요" name="resName">
+                   <input id="search" type="text" placeholder="식당 이름을 검색해 주세요" name="resName" required>
                    <input id="hidden" name="pno" value="1">
                    <input type="submit" id="searchImg" value="">
                 </form>
@@ -277,11 +274,23 @@ input[name="pno"] {
     <%@ include file="/WEB-INF/views/member/businessLogin.jsp" %>
     <%@ include file="/WEB-INF/views/member/join.jsp" %>
     <%@ include file="/WEB-INF/views/member/login.jsp" %>
+    <%@ include file="/WEB-INF/views/chat/chat.jsp" %>
 
-    
-
-
-    
+	<script>
+		$(document).ready(function() {
+			$('#searchImg').click(function) {
+				if($('#search').val().trim() == '') {
+					Swal.fire({
+						title: '필수 입력 사항입니다.',
+						showConfirmButton: true,
+						icon: 'info',
+						confirmButtonColor: '#82A994',
+					})
+					return false;
+				}
+			}
+		})
+	</script>    
 
 </body>
 </html>

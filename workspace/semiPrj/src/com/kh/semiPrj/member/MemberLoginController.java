@@ -21,6 +21,7 @@ public class MemberLoginController extends HttpServlet{
 		//데이터 꺼내기
 		String memberId = req.getParameter("memberId");
 		String memberPwd = req.getParameter("memberPwd");
+		String uri = req.getParameter("requestURI");
 		
 		//데이터 뭉치기
 		MemberVo vo = new MemberVo();
@@ -36,7 +37,7 @@ public class MemberLoginController extends HttpServlet{
 			System.out.println("로그인 성공");
 			HttpSession s = req.getSession();
 			s.setAttribute("loginMember", loginMember);
-			resp.sendRedirect("/semiPrj");
+			resp.sendRedirect(uri);
 		}else {
 			//로그인 실패
 			req.setAttribute("msg", "로그인 실패");

@@ -391,10 +391,10 @@ a {
 		}, 5000);
 	}
 	
-	const loginMember = '<%= member %>';
+	const member = '<%= member %>';
 	
 	function couCheck(){
- 		if(loginMember != 'null'){
+ 		if(member != 'null'){
   			hide_area()
         } else {
             document.getElementById("header-login").click();

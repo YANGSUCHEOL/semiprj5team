@@ -189,6 +189,7 @@ text-align: left;
          
         const bslogin2 = document.getElementById("bs-modal")
         const closeBtn4 = bslogin2.querySelector(".bs-loginclose-area")
+        
         closeBtn4.addEventListener("click", e => {
             bslogin2.style.display = "none"
         })

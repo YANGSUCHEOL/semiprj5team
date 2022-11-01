@@ -180,6 +180,7 @@ text-align: left;
                             <td><a href=""><span id="forget" >비밀번호를 잊어버리셨나요?</span></a></td>
                             <td><span  id="signUp">계정이 없으신가요? <a id="login-join" href="#" onclick='loginjoin'>회원가입</a></span></td>
                             <td><span  id="businessLogin">사업자 이신가요? <a id="login-login" href="#" onclick='login'>사업자 로그인</a></span></td>
+                        	<input type="hidden" id="uri" name="requestURI" value="">
                         </tr>
                     </table>
                 </form>
@@ -189,19 +190,29 @@ text-align: left;
     <script>         
         const modal = document.getElementById("modal")
         const btnModal = document.getElementById("header-login")
+        const requestURI = window.location.pathname + window.location.search;
+        sessionStorage.setItem("requestURI", requestURI);
+        
+        // 헤더1 로그인
         btnModal.addEventListener("click", e => {
-                modal.style.display = "flex"
+        	document.getElementById('uri').value = sessionStorage.getItem("requestURI");
+            modal.style.display = "flex"
         })
 
+        // 헤더2 로그인
         const btnModal_1 = document.getElementById("header-login_1")
         btnModal_1.addEventListener("click", e => {
-                modal.style.display = "flex"
+        	document.getElementById('uri').value = sessionStorage.getItem("requestURI");
+            modal.style.display = "flex"
         })
        
+        // 닫는 버튼
         const closeBtn = modal.querySelector(".close-area")
         closeBtn.addEventListener("click", e => {
-        modal.style.display = "none"
+        	sessionStorage.removeItem("requestURI");
+        	modal.style.display = "none"
         })
+        
         //로그인 ->비지니스 로그인
         const bslogin = document.getElementById("bs-modal")
         const login = document.getElementById("login-login")
