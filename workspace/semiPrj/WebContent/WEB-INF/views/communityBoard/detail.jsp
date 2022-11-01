@@ -55,6 +55,12 @@
             margin: 0 auto;
             padding: 20px;
         }
+        
+        #photo {
+        	width: 100%;
+        	height: 500px;
+        
+        }
 
         .btn{
             margin-right: 10px;
@@ -95,22 +101,20 @@
 
         .cmt > textarea {
 			
-            width: 735px;
+            width: 100%;
             height: 100px;
             outline: none;
             resize: none;
         }
 
-        #cmt-list {
-            height: 70px;
+        #reply-content-area {
+            height: 100px;
             border: 1px solid lightgray;
 			padding: 10px;
         }
         
-        #cmt-info {
-        	--margin : 10px;
-        }
-        
+        #reply-info {height: 30%;}
+        #reply-info2 {height: 70%;}
 
     </style>
 
@@ -140,18 +144,19 @@
             <div><%= vo.getHit() %></div>
         </div>
 
-        <div id="content">
-            <div><%= vo.getContent() %></div>
+        <div id="content-box">
+        	<div id="photo"></div>
+            <div id="content"><%= vo.getContent() %></div>
         </div>
 
         <hr>
 
-        <div class="comment">
-
-            <div id="cmt-list">
-				<div id="cmt-info">작성자 | 작성일자</div>
-				<div>댓글 내용</div>
-            </div>
+        <div class="comment" id="reply-list-area">
+            <div id="reply-content-area">
+				<div id="reply-info">작성자 | 작성일자</div>
+				<div id="reply-info2">댓글 내용</div>
+			</div>
+        </div>
 			
 			
 			 <form class="border rounded-lg p-3 mb-4">
@@ -159,7 +164,7 @@
 					<%if(loginMember != null) {%>
 			           <div class="cmt">
 			               <textarea name="replyContent" id="replyContent" required placeholder="댓글을 작성해 주세요"></textarea>
-			               <button type="button" class="btn btn-success" id="insert-btn" onclick="insertReply();">등록</button>
+			               <button type="button" class="btn btn-success" id="insert-btn" onclick="return insertReply(); location.href='/semiPrj/communityBoard/detail?bno=<%= vo.getNo()%>'">등록</button>
 			           </div>
 			          	<%}else{ %>
 			           <div class="cmt">
@@ -179,9 +184,7 @@
     <script>
 
         function insertReply(){
-        
-        	
-        $ajax({
+        $.ajax({
         	
         	url: "/semiPrj/replyInsert",
             type: "post",
@@ -193,20 +196,21 @@
 
                 // result 가 1 이라면 성공 / 0 이라면 실패
                 if (result > 0) { // 댓글작성 성공
-	
+                	alert("댓글이 등록됐습니다.");
                     // 갱신된 댓글 리스트 조회
-                    selectReplyList();
-
+                    //selectReplyList();
                     // textarea 초기화
                     $("#replyContent").val("");
+                    return true;
                 }
                 else { // 댓글작성 실패
                     alert("댓글 등록에 실패했습니다.");
+                return false;
                 }
             },
             
             error: function(){
-                console.log("댓글 작성용 ajax 통신 실패!");
+                console.log("댓글 작성 ajax 통신 실패!");
             }
         	
         	

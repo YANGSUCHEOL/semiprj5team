@@ -21,9 +21,6 @@
 
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&display=swap');
-
-        *{font-family: 'Alumni Sans Pinstripe', sans-serif;}
 
         #main{
             width: 70vw;
@@ -125,7 +122,7 @@
 
         </div>
         
-		<%if(loginMember != null){ %>
+		<%if(loginMember != null && loginMember.equals("admin")){ %>
         <div id="main-bot">
             <a href="/semiPrj/notice/write" class="btn btn-light" id="write">글쓰기</a>
         </div>
