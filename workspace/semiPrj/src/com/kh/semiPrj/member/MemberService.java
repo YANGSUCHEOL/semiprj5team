@@ -37,4 +37,20 @@ public class MemberService {
 		return loginMember;
 	}
 
+	public int quit(String no) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result =  new MemberDao().quit(conn , no);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }
