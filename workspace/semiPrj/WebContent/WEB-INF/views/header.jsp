@@ -11,9 +11,15 @@
 
 <script>
 	<%if(alertMsg != null){%>
-			alert('<%= alertMsg %>');
+	window.onload = function() {
+		Swal.fire({
+			title: '<%= alertMsg %>',
+			showConfirmButton: true,
+			icon: 'success',
+			confirmButtonColor: '#82A994',
+		})
+	}
 	<%}%>
-	
 </script> 
     
 <!DOCTYPE html>
@@ -21,6 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.3/dist/sweetalert2.all.min.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
@@ -28,6 +35,10 @@
 *{
    font-family: 'Noto Sans KR', sans-serif;
    letter-spacing: -0.1em;
+}
+.swal-button {
+	color: black;
+	border: 1px solid lightgray;
 }
  
 body {
