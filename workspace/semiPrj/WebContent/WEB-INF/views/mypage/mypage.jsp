@@ -400,7 +400,7 @@ text-decoration: none;
                 <div><a href="/semiPrj/coupon/list?mno= <%= loginMember.getNo()%>">쿠폰</a></div>
                 <div><a href="">예약 내역</a></div>
                 <div><a href="">내 리뷰&nbsp&nbsp&nbsp&nbsp</a></div>
-                <div><a href="/semiPrj/qna/list">문의 내역&nbsp&nbsp&nbsp&nbsp</a></div>
+                <div><a href="/semiPrj/qna/list">문의 내역&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></div>
                 <div id="changePwd2"><a href="#" onclick='changeBtn2'>정보수정</a></div>
             </div>
         </div>
@@ -410,7 +410,7 @@ text-decoration: none;
     	<a href="/semiPrj/qna/adminList?pno=1">개인회원 문의확인</a>
     </div>
     <div id="qna2">
-    	<a href="/semiPrj/bqna/adminList?pno=1"">사업자회원 문의확인</a>
+    	<a href="/semiPrj/bqna/adminList?pno=1">사업자회원 문의확인</a>
     </div>
 
     
