@@ -278,7 +278,7 @@ body {
 
 	<script>
 		$(document).ready(function() {
-			$('#searchImg').click(function) {
+			$('#searchImg').click(function() {
 				if($('#search').val().trim() == '') {
 					Swal.fire({
 						title: '필수 입력 사항입니다.',
@@ -288,7 +288,7 @@ body {
 					})
 					return false;
 				}
-			}
+			})
 		})
 	</script>    
 
