@@ -33,6 +33,25 @@ public class CouponService {
 		return detail;
 	}
 
+	//쿠폰 인서트
+	public int insertCoupon(CouponHistoryVo vo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		CouponDao dao = new CouponDao();
+		int result = dao.insertCoupon(conn, vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 	
 	
 }

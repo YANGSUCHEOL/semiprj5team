@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semiPrj.coupon.history.CouponHistoryVo;
 import com.kh.semiPrj.restaurant.vo.RestaurantVo;
 
 @WebServlet(urlPatterns = "/coupon/download")
