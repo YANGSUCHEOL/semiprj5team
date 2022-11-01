@@ -315,33 +315,12 @@
     font-size: 1.5rem;
 }
 #qna{
-    border: none;
-    width: 100px;
-    height: 63px;
-    background-color: yellow;
-    position: absolute;
-    left: 1000px;
-    font-size: 18px;
-}
-#qna > a{
-text-decoration: none;
-    color: black;
-    font-size: 1.3rem;
+	background-color: yellow
 }
 #qna2{
-    border: none;
-    width: 100px;
-    height: 63px;
-    background-color: yellow;
-    position: absolute;
-    left: 1200px;
-    font-size: 18px;
+	background-color: yellow
 }
-#qna2 > a{
-text-decoration: none;
-    color: black;
-    font-size: 1.3rem;
-}      
+ 
 </style>
 </head>
 <body>
@@ -382,14 +361,44 @@ text-decoration: none;
 
     <div id="main">
         <div id="content">
-            <div id="content-header">마이페이지</div>
+            <div id="content-header">
+           			<%if(loginMember.getId().equals("admin")){%>
+	                	관리자 전용 마이페이지
+	                <%}else{%>
+	               	마이페이지
+	                <%}%>
+            </div>
             <div id="content-myinfo">
                 <div class="title">이름</div>
-                <div class="title">등급</div>
-                <div class="title">쿠폰</div>
+                <div class="title">
+	                <%if(loginMember.getId().equals("admin")){%>
+	                	관리자 전용
+	                <%}else{%>
+	                등급
+	                <%}%>
+				</div>
+                <div class="title">
+	                <%if(loginMember.getId().equals("admin")){%>
+	                	관리자 전용
+	                <%}else{%>
+	                쿠폰
+	                <%}%>
+                </div>
                 <div class="myinfo"><%= loginMember.getNick() %></div>
-                <div class="myinfo"><%= loginMember.getGradeNo() %>등급</div>
-                <div class="myinfo">2장</div>
+                <div class="myinfo">
+                 <%if(loginMember.getId().equals("admin")){%>
+	                	<a id="qna" href="/semiPrj/qna/adminList?pno=1">개인회원 문의 확인</a>
+	                <%}else{%>
+	                 	<%= loginMember.getGradeNo() %>등급
+	                <%}%>
+                </div>
+                <div class="myinfo">
+					<%if(loginMember.getId().equals("admin")){%>
+	                	<a id="qna2" href="/semiPrj/bqna/adminList?pno=1">사업자회원 문의 확인</a>
+	                <%}else{%>
+	                 	2장
+	                <%}%>                
+                </div>
             </div>
             <div id="content-detail">
                 <div><a href="/semiPrj/coupon/list?mno= <%= loginMember.getNo()%>"><img src="/semiPrj/resources/img/쿠폰.png" alt="찜한내역" width="150px" height="auto"></a></div>
@@ -405,16 +414,6 @@ text-decoration: none;
             </div>
         </div>
     </div>
-   	 <%if(loginMember !=null && loginMember.getId().equals("admin")){%>
-    <div id="qna">
-    	<a href="/semiPrj/qna/adminList?pno=1">개인회원 문의확인</a>
-    </div>
-    <div id="qna2">
-    	<a href="/semiPrj/bqna/adminList?pno=1">사업자회원 문의확인</a>
-    </div>
-
-    
-    <%}%>
     
       <script>         
         const changmodal = document.getElementById("change-modal")

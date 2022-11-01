@@ -89,7 +89,7 @@ body {
 #searchImg2{
     float: left;
     position: relative;
-    left: 140px;
+    left: 45px;
     border: none;
     width: 33px;
     height: 33px;
@@ -169,7 +169,7 @@ body {
 #searchImg{
     float: left;
     position: relative;
-    left: 145px;
+    left: 45px;
     border: none;
     width: 33px;
     height: 33px;
