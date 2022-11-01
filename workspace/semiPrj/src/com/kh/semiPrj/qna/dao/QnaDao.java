@@ -512,6 +512,25 @@ public class QnaDao {
 		
 		return avo;
 	}
+
+	public int editAnswerYn(Connection conn, String qno) {
+		String sql = "UPDATE QUESTION SET ANSWER_YN = 'Y' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, qno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
    
    //답변 작성
    //public int insertAnswer(Connection conn, AnswerVo avo) {

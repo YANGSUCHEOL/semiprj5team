@@ -153,7 +153,7 @@ hr{
 	           		<!-- customer 뺌 -->
 	           		<div><%= voList.get(i).getmNo() %></div>
 	           		<div><%= voList.get(i).getEnrollDate() %></div>
-	           		<% if(voList.get(i).getAnswerYn() == "Y") {%>
+	           		<% if(voList.get(i).getAnswerYn().equals("Y")) {%>
 	          		 	<div id="ans-done">답변완료</div>
 	           		<%} else{%>
 	           			<div id="ans-expect">답변예정</div>

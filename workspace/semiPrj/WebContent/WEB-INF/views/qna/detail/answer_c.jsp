@@ -161,7 +161,7 @@
                 <div><%= vo.getTitle() %></div>
             	<div><%= vo.getmNo() %></div>
             	<div><%= vo.getEnrollDate() %></div>
-                <% if(vo.getAnswerYn() == "Y") {%>
+                <% if(vo.getAnswerYn().equals("Y")) {%>
           		 	<div id="ans-done">답변완료</div>
            		<%} else{%>
            			<div id="ans-expect">답변예정</div>

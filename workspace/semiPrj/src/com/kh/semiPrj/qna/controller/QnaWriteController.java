@@ -50,7 +50,7 @@ public class QnaWriteController extends HttpServlet{
 		
 		//로그인멤버 가져오기
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-		
+		System.out.println("write 로그인멤버 가져옴?");
 		//인코딩
 		req.setCharacterEncoding("UTF-8");
 		

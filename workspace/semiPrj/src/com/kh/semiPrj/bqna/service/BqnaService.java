@@ -146,7 +146,7 @@ public class BqnaService {
 		
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
-			//vo = dao.updateYn(conn , qno);
+			//vo = new BqnaDao().updateYn(conn , qno);
 			
 		}else{
 			JDBCTemplate.rollback(conn);
@@ -174,6 +174,27 @@ public class BqnaService {
 		
 		return bavo;
 	
+	}
+
+	
+
+	public int edit(BanswerVo bavo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = bdao.updateOneByNo(conn , bavo);
+		System.out.println("돌아갔어?");
+		System.out.println(result);
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+			
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 
 	

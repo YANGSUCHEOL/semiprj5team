@@ -415,6 +415,30 @@ public class BqnaDao {
 		}
 		
 		return bavo;
+	}
+
+	
+	public int updateOneByNo(Connection conn, BanswerVo bavo) {
+	
+		String sql = "UPDATE BANSWER SET CONTENT = ? , UPDATE_DATE = SYSDATE WHERE NO = ?";
+	
+		PreparedStatement pstmt = null;
+        int result = 0;
+        
+        try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bavo.getContent());
+			pstmt.setString(2, bavo.getNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            JDBCTemplate.close(pstmt);
+         }
+         
+         return result;
 	}	 
 
 }
