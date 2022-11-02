@@ -226,7 +226,7 @@ span[name="warning"] {
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">
-					<button id="cou-modal">쿠폰 선택</button>
+					<a id="cou-modal" href="#coupon">쿠폰 변경 불가</a>
 					<input type="hidden" name="couNo" value="<%= reservation.getCoupon() %>">
 					</div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
@@ -393,6 +393,11 @@ span[name="warning"] {
 			}
 		}
 	};
+	
+	$('a[href="#coupon"]').click(function(event) {
+	      event.preventDefault();
+	      callCouNo()
+	    });
 	
 	function timeCheck(){
 		$.ajax({
