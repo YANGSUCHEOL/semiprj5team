@@ -165,7 +165,7 @@ hr{
 	
 	    </div>
 	    <div id="page-area" align="center">
-	           	 	<a href="/semiPrj/qna/write">작성하기</a>
+	           	 	<a href="/semiPrj/qna/write"><button>작성하기</button></a>
 	
 	        </div>
 	

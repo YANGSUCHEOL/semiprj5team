@@ -206,8 +206,9 @@ pageEncoding="UTF-8"%>
         
         
         <div id="main-bot">
-			<a href="/semiPrj/qna/edit?no=<%= vo.getNo() %>"><button>수정하기</button></a>
-			<a href="/semiPrj/qna/delete?no=<%= vo.getNo() %>"><button>삭제하기</button></a>
+			<a href="/semiPrj/qna/edit?no=<%= vo.getNo() %>"><button>수정하기</button></a>&nbsp;&nbsp;
+			<a href="/semiPrj/qna/delete?no=<%= vo.getNo() %>"><button>삭제하기</button></a>&nbsp;&nbsp;
+			<a href="/semiPrj/qna/list"><button>목록</button></a>
 		</div>
 		
 		<%if(loginMember !=null && loginMember.getId().equals("admin")){%>
@@ -230,7 +231,7 @@ pageEncoding="UTF-8"%>
 <!--             <div id="answer-date"></div> -->
 <!--             <div id="answer-content"></div> -->
             <div id="btns">
-            <a href="/semiPrj/qna/list"><button>목록</button></a>
+            
         </div>
 		<% } else {%>
         	

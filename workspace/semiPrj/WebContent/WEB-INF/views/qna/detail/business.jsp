@@ -208,8 +208,9 @@ pageEncoding="UTF-8"%>
         
         
         <div id="main-bot">
-			<a href="/semiPrj/bqna/edit?no=<%= bvo.getNo() %>"><button>수정하기</button></a>
-			<a href="/semiPrj/bqna/delete?no=<%= bvo.getNo() %>"><button>삭제하기</button></a>
+			<a href="/semiPrj/bqna/edit?no=<%= bvo.getNo() %>"><button>수정하기</button></a>&nbsp;&nbsp;
+			<a href="/semiPrj/bqna/delete?no=<%= bvo.getNo() %>"><button>삭제하기</button></a>&nbsp;&nbsp;
+			<a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
 		</div>
 		
 		<%if(loginMember !=null && loginMember.getId().equals("admin")){%>
@@ -221,7 +222,7 @@ pageEncoding="UTF-8"%>
             
 			<div id="btns">
                <button onclick="insertAnswer();">작성하기</button>
-                <a href="/semiPrj/qna/adminList?pno=1"><button>목록</button></a>
+                
             </div>
 		<%} %>
 		
@@ -240,7 +241,7 @@ pageEncoding="UTF-8"%>
             <div id="answer-date"><%=bavo.getEnrollDate() %></div>
             <div id="answer-content"><%=bavo.getContent() %></div>
 			<div id="btns">
-            <a href="/semiPrj/bqna/list"><button>목록</button></a>
+            
            
         	</div>
 			<%} %>
