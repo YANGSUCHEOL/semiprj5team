@@ -6,9 +6,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	List<CouponVo> voList = (List<CouponVo>)request.getAttribute("voList");
-	CouponHistoryVo vo = new CouponHistoryVo();
-	String rNo = (String)session.getAttribute("rNo");
-	String cNo = (String)session.getAttribute("cNo");
 %>
 <!DOCTYPE html>
 <html>
@@ -241,15 +238,6 @@
 			       	<%}%>
 		        </div>
 	       	
-	        
-	        
-	        <script>
-	        	function f01(n){
-	        		num = n;
-	        	}
-	        </script>
-	        
-	        
 	   		<div class="modal2">
 	            <div class="modal-content2">
 	                <a class="btn-close2" href="#none">X</a>
@@ -270,15 +258,19 @@
 		                    쿠폰을 다운로드하시면 마이페이지로 이동합니다:)
 		                </p>
 			<form action="/semiPrj/coupon/insert" method="post" id="couDown">
-						<input type="hidden" name="rNo" id="rNo" value="<%= rNo %>"></input>
-						<input type="hidden" name="cNo" id="cNo" value="post"></input>
 		                <input type="hidden" name="mNo" id="mNo" value="<%= loginMember.getNo()%>"></input>
-		                <input type="button" class="btn-guide" onclick="location.href='/semiPrj/mypage/mypage?mno=<%= loginMember.getNo() %> & ?num=' + num" value="다운로드"></input>
+		                <input type="submit" class="btn-guide" value="다운로드"></input>
 		            </div>
 		        </div>
         	</form>
         	
-        
+        	<script>
+	        	var num = document.getElementById('cNo');
+	        	function f01(n){
+	        		num.setAttribute('value', n);
+	        	}
+	        </script>
+        	
         <script>
         	//첫번째 모달
             $('.modal-notice2').click(function(){

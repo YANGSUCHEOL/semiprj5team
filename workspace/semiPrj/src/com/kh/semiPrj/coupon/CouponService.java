@@ -21,17 +21,6 @@ public class CouponService {
 		return voList;
 	}
 
-	//쿠폰 디테일
-	public List<CouponHistoryVo> couponDetail(String mNo, String rNo) {
-		
-		Connection conn = JDBCTemplate.getConnection();
-		
-		List<CouponHistoryVo> detail = new CouponDao().couponDetail(conn, mNo, rNo);
-		
-		JDBCTemplate.close(conn);
-		
-		return detail;
-	}
 
 	//쿠폰 인서트
 	public int insertCoupon(CouponHistoryVo vo) {

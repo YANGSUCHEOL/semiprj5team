@@ -24,6 +24,10 @@ public class CouponInsertCotroller extends HttpServlet {
 		String rNo = req.getParameter("rNo");
 		String cNo = req.getParameter("cNo");
 		String mNo = req.getParameter("mNo");
+		System.out.println(rNo);
+		System.out.println(cNo);
+		System.out.println(mNo);
+		
 		
 		//데이터 뭉치기
 		CouponHistoryVo vo = new CouponHistoryVo();
