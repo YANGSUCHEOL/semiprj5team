@@ -200,11 +200,7 @@
 				</div>
 			</div>
 
-<!-- 			<div id="answer"> -->
-<%--             <div id="answer-date"><%=avo.getEnrollDate() %></div> --%>
-<%--             <div id="answer-content"><%=avo.getContent() %></div> --%>
 
-<!--         </div> -->
             
             
          </div>

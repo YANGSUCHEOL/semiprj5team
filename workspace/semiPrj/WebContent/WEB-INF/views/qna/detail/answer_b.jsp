@@ -217,8 +217,6 @@
 		 <div id="answer-title">고객님 질문 답변 드립니다~</div>
             <div id="answer-date"><%=bavo.getEnrollDate() %></div>
             <div id="answer-content"><%=bavo.getContent() %></div>
-			 <a href="/semiPrj/bqna/editAnswer?bno=<%= bavo.getNo() %>">수정하기</a>
-			<a href="/semiPrj/bqna/delete?bno=<%= bavo.getNo() %>">삭제하기</a>
 		<%} %>
 	
 	 

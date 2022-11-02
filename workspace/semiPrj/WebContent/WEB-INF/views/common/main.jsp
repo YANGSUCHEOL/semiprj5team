@@ -116,7 +116,7 @@
             <div><a href="/semiPrj/search/detail?rno=146">#공간녹음</a></div>
             <div><a href="/semiPrj/search/detail?rno=665">#플랜트</a></div>
             <div><a href="/semiPrj/search/detail?rno=631">#닥터로빈(여의도부국)</a></div>
-            <div><a href="semiPrj/search/detail?rno=413">#슬로우캘리</a></div>
+            <div><a href="/semiPrj/search/detail?rno=413">#슬로우캘리</a></div>
         </div>
         
         <!--<div id="banner">슬라이드로 넘어감</div>-->
