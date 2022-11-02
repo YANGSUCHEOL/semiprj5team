@@ -1,5 +1,10 @@
 package com.kh.semiPrj.bqna.service;
 
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -195,6 +200,23 @@ public class BqnaService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+
+	public int answerYnCheck(String bno) {
+		Connection conn = getConnection();
+		
+		int result = new BqnaDao().editAnswerYn(conn, bno);
+		
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	
 	}
 
 	

@@ -98,6 +98,10 @@
     	font-size: 25px;
     	border-bottom:1px solid #DEDEDE;
     }
+    
+    a {
+  		text-decoration: none;
+	}
     </style>
 
 </style>
@@ -185,5 +189,6 @@
         
         
     </div>
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

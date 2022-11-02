@@ -34,6 +34,10 @@ public class BqnaAdmWriteController extends HttpServlet{
 		bavo.setmNo(loginMember.getNo());
 		
 		int result = new BqnaService().insertAnswer(bavo);
+		//여기부터  답변완료 수정
+		if(result > 0) {
+			int result2 = new BqnaService().answerYnCheck(bno);
+		}
 	}
 	
 	@Override
