@@ -27,7 +27,6 @@
 }
 
 #main {
-	padding-top: 70px;
 	width: 70vw;
 	display: grid;
 	margin: 0 auto;
