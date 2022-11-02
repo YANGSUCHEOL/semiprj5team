@@ -141,6 +141,44 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public MemberVo selectPwd(Connection conn, MemberVo vo) {
+		
+String sql = "SELECT PWD FROM MEMBER WHERE NAME = ? AND ID = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberVo loginMember = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String pwd = rs.getString("PWD");
+
+				
+				loginMember = new MemberVo();
+				loginMember.setPwd(pwd);
+				
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return loginMember;
+		
+		
+	}
 	
 
 }
