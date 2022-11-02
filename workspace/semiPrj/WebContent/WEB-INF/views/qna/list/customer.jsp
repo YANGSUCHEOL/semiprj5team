@@ -21,19 +21,19 @@ List<QuestionVo> voList = (List<QuestionVo>)request.getAttribute("voList");
 
 <style>
 #background{
-box-sizing: border-box;
-
-
-position: relative;
-width: 70vw;
-height: 800px;
-
-margin: auto;
-margin-top:50px;
-
-background: rgba(255, 255, 255, 0.45);
-border: 1px solid #DADADA;
-border-radius: 10px;
+	box-sizing: border-box;
+	
+	
+	position: relative;
+	width: 70vw;
+	height: 800px;
+	
+	margin: auto;
+	--margin-top:50px;
+	
+	background: rgba(255, 255, 255, 0.45);
+	border: 1px solid #DADADA;
+	border-radius: 10px;
 }
 
 #top-back{
@@ -174,6 +174,6 @@ hr{
 	</div>
 	
 	
-	
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	</body>
 </html>

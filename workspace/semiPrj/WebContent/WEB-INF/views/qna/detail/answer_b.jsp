@@ -26,7 +26,7 @@
     --left: 82px;
     --top: 150px;
     margin: 0 auto;
-    margin-top:50px;
+    --margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -207,6 +207,7 @@
                 <a href="/semiPrj/bqna/adminList?pno=1"><button>목록</button></a>
             </div>
 		<%} %>
+           
 		
 		<%if (bavo == null){ %> 
 		<div id="answer-title">답변 예정입니다.</div>
@@ -219,7 +220,8 @@
 			 <a href="/semiPrj/bqna/editAnswer?bno=<%= bavo.getNo() %>">수정하기</a>
 			<a href="/semiPrj/bqna/delete?bno=<%= bavo.getNo() %>">삭제하기</a>
 		<%} %>
-
+	
+	 
 
            
 
@@ -252,8 +254,20 @@
                   })
               };
               
+              <%if(alertMsg != null){%>
+          	window.onload = function() {
+          		Swal.fire({
+          			title: '<%= alertMsg %>',
+          			showConfirmButton: true,
+          			icon: 'success',
+          			confirmButtonColor: '#82A994',
+          		})
+          	}
+          	<%}%>
+              
               
               
           </script>
+  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

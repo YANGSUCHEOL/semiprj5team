@@ -47,59 +47,59 @@ public class QnaDao {
       //question 목록조회
       public List<QuestionVo> selectQuestionList(Connection conn, QuestionVo vo) {
       
-         String sql = "SELECT * FROM QUESTION WHERE DELETE_YN = 'N' AND M_NO = ? ORDER BY NO DESC";
-      
-         //쿼리에 AND M_NO = '?' 지움
-         PreparedStatement pstmt = null;
-         ResultSet rs = null;
-         List<QuestionVo> voList = new ArrayList<QuestionVo>();
-      
-         try {
-            pstmt = conn.prepareStatement(sql);
-      
-            pstmt.setString(1, vo.getmNo());
-      
-            rs = pstmt.executeQuery();
-      
-            while(rs.next()) {
-      
-               String no = rs.getString("NO");
-               String mNo = rs.getString("M_NO");
-               String title = rs.getString("TITLE");
-               String enrollDate = rs.getString("ENROLL_DATE");
-               String updateDate = rs.getString("UPDATE_DATE");
-               String deleteYn = rs.getString("DELETE_YN");
-               String answerYn = rs.getString("ANSWER_YN");
-      
-               vo = new QuestionVo();
-               vo.setNo(no);
-               vo.setmNo(mNo);
-               vo.setTitle(title);
-               vo.setEnrollDate(enrollDate);
-               vo.setUpdateDate(updateDate);
-               vo.setDeleteYn(deleteYn);
-               vo.setAnswerYn(answerYn);
-      
-               voList.add(vo);
-      
-            }
-      
-         } catch (SQLException e) {
-            e.printStackTrace();
-           
-         } finally {
-            common.JDBCTemplate.close(rs);
-            common.JDBCTemplate.close(pstmt);
-         }
-      
-         return voList;
+    	  String sql = "SELECT Q.NO ,Q.M_NO ,Q.TITLE ,Q.CONTENT ,Q.HIT ,Q.ENROLL_DATE ,Q.UPDATE_DATE ,Q.DELETE_YN ,Q.ANSWER_YN ,M.NICK AS WRITER FROM QUESTION Q JOIN MEMBER M ON Q.M_NO = M.NO WHERE M.NO = ? AND Q.DELETE_YN = 'N' ORDER BY Q.NO DESC";
+          
+          //쿼리에 AND M_NO = '?' 지움
+          PreparedStatement pstmt = null;
+          ResultSet rs = null;
+          List<QuestionVo> voList = new ArrayList<QuestionVo>();
+       
+          try {
+             pstmt = conn.prepareStatement(sql);
+       
+             pstmt.setString(1, vo.getmNo());
+       
+             rs = pstmt.executeQuery();
+       
+             while(rs.next()) {
+       
+                String no = rs.getString("NO");
+                String mNo = rs.getString("WRITER");
+                String title = rs.getString("TITLE");
+                String enrollDate = rs.getString("ENROLL_DATE");
+                String updateDate = rs.getString("UPDATE_DATE");
+                String deleteYn = rs.getString("DELETE_YN");
+                String answerYn = rs.getString("ANSWER_YN");
+       
+                vo = new QuestionVo();
+                vo.setNo(no);
+                vo.setmNo(mNo);
+                vo.setTitle(title);
+                vo.setEnrollDate(enrollDate);
+                vo.setUpdateDate(updateDate);
+                vo.setDeleteYn(deleteYn);
+                vo.setAnswerYn(answerYn);
+       
+                voList.add(vo);
+       
+             }
+       
+          } catch (SQLException e) {
+             e.printStackTrace();
+            
+          } finally {
+             common.JDBCTemplate.close(rs);
+             common.JDBCTemplate.close(pstmt);
+          }
+       
+          return voList;
       
       }
       
       //QUESTION 상세조회
       public QuestionVo selectOne(Connection conn, String bno) {
       
-         String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN , M.NICK AS NICK FROM QUESTION Q JOIN MEMBER M ON Q.M_NO= M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
+         String sql = "SELECT Q.NO , Q.TITLE , Q.CONTENT , Q.ENROLL_DATE , Q.UPDATE_DATE , Q.DELETE_YN , Q.ANSWER_YN , M.NICK AS WRITER FROM QUESTION Q JOIN MEMBER M ON Q.M_NO= M.NO WHERE Q.NO = ? AND Q.DELETE_YN = 'N'";
       
          PreparedStatement pstmt = null;
          ResultSet rs = null;
@@ -113,7 +113,7 @@ public class QnaDao {
       
             if(rs.next()) {
                String no = rs.getString("NO");
-               String mNo = rs.getString("NICK");
+               String mNo = rs.getString("WRITER");
                String title = rs.getString("TITLE");
                String content = rs.getString("CONTENT");
                String enrollDate = rs.getString("ENROLL_DATE");
