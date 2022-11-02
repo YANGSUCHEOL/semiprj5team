@@ -141,7 +141,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td><input class="form-control form-control-sm" id="formFileSm" type="file"></td>
+                        <td><input class="form-control form-control-sm" id="formFileSm" type="file" name="f"></td>
                     </tr>
                 </table>
                 <br><br>

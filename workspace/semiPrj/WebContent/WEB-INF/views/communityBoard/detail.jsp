@@ -147,6 +147,7 @@
 				<%}%>
         	</div>
         </div>
+     
 
         <div id="title1">
             <div><b><%= vo.getTitle() %></b></div>
@@ -210,17 +211,17 @@
         	commuNo : <%= vo.getNo() %>
         	},
         	success: function (list) {
-        	let resultStr="";
+        	let listStr = "";
         	
 	        	for (let i in list) {
-	        	resultStr+=
+	        	listStr+=
 	        	'<div class="comment" id="reply-list-area">'+
 	        	'<div id="reply-content-area"'+
-	        	'<div id="reply-info">' + '<b>' + list[i].nick + '</b>' + '&nbsp;&nbsp;&nbsp; ' + list[i].enrollDate + '&nbsp;&nbsp;&nbsp; ' + 
-	        	'</div>' +
-	        	'<div id="reply-info2">'+ list[i].content +'</div>'+ '</div>' + '</div>' + '<hr>';
+	        	'<div id="reply-info">' + '<b>' + list[i].nick + '</b>' + '&nbsp;&nbsp;&nbsp; ' + list[i].enrollDate + '&nbsp;&nbsp;&nbsp; ' + '</div>' +
+	        	'<div id="reply-info2">'+ list[i].content +'</div>'+ 
+	        	'</div>' + '</div>' + '<hr>';
 	        	}
-        	$("#reply-board").html(resultStr);
+        	$("#reply-board").html(listStr);
         	},
         	
         	error: function () {
@@ -250,12 +251,12 @@
                     selectReplyList();
                     
                     // textarea 초기화
-                    $("#reply-info2").val("");
+                    $("#replyContent").val("");
                     return true;
                 }
                 else { // 댓글작성 실패
                     alert("댓글 등록에 실패했습니다.");
-                return false;
+                	return false;
                 }
             },
             
@@ -268,53 +269,7 @@
     	
         }//insertReply
         
-      
-       /*  function deleteReply(cmtNo) {
-        	
-        	let query = {rno : cmtNo}
-        	var ans = confirm("댓글을 삭제하시겠습니까?");
-            if(!ans) return false;
-        	
-        	$.ajax({
-        		url : "/semiPrj/deleteReply",
-        		data : query,
- 
-        		 success : function(data) {
-	        		if(result > 0){
-	                    alert("댓글이 삭제 되었습니다.");
-	                   	location.reload();
-	             	} else { // 댓글작성 실패
-	                    alert("댓글 등록에 실패했습니다.");
-                    },
-             	error : function(data) {
-                 	alert("댓글이 삭제되지 않았습니다.");
-             	}
-        		
-        	});
-        	
-        } *///commentDelete
-        
-		
-       	function deleteReply(rno){
-       	    if (!confirm("댓글을 삭제하시겠습니까?")) {
-       	        return;
-       	    }
-       	    
-       	    let query = {rno : cmtNo}
-       	    $.ajax({
-       	        url: "/semiPrj/deleteReply",
-       	        data: query,
-       	        success: function(result){
-       	            if (result == 1) {
-       	                $("reply-content-area"+rno).remove();
-       	                alert("삭제되었습니다.");
-       	            } else{
-       	                alert("댓글이 있어서 삭제할 수 있습니다.");
-       	            }
-       	        }
-       	    })
-       	}
-        
+     
         
 
     </script>

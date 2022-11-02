@@ -1,19 +1,25 @@
 package com.kh.semiPrj.community.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.kh.semiPrj.member.MemberVo;
 import com.kh.semiPrj.community.service.CommuService;
+import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CategoryVo;
 import com.kh.semiPrj.community.vo.CommuVo;
+import com.kh.semiPrj.community.vo.FileUploader;
+
 
 @WebServlet(urlPatterns = "/community/edit")
 public class CommuEditController extends HttpServlet {
@@ -22,6 +28,13 @@ public class CommuEditController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		if(req.getSession().getAttribute("loginMember") == null) {
+			
+			req.setAttribute("msg", "로그인 후 이용해 주세요");
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
+			return;
+		}
+		
 		
 		//현재 게시글 번호만 조회(꺼내오기)
 		String bno = req.getParameter("bno");
@@ -53,14 +66,15 @@ public class CommuEditController extends HttpServlet {
 		// 데이터 꺼내기
 		String bno = req.getParameter("bno");
 		String category = req.getParameter("category");
-		System.out.println(category);
+		//System.out.println(category);
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		
 		
 		CommuVo vo = new CommuVo();
 		vo.setNo(bno);
 		vo.setCategory(category);
-		System.out.println(vo.getCategory());
+		//System.out.println(vo.getCategory());
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setWriter(loginMember.getNo());
@@ -76,7 +90,7 @@ public class CommuEditController extends HttpServlet {
 		}else {
 			//실패
 			req.setAttribute("msg", "게시글 수정 실패 ...");
-			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
 		}
 	
 	}//post

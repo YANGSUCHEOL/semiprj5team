@@ -24,11 +24,13 @@ public class RestaurantService {
 		voList = dao.selectList(conn, resName, pv);
 		
 		for(int i = 0; i < voList.size(); ++i) {
-			String a = voList.get(i).getDayoff();
-			String[] b = a.split(",");
-			String[] c = setDay(b);
-			
-			voList.get(i).setOffDay(c);
+			if(voList.get(i).getDayoff() != null) {
+				String a = voList.get(i).getDayoff();
+				String[] b = a.split(",");
+				String[] c = setDay(b);
+				
+				voList.get(i).setOffDay(c);
+			}
 		}
 		
 		JDBCTemplate.close(conn);
@@ -54,11 +56,12 @@ public class RestaurantService {
 		
 		RestaurantVo vo = dao.selectOneByNo(conn, rNo);
 		
-		String a = vo.getDayoff();
-		String[] b = a.split(",");
-		String[] c = setDay(b);
-		
-		vo.setOffDay(c);
+		if(vo.getDayoff() != null) {
+			String a = vo.getDayoff();
+			String[] b = a.split(",");
+			String[] c = setDay(b);
+			vo.setOffDay(c);
+		}
 		
 		JDBCTemplate.close(conn);
 		
@@ -72,11 +75,13 @@ public class RestaurantService {
 		
 		RestaurantVo vo = dao.selectOneByReNo(conn, rNo);
 		
-		String a = vo.getDayoff();
-		String[] b = a.split(",");
-		String[] c = setDay(b);
-		
-		vo.setOffDay(c);
+		if(vo.getDayoff() != null) {
+			String a = vo.getDayoff();
+			String[] b = a.split(",");
+			String[] c = setDay(b);
+			
+			vo.setOffDay(c);
+		}
 		
 		JDBCTemplate.close(conn);
 		
@@ -139,11 +144,13 @@ public class RestaurantService {
 		voList = dao.selectList(conn, district);
 		
 		for(int i = 0; i < voList.size(); ++i) {
-			String a = voList.get(i).getDayoff();
-			String[] b = a.split(",");
-			String[] c = setDay(b);
-			
-			voList.get(i).setOffDay(c);
+			if(voList.get(i).getDayoff() != null) {
+				String a = voList.get(i).getDayoff();
+				String[] b = a.split(",");
+				String[] c = setDay(b);
+				
+				voList.get(i).setOffDay(c);
+			}
 		}
 		
 		JDBCTemplate.close(conn);

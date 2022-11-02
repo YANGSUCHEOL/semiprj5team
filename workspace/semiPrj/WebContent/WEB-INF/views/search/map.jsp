@@ -264,7 +264,8 @@ a {
 			  },
 			  hideClass: {
 			    popup: 'animate__animated animate__fadeOutUp'
-			  }
+			  },
+			  confirmButtonColor: '#82A994'
 			})
 	 });
 	</script>

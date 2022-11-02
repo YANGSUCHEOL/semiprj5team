@@ -120,6 +120,7 @@ div[name="more-btn"] {
 }
 
 .none {
+	grid-column: 1/3;
 	text-align: center;
 }
 
@@ -210,7 +211,7 @@ div[name="more-btn"] {
 				<% } %>
 				<% } else if(voList.size() == 0) { %>
 				<div class="none">
-					<span>검색 결과가 없습니다. 다시 검색해 주세요.</span>
+					<span>예약하신 내역이 없습니다.</span>
 				</div>
 				<% } %>
 			</div>

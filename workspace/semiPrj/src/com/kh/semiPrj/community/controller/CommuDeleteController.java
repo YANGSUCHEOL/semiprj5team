@@ -23,6 +23,7 @@ public class CommuDeleteController extends HttpServlet {
 		//디비 다녀오기
 		int result = new CommuService().delete(bno);
 		
+		
 		//화면 선택
 		if(result == 1){
 			//성공 -> 알람, 리스트 조회
