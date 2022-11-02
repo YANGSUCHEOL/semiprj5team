@@ -190,13 +190,24 @@ span[name="warning"] {
 	font-size: 14px;
 	color: lightgray;
 }
-
-#res-picture>img{
+#res-picture {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	width: 400px;
+	height: 300px;
+}
+#res-picture>img {
 	width: 80%;
 	height: 80%;
 	object-fit: cover;
 }
-
+.object-fit {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -207,7 +218,6 @@ span[name="warning"] {
 	<% for(int i = 0; i < dayoff.length; ++i) { %>
 		array.push("<%= dayoff[i] %>");
 	<% } %>
-	console.log(array);
     $(document).ready(function () {
             $.datepicker.setDefaults($.datepicker.regional['ko']); 
             $( "#resDate" ).datepicker({
@@ -224,10 +234,7 @@ span[name="warning"] {
                 minDate: 0,
                 beforeShowDay: function(date){
                 	var day = date.getDay();
-                	for(let i = 0; i < 7; i++) {
-	                	if(i == array.length) {break;}
-	                	return [(day != parseInt(array[i]))];
-                	}
+	                	return [(day != parseInt(array[0]) && day != parseInt(array[1]) && day != parseInt(array[2]) && day != parseInt(array[3]) && day != parseInt(array[4]) && day != parseInt(array[5]) && day != parseInt(array[6]))];
                 }
            });    
     });
@@ -244,7 +251,7 @@ span[name="warning"] {
 		<form action="/semiPrj/res" method="post">
 			<div id="content">
 				<div id="res-store">
-					<div id="res-picture"><img src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img></div>
+					<div id="res-picture"><img class="object-fit" src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img></div>
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">
@@ -263,7 +270,7 @@ span[name="warning"] {
 					</div>
 					<div class="space-evenly">
 						<label class="box-radio-input"><input type="radio"
-							name="cnt" value="2"><span>2인</span></label> <label
+							name="cnt" value="2" required><span>2인</span></label> <label
 							class="box-radio-input"><input type="radio" name="cnt"
 							value="3"><span>3인</span></label> <label class="box-radio-input"><input
 							type="radio" name="cnt" value="4"><span>4인</span></label>

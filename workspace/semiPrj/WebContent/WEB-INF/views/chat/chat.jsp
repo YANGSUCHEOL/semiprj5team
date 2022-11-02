@@ -229,13 +229,13 @@ a {
 			<div id="alert">
 				<div id="alert1" class="chat-alert">
 					<div>
-						<img src="./resources/img/admin.png">
+						<img src="/semiPrj/resources/img/admin.png">
 					</div>
 					<div class="bubble">어서오세요. 겟잇비건 온라인 상담실입니다.</div>
 				</div>
 				<div id="alert2" class="chat-alert">
 					<div>
-						<img src="./resources/img/admin.png">
+						<img src="/semiPrj/resources/img/admin.png">
 					</div>
 					<div class="bubble">
 						채팅 연결 전에&nbsp<a href="">FAQ</a>&nbsp를 확인해 주세요.
@@ -243,7 +243,7 @@ a {
 				</div>
 				<div id="alert3" class="chat-alert">
 					<div>
-						<img src="./resources/img/admin.png">
+						<img src="/semiPrj/resources/img/admin.png">
 					</div>
 					<div class="bubble">채팅 신청을 하시겠습니까?</div>
 				</div>
@@ -273,7 +273,7 @@ a {
 	</div>
 	<% } %>
 
-	<script>
+	<script type="text/javascript">
 	$('#toggle-area').click(function() {
 		$('#admin-chat-area').toggle();
 		roomGuide();
@@ -320,7 +320,7 @@ a {
 				console.log(data);
 				$.each(data, function(i, item) {
 					if(item.mNo == '1') {
-						var admin = '<div class="chat-alert"><div><img src="./resources/img/admin.png"></div><div class="bubble">' + item.chat + '</div></div>';
+						var admin = '<div class="chat-alert"><div><img src="/semiPrj/resources/img/admin.png"></div><div class="bubble">' + item.chat + '</div></div>';
 					} else {
 						var client = '<div class="chat-client"><div class="bubble bubble-client">' + item.chat + '</div></div>';
 					}
@@ -345,7 +345,7 @@ a {
 			},
 			success: function(e){
 				if(e.length >= 1) {
-					var s = '<div class="chat-alert"><div><img src="./resources/img/admin.png"></div><div class="bubble">' + e + '</div></div>';
+					var s = '<div class="chat-alert"><div><img src="/semiPrj/resources/img/admin.png"></div><div class="bubble">' + e + '</div></div>';
 					$('#chat-room').append(s);
 					$('#chat-room').scrollTop($('#chat-room')[0].scrollHeight);
 				} else if (e == '') {
@@ -393,7 +393,7 @@ a {
 				mno: 1
 			},
 			success: function(e) {
-				var s = '<div class="chat-alert"><div><img src="./resources/img/admin.png"></div><div class="bubble">' + e + '</div></div>';
+				var s = '<div class="chat-alert"><div><img src="/semiPrj/resources/img/admin.png"></div><div class="bubble">' + e + '</div></div>';
 				$('#chat-room').append(s);
 				$('#admin-answer').val('');
 				$('#chat-room').scrollTop($('#chat-room')[0].scrollHeight);

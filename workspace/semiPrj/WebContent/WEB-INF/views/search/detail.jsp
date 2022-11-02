@@ -70,6 +70,8 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: right;
+	width: 400px;
+	height: 300px;
 }
 
 .res-image>img {
@@ -187,6 +189,24 @@ a {
 	border-color: #d1edee !important;
 	color: gray;
 }
+div[name="menu-picture"] {
+	width: 100px;
+	height: 100px;
+}
+.object-fit {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.span-nope {
+	grid-column: 1/5;
+	justify-content: center;
+	text-align: center;
+}
+.padding-top {
+	padding-top: 15px;
+}
 </style>
 </head>
 
@@ -198,7 +218,7 @@ a {
 		<div id="content">
 			<div id="res-info">
 				<div class="res-image">
-					<img src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img>
+					<img class="object-fit" src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img>
 				</div>
 				<div class="res-name"><%=vo.getName()%></div>
 				<div><%=vo.getType()%></div>
@@ -209,13 +229,17 @@ a {
 					<%=vo.getClose()%></div>
 				<div>
 					<%
-					for (int i = 0; i < vo.getOffDay().length; ++i) {
+					if (vo.getOffDay() != null) {
+						for (int i = 0; i < vo.getOffDay().length; ++i) {
 					%>
-					<%=vo.getOffDay()[i]%>
-					<%
-					}
-					%>
-					휴무
+						<%=vo.getOffDay()[i]%>
+						<%
+						}
+						%>
+						휴무
+					<% } else {%>
+					연중무휴
+					<% } %>
 				</div>
 			</div>
 			<div id="res-navi">
@@ -237,22 +261,25 @@ a {
 					<span>대표 메뉴 안내</span>
 				</div>
 				<div name="more-btn">
-					<a href='/semiPrj/menu/list'">더 보기</a>
+					<a href="#">더 보기</a>
 				</div>
 				<%
+				if(menu.size() != 0) {
 				for (int i = 0; i < 4; ++i) {
 					if(i == menu.size()) break;
 				%>
 				<div class="res-menu">
 					<div name="menu-picture">
-						<img src="<%=menu.get(i).getPhoto()%>"></img>
+						<img class="object-fit" src="/semiPrj/resources/img/<%=menu.get(i).getPhoto()%>.jpg"></img>
 					</div>
 					<div name="menu-name"><%=menu.get(i).getName()%></div>
-					<div name="menu-price"><%=menu.get(i).getPrice()%></div>
+					<div name="menu-price"><%=menu.get(i).getPrice()%> 원</div>
 				</div>
 				<%
-				}
+				} } else {
 				%>
+				<div class="span-nope"><span>등록된 메뉴가 없습니다.</span></div>
+				<% } %>
 			</div>
 			<div id="res-reviewlist">
 				<div name="review-info">
@@ -267,6 +294,7 @@ a {
 					<a href="/semiPrj/review/list?pno=1&rno=<%=vo.getNo()%>">더 보기</a>
 				</div>
 				<%
+				if(review.size() != 0) {
 				for (int i = 0; i < 4; ++i) {
 					if(i == review.size()) break;
 				%>
@@ -277,8 +305,10 @@ a {
 					<div name="user-review"><%=review.get(i).getContent()%></div>
 				</div>
 				<%
-				}
+				} } else {
 				%>
+				<div class="span-nope padding-top"><span>등록된 리뷰가 없습니다.</span></div>
+				<% } %>
 			</div>
 		</div>
 	</div>
@@ -311,7 +341,7 @@ a {
         
     	function rexCheck(){
             if(loginMember != 'null') {
-               location.href = '/semiPrj/coupon/download?rno= <%= vo.getNo()%>';
+               location.href = '/semiPrj/coupon/download?rno=<%= vo.getNo()%>';
              } else {
                  document.getElementById("header-login").click();
              }
