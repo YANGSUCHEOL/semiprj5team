@@ -439,6 +439,26 @@ public class BqnaDao {
          }
          
          return result;
+	}
+
+	public int editAnswerYn(Connection conn, String bno) {
+
+		String sql = "UPDATE BQUESTION SET ANSWER_YN = 'Y' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}	 
 
 }
