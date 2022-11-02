@@ -24,12 +24,13 @@ pageEncoding="UTF-8"%>
     <style>
         #main{
             width: 70vw;
-            --height: 70%;
+            height: 70%;
             border: 1px solid lightgray;
             border-radius: 10px;
             margin: 0 auto;
-            padding: 50px;
+            padding: 0px;
             align-content: center;
+            overflow: auto;
         }
 
         #title1{
@@ -39,7 +40,7 @@ pageEncoding="UTF-8"%>
             text-align: center;
             place-items: center;
             background-color: #EEFFF6;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid lightgray;
             font-size: 20px;
         }
 
@@ -99,16 +100,16 @@ pageEncoding="UTF-8"%>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="main">
         <div id="title1">
-            <div>COMMUNITY🌿</div>
+            <div><h3>COMMUNITY🌿</h3></div>
         </div>
 
         <div id="content">
-            <div class="list">번호</div>
+            <div class="list"><b>번호</b></div>
             <div class="list"></div>
-            <div class="list">제목</div>
-            <div class="list">작성자</div>
-            <div class="list">작성일시</div>
-            <div class="list">조회수</div>
+            <div class="list"><b>제목</b></div>
+            <div class="list"><b>작성자</b></div>
+            <div class="list"><b>작성일시</b></div>
+            <div class="list"><b>조회수</b></div>
 
 			<%for(int i = 0; i < voList.size(); ++i){ %>
 				

@@ -27,9 +27,10 @@
             height: 70%;
             border: 1px solid lightgray;
             border-radius: 10px;
-            margin: 100px auto;
-            padding: 50px;
+            margin: 0 auto;
+            padding: 0px;
             align-content: center;
+            overflow: auto;
         }
 
         #title1{ 
@@ -39,9 +40,8 @@
             place-items: center;
             text-align: center;
             background-color: #EEFFF6;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid lightgray;
             font-size: 25px;
-            --font-weight: 300;
         }
 
         #content{
@@ -74,9 +74,14 @@
     		text-decoration: underline;
   		}	
         
+        #main-bot{
+        	margin: 50px;
+        	padding: 10px;
+        }
+        
         #write{
+
           float: right;
-          margin: -10px;
           background-color: #EEFFF6;
 
         }
@@ -86,13 +91,7 @@
             border: 1px solid #e4faee;
         }
 
-        #page-area2{
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            margin-left: 250px;
-            
-        }
+     
 
 
     </style>
@@ -101,15 +100,15 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
     <div id="main">
         <div id="title1">
-            <div>NOTICE🌿</div>
+            <div><h3>NOTICE🌿</h3></div>
         </div>
 
         <div id="content">
-            <div class="list">번호</div>
+            <div class="list"><b>번호</b></div>
             <div class="list"></div>
-            <div class="list">제목</div>
-            <div class="list">작성일시</div>
-            <div class="list">조회수</div>
+            <div class="list"><b>제목</b></div>
+            <div class="list"><b>작성일시</b></div>
+            <div class="list"><b>조회수</b></div>
 
 			<%for(int i = 0; i < voList.size(); ++i){ %>
 				
@@ -122,7 +121,7 @@
 
         </div>
         
-		<%if(loginMember != null && loginMember.equals("admin")){ %>
+		<%if(loginMember != null && loginMember.getId().equals("admin")){ %>
         <div id="main-bot">
             <a href="/semiPrj/notice/write" class="btn btn-light" id="write">글쓰기</a>
         </div>

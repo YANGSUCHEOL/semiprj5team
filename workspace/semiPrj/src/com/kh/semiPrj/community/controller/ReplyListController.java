@@ -25,16 +25,11 @@ public class ReplyListController extends HttpServlet {
 		
 		String commuNo = req.getParameter("commuNo");
 		
-		//현재 로그인 한 멤버 가지고 오기
-		MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
-
 		List<CommentVo> list = new CommuService().selectReplyList(commuNo);
 		
 		resp.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, resp.getWriter());
-		
-		
-	
+
 	}//get
 	
 

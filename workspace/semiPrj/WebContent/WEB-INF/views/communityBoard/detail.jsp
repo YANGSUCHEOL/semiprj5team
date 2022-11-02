@@ -1,3 +1,4 @@
+<%@page import="com.kh.semiPrj.community.vo.CommentVo"%>
 <%@page import="com.kh.semiPrj.community.vo.AttachmentVo"%>
 <%@page import="com.kh.semiPrj.community.vo.CategoryVo"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,7 @@
 	CommuVo vo = (CommuVo)request.getAttribute("vo");
 	List<CategoryVo> cateList = (List<CategoryVo>)request.getAttribute("cateList");
 	AttachmentVo attVo = (AttachmentVo)request.getAttribute("attachmentVo");
+
 	if(attVo == null){
 		attVo = new AttachmentVo();
 	}
@@ -27,8 +29,6 @@
   	
     <style>
         #main{
-            width: 60vw;
-            height: 70vh;
             margin: 0 auto;
             border: 1px solid lightgray;
             border-radius: 10px;
@@ -117,13 +117,16 @@
 
 		
         #reply-content-area {
-            height: 100px;
+            height: 20px;
             --border: 1px solid lightgray;
-			padding: 10px;
+			--padding: 10px;
         }
         
         #reply-info {height: 30%;}
-        #reply-info2 {height: 70%;}
+        #reply-info2 {
+        	height: 70%;
+        	margin-top: 15px;
+        }
 
     </style>
 
@@ -165,6 +168,7 @@
 	            <div id="reply-content-area">
 					<div id="reply-info">작성자 | 작성일자</div>
 					<div id="reply-info2">댓글 내용</div>
+
 				</div>
 			<hr>
 	        </div>
@@ -198,8 +202,34 @@
     	selectReplyList();
     	setInterval(selectReplyList, 1000);   	
 	})
-    
-    
+     
+	function selectReplyList(){
+        	$.ajax({
+        	url: "/semiPrj/selectReplyList",
+        	data: {
+        	commuNo : <%= vo.getNo() %>
+        	},
+        	success: function (list) {
+        	let resultStr="";
+        	
+	        	for (let i in list) {
+	        	resultStr+=
+	        	'<div class="comment" id="reply-list-area">'+
+	        	'<div id="reply-content-area"'+
+	        	'<div id="reply-info">' + '<b>' + list[i].nick + '</b>' + '&nbsp;&nbsp;&nbsp; ' + list[i].enrollDate + '&nbsp;&nbsp;&nbsp; ' + 
+	        	'</div>' +
+	        	'<div id="reply-info2">'+ list[i].content +'</div>'+ '</div>' + '</div>' + '<hr>';
+	        	}
+        	$("#reply-board").html(resultStr);
+        	},
+        	
+        	error: function () {
+        	console.log("댓글 목록 ajax 통신 실패!");
+        	}
+        	
+        	});
+        	}//selectReplyList
+
 
         function insertReply(){
         $.ajax({
@@ -220,7 +250,7 @@
                     selectReplyList();
                     
                     // textarea 초기화
-                    $("#replyContent").val("");
+                    $("#reply-info2").val("");
                     return true;
                 }
                 else { // 댓글작성 실패
@@ -239,33 +269,53 @@
         }//insertReply
         
       
-       
-        
-		function selectReplyList(){
+       /*  function deleteReply(cmtNo) {
+        	
+        	let query = {rno : cmtNo}
+        	var ans = confirm("댓글을 삭제하시겠습니까?");
+            if(!ans) return false;
+        	
         	$.ajax({
-        	url: "/semiPrj/selectReplyList",
-        	data: {
-        	commuNo : <%= vo.getNo() %>
-        	},
-        	success: function (result) {
-        	let resultStr="";
-	        	for (let i in result) {
-	        	resultStr+=
-	        	'<div class="comment" id="reply-list-area">'+
-	        	'<div id="reply-content-area"'+
-	        	'<div id="reply-info">' + result[i].Nick + result[i].enrollDate +'</div>'+
-	        	'<div id="reply-info2">'+ result[i].content +'</div>'+ '</div>' + '</div>' + '<hr>';
-	        	}
-        	$("#reply-board").html(resultStr);
-        	},
-        	
-        	error: function () {
-        	console.log("댓글 리스트 ajax 통신 실패!");
-        	}
-        	
+        		url : "/semiPrj/deleteReply",
+        		data : query,
+ 
+        		 success : function(data) {
+	        		if(result > 0){
+	                    alert("댓글이 삭제 되었습니다.");
+	                   	location.reload();
+	             	} else { // 댓글작성 실패
+	                    alert("댓글 등록에 실패했습니다.");
+                    },
+             	error : function(data) {
+                 	alert("댓글이 삭제되지 않았습니다.");
+             	}
+        		
         	});
-        	}//selectReplyList
-
+        	
+        } *///commentDelete
+        
+		
+       	function deleteReply(rno){
+       	    if (!confirm("댓글을 삭제하시겠습니까?")) {
+       	        return;
+       	    }
+       	    
+       	    let query = {rno : cmtNo}
+       	    $.ajax({
+       	        url: "/semiPrj/deleteReply",
+       	        data: query,
+       	        success: function(result){
+       	            if (result == 1) {
+       	                $("reply-content-area"+rno).remove();
+       	                alert("삭제되었습니다.");
+       	            } else{
+       	                alert("댓글이 있어서 삭제할 수 있습니다.");
+       	            }
+       	        }
+       	    })
+       	}
+        
+        
 
     </script>
 

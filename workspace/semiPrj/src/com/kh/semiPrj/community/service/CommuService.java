@@ -143,6 +143,9 @@ public class CommuService {
 		return result;
 	
 	}
+	
+	
+	
 
 
 	//게시글에 댓글 달기(insert)
@@ -174,6 +177,25 @@ public class CommuService {
 		close(conn);
 		
 		return list;
+	
+	}
+	
+	//댓글 삭제하기
+	public int replyDel(String rno) {
+
+		Connection conn = getConnection();
+		
+		int result = dao.replyDel(conn, rno);
+	
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	
 	}
 
