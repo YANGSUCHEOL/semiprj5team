@@ -72,4 +72,11 @@ public class MemberService {
 		return updatedMember;
 	}
 
+	public MemberVo forget(MemberVo vo) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberVo forgetMember = new MemberDao().selectPwd(conn, vo);
+		JDBCTemplate.close(conn);
+		return forgetMember;
+	}
+
 }

@@ -177,7 +177,7 @@ text-align: left;
                         </tr>
                         <tr>
                             <td><input id="login" type="submit" value="로그인"></td>
-                            <td><a href=""><span id="forget" >비밀번호를 잊어버리셨나요?</span></a></td>
+                            <td><a id="forgeta" href="#" onclick='forgetbt'><span id="forget" >비밀번호를 잊어버리셨나요?</span></a></td>
                             <td><span  id="signUp">계정이 없으신가요? <a id="login-join" href="#" onclick='loginjoin'>회원가입</a></span></td>
                             <td><span  id="businessLogin">사업자 이신가요? <a id="login-login" href="#" onclick='login'>사업자 로그인</a></span></td>
                         	<input type="hidden" id="uri" name="requestURI" value="">
@@ -235,6 +235,13 @@ text-align: left;
             joinlogin33.addEventListener("click", e => {
             modal22.style.display = "none"
             modal.style.display = "flex"
+        })
+        //로그인 -> 비밀번호찾기
+        const forgetmodal = document.getElementById("forget-modal")
+        const forgetbt = document.getElementById("forgeta")
+        forgetbt.addEventListener("click", e => {
+        modal.style.display = "none"
+        forgetmodal.style.display = "flex"
         })
      </script>
 

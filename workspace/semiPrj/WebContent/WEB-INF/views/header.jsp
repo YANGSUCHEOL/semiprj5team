@@ -273,6 +273,7 @@ body {
     <%@ include file="/WEB-INF/views/member/businessJoin.jsp" %>
     <%@ include file="/WEB-INF/views/member/businessLogin.jsp" %>
     <%@ include file="/WEB-INF/views/member/join.jsp" %>
+    <%@ include file="/WEB-INF/views/member/forgetPwd.jsp" %>
     <%@ include file="/WEB-INF/views/member/login.jsp" %>
     <%@ include file="/WEB-INF/views/chat/chat.jsp" %>
 
