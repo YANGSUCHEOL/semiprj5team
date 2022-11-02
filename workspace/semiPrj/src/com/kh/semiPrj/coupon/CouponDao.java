@@ -53,50 +53,6 @@ public class CouponDao {
 		return voList;
 	}
 
-	//쿠폰 디테일
-	public List<CouponHistoryVo> couponDetail(Connection conn, String mNo, String rNo) {
-		
-		String sql = "SELECT H.NO, R.NAME AS RESTAURANT, C.NO AS COUPON, M.NO AS NAME, H.USED_YN, H.ENROLL_DATE FROM COU_HISTORY H JOIN MEMBER M ON H.M_NO = M.NO JOIN RESTAURANT R ON H.R_NO = R.NO JOIN COUPON C ON H.C_NO = C.NO WHERE M.NO = ? AND R.NO = ?";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<CouponHistoryVo> detail = new ArrayList<CouponHistoryVo>();
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, mNo);
-			pstmt.setString(2, rNo);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				String no = rs.getString("NO");	
-				String restaurant = rs.getString("RESTAURANT");
-				String coupon = rs.getString("COUPON");
-				String name = rs.getString("NAME");
-				String usedYn = rs.getString("USED_YN");
-				String enrollDate = rs.getString("ENROLL_DATE");
-				
-				CouponHistoryVo vo = new CouponHistoryVo();
-				vo.setNo(no);
-				vo.setrNo(restaurant);
-				vo.setcNo(coupon);
-				vo.setmNo(name);
-				vo.setUsedYn(usedYn);
-				vo.setEnrollDate(enrollDate);
-				
-				detail.add(vo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return detail;
-	}
 
 	//쿠폰 인서트
 	public int insertCoupon(Connection conn, CouponHistoryVo vo) {
