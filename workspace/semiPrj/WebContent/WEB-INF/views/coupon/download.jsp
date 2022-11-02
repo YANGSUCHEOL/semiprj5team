@@ -1,3 +1,4 @@
+<%@page import="com.kh.semiPrj.coupon.history.CouponHistoryVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.semiPrj.coupon.CouponVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	List<CouponVo> voList = (List<CouponVo>)request.getAttribute("voList");
+	CouponHistoryVo vo = new CouponHistoryVo();
 	String rNo = (String)session.getAttribute("rNo");
 	String cNo = (String)session.getAttribute("cNo");
 %>
@@ -225,7 +227,7 @@
 			                	<table class="coupon-table">
 			                        <thead>
 			                            <tr>
-			                                <th scope="col" class="th-num" name="num"><%= voList.get(i).getNo() %></th>
+			                                <th scope="col" class="th-num" name="cNo"><%= voList.get(i).getNo() %></th>
 			                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
 			                                <th scope="col" class="th-coupon"><button class="modal-notice2" onclick="f01(<%= voList.get(i).getNo() %>);"> ⭐⭐쿠폰 발급⭐⭐</button></th>
 			                            </tr>
@@ -268,8 +270,8 @@
 		                    쿠폰을 다운로드하시면 마이페이지로 이동합니다:)
 		                </p>
 			<form action="/semiPrj/coupon/insert" method="post" id="couDown">
-						<input type="hidden" name="cNo" id="cNo" value="num"></input>
-		                <input type="hidden" name="rNo" id="rNo" value="<%= rNo %>"></input>
+						<input type="hidden" name="rNo" id="rNo" value="<%= rNo %>"></input>
+						<input type="hidden" name="cNo" id="cNo" value="post"></input>
 		                <input type="hidden" name="mNo" id="mNo" value="<%= loginMember.getNo()%>"></input>
 		                <input type="button" class="btn-guide" onclick="location.href='/semiPrj/mypage/mypage?mno=<%= loginMember.getNo() %> & ?num=' + num" value="다운로드"></input>
 		            </div>
