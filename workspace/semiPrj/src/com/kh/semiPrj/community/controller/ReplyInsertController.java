@@ -25,6 +25,8 @@ public class ReplyInsertController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html; charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
 		
 		String replyContent = req.getParameter("content");
 		String commuNo = req.getParameter("commuNo");
@@ -40,7 +42,6 @@ public class ReplyInsertController extends HttpServlet {
 		r.setNick(loginMember.getNick());
 		
 		int result = new CommuService().insertReply(r);
-		resp.setContentType("text/html; charset=UTF-8");
 		
 		resp.getWriter().print(result);
 		

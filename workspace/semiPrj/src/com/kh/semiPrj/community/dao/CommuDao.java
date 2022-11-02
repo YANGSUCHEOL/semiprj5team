@@ -371,12 +371,64 @@ public class CommuDao {
 	
 	}//insertAttachment
 
+	
+	
+	
+	//첨부파일 조회
+	public AttachmentVo selectAttachment(Connection conn, String bno) {
+
+		String sql = "SELECT * FROM ATTACHMENT WHERE STATUS = 'O' AND COMMUNITY_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		AttachmentVo vo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				String no = rs.getString("NO");
+				String communityNo = rs.getString("COMMUNITY_NO");
+				String originName = rs.getString("ORIGIN_NAME");
+				String changeName = rs.getString("CHANGE_NAME");
+				String filePath = rs.getString("FILE_PATH");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String thumbYn = rs.getString("THUMB_YN");
+				String status = rs.getString("STATUS");	
+				
+				vo = new AttachmentVo();
+				vo.setNo(no);
+				vo.setCommunityNo(communityNo);
+				vo.setOriginName(originName);
+				vo.setChangeName(changeName);
+				vo.setFilePath(filePath);
+				vo.setEnrollDate(enrollDate);
+				vo.setThumbYn(thumbYn);
+				vo.setStatus(status);
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return vo;
+	
+	}//selectAttachment
 
 
 	//커뮤니티 댓글 리스트(select)
 	public List<CommentVo> selectReplyList(Connection conn, String commuNo) {
 		
-		String sql = "SELECT NO, CONTENT, NICK, ENROLL_DATE FROM COMMUNITY_CMT WHERE COMMU_NO = ? AND DELETE_YN = 'N' ORDER BY ENROLL_DATE DESC";
+		String sql = "SELECT C.NO , C.CONTENT , M.NICK AS NICK , C.ENROLL_DATE FROM COMMUNITY_CMT C JOIN MEMBER M ON C.M_NO = M.NO WHERE M.QUIT_YN = 'N' AND C.DELETE_YN = 'N' AND C.COMMU_NO = ? ORDER BY C.ENROLL_DATE DESC";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -395,8 +447,6 @@ public class CommuDao {
 				String content = rs.getString("CONTENT");
 				String nick = rs.getString("NICK");
 				String enrollDate = rs.getString("ENROLL_DATE");
-				String deleteYn = rs.getString("DELETE_YN");
-
 				
 				
 				CommentVo vo = new CommentVo();
@@ -404,7 +454,6 @@ public class CommuDao {
 				vo.setNo(content);
 				vo.setNo(nick);
 				vo.setNo(enrollDate);
-				vo.setNo(deleteYn);
 				
 				list.add(vo);
 				
@@ -420,6 +469,9 @@ public class CommuDao {
 		
 		return list;
 	}//selectReplyList
+
+
+	
 
 
 

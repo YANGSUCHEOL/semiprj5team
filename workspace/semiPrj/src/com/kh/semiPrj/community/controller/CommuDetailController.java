@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semiPrj.community.service.CommuService;
+import com.kh.semiPrj.community.vo.AttachmentVo;
 import com.kh.semiPrj.community.vo.CommuVo;
 
 @WebServlet(urlPatterns = "/community/detail")
@@ -22,9 +23,11 @@ public class CommuDetailController extends HttpServlet {
  		
  		//디비 다녀오기
  		CommuVo vo = new CommuService().selectOne(bno);
-	
+ 		AttachmentVo attachmentVo = new CommuService().selectAttachment(bno);
+ 		
  		//화면 선택
  		req.setAttribute("vo", vo);
+ 		req.setAttribute("attachmentVo", attachmentVo);
  		req.getRequestDispatcher("/WEB-INF/views/communityBoard/detail.jsp").forward(req, resp);
 	}//get
 	

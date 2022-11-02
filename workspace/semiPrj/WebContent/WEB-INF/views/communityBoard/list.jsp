@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
             --height: 70%;
             border: 1px solid lightgray;
             border-radius: 10px;
-            margin: 100px auto;
+            margin: 0 auto;
             padding: 50px;
             align-content: center;
         }

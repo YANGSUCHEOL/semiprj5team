@@ -176,6 +176,20 @@ public class CommuService {
 		return list;
 	
 	}
+
+
+	//첨부파일 조회
+	public AttachmentVo selectAttachment(String bno) {
+		
+		Connection conn = getConnection();
+		
+		AttachmentVo vo = dao.selectAttachment(conn, bno);
+		
+		close(conn);
+		
+		return vo;
+	
+	}//selectAttachment
 	
 	
 	

@@ -40,7 +40,7 @@ public class CommuWriteController extends HttpServlet {
 		if(req.getSession().getAttribute("loginMember") == null) {
 			
 			req.setAttribute("msg", "로그인 후 이용해 주세요");
-			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
 			return;
 		}
 		
@@ -73,8 +73,9 @@ public class CommuWriteController extends HttpServlet {
 		AttachmentVo attachmentVo = null;
 		// ---------------- 파일 업로드 start ----------------		
 		// 파일 정보 db에 저장(파일이 있을 때만)
+		String rootPath = req.getServletContext().getRealPath("/"); //최상단경로
 		if(f.getSubmittedFileName().length() > 0) {
-			attachmentVo = FileUploader.uploadFile(f, req.getServletContext().getRealPath("/"));
+			attachmentVo = FileUploader.uploadFile(f, rootPath);
 		}
 		// ---------------- 파일 업로드 end - ----------------		
 		
@@ -95,9 +96,13 @@ public class CommuWriteController extends HttpServlet {
 			s.setAttribute("alertMsg", "게시글 작성 성공!");
 			resp.sendRedirect("/semiPrj/community/list?pno=1");
 		} else {
-			//작성 실패 -> 에러 페이지로
+			//작성 실패 -> 에러 페이지로, 업로드된 파일 삭제
+			if(attachmentVo != null) {
+				String savePath  = rootPath + attachmentVo.getFilePath() + "/" + attachmentVo.getChangeName();
+				new File(savePath).delete();				
+			}
 			req.setAttribute("msg", "게시글 작성 실패...");
-			req.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp").forward(req, resp);
 		}
 	
 	}//post
