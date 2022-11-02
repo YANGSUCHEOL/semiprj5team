@@ -180,7 +180,7 @@
 												<form action="/semiPrj/review/delete" method="post" id="deleteForm">
 												<input type="hidden" name="no" value="<%= voList.get(i).getNo() %>">
 												<input type="hidden" name="uri" id="deleteuri" value="">
-												<button class="dropdown-item" id="deletebtn" onclick="reviewDelete();">삭제하기</a>
+												<button class="dropdown-item" type="button" onclick="reviewDelete()">삭제하기</a>
 												</form>
 											<% } %>
 										<% } %>

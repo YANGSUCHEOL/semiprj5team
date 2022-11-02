@@ -39,6 +39,7 @@ public class ReservationEditController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		String no = req.getParameter("resNo");
+		String rName = req.getParameter("rName");
 		String cnt = req.getParameter("cnt");
 		String date = req.getParameter("date");
 		String time = req.getParameter("time");
@@ -46,6 +47,7 @@ public class ReservationEditController extends HttpServlet {
 		
 		ReservationVo vo = new ReservationVo();
 		vo.setNo(no);
+		vo.setRestaurant(rName);
 		vo.setCnt(cnt);
 		vo.setDate(date);
 		vo.setTime(time);

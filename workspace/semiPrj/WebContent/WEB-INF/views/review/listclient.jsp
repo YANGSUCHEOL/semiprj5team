@@ -29,7 +29,6 @@
             font-size: 16px;
         }
         #main {
-        	padding-top: 70px;
             width: 70vw;
             display: grid;
             margin: 0 auto;
@@ -99,7 +98,9 @@
             align-items: center;
         }
         .rev-content {
+            display: flex;
             grid-column: 1/4;
+            align-items: center;
             margin-left: 30px;
             line-height: 200%;
         }
@@ -172,7 +173,7 @@
 												<form action="/semiPrj/review/delete" method="post" id="deleteForm">
 												<input type="hidden" name="no" value="<%= voList.get(i).getNo() %>">
 												<input type="hidden" name="uri" id="deleteuri" value="">
-												<button class="dropdown-item" id="deletebtn" onclick="reviewDelete();">삭제하기</a>
+												<button class="dropdown-item" type="button" onclick="reviewDelete()">삭제하기</a>
 												</form>
 											<% } %>
 										<% } %>

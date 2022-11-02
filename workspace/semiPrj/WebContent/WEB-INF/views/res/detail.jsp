@@ -138,7 +138,9 @@
     			  confirmButtonText: '취소해 주세요!',
     			  cancelButtonText: '창 닫기'
     			}).then((result) => {
-    			  location.href='/semiPrj/res/cancel?no=<%= vo.getNo() %>';
+    				if (result.isConfirmed) {
+	    			  location.href='/semiPrj/res/cancel?no=<%= vo.getNo() %>';
+    				}
     			})
     	}
     </script>

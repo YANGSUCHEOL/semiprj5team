@@ -231,6 +231,7 @@ span[name="warning"] {
 					<input type="hidden" name="couNo" value="<%= reservation.getCoupon() %>">
 					</div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
+					<input type="hidden" name="rName" value="<%= vo.getName() %>">
 					<input type="hidden" name="resNo" value="<%= reservation.getNo() %>">
 				</div>
 				<div id="res-cnt">

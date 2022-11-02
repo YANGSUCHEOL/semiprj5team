@@ -89,6 +89,29 @@ span {
 	height: 40px;
 }
 
+.radio-coupon-input input[type="radio"] {
+	display: none;
+}
+
+.radio-coupon-input input[type="radio"]+span {
+	display: block;
+	width: 100%;
+	background: none;
+	text-align: center;
+	height: 35px;
+	line-height: 33px;
+	font-weight: 500;
+	cursor: pointer;
+	border: 1px solid lightgray;
+	font-size: 15px;
+}
+
+.radio-coupon-input input[type="radio"]:checked+span {
+	margin: 0px;
+	background: #FCFFED;
+	color: #000000;
+}
+
 .box-radio-input input[name="cnt"]+span {
 	display: inline-flex;
 	flex-direction: row;
@@ -226,15 +249,14 @@ span[name="warning"] {
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">
-					<a id="cou-modal" class="btn-common" href="#coupon">쿠폰 선택</a>
-					<input type="hidden" name="couNo" id="couNo" value="">
+					<a id="cou-modal" href="#coupon" rel="modal:open">쿠폰 선택</a>
 					</div>
 					<input type="hidden" name="rNo" value="<%= vo.getNo() %>">
 					<input type="hidden" name="mNo" value="<%= loginMember.getNo() %>">
 				</div>
 				<div id="coupon" class="modal">
-				
-				
+					<div id="coupon-list"></div>
+					<div id="none"></div>
 				</div>
 				<div id="res-cnt">
 					<div>
@@ -421,13 +443,12 @@ span[name="warning"] {
 	// request focus => 값 비워 주는 함수
 </script>
 <script>
+
     $('a[href="#coupon"]').click(function(event) {
       event.preventDefault();
- 
-      $(this).modal({
-        fadeDuration: 250
-      });
+      callCouNo()
     });
+    
     function callCouNo() {
     	$.ajax({
     		url: "/semiPrj/res/coupon",
@@ -437,7 +458,20 @@ span[name="warning"] {
     			rno: <%= vo.getNo() %>
     		},
     		success: function(e){
-    			
+    			var data = JSON.parse(e);
+    			if(data.length != 0) {
+	    			$.each(data, function(i, item) {
+	    				var s = '<label class="radio-coupon-input"> <input type="radio" name="couNo" value="' + item.no + '"><span>사용처: ' + item.rName + ' | 쿠폰 적용 내용: ' + item.info + '</span></label>';
+	    				if($("#coupon-list").text() == '') {
+	    					$("#coupon-list").append(s);
+	    				}
+	    			})
+    			} else {
+    				var nope = '조회된 쿠폰이 없습니다.';
+    				if($('#none').text() == '') {
+    					$('#none').text(nope);
+    				}
+    			}
     		},
     		error: function() {
     			console.log('error');

@@ -512,6 +512,8 @@ public class ReservationDao {
 			pstmt.setString(1, mno);
 			pstmt.setString(2, resno);
 			
+			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				String no = rs.getString("NO");
 				String rname = rs.getString("NAME");
@@ -524,13 +526,15 @@ public class ReservationDao {
 				vo.setInfo(info);
 				vo.setrName(rname);
 				vo.setcNo(cno);
+				
+				voList.add(vo);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return voList;
 	}
 
 }
