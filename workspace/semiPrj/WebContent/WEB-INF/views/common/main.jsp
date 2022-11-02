@@ -19,7 +19,7 @@
         border-radius: 20px;
        --display:flex;
         margin:auto;
-        margin-top: 80px;
+        --margin-top: 80px;
     }
     #top-main{
         width: 70vw;
@@ -38,7 +38,7 @@
 
 	.slidewrap{
 		position: relative;
-		--margin-top: 100px;
+		
 	}
     
 	/* 브라우저 마진과 패딩 리셋 */
@@ -112,11 +112,11 @@
     <div id="wrap">
         <div id="top-main">
             <div>지금 뜨는 식당</div>
-            <div><a>#남미플랜트랩</a></div>
-            <div><a>#레이지파머스</a></div>
-            <div><a>#플랜트</a></div>
-            <div><a>#브레게티</a></div>
-            <div><a>#슬로우캘리</a></div>
+            <div><a href="/semiPrj/search/detail?rno=476">#남미플랜트랩</a></div>
+            <div><a href="/semiPrj/search/detail?rno=146">#공간녹음</a></div>
+            <div><a href="/semiPrj/search/detail?rno=665">#플랜트</a></div>
+            <div><a href="/semiPrj/search/detail?rno=631">#닥터로빈(여의도부국)</a></div>
+            <div><a href="semiPrj/search/detail?rno=413">#슬로우캘리</a></div>
         </div>
         
         <!--<div id="banner">슬라이드로 넘어감</div>-->
@@ -138,14 +138,14 @@
                     <li>
                         <a>
                             <label for="slide01" class="left"></label>
-                            <img src="/semiPrj/resources/img/02.jpg">
+                            <img src="/semiPrj/resources/img/02-2.png">
                             <label for="slide03" class="right"></label>
                         </a>
                     </li>
                     <li>
                         <a>
                             <label for="slide02" class="left"></label>
-                            <img src="/semiPrj/resources/img/03.png">
+                            <img src="/semiPrj/resources/img/03-2.png">
                             <label for="slide01" class="right"></label>
                         </a>
                     </li>
@@ -169,10 +169,10 @@
         <div id="board-list">
             <div id="review">
             	<div id="review-title"><i class="fa-regular fa-pen-to-square"></i> 이 달의 리뷰</div>
-                <div>[안국] 어디어디 리뷰</div>
-                <div>[역삼] 어디어디 리뷰</div>
-                <div>[서촌] 어디어디 리뷰</div>
-                <div>[강남] 어디어디 리뷰</div>
+                <div><a href="/semiPrj/review/list?pno=1&rno=476">[서초구] 남미플랜트랩 리뷰</a></div>
+                <div><a href="/semiPrj/review/list?pno=1&rno=476">[용산구] 플랜트 리뷰</a></div>
+                <div><a href="/semiPrj/review/list?pno=1&rno=232">[광진구] 지속 리뷰</a></div>
+                <div><a href="/semiPrj/review/list?pno=1&rno=605">[송파구] 스윗솔키친 리뷰</a></div>
                 </div>
             
             <div id="community">

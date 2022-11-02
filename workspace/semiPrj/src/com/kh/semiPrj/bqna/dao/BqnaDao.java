@@ -46,13 +46,13 @@ public class BqnaDao {
 
 	public List<BquestionVo> selectQuestionList(Connection conn, BquestionVo bvo) {
 
-		String sql = "SELECT * FROM BQUESTION WHERE DELETE_YN = 'N' AND B_NO = ? ORDER BY NO DESC";
-	
+		String sql = "SELECT BQ.NO ,BQ.B_NO ,BQ.TITLE ,BQ.CONTENT ,BQ.HIT ,BQ.ENROLL_DATE ,BQ.UPDATE_DATE ,BQ.DELETE_YN ,BQ.ANSWER_YN ,B.NICK AS WRITER FROM BQUESTION BQ JOIN BUSINESS B ON BQ.B_NO = B.NO WHERE B.NO = ? AND BQ.DELETE_YN = 'N' ORDER BY BQ.NO DESC";
+		
 		 PreparedStatement pstmt = null;
-         ResultSet rs = null;
-         List<BquestionVo> bvoList = new ArrayList<BquestionVo>();
+        ResultSet rs = null;
+        List<BquestionVo> bvoList = new ArrayList<BquestionVo>();
 	
-         try {
+        try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, bvo.getbNo());
@@ -63,7 +63,7 @@ public class BqnaDao {
 			while(rs.next()) {
 				
 				String no = rs.getString("NO");
-				String bNo = rs.getString("B_NO");
+				String bNo = rs.getString("WRITER");
 				String title = rs.getString("TITLE");
 				String enrollDate = rs.getString("ENROLL_DATE");
 				String updateDate = rs.getString("UPDATE_DATE");
@@ -85,11 +85,11 @@ public class BqnaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-        	 JDBCTemplate.close(rs);
-        	 JDBCTemplate.close(pstmt);
-         }
-         
-         return bvoList;
+       	 JDBCTemplate.close(rs);
+       	 JDBCTemplate.close(pstmt);
+        }
+        
+        return bvoList;
 	}
 
 	//조회수..... 주석처리하고싶음

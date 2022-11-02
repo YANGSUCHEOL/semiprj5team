@@ -1,3 +1,9 @@
+<%@page import="com.kh.semiPrj.bqna.vo.BanswerVo"%>
+<%@page import="com.kh.semiPrj.bqna.vo.BquestionVo"%>
+<%@page import="com.kh.semiPrj.qna.vo.AnswerVo"%>
+<%@page import="java.util.List"%>
+
+<%@page import="com.kh.semiPrj.qna.vo.QuestionVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,20 +13,20 @@
 <title>Insert title here</title>
 <style>
 	 	#background{
-box-sizing: border-box;
-
-
-position: relative;
-width: 70vw;
-height: 800px;
-
-margin: auto;
-margin-top:50px;
-
-background: rgba(255, 255, 255, 0.45);
-border: 1px solid #DADADA;
-border-radius: 10px;
-}
+		box-sizing: border-box;
+		
+		
+		position: relative;
+		width: 70vw;
+		height: 800px;
+		
+		margin: auto;
+		--margin-top:50px;
+		
+		background: rgba(255, 255, 255, 0.45);
+		border: 1px solid #DADADA;
+		border-radius: 10px;
+		}
 
 #top-back{
     position: relative;
@@ -134,5 +140,6 @@ border-radius: 10px;
             </div>
         </form>
     </div>
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

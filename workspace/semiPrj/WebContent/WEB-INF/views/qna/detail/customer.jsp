@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
     --left: 82px;
     --top: 150px;
     margin: 0 auto;
-    margin-top:50px;
+    --margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -206,8 +206,8 @@ pageEncoding="UTF-8"%>
         
         
         <div id="main-bot">
-			<a href="/semiPrj/qna/edit?no=<%= vo.getNo() %>">수정하기</a>
-			<a href="/semiPrj/qna/delete?no=<%= vo.getNo() %>">삭제하기</a>
+			<a href="/semiPrj/qna/edit?no=<%= vo.getNo() %>"><button>수정하기</button></a>
+			<a href="/semiPrj/qna/delete?no=<%= vo.getNo() %>"><button>삭제하기</button></a>
 		</div>
 		
 		<%if(loginMember !=null && loginMember.getId().equals("admin")){%>
@@ -271,7 +271,7 @@ function insertAnswer(){
     })
 };
 </script>
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 </body>
 </html>

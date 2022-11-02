@@ -23,7 +23,7 @@
     --left: 82px;
     --top: 150px;
     margin: 0 auto;
-    margin-top:50px;
+    --margin-top:50px;
 
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid #DADADA;
@@ -240,7 +240,16 @@
                   })
               };
               
-              
+              <%if(alertMsg != null){%>
+          	window.onload = function() {
+          		Swal.fire({
+          			title: '<%= alertMsg %>',
+          			showConfirmButton: true,
+          			icon: 'success',
+          			confirmButtonColor: '#82A994',
+          		})
+          	}
+          	<%}%>
               
              
             	  
@@ -254,6 +263,6 @@
                 
 
 
-        
+        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
