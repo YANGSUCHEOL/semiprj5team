@@ -32,6 +32,8 @@ public class NoticeDao {
 			
 			result = pstmt.executeUpdate();
 			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -180,7 +182,17 @@ public class NoticeDao {
 			pstmt.setString(2, vo.getContent());
 			pstmt.setString(3, vo.getNo());
 			
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			
+			if(pstmt != null) pstmt.close();
+			
+		    //수정하면 조회수 증가하지 않게  
+		    sql = "UPDATE NOTICE SET HIT = HIT - 1 WHERE NO = ?";
+		    pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1, vo.getNo());
+		    pstmt.executeUpdate();
+		      
+		    result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

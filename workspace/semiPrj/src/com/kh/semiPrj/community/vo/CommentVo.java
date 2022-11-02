@@ -9,16 +9,16 @@ public class CommentVo {
 	private String commuNo;
 	private String content;
 	private String nick;
-	private Date enrollDate;
-	private Date modifyDate;
+	private String enrollDate;
+	private String modifyDate;
 	private String deleteYn;
 	
 	public CommentVo() {
 		super();
 	}
 
-	public CommentVo(String no, String mNo, String commuNo, String content, String nick, Date enrollDate,
-			Date modifyDate, String deleteYn) {
+	public CommentVo(String no, String mNo, String commuNo, String content, String nick, String enrollDate,
+			String modifyDate, String deleteYn) {
 		super();
 		this.no = no;
 		this.mNo = mNo;
@@ -70,19 +70,19 @@ public class CommentVo {
 		this.nick = nick;
 	}
 
-	public Date getEnrollDate() {
+	public String getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
@@ -100,7 +100,7 @@ public class CommentVo {
 				+ nick + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn + "]";
 	}
 
-	
+
 	
 	
 	
