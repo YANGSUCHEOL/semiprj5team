@@ -195,6 +195,12 @@
     .modal-content > p{
         margin-bottom: 20px;
     }
+    .noCou{
+    	width: 20vw;
+    	margin: 0 auto;
+    	font-size: 20px;
+    	text-align: center;
+    }
     
 </style>
 </head>
@@ -210,21 +216,30 @@
             </div>
         </div>
         
-	        <div id="coupon-list">
-	            <div class="container">
-	            	<%for(int i = 0; i < voList.size(); ++i){%>
-		                <table class="coupon-table">
-		                        <thead>
-		                            <tr>
-		                                <th scope="col" class="th-num" name="num"><%= voList.get(i).getNo() %></th>
-		                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
-		                                <th scope="col" class="th-coupon"><button class="modal-notice2" onclick="f01(<%= voList.get(i).getNo() %>);"> ⭐⭐쿠폰 발급⭐⭐</button></th>
-		                            </tr>
-		                        </thead>
-		                </table>
-	                <%}%>
-	            </div>
-	        </div>
+        
+        
+	        	<div class="coupon-list">
+	        		<%if(voList.size() != 0){%>
+			            <div class="container">
+			            	<%for(int i = 0; i < voList.size(); ++i){%>
+			                	<table class="coupon-table">
+			                        <thead>
+			                            <tr>
+			                                <th scope="col" class="th-num" name="num"><%= voList.get(i).getNo() %></th>
+			                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
+			                                <th scope="col" class="th-coupon"><button class="modal-notice2" onclick="f01(<%= voList.get(i).getNo() %>);"> ⭐⭐쿠폰 발급⭐⭐</button></th>
+			                            </tr>
+			                            
+			                        </thead>
+			                	</table>
+		                	<%}%>
+			            </div>
+		            <%}else{%>
+                         <div class="noCou">" 발급 가능한 쿠폰이 없습니다. "</div>
+			       	<%}%>
+		        </div>
+	       	
+	        
 	        
 	        <script>
 	        	function f01(n){
