@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .header{
-        margin-bottom: 100px;
-    }
+    
     table{
         border-collapse: collapse;
         border-spacing: 0;
@@ -176,25 +174,25 @@
 	                        <tr>
 	                            <td>1.</td>
 	                            <th>
-	                                <a>예약은 어떻게 하나요?</a>
+	                                <a href="/semiPrj/faq/list">예약은 어떻게 하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>2.</td>
 	                            <th>
-	                                <a>쿠폰은 어떻게 사용하나요?</a>
+	                                <a href="/semiPrj/faq/list">쿠폰은 어떻게 사용하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>3.</td>
 	                            <th>
-	                                <a>예약 내역 변경은 어떻게 하나요?</a>
+	                                <a href="/semiPrj/faq/list">예약 내역 변경은 어떻게 하나요?</a>
 	                            </th>
 	                        </tr>
                             <tr>
 	                            <td>4.</td>
 	                            <th>
-	                                <a>리뷰는 어떻게 작성하나요?</a>
+	                                <a href="/semiPrj/faq/list">리뷰는 어떻게 작성하나요?</a>
 	                            </th>
 	                        </tr>
 	                    </tbody>

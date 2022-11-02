@@ -6,6 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 	List<CouponVo> voList = (List<CouponVo>)request.getAttribute("voList");
 	String rNo = (String)session.getAttribute("rNo");
+	String cNo = (String)session.getAttribute("cNo");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,9 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <style>
-    .header{
-        margin-bottom: 180px;
-    }
+    
     table{
         border-collapse: collapse;
         border-spacing: 0;
@@ -217,16 +216,22 @@
 		                <table class="coupon-table">
 		                        <thead>
 		                            <tr>
-		                                <th scope="col" class="th-num" name="cNo"><%= voList.get(i).getNo() %></th>
+		                                <th scope="col" class="th-num" name="num"><%= voList.get(i).getNo() %></th>
 		                                <th scope="col" class="th-title"><%= voList.get(i).getInfo() %> 쿠폰</th>
-		                                <th scope="col" class="th-coupon"><button class="modal-notice2"> ⭐⭐쿠폰 발급⭐⭐</button></th>
+		                                <th scope="col" class="th-coupon"><button class="modal-notice2" onclick="f01(<%= voList.get(i).getNo() %>);"> ⭐⭐쿠폰 발급⭐⭐</button></th>
 		                            </tr>
 		                        </thead>
 		                </table>
 	                <%}%>
-	                
 	            </div>
 	        </div>
+	        
+	        <script>
+	        	function f01(n){
+	        		num = n;
+	        	}
+	        </script>
+	        
 	        
 	   		<div class="modal2">
 	            <div class="modal-content2">
@@ -247,14 +252,15 @@
 		                <p>
 		                    쿠폰을 다운로드하시면 마이페이지로 이동합니다:)
 		                </p>
-			<form action="/coupon/insert" method="post" id="couDown">
-						<input type="hidden" value="" name="cNo" id="cNo"></input>
+			<form action="/semiPrj/coupon/insert" method="post" id="couDown">
+						<input type="hidden" name="cNo" id="cNo" value="num"></input>
 		                <input type="hidden" name="rNo" id="rNo" value="<%= rNo %>"></input>
 		                <input type="hidden" name="mNo" id="mNo" value="<%= loginMember.getNo()%>"></input>
-		                <input type="button" class="btn-guide" onclick="document.getElementById('couDown').submit();" value="다운로드"></input>
+		                <input type="button" class="btn-guide" onclick="location.href='/semiPrj/mypage/mypage?mno=<%= loginMember.getNo() %> & ?num=' + num" value="다운로드"></input>
 		            </div>
 		        </div>
         	</form>
+        	
         
         <script>
         	//첫번째 모달
