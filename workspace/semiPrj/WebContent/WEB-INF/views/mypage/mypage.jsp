@@ -1,11 +1,29 @@
 <%@page import="java.lang.reflect.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)session.getAttribute("msg");
+	session.removeAttribute("msg");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	<%if(msg != null){%>
+		window.onload = function() {
+		Swal.fire({
+			title: '<%= msg %>',
+			showConfirmButton: true,
+			icon: 'success',
+			confirmButtonColor: '#82A994',
+		})
+	}
+<%}%>
+
+</script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
