@@ -15,9 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <style>
-    .header{
-        margin-bottom: 180px;
-    }
+    
     table{
         border-collapse: collapse;
         border-spacing: 0;
@@ -170,6 +168,8 @@
 </head>
 <body>
 	
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 	<div class="header"></div>
     <section class="faq">
         <div class="page-title">
@@ -199,7 +199,7 @@
                 <a class="btn-close2" href="#none">X</a>
                 
                 <p class="font">👇👇 쿠폰을 사용하시겠습니까? 👇👇</p>
-                <a class="btn-guide" href="/semiPrj/res/res">사용하기</a>
+                <a class="btn-guide" href="/semiPrj/res">사용하기</a>
             </div>
         </div>
         

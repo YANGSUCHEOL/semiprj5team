@@ -12,9 +12,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .header{
-        margin-bottom: 150px;
-    }
+    
     table{
         border-collapse: collapse;
         border-spacing: 0;
