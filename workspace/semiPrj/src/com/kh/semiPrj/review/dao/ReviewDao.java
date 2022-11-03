@@ -112,6 +112,7 @@ public class ReviewDao {
 				vo.setNo(no);
 				vo.setRestaurant(restaurant);
 				vo.setWriter(name);
+				vo.setReNo(reservation);
 				vo.setScore(Integer.parseInt(score));
 				vo.setContent(content);
 				vo.setReleaseYn(releaseYn);
@@ -164,6 +165,7 @@ public class ReviewDao {
 				vo.setRestaurant(restaurant);
 				vo.setWriter(name);
 				vo.setScore(Integer.parseInt(score));
+				vo.setReNo(reservation);
 				vo.setContent(content);
 				vo.setReleaseYn(releaseYn);
 				vo.setDeleteYn(deleteYn);

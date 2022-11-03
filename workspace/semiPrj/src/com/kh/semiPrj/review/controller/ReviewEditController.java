@@ -21,8 +21,10 @@ public class ReviewEditController extends HttpServlet {
 		
 		String no = req.getParameter("no");
 		String reNo = req.getParameter("reno");
+		System.out.println(reNo);
 		ReviewVo vo = new ReviewService().getOne(no);
 		ReservationVo res = new ReservationService().getOneByNo(reNo);
+		System.out.println(res);
 		
 		req.setAttribute("myReview", vo);
 		req.setAttribute("myBooking", res);
