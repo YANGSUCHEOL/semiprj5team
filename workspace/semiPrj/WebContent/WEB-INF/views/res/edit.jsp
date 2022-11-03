@@ -450,5 +450,6 @@ span[name="warning"] {
 	};
 	// request focus => 값 비워 주는 함수
 </script>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
