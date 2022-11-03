@@ -433,6 +433,8 @@
         </div>
     </div>
     
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    
       <script>         
         const changmodal = document.getElementById("change-modal")
         const changeBtn = document.getElementById("changePwd")
