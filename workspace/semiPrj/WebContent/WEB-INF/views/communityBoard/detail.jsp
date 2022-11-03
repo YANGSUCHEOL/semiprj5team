@@ -164,16 +164,27 @@
 
         <hr>
 
-		<div id="reply-board">
-	        <div class="comment" id="reply-list-area">
-	            <div id="reply-content-area">
-					<div id="reply-info">작성자 | 작성일자</div>
-					<div id="reply-info2">댓글 내용</div>
-
-				</div>
-			<hr>
+<div id="reply-board">
+            
+            
+	            <div class="board-comment border-bottom">
+	                <div class="d-flex">
+	                    <div class="p-2 font-weight-bold">가지조아</div>
+	                    <div class="p-2 flex-grow-1 text-muted"><small>22.11.03 15:11</small></div>
+	                    <div class="p-2"><span onclick="commentDelete();"><i class="bi bi-trash ml-2"></i>삭제</span></small></div>
+	              	</div>
+	                
+	                
+	             	<div>
+	                    <div class="p-2">반갑뜹니다</div>
+	                </div> 
+	            </div> 
+	            
+	 
 	        </div>
-		</div>
+
+
+		<div id="reply-board1">		
 			
 			 <form id="frm-cmt">
 			        
@@ -188,6 +199,9 @@
 			           </div>
 			           <%} %>
 			   </form>
+		</div>
+		
+		
        
 </div>			
 
@@ -269,14 +283,21 @@
     	
         }//insertReply
         
-     
+        
+        function commentDelete() {
+            if (confirm("댓글을 삭제하시겠습니까?") == true) {    //확인
+                alert('삭제가 완료되었습니다.');
+            } else {   //취소
+                return false;
+            }
+        }//commentDelete
         
 
     </script>
 
 
 
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
 </body>
 </html>

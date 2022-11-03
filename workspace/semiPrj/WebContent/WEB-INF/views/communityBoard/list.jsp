@@ -153,7 +153,7 @@ pageEncoding="UTF-8"%>
     </div>
 
 
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
 </body>
 </html>
