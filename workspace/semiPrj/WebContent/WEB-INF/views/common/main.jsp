@@ -154,15 +154,15 @@
         </div>
 
         <div id="main-bottom">
-            <div><a><img src="/semiPrj/resources/img/main02.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/main01.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/main03.png"></a></div>
-            <div><a><img src="/semiPrj/resources/img/main04.png"></a></div>
+            <div><a href="https://youtu.be/cX20G41-694"><img src="/semiPrj/resources/img/main02.png"></a></div>
+            <div><a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vegan-us&logNo=221441295753"><img src="/semiPrj/resources/img/main01.png"></a></div>
+            <div><a href="https://efgvillage.com/original/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6Mzt9&bmode=view&idx=6636937&t=board"><img src="/semiPrj/resources/img/main03.png"></a></div>
+            <div><a href="/semiPrj/search/detail?rno=665"><img src="/semiPrj/resources/img/main04.png"></a></div>
 
-            <div>비건 토마토파스타 레시피가 궁금하다면?!</div>
-            <div>맛있겠따///</div>
-            <div>비건이 바꾸는 세상!</div>
-            <div>졸려요,,,</div>
+            <div><a href="https://youtu.be/cX20G41-694">비건 토마토 파스타 레시피가 궁금하다면?</a></div>
+            <div><a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vegan-us&logNo=221441295753">맛있겠따///</a></div>
+            <div><a href="https://efgvillage.com/original/?q=YToyOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjtzOjQ6InBhZ2UiO2k6Mzt9&bmode=view&idx=6636937&t=board">어느 비건지향인의 텀블러챌린지 3년 기록</a></div>
+            <div><a href="/semiPrj/search/detail?rno=665">새로 생긴 비건식당 다녀왔어요!</a></div>
 
         </div>
 
@@ -177,10 +177,10 @@
             
             <div id="community">
             	<div id="community-title"><i class="fa-regular fa-comment"></i> 커뮤니티 추천글</div>
-                <div>제 레시피 구경하고 가세용~~~~</div>
-                <div>믿고 갔는데 실망이에요ㅡㅡ</div>
-                <div>거북목이 되어 목이 아파요</div>
-                <div>졸립다..</div>
+                <div><a href="/semiPrj/community/detail?bno=145">두부 김치 조림 만들기 채식 사찰 요리 레시피입니당~~~</a></div>
+                <div><a href="/semiPrj/community/detail?bno=140">믿고 갔는데 실망이에요ㅡㅡ</a></div>
+                <div><a href="/semiPrj/community/detail?bno=141">동물 실험 없는 화장품 추천합니다~~~</a></div>
+                <div><a href="/semiPrj/community/detail?bno=139">안녕하세요 제가 요즘 채식에 대해 고민이 많습니다 ㅠㅠ 들어주실분</a></div>
                 </div>
 
             
