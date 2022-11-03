@@ -40,7 +40,7 @@
             box-sizing: border-box;
             display: grid;
             align-items: center;
-            grid-template-rows: repeat(3, minmax(70px, auto));
+            grid-template-rows: repeat(5, minmax(70px, auto));
             background: #FFFFFF;
             border: 1px solid #DEDEDE;
             border-radius: 10px;
@@ -184,11 +184,10 @@
 					        <div class="rev-content"><%= voList.get(i).getContent() %></div>
 					    </div>
 					<% } %>
-				<% } else if(voList.size() == 0) { %>
+				<% } else { %>
 						<div class="none"><span>작성된 리뷰가 없습니다.</span></div>
 				<% } %>
 			</div>
-				
                 <div class="page">
                 
                 <%if(pv.getStartPage() != 1){%>
@@ -217,7 +216,19 @@
     const deleteForm = document.getElementById("deleteForm");
     function reviewDelete() {
     	document.getElementById('deleteuri').value = sessionStorage.getItem("requestURI");
-    	deleteForm.submit();
+    	Swal.fire({
+			  title: '리뷰를 삭제하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#82A994',
+			  cancelButtonColor: 'gray',
+			  confirmButtonText: '삭제해 주세요!',
+			  cancelButtonText: '창 닫기'
+			}).then((result) => {
+				if (result.isConfirmed) {
+    			deleteForm.submit();
+				}
+			})
     }
     </script>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>

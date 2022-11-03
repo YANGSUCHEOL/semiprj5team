@@ -52,7 +52,7 @@ public class ReviewService {
 
 		Connection conn = JDBCTemplate.getConnection();
 
-		int result = dao.selectCount(conn, mno);
+		int result = dao.selectCountMember(conn, mno);
 
 		JDBCTemplate.close(conn);
 
