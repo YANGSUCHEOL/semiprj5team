@@ -22,7 +22,7 @@
             width: 70vw;
             display: grid;
             margin: 0 auto;
-            grid-template-rows: 70px minmax(100px, auto);
+            grid-template-rows: 1fr;
             row-gap: 30px;
             align-content: center;
         }
@@ -76,6 +76,7 @@
         span[name="alertMsg"] {
             font-size: 24px;
             font-weight: bold;
+            background-color: #EEFFF6;
         }
     </style>
 </head>

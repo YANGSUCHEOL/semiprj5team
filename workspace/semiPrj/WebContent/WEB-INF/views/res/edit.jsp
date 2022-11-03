@@ -175,6 +175,19 @@ span[name="warning"] {
 	height: 80%;
 	object-fit: cover;
 }
+#res-picture {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	width: 400px;
+	height: 300px;
+}
+.object-fit {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -203,10 +216,7 @@ span[name="warning"] {
                 minDate: 0,
                 beforeShowDay: function(date){
                 	var day = date.getDay();
-                	for(let i = 0; i < 7; i++) {
-	                	if(i == array.length) {break;}
-	                	return [(day != parseInt(array[i]))];
-                	}
+                	return [(day != parseInt(array[0]) && day != parseInt(array[1]) && day != parseInt(array[2]) && day != parseInt(array[3]) && day != parseInt(array[4]) && day != parseInt(array[5]) && day != parseInt(array[6]))];
                 }
            });    
     });
@@ -222,7 +232,7 @@ span[name="warning"] {
 		<form action="/semiPrj/res/edit" method="post">
 			<div id="content">
 				<div id="res-store">
-					<div id="res-picture"><img src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img></div>
+					<div id="res-picture"><img class="object-fit" src="<%= root %>/resources/img/<%= vo.getPhoto() %>.jpg"></img></div>
 					<div id="res-name"><%= vo.getName() %></div>
 					<div id="res-openclose"><%= vo.getOpen() %> ~ <%= vo.getClose() %> 운영</div>
 					<div id="res-cou">
