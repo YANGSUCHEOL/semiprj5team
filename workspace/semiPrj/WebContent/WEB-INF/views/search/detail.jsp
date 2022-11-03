@@ -352,7 +352,7 @@ div[name="menu-picture"] {
 	<script src="../resources/js/popper.js"></script>
 	<script src="../resources/js/bootstrap.min.js"></script>
 	<script src="../resources/js/main.js"></script>
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 
 </html>
