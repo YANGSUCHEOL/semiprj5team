@@ -224,7 +224,19 @@
     const deleteForm = document.getElementById("deleteForm");
     function reviewDelete() {
     	document.getElementById('deleteuri').value = sessionStorage.getItem("requestURI");
-    	deleteForm.submit();
+    	Swal.fire({
+			  title: '리뷰를 삭제하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#82A994',
+			  cancelButtonColor: 'gray',
+			  confirmButtonText: '삭제해 주세요!',
+			  cancelButtonText: '창 닫기'
+			}).then((result) => {
+				if (result.isConfirmed) {
+  			deleteForm.submit();
+				}
+			})
     }
     </script>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>

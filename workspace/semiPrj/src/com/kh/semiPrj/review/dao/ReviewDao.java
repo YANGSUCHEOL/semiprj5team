@@ -78,7 +78,7 @@ public class ReviewDao {
 
 	public List<ReviewVo> selectList(Connection conn, String resNo, PageVo pv) {
 		
-		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE R.R_NO = ? AND R.RELEASE_YN = 'Y' AND R.DELETE_YN = 'N') A) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE R.R_NO = ? AND R.RELEASE_YN = 'Y' AND R.DELETE_YN = 'N' ORDER BY R.ENROLL_DATE DESC) A) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -134,7 +134,7 @@ public class ReviewDao {
 	
 	public List<ReviewVo> selectListExceptPage(Connection conn, String resNo) {
 		
-		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE R.R_NO = ? AND R.RELEASE_YN = 'Y' AND R.DELETE_YN = 'N') A)";
+		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE R.R_NO = ? AND R.RELEASE_YN = 'Y' AND R.DELETE_YN = 'N' ORDER BY R.ENROLL_DATE DESC) A)";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -186,7 +186,7 @@ public class ReviewDao {
 	// 한 회원의 review list 보기
 	public List<ReviewVo> selectListClient(Connection conn, String mno, PageVo pv) {
 		
-		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE M.NO = ? AND R.DELETE_YN = 'N') A) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM ( SELECT R.NO, S.NAME AS RESTAURANT, R.RE_NO AS RESERVATION, M.NICK AS NAME, R.SCORE, R.CONTENT, R.RELEASE_YN, R.DELETE_YN, R.ENROLL_DATE, R.UPDATE_DATE FROM REVIEW R INNER JOIN RESTAURANT S ON S.NO = R.R_NO INNER JOIN MEMBER M ON M.NO = R.M_NO WHERE M.NO = ? AND R.DELETE_YN = 'N' ORDER BY R.ENROLL_DATE DESC) A) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -340,6 +340,36 @@ public class ReviewDao {
 			close(pstmt);
 		}
 		
+		return result;
+		
+	}
+
+	public int selectCountMember(Connection conn, String mno) {
+		
+		String sql = "SELECT COUNT(*) AS CNT FROM REVIEW WHERE M_NO = ? AND DELETE_YN = 'N'";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, mno);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = Integer.parseInt(rs.getString("CNT"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+
 		return result;
 		
 	}

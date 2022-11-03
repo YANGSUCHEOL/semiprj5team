@@ -27,11 +27,6 @@
             align-content: center;
         }
 
-        #sidebar {
-            background: #EEFFF6;
-            display: flex;
-        }
-
         #content {
             box-sizing: border-box;
             display: grid;
@@ -90,9 +85,6 @@
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
     <div id="main">
-        <div id="sidebar">
-
-        </div>
         <div id="content">
             <div><span name="alertMsg">🎉 예약이 완료되었습니다!</span></div>
             <table>
